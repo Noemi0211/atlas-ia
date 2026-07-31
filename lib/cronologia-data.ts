@@ -17,7 +17,7 @@ export const CRONOLOGIA: HitoIA[] = [
   {
     año: 1956,
     titulo: "Nacimiento de la IA",
-    descripcion: "Conferencia de Dartmouth: John McCarthy acuña el término 'Inteligencia Artificial' y marca el inicio oficial del campo.",
+    descripcion: "Conferencia de Dartmouth: John McCarthy acuña el término 'inteligencia artificial' y marca el inicio oficial del campo.",
     categoria: "hito",
   },
   {
@@ -29,7 +29,7 @@ export const CRONOLOGIA: HitoIA[] = [
   {
     año: 1997,
     titulo: "Deep Blue vence a Kasparov",
-    descripcion: "La supercomputadora de IBM Deep Blue derrota al campeón mundial de ajedrez Garry Kasparov, demostrando que una máquina puede superar al humano en tareas específicas.",
+    descripcion: "El superordenador de IBM Deep Blue derrota al campeón mundial de ajedrez Garry Kasparov, demostrando que una máquina puede superar al ser humano en tareas específicas.",
     categoria: "hito",
   },
   {
@@ -46,7 +46,7 @@ export const CRONOLOGIA: HitoIA[] = [
   },
   {
     año: 2012,
-    titulo: "AlexNet revoluciona la visión por computadora",
+    titulo: "AlexNet revoluciona la visión por ordenador",
     descripcion: "Alex Krizhevsky gana ImageNet con AlexNet, una red neuronal profunda que reduce drásticamente la tasa de error en reconocimiento de imágenes.",
     categoria: "investigacion",
   },
@@ -71,25 +71,25 @@ export const CRONOLOGIA: HitoIA[] = [
   {
     año: 2018,
     titulo: "BERT de Google",
-    descripcion: "Google lanza BERT, un modelo de lenguaje pre-entrenado que revoluciona la comprensión del lenguaje natural.",
+    descripcion: "Google lanza BERT, un modelo de lenguaje preentrenado que revoluciona la comprensión del lenguaje natural.",
     categoria: "modelo",
   },
   {
     año: 2018,
     titulo: "Nace GPT",
-    descripcion: "OpenAI lanza GPT-1, el primer modelo generativo pre-entrenado basado en transformers. Con 117 millones de parámetros.",
+    descripcion: "OpenAI lanza GPT-1, el primer modelo generativo preentrenado basado en transformers, con 117 millones de parámetros.",
     categoria: "modelo",
   },
   {
     año: 2019,
     titulo: "GPT-2: polémica y poder",
-    descripcion: "OpenAI desarrolla GPT-2 con 1.5B parámetros. Inicialmente no lo publican por miedo a usos malintencionados, sentando un precedente ético importante.",
+    descripcion: "OpenAI desarrolla GPT-2 con 1500 millones de parámetros. Inicialmente no lo publican por miedo a usos malintencionados, sentando un precedente ético importante.",
     categoria: "modelo",
   },
   {
     año: 2020,
     titulo: "GPT-3 y la API de OpenAI",
-    descripcion: "OpenAI lanza GPT-3 con 175B parámetros y una API comercial. Marca el inicio de la IA generativa accesible para el público.",
+    descripcion: "OpenAI lanza GPT-3 con 175 000 millones de parámetros y una API comercial. Marca el inicio de la IA generativa accesible para el público.",
     categoria: "modelo",
   },
   {
@@ -113,7 +113,7 @@ export const CRONOLOGIA: HitoIA[] = [
   {
     año: 2022,
     titulo: "ChatGPT: la explosión masiva",
-    descripcion: "OpenAI lanza ChatGPT basado en GPT-3.5. Alcanza 100 millones de usuarios en 2 meses, convirtiéndose en la aplicación de más rápido crecimiento de la historia.",
+    descripcion: "OpenAI lanza ChatGPT basado en GPT-3.5. Alcanza 100 millones de usuarios en 2 meses, convirtiéndose en la aplicación de crecimiento más rápido de la historia.",
     categoria: "herramienta",
   },
   {
@@ -155,7 +155,7 @@ export const CRONOLOGIA: HitoIA[] = [
   {
     año: 2024,
     titulo: "DeepSeek irrumpe en el mercado",
-    descripcion: "La startup china DeepSeek lanza un modelo competitivo con GPT-4 a una fracción del costo, revolucionando el mercado de APIs de IA.",
+    descripcion: "La empresa emergente china DeepSeek lanza un modelo competitivo con GPT-4 a una fracción del coste, revolucionando el mercado de APIs de IA.",
     categoria: "modelo",
   },
   {

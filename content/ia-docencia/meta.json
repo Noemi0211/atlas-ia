@@ -38,7 +38,7 @@
     {
       "slug": "05-evaluacion-aprendizaje",
       "titulo": "Evaluación y retroalimentación con IA",
-      "descripcion": "Rúbricas, corrección automatizada y feedback personalizado",
+      "descripcion": "Rúbricas, corrección automatizada y retroalimentación personalizada",
       "orden": 5,
       "duracion": "10 min",
       "dificultad": "intermedio"
@@ -46,7 +46,7 @@
     {
       "slug": "06-etica-desafios",
       "titulo": "Ética y desafíos de la IA en la docencia",
-      "descripcion": "Privacidad, equidad, sesgo y el rol docente en la era digital",
+      "descripcion": "Privacidad, equidad, sesgo y el papel docente en la era digital",
       "orden": 6,
       "duracion": "10 min",
       "dificultad": "avanzado"

@@ -1,20 +1,20 @@
 ---
 title: "Agentes y flujos prácticos"
-description: "Construcción de pipelines de agentes y automatización"
+description: "Construcción de flujos de agentes y automatización"
 ---
 
 ## Diseñando flujos inteligentes
 
-Agent Flow te permite visualizar y construir pipelines de agentes conectando nodos. Es como dibujar un diagrama de flujo, pero cada nodo es un componente funcional que procesa información de forma autónoma.
+Flujo de Agentes te permite visualizar y construir cadenas de agentes conectando nodos. Es como dibujar un diagrama de flujo, pero cada nodo es un componente funcional que procesa información de forma autónoma.
 
 <Callout type="info">
-Un pipeline de agentes es una cadena de procesamiento donde cada etapa recibe información de la anterior, la transforma y la pasa a la siguiente. El diseño del flujo determina la calidad del resultado final.
+Un flujo de agentes es una cadena de procesamiento donde cada etapa recibe información de la anterior, la transforma y la pasa a la siguiente. El diseño del flujo determina la calidad del resultado final.
 </Callout>
 
 ## Nodos disponibles
 
 ### Input
-Punto de entrada del flujo. Define qué información recibe el pipeline: texto libre, un prompt, un documento o datos estructurados.
+Punto de entrada del flujo. Define qué información recibe el flujo: texto libre, un prompt, un documento o datos estructurados.
 
 ### LLM
 Nodo de procesamiento con modelo de lenguaje. Es el cerebro del flujo. Puedes configurar el prompt específico que guiará su comportamiento en esta etapa.
@@ -23,14 +23,14 @@ Nodo de procesamiento con modelo de lenguaje. Es el cerebro del flujo. Puedes co
 Nodo de recuperación de información. Consulta una base de conocimiento externa para enriquecer el contexto antes de generar una respuesta.
 
 ### Tool
-Nodo de acción. Ejecuta una operación externa: buscar en internet, hacer una API call, transformar datos o generar un archivo.
+Nodo de acción. Ejecuta una operación externa: buscar en internet, hacer una llamada a una API, transformar datos o generar un archivo.
 
 ### Output
 Punto de salida. Define cómo se entrega el resultado: texto, resumen estructurado o datos formateados.
 
-## Cómo construir un pipeline
+## Cómo construir un flujo
 
-### Pipeline básico: Asistente simple
+### Flujo básico: Asistente simple
 
 ```
 Input → LLM → Output
@@ -38,7 +38,7 @@ Input → LLM → Output
 
 El flujo más simple. Útil para tareas de pregunta-respuesta donde no se necesita contexto externo.
 
-### Pipeline intermedio: Asistente con conocimiento
+### Flujo intermedio: Asistente con conocimiento
 
 ```
 Input → RAG → LLM → Output
@@ -46,7 +46,7 @@ Input → RAG → LLM → Output
 
 El modelo recupera información relevante antes de generar su respuesta. Ideal para preguntas sobre documentación específica.
 
-### Pipeline avanzado: Agente autónomo
+### Flujo avanzado: Agente autónomo
 
 ```
 Input → LLM → Tool → LLM → Output
@@ -58,7 +58,7 @@ El modelo decide qué herramienta usar, ejecuta la acción y luego procesa el re
 
 ### Ejercicio 1: Resumen inteligente
 
-**Objetivo:** crear un pipeline que resuma documentos largos.
+**Objetivo:** crear un flujo que resuma documentos largos.
 
 **Flujo sugerido:**
 1. Input: documento extenso
@@ -67,7 +67,7 @@ El modelo decide qué herramienta usar, ejecuta la acción y luego procesa el re
 
 ### Ejercicio 2: Investigador automático
 
-**Objetivo:** pipeline que investiga un tema y genera un informe.
+**Objetivo:** flujo que investiga un tema y genera un informe.
 
 **Flujo sugerido:**
 1. Input: tema de investigación
@@ -108,9 +108,9 @@ El orden de los nodos importa. Un mismo conjunto de nodos en diferente orden pro
 
 ## Autoevaluación
 
-1. ¿Cuáles son los cinco tipos de nodo disponibles en Agent Flow?
+1. ¿Cuáles son los cinco tipos de nodo disponibles en Flujo de Agentes?
 2. ¿Qué ventaja tiene añadir un nodo RAG antes del LLM?
-3. Diseña un pipeline para un asistente que traduzca textos técnicos de inglés a español, manteniendo la terminología especializada
+3. Diseña un flujo para un asistente que traduzca textos técnicos de inglés a español, manteniendo la terminología especializada
 4. ¿Por qué es importante configurar prompts específicos por nodo?
 
 En la última lección desarrollaremos **proyectos integrados** combinando todas las herramientas del laboratorio.

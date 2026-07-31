@@ -66,7 +66,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
             <button
               onClick={onSidebarToggle}
               className="hidden lg:flex p-2 rounded-lg hover:bg-bg-secondary text-fg-secondary hover:text-fg transition-colors"
-              aria-label={sidebarCollapsed ? "Expandir sidebar" : "Colapsar sidebar"}
+              aria-label={sidebarCollapsed ? "Expandir barra lateral" : "Colapsar barra lateral"}
             >
               {sidebarCollapsed ? (
                 <PanelLeftOpen className="w-5 h-5" />

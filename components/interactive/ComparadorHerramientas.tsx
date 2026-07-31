@@ -95,7 +95,7 @@ export function ComparadorHerramientas() {
   return (
     <div className="my-8 p-6 bg-bg-secondary border border-border rounded-2xl">
       <h3 className="text-xl font-bold text-fg mb-4">
-        Comparador de Herramientas IA
+        Comparador de herramientas de IA
       </h3>
 
       <div className="mb-6">

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: "Mensajes requeridos" }, { status: 400 });
+      return NextResponse.json({ error: "Debes enviar al menos un mensaje" }, { status: 400 });
     }
 
     const encoder = new TextEncoder();

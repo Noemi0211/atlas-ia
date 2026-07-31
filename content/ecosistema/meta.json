@@ -6,7 +6,7 @@
     {
       "slug": "01-panorama-ecosistema",
       "titulo": "Panorama del Ecosistema IA",
-      "descripcion": "Una vista general de las categorías de herramientas y cómo se organizan",
+      "descripcion": "Una visión general de las categorías de herramientas y cómo se organizan",
       "orden": 1,
       "duracion": "8 min",
       "dificultad": "basico"
@@ -54,7 +54,7 @@
     {
       "slug": "07-comparador-interactivo",
       "titulo": "Comparador Interactivo",
-      "descripcion": "Compara herramientas lado a lado según tus necesidades",
+      "descripcion": "Compara herramientas entre sí según tus necesidades",
       "orden": 7,
       "duracion": "10 min",
       "dificultad": "basico"

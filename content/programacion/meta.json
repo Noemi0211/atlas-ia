@@ -38,7 +38,7 @@
     {
       "slug": "05-buenas-practicas",
       "titulo": "Buenas prácticas y debugging con IA",
-      "descripcion": "Revisión de código, testing y depuración asistida",
+      "descripcion": "Revisión de código, pruebas y depuración asistida",
       "orden": 5,
       "duracion": "10 min",
       "dificultad": "intermedio"

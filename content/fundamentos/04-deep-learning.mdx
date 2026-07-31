@@ -21,7 +21,7 @@ Imagina una empresa con tres departamentos:
 2. **Departamentos intermedios** (capas ocultas): Procesan la información, cada uno a su nivel de abstracción
 3. **Departamento de salida** (capa de salida): Produce el resultado — "esto es un gato", "este correo es spam"
 
-En una imagen por computadora, por ejemplo:
+En una imagen por ordenador, por ejemplo:
 
 - La primera capa detecta **bordes** y colores
 - La segunda capa combina bordes para detectar **formas**
@@ -30,7 +30,7 @@ En una imagen por computadora, por ejemplo:
 
 ## ¿Por qué "deep" (profundo)?
 
-Porque tiene **muchas capas intermedias**. Una red "pocas" capas podría tener 3-5 capas. Una red "profunda" puede tener **decenas o cien de capas**.
+Porque tiene **muchas capas intermedias**. Una red con pocas capas podría tener 3-5 capas. Una red "profunda" puede tener **decenas o cientos de capas**.
 
 Cada capa aprende representaciones **más complejas** de los datos.
 
@@ -58,7 +58,7 @@ Aquí está la magia. El error se envía **hacia atrás** por la red, ajustando 
 
 ### Iteración
 
-Este proceso se repite **millones de veces** con miles de ejemplos. gradualmente, la red va mejorando.
+Este proceso se repite **millones de veces** con miles de ejemplos. Gradualmente, la red va mejorando.
 
 ## Tipos de redes neuronales importantes
 
@@ -82,7 +82,7 @@ La arquitectura dominante actual. Procesan **toda la secuencia a la vez** en lug
 
 ### Redes generativas adversarias (GAN)
 
-Dos redes compiten entre sí: una genera contenido falsa y la otra intenta detectar si es falso. El resultado es contenido cada vez más realista.
+Dos redes compiten entre sí: una genera contenido falso y la otra intenta detectar si es falso. El resultado es contenido cada vez más realista.
 
 **Uso**: Generación de imágenes, deepfakes, superresolución.
 
@@ -104,7 +104,7 @@ No todo es perfecto:
 - **Necesita muchísimos datos**: Funciona bien con millones de ejemplos
 - **Es computacionalmente costoso**: Entrenar un modelo grande puede costar millones de dólares
 - **Es una caja negra**: A veces no sabemos por qué toma ciertas decisiones
-- **Es propenso a overfitting**: Puede memorizar en lugar de aprender
+- **Es propenso al sobreajuste**: Puede memorizar en lugar de aprender
 
 <Callout type="warning">
 El Deep Learning no es la solución a todo. Para muchos problemas, un modelo simple (como una regresión o un árbol de decisión) funciona igual de bien o mejor. Elegir la herramienta adecuada es clave.

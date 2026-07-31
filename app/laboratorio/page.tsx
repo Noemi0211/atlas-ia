@@ -19,8 +19,8 @@ import {
 
 const TABS = [
   { id: "chat", label: "Chat IA", icon: MessageSquare, component: AIChat },
-  { id: "prompts", label: "Sandbox de Prompts", icon: Wand2, component: PromptSandbox },
-  { id: "agentflow", label: "Agent Flow", icon: Bot, component: AgentFlow },
+  { id: "prompts", label: "Entorno de Prompts", icon: Wand2, component: PromptSandbox },
+  { id: "agentflow", label: "Flujo de Agentes", icon: Bot, component: AgentFlow },
   { id: "comparador", label: "Comparador", icon: BarChart3, component: ModelComparator },
   { id: "tokens", label: "Tokens", icon: Hash, component: TokenSimulator },
 ];

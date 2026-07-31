@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Atlas IA",
   },
   description:
-    "La mejor plataforma en español para aprender Inteligencia Artificial desde cero hasta nivel avanzado. Diseñada para docentes, profesionales y cualquier persona.",
+    "La mejor plataforma en español para aprender Inteligencia Artificial desde cero hasta nivel avanzado. Diseñada para docentes, profesionales y todas las personas interesadas.",
   keywords: [
     "inteligencia artificial",
     "IA",

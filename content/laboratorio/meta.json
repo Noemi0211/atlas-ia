@@ -30,7 +30,7 @@
     {
       "slug": "04-agentes-flujos",
       "titulo": "Agentes y flujos prácticos",
-      "descripcion": "Construcción de pipelines de agentes y automatización",
+      "descripcion": "Construcción de flujos de agentes y automatización",
       "orden": 4,
       "duracion": "12 min",
       "dificultad": "intermedio"

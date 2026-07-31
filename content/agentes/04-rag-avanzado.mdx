@@ -91,10 +91,10 @@ Herramientas populares para almacenar y buscar embeddings:
 | Herramienta | Tipo | Escalabilidad | Open Source |
 |------------|------|---------------|-------------|
 | Pinecone | SaaS | Muy alta | No |
-| Weaviate | Self-hosted | Alta | Sí |
-| Qdrant | Self-hosted | Alta | Sí |
+| Weaviate | Autoalojado | Alta | Sí |
+| Qdrant | Autoalojado | Alta | Sí |
 | Chroma | Local | Media | Sí |
-| Milvus | Self-hosted | Muy alta | Sí |
+| Milvus | Autoalojado | Muy alta | Sí |
 
 ## Métricas de calidad en RAG
 
@@ -115,12 +115,12 @@ Herramientas populares para almacenar y buscar embeddings:
 Puedes evaluar tu sistema RAG con métricas como:
 
 - **MRR (Mean Reciprocal Rank):** posición del primer resultado relevante
-- **NDCG (Normalized Discounted Cumulative Gain):** calidad del ranking
-- **Faithfulness:** qué porcentaje de la respuesta es verificable en los documentos
-- **Answer Relevance:** qué tan relevante es la respuesta para la consulta
+- **NDCG (Normalized Discounted Cumulative Gain):** calidad del orden de los resultados
+- **Fidelidad:** qué porcentaje de la respuesta es verificable en los documentos
+- **Relevancia de la respuesta:** cuán relevante es la respuesta para la consulta
 
 <Callout type="warning">
-RAG no es una bala de plata. Si los chunks están mal diseñados o la base de conocimiento es deficiente, el RAG puede dar respuestas parciales o incorrectas. La calidad del sistema depende tanto de la recuperación como de la generación.
+RAG no es una solución milagrosa. Si los fragmentos están mal diseñados o la base de conocimiento es deficiente, el RAG puede dar respuestas parciales o incorrectas. La calidad del sistema depende tanto de la recuperación como de la generación.
 </Callout>
 
 ## Autoevaluación

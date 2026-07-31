@@ -14,11 +14,11 @@ export const ROLES = [
   { id: "periodista", label: "Periodista / Escritor", descripcion: "Redacción clara, objetiva y bien estructurada" },
   { id: "abogado", label: "Abogado / Asesor legal", descripcion: "Preciso, formal, basado en normativas" },
   { id: "cientifico", label: "Científico / Investigador", descripcion: "Rigor académico, datos y referencias" },
-  { id: "marketing", label: "Experto en Marketing", descripcion: "Persuasivo, orientado a conversión" },
+  { id: "marketing", label: "Experto en Marketing", descripcion: "Persuasivo, orientado a la conversión" },
   { id: "ceo", label: "CEO / Directivo", descripcion: "Visión estratégica, ejecutiva y práctica" },
   { id: "desarrollador", label: "Desarrollador / Programador", descripcion: "Técnico, preciso, con ejemplos de código" },
   { id: "creativo", label: "Creativo / Diseñador", descripcion: "Original, visual, innovador" },
-  { id: "psicologo", label: "Psicólogo / Coach", descripcion: "Empático, comprensivo, orientado a personas" },
+  { id: "psicologo", label: "Psicólogo / Coach", descripcion: "Empático, comprensivo, orientado a las personas" },
 ] as const;
 
 export const FORMATOS = [
@@ -26,7 +26,7 @@ export const FORMATOS = [
   { id: "lista", label: "Lista con viñetas", descripcion: "Puntos clave enumerados" },
   { id: "tabla", label: "Tabla comparativa", descripcion: "Datos organizados en columnas" },
   { id: "pasos", label: "Pasos / Instrucciones", descripcion: "Secuencia numerada de acciones" },
-  { id: "email", label: "Email / Carta", descripcion: "Formato de correspondencia" },
+  { id: "email", label: "Correo / Carta", descripcion: "Formato de correspondencia" },
   { id: "codigo", label: "Código", descripcion: "Bloques de código con explicación" },
   { id: "esquema", label: "Esquema / Outline", descripcion: "Estructura jerárquica de contenidos" },
   { id: "dialogo", label: "Diálogo / Conversación", descripcion: "Formato de preguntas y respuestas" },
@@ -35,7 +35,7 @@ export const FORMATOS = [
 export const TONOS = [
   { id: "profesional", label: "Profesional", descripcion: "Formal y corporativo" },
   { id: "casual", label: "Casual / Amigable", descripcion: "Cercano y natural" },
-  { id: "divulgativo", label: "Divulgativo", descripcion: "Claro para todo público" },
+  { id: "divulgativo", label: "Divulgativo", descripcion: "Claro para todos los públicos" },
   { id: "humoristico", label: "Humorístico", descripcion: "Con sentido del humor" },
   { id: "inspirador", label: "Inspirador / Motivacional", descripcion: "Que motive a la acción" },
   { id: "tecnico", label: "Técnico / Especializado", descripcion: "Con jerga del sector" },
@@ -48,7 +48,7 @@ export const AUDIENCIAS = [
   { id: "profesional", label: "Profesionales del sector", descripcion: "Con experiencia en el área" },
   { id: "ejecutivo", label: "Ejecutivos / Directivos", descripcion: "Alta dirección" },
   { id: "estudiante", label: "Estudiantes", descripcion: "En formación académica" },
-  { id: "cliente", label: "Clientes / Usuarios", descripcion: "Personas que usan tu producto" },
+  { id: "cliente", label: "Clientes / Personas usuarias", descripcion: "Personas que usan tu producto" },
   { id: "ninos", label: "Niños / Adolescentes", descripcion: "Audiencia joven" },
 ] as const;
 

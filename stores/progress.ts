@@ -97,10 +97,10 @@ const WEEKLY_CHALLENGES: Omit<Challenge, "id" | "completed" | "expiresAt">[] = [
 ];
 
 const DEFAULT_PROJECTS: Omit<Project, "completed" | "completedAt">[] = [
-  { id: "proyecto-1", title: "Chatbot simple con prompts", description: "Diseña un prompt system para un asistente de atención al cliente", difficulty: "basico" },
+  { id: "proyecto-1", title: "Chatbot simple con prompts", description: "Diseña un prompt de sistema para un asistente de atención al cliente", difficulty: "basico" },
   { id: "proyecto-2", title: "Análisis de sentimientos", description: "Usa IA para analizar el sentimiento de 10 reseñas de productos", difficulty: "basico" },
   { id: "proyecto-3", title: "Generador de imágenes", description: "Crea una serie de 5 imágenes con DALL-E o Midjourney para una campaña", difficulty: "intermedio" },
-  { id: "proyecto-4", title: "Pipeline de automatización", description: "Diseña un flujo de trabajo con Make o Zapier que use IA", difficulty: "intermedio" },
+  { id: "proyecto-4", title: "Flujo de automatización", description: "Diseña un flujo de trabajo con Make o Zapier que use IA", difficulty: "intermedio" },
   { id: "proyecto-5", title: "Agente RAG básico", description: "Construye un agente con recuperación de información usando prompts", difficulty: "avanzado" },
   { id: "proyecto-6", title: "Comparativa de modelos", description: "Compara GPT-4, Claude y Gemini en una tarea específica y documenta resultados", difficulty: "avanzado" },
 ];
@@ -633,7 +633,7 @@ export const BADGES: Record<string, { nombre: string; descripcion: string; icono
     icono: "🔧",
   },
   "reto-diario": {
-    nombre: "Rutinario",
+    nombre: "Asiduo",
     descripcion: "Completaste un reto diario",
     icono: "📅",
   },
@@ -704,12 +704,12 @@ export const BADGES: Record<string, { nombre: string; descripcion: string; icono
   },
   "ingeniero-prompts": {
     nombre: "Ingeniero de prompts",
-    descripcion: "Usaste el sandbox de prompts interactivo",
+    descripcion: "Usaste el entorno de prompts interactivo",
     icono: "💡",
   },
   "arquitecto-flujos": {
     nombre: "Arquitecto de flujos",
-    descripcion: "Creaste un pipeline en AgentFlow",
+    descripcion: "Creaste un flujo de agentes en AgentFlow",
     icono: "🔀",
   },
   "evaluador-modelos": {

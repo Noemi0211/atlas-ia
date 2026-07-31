@@ -65,7 +65,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg text-fg-secondary leading-relaxed mb-8 max-w-xl">
-              La guía más completa en español para entender la IA. No solo
+              La guía más completa en español para entender la IA. No sólo
               herramientas. <strong>Criterio</strong>.{" "}
               <strong>Pensamiento crítico</strong>.{" "}
               <strong>Saber cuándo y cómo usar cada IA</strong>.
@@ -191,7 +191,7 @@ export default function HomePage() {
             ¿Listo para empezar?
           </h2>
           <p className="text-fg-secondary mb-8 max-w-lg mx-auto">
-            No necesitas experiencia previa. No necesitas pagar nada. Solo
+            No necesitas experiencia previa. No necesitas pagar nada. Sólo
             necesitas curiosidad y ganas de aprender.
           </p>
           <Link

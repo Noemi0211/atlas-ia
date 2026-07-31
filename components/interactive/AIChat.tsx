@@ -151,7 +151,7 @@ export function AIChat() {
               <Bot className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-lg font-bold text-fg mb-2">
-              ¡Bienvenido al laboratorio!
+              ¡Te damos la bienvenida al laboratorio!
             </h2>
             <p className="text-sm text-fg-muted max-w-md mx-auto mb-6">
               Pregúntame cualquier cosa sobre Inteligencia Artificial.

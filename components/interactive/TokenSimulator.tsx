@@ -151,7 +151,7 @@ export function TokenSimulator() {
             <h4 className="text-2xs font-medium text-fg-secondary mb-1">¿Cómo se calcula?</h4>
             <p className="text-2xs text-fg-muted leading-relaxed">
               Estimación basada en ~1.3 tokens por palabra + 0.05 tokens por carácter.
-              El conteo real varía según el tokenizador de cada modelo.
+              El recuento real varía según el tokenizador de cada modelo.
             </p>
           </div>
         </div>

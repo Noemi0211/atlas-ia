@@ -100,7 +100,7 @@ export function NotificationBell() {
                 className="flex items-center gap-1 text-2xs text-primary hover:text-primary-hover transition-colors"
               >
                 <CheckCheck className="w-3 h-3" />
-                Marcar todas leídas
+                Marcar todas como leídas
               </button>
             )}
           </div>

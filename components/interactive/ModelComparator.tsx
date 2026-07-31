@@ -221,7 +221,7 @@ export function ModelComparator() {
           <p className="text-xs text-accent">
             <strong>Recomendación:</strong>{" "}
             {selectedModels.every((m) => m.categoria === "asistente-conversacion")
-              ? "Para uso general, ChatGPT ofrece versatilidad; Claude destaca en análisis profundo; Gemini tiene el contexto más grande."
+              ? "Para uso general, ChatGPT ofrece versatilidad; Claude destaca en análisis profundo; Gemini tiene la ventana de contexto más amplia."
               : selectedModels.every((m) => m.categoria === "codigo")
               ? "Copilot es ideal para sugerencias en el editor; Cursor ofrece un entorno completo con IA integrada."
               : selectedModels.every((m) => m.categoria === "imagen")

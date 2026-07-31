@@ -203,7 +203,7 @@ export function AgentFlow() {
         {nodes.length === 0 && (
           <div className="flex flex-col items-center justify-center h-64 text-center">
             <Bot className="w-10 h-10 text-fg-muted mb-3" />
-            <p className="text-sm text-fg-muted">Arrastra bloques para crear tu pipeline</p>
+            <p className="text-sm text-fg-muted">Arrastra bloques para crear tu flujo</p>
           </div>
         )}
 

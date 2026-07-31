@@ -22,7 +22,7 @@
     {
       "slug": "03-video-animacion",
       "titulo": "Video y animación con IA",
-      "descripcion": "Creación y edición de video, animaciones y presentaciones dinámicas",
+      "descripcion": "Creación y edición de vídeo, animaciones y presentaciones dinámicas",
       "orden": 3,
       "duracion": "12 min",
       "dificultad": "intermedio"
@@ -38,7 +38,7 @@
     {
       "slug": "05-aplicaciones-multimodales",
       "titulo": "Aplicaciones multimodales en el mundo real",
-      "descripcion": "Casos de uso integrados que combinan imagen, texto, audio y video",
+      "descripcion": "Casos de uso integrados que combinan imagen, texto, audio y vídeo",
       "orden": 5,
       "duracion": "10 min",
       "dificultad": "intermedio"

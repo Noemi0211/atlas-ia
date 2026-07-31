@@ -1,22 +1,22 @@
 ---
-title: "Buenas prácticas y debugging con IA"
-description: "Revisión de código, testing y depuración asistida"
+title: "Buenas prácticas y depuración con IA"
+description: "Revisión de código, pruebas y depuración asistida"
 ---
 
 ## Calidad del código aumentada
 
-La IA no solo sirve para generar código: también es una herramienta excelente para mejorarlo. La revisión de código, el testing y la depuración son áreas donde la IA puede aportar un valor inmenso.
+La IA no solo sirve para generar código: también es una herramienta excelente para mejorarlo. La revisión de código, las pruebas y la depuración son áreas donde la IA puede aportar un valor inmenso.
 
 <Callout type="info">
 El mejor uso de la IA en programación no es escribir más código, sino escribir mejor código. Usa la IA para revisar, refinar y robustecer lo que ya has creado.
 </Callout>
 
-## Code review con IA
+## Revisión de código con IA
 
 ### Qué puede revisar
 
 - **Estilo y convenciones:** sigue las guías de estilo del proyecto
-- **Posibles bugs:** detecta patrones que suelen causar errores
+- **Posibles errores:** detecta patrones que suelen causar errores
 - **Rendimiento:** identifica cuellos de botella y operaciones ineficientes
 - **Seguridad:** encuentra vulnerabilidades comunes (inyección, XSS, CSRF)
 - **Mantenibilidad:** sugiere mejoras de legibilidad y organización
@@ -41,33 +41,33 @@ Revisa este código y señala:
 Sé constructivo y sugiere soluciones concretas."
 ```
 
-## Testing con IA
+## Pruebas con IA
 
-### Generación de tests
+### Generación de pruebas
 
-La IA puede generar tests unitarios, de integración y end-to-end a partir del código fuente:
+La IA puede generar pruebas unitarias, de integración y de extremo a extremo a partir del código fuente:
 
-> "Genera tests unitarios con Vitest para esta función. Cubre casos normales, edge cases y errores esperados."
+> "Genera pruebas unitarias con Vitest para esta función. Cubre casos normales, casos límite y errores esperados."
 
-### Lo que la IA hace bien en testing
+### Lo que la IA hace bien en las pruebas
 
-- Tests para funciones puras y predecibles
+- Pruebas para funciones puras y predecibles
 - Cobertura de casos límite obvios
 - Generación de mocks y fixtures
-- Tests de regresión para bugs corregidos
+- Pruebas de regresión para errores corregidos
 
 ### Lo que requiere supervisión
 
-- Tests de integración complejos
-- Escenarios de usuario realistas
-- Validación de la corrección del test
-- Mantenimiento de la suite de tests
+- Pruebas de integración complejas
+- Escenarios de uso realistas
+- Validación de la corrección de la prueba
+- Mantenimiento del conjunto de pruebas
 
 <Callout type="tip">
 Pide a la IA que genere tests antes de escribir la implementación (TDD asistido). Esto te obliga a pensar en la interfaz y los casos de uso antes del código interno.
 </Callout>
 
-## Debugging con IA
+## Depuración con IA
 
 ### Cómo depurar con IA
 
@@ -78,9 +78,9 @@ Pide a la IA que genere tests antes de escribir la implementación (TDD asistido
 
 ### Estrategias de depuración asistida
 
-- **Análisis de logs:** la IA puede encontrar patrones en logs extensos
-- **Comparación de versiones:** identificar qué cambio introdujo el bug
-- **Stack traces:** explicar el significado de errores complejos
+- **Análisis de registros:** la IA puede encontrar patrones en registros extensos
+- **Comparación de versiones:** identificar qué cambio introdujo el error
+- **Trazas de pila:** explicar el significado de errores complejos
 - **Depuración inversa:** partir del error y rastrear hacia atrás
 
 ## Mejores prácticas generales
@@ -99,21 +99,21 @@ Pide a la IA que genere tests antes de escribir la implementación (TDD asistido
 3. **Combina herramientas:** diferentes IAs detectan diferentes problemas
 4. **Revisa la revisión:** la IA también se equivoca
 
-### Para testing
+### Para las pruebas
 
 1. **Genera antes de implementar:** TDD asistido
-2. **Pide cobertura de casos límite:** edge cases que no consideraste
-3. **Revisa los tests generados:** tests incorrectos son peor que no tener tests
+2. **Pide cobertura de casos límite:** los casos que no consideraste
+3. **Revisa las pruebas generadas:** unas pruebas incorrectas son peores que no tener ninguna prueba
 4. **Mantén los tests:** la IA puede actualizar tests cuando cambia el código
 
 <Callout type="warning">
-Un test incorrecto que siempre pasa es más peligroso que no tener test. Da una falsa sensación de seguridad. Revisa siempre que los tests generados prueben realmente lo que deben probar.
+Una prueba incorrecta que siempre pasa es más peligrosa que no tener prueba alguna. Da una falsa sensación de seguridad. Revisa siempre que las pruebas generadas prueben realmente lo que deben probar.
 </Callout>
 
 ## Autoevaluación
 
-1. ¿Qué aspectos puede revisar la IA en un code review?
-2. ¿Cómo puede la IA ayudar en el testing automatizado?
+1. ¿Qué aspectos puede revisar la IA en una revisión de código?
+2. ¿Cómo puede la IA ayudar en las pruebas automatizadas?
 3. Describe el proceso para depurar un error con ayuda de IA
 4. ¿Por qué es importante revisar los tests generados por IA?
 

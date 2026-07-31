@@ -69,7 +69,7 @@ export function CalculadoraPrompts() {
   return (
     <div className="my-8 p-6 bg-bg-secondary border border-border rounded-2xl">
       <h3 className="text-xl font-bold text-fg mb-4">
-        Calculadora de Prompts
+        Calculadora de prompts
       </h3>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -81,7 +81,7 @@ export function CalculadoraPrompts() {
             <textarea
               value={tarea}
               onChange={(e) => setTarea(e.target.value)}
-              placeholder="Ej: Escribe un email de ventas, crea un plan de marketing, explica un concepto..."
+              placeholder="Ej: Escribe un correo de ventas, crea un plan de marketing, explica un concepto..."
               className="mt-1 w-full p-3 bg-bg border border-border rounded-lg text-fg placeholder:text-fg-muted text-sm resize-none focus:outline-none focus:border-primary"
               rows={3}
             />
@@ -114,7 +114,7 @@ export function CalculadoraPrompts() {
             <textarea
               value={contexto}
               onChange={(e) => setContexto(e.target.value)}
-              placeholder="Ej: Soy el director de marketing de una startup de SaaS..."
+              placeholder="Ej: Soy responsable de marketing en una empresa emergente de SaaS..."
               className="mt-1 w-full p-3 bg-bg border border-border rounded-lg text-fg placeholder:text-fg-muted text-sm resize-none focus:outline-none focus:border-primary"
               rows={2}
             />

@@ -8,7 +8,7 @@ export async function POST(req: Request) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { error: "Email y contraseña requeridos" },
+        { error: "El correo electrónico y la contraseña son obligatorios" },
         { status: 400 }
       );
     }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     if (existing) {
       return NextResponse.json(
-        { error: "Ya existe un usuario con ese email" },
+        { error: "Ya existe un usuario con ese correo electrónico" },
         { status: 400 }
       );
     }

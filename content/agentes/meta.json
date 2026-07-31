@@ -14,7 +14,7 @@
     {
       "slug": "02-tipos-de-agentes",
       "titulo": "Tipos de agentes",
-      "descripcion": "Reactivos, con memoria, autónomos y multiagente",
+      "descripcion": "Reactivos, con memoria, autónomos y sistemas multiagente",
       "orden": 2,
       "duracion": "10 min",
       "dificultad": "intermedio"
@@ -46,7 +46,7 @@
     {
       "slug": "06-herramientas-para-agentes",
       "titulo": "Herramientas para construir agentes",
-      "descripcion": "LangChain, AutoGPT, CrewAI y el ecosistema de frameworks",
+      "descripcion": "LangChain, AutoGPT, CrewAI y el ecosistema de marcos de trabajo",
       "orden": 6,
       "duracion": "12 min",
       "dificultad": "intermedio"
