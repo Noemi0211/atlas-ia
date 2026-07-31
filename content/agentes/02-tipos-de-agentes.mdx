@@ -1,0 +1,120 @@
+---
+title: "Tipos de agentes"
+description: "Reactivos, con memoria, autónomos y multiagente"
+---
+
+## Clasificación de agentes
+
+No todos los agentes de IA son iguales. Se clasifican según su capacidad de razonamiento, memoria y autonomía. Elegir el tipo correcto es clave para cada aplicación.
+
+## Agentes reactivos
+
+Son los más simples. Responden a estímulos del entorno sin mantener estado interno.
+
+### Características
+
+- No tienen memoria del pasado
+- Actúan basándose únicamente en la entrada actual
+- Son rápidos y predecibles
+- Ideales para tareas simples y bien definidas
+
+### Ejemplos
+
+- Un chatbot que responde preguntas frecuentes sin contexto
+- Un sistema de reglas IF-THEN con IA
+- Un clasificador de imágenes que etiqueta sin recordar clasificaciones anteriores
+
+<Callout type="info">
+Los agentes reactivos son como un espejo: reflejan lo que tienen delante sin recordar lo que vieron antes.
+</Callout>
+
+## Agentes con memoria
+
+Añaden capacidad de recordar y usar información del pasado. Son el tipo más común en aplicaciones actuales.
+
+### Tipos de memoria
+
+- **Memoria de ventana:** recuerda los últimos N mensajes
+- **Memoria resumida:** comprime conversaciones largas en resúmenes
+- **Memoria vectorial:** almacena información en embeddings para búsqueda semántica
+- **Memoria estructurada:** guarda datos en tablas o bases de datos
+
+### Ejemplos
+
+- Asistentes virtuales que recuerdan preferencias del usuario
+- Tutores de IA que siguen el progreso del estudiante
+- Sistemas de recomendación con memoria de interacciones
+
+## Agentes autónomos
+
+Son agentes con capacidad de planificación y ejecución multi-paso. Pueden descomponer objetivos complejos en subtareas y ejecutarlas de forma independiente.
+
+### Capacidades
+
+- **Planificación:** dividen un objetivo en pasos
+- **Ejecución:** completan cada paso usando herramientas
+- **Adaptación:** cambian de estrategia si algo falla
+- **Reflexión:** evalúan sus propios resultados y aprenden
+
+### El patrón ReAct
+
+ReAct (Reasoning + Acting) es el patrón más usado para agentes autónomos. Alterna entre:
+
+1. **Razonar:** piensa qué hacer basándose en el contexto
+2. **Actuar:** ejecuta una herramienta o acción
+3. **Observar:** recibe el resultado de la acción
+4. **Repetir:** continúa hasta completar el objetivo
+
+<Callout type="tip">
+El patrón ReAct es como un científico: formula una hipótesis (razona), hace un experimento (actúa), observa los resultados y ajusta su teoría.
+</Callout>
+
+## Sistemas multiagente
+
+Varios agentes trabajan juntos para resolver problemas complejos. Cada agente tiene un rol especializado.
+
+### Roles comunes
+
+- **Coordinador:** divide tareas y asigna trabajo
+- **Investigador:** busca información
+- **Analista:** procesa y evalúa datos
+- **Ejecutor:** realiza acciones concretas
+- **Validador:** verifica resultados
+
+### Ventajas
+
+- Escalabilidad: cada agente se enfoca en lo suyo
+- Especialización: agentes entrenados para tareas específicas
+- Resiliencia: si un agente falla, otros pueden compensar
+- Colaboración: emergen comportamientos complejos
+
+### Ejemplo práctico
+
+Un equipo de agentes para crear un informe:
+
+1. **Agente investigador** busca fuentes relevantes
+2. **Agente redactor** escribe el borrador
+3. **Agente revisor** corrige errores y mejora el estilo
+4. **Agente formateador** genera el documento final
+
+## Cómo elegir el tipo adecuado
+
+| Tipo | Complejidad | Memoria | Autonomía | Cuándo usarlo |
+|------|------------|---------|-----------|---------------|
+| Reactivo | Baja | No | Nula | Preguntas frecuentes, clasificación simple |
+| Con memoria | Media | Sí | Baja | Asistentes, tutores, chatbots |
+| Autónomo | Alta | Sí | Alta | Automatización compleja, análisis |
+| Multiagente | Muy alta | Sí | Muy alta | Proyectos grandes, sistemas empresariales |
+
+<Callout type="warning">
+No siempre necesitas el agente más complejo. Un agente reactivo bien diseñado puede ser más efectivo que un sistema multiagente para una tarea simple. Empieza simple y escala según necesites.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia entre un agente reactivo y uno con memoria?
+2. Explica el patrón ReAct en tus propias palabras
+3. ¿En qué caso elegirías un sistema multiagente?
+4. ¿Qué rol cumpliría un agente validador en un equipo?
+
+En la siguiente lección aprenderemos sobre el **Model Context Protocol (MCP)**, la forma estándar de conectar agentes con herramientas externas.

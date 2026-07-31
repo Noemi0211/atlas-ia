@@ -1,0 +1,106 @@
+---
+title: "Automatización de flujos"
+description: "Make, Zapier, n8n: cómo integrar IA en tus procesos automatizados"
+---
+
+## IA + Automatización
+
+La combinación de inteligencia artificial con plataformas de automatización está transformando la productividad. Donde antes tenías que programar flujos rígidos, ahora puedes crear procesos inteligentes que toman decisiones, adaptan rutas y procesan información no estructurada.
+
+<Callout type="info">
+La automatización tradicional sigue reglas fijas. Con IA, la regla se convierte en decidir qué hacer según el contexto.
+</Callout>
+
+## Plataformas principales
+
+### Make (antes Integromat)
+
+Make es una plataforma visual de automatización con un editor de flujos intuitivo. Su integración con IA permite procesar texto con LLMs, clasificar contenido automáticamente y extraer datos de documentos no estructurados.
+
+**Módulos de IA en Make:**
+- OpenAI (ChatGPT, DALL-E)
+- Claude (Anthropic)
+- Google AI (Gemini)
+
+### Zapier
+
+Zapier es la plataforma más conocida, con más de 6000 integraciones. Su capa de IA (Zapier Central) permite crear bots que interactúan con tus apps y automatizar decisiones con IA.
+
+**Zapier + IA es ideal para:**
+- Clasificación automática de tickets de soporte
+- Resúmenes automáticos de reuniones
+- Enriquecimiento de leads con datos de IA
+
+### n8n
+
+n8n es open source y se puede auto-alojar. Ofrece el máximo control y personalización con ejecución local de datos sensibles y workflows complejos.
+
+**Ventajas de n8n para agentes IA:**
+- Puedes ejecutar modelos localmente (Ollama, Llama)
+- Control total sobre los datos
+- Integración con bases de datos vectoriales
+
+<Callout type="tip">
+Si trabajas con datos sensibles, n8n auto-alojado es la mejor opción. Si necesitas integraciones rápidas, Zapier. Si buscas el equilibrio, Make.
+</Callout>
+
+## Patrones de automatización con IA
+
+### Clasificación inteligente
+
+Un correo llega al buzón de soporte. La IA lo clasifica por categoría, urgencia y departamento, y lo asigna automáticamente.
+
+```
+Correo entrante - IA clasifica - Enruta a departamento - Responde con plantilla
+```
+
+### Procesamiento de documentos
+
+Un PDF con facturas se procesa automáticamente: la IA extrae los datos, los valida y los introduce en el sistema contable.
+
+```
+PDF - IA extrae datos - Valida - Introduce en ERP - Archiva
+```
+
+### Atención al cliente híbrida
+
+Un chatbot IA atiende al cliente. Si no puede resolverlo, escala a un humano con todo el contexto.
+
+```
+Cliente - Chatbot IA - Resuelve o escala a humano con contexto
+```
+
+### Generación de contenido
+
+La IA monitorea fuentes de noticias, redacta resúmenes, los personaliza por audiencia y los publica en los canales correspondientes.
+
+```
+Noticias - IA analiza - Redacta - Personaliza - Publica
+```
+
+## Cómo empezar
+
+1. Identifica un proceso repetitivo que consuma tiempo
+2. Mapea el flujo: entrada, procesamiento, salida
+3. Elige la plataforma según tus necesidades
+4. Diseña el flujo con un paso de IA en el punto crítico
+5. Prueba con datos reales y ajusta
+6. Escala una vez validado
+
+<Callout type="warning">
+No automatices todo de golpe. Empieza con un proceso pequeño, valida que funciona y luego escala.
+</Callout>
+
+## Ejemplo práctico: Resumidor automático
+
+Un flujo que escucha un canal de Slack, recibe contenido largo, lo envía a un LLM con un prompt de resumen, publica el resumen y lo almacena.
+
+Este flujo, que antes requería una persona dedicada, ahora se ejecuta en segundos.
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia entre Make, Zapier y n8n?
+2. ¿En qué caso elegirías n8n sobre las otras plataformas?
+3. ¿Qué precauciones debes tomar al automatizar con IA?
+
+En la siguiente lección exploraremos los frameworks y herramientas para construir agentes desde código.

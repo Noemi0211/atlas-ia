@@ -1,0 +1,143 @@
+---
+title: "Model Context Protocol (MCP)"
+description: "El protocolo que conecta modelos de lenguaje con herramientas externas"
+---
+
+## Qué es MCP
+
+El **Model Context Protocol (MCP)** es un protocolo abierto creado por Anthropic que estandariza la forma en que los modelos de lenguaje se conectan con herramientas y fuentes de datos externas.
+
+Piensa en MCP como el "USB-C de la IA": un estándar universal para que cualquier modelo pueda usar cualquier herramienta.
+
+<Callout type="info">
+Antes de MCP, cada integración requería código personalizado. Con MCP, cualquier agente compatible puede usar cualquier servidor MCP sin configuración adicional.
+</Callout>
+
+## Arquitectura de MCP
+
+MCP sigue una arquitectura cliente-servidor:
+
+### Cliente MCP
+
+Es el agente o aplicación que consume las herramientas. Por ejemplo, Claude Desktop, un asistente personalizado o tu propio agente.
+
+### Servidor MCP
+
+Es un proceso independiente que expone herramientas, recursos y prompts. Cada servidor ofrece capacidades específicas:
+
+- **Herramientas:** funciones que el agente puede ejecutar (buscar, calcular, leer archivos)
+- **Recursos:** datos que el agente puede consultar (documentos, bases de datos, APIs)
+- **Prompts:** plantillas de interacción predefinidas
+
+### Transporte
+
+La comunicación entre cliente y servidor puede ser:
+
+- **stdio:** para herramientas locales (el servidor se ejecuta como subproceso)
+- **HTTP + SSE:** para servidores remotos
+- **WebSocket:** para comunicación bidireccional en tiempo real
+
+## Cómo funciona en la práctica
+
+Cuando un agente necesita realizar una acción, el flujo es:
+
+1. El agente recibe una petición del usuario
+2. Determina que necesita usar una herramienta
+3. Consulta el servidor MCP para conocer las herramientas disponibles
+4. El servidor devuelve la lista de herramientas con sus parámetros
+5. El agente decide qué herramienta usar y con qué parámetros
+6. El servidor ejecuta la herramienta y devuelve el resultado
+7. El agente incorpora el resultado en su respuesta
+
+### Ejemplo simple
+
+```
+Usuario: "¿Cuál es el tiempo hoy en Madrid?"
+
+Agente → Servidor MCP de clima
+  └── Llama a get_weather(city: "Madrid")
+Servidor → Agente
+  └── Devuelve { temperatura: 28°, humedad: 45% }
+Agente → Usuario
+  └── "Hoy en Madrid hace 28°C con humedad del 45%."
+```
+
+## Herramientas que puedes exponer con MCP
+
+### Procesamiento de archivos
+
+- Leer, escribir y modificar archivos locales
+- Procesar documentos PDF, Word, Excel
+- Manipular imágenes y audio
+
+### Acceso a datos
+
+- Consultar bases de datos SQL
+- Buscar en índices vectoriales
+- Leer APIs REST y GraphQL
+
+### Automatización
+
+- Ejecutar comandos del sistema
+- Controlar navegadores web
+- Enviar correos y mensajes
+- Gestionar calendarios y tareas
+
+### Servicios externos
+
+- Buscar en internet
+- Consultar redes sociales
+- Acceder a servicios cloud
+
+## Ventajas de usar MCP
+
+### Estandarización
+
+Cualquier agente compatible con MCP puede usar cualquier servidor MCP. No más integraciones ad-hoc.
+
+### Seguridad
+
+Los servidores MCP se ejecutan en entornos aislados. El agente no tiene acceso directo al sistema, solo a través de las herramientas definidas.
+
+### Mantenibilidad
+
+Actualizar una herramienta solo requiere modificar el servidor MCP. Todos los agentes que lo usan se benefician automáticamente.
+
+### Descubrimiento
+
+Los agentes pueden descubrir dinámicamente qué herramientas están disponibles y cómo usarlas, sin configuración manual.
+
+<Callout type="tip">
+MCP cambia el paradigma: en lugar de decirle al agente qué herramientas usar, le dices qué servidores MCP tiene disponibles y él decide cómo usarlos.
+</Callout>
+
+## MCP vs otras alternativas
+
+| Aspecto | MCP | Function Calling | Plugins | Custom API |
+|---------|-----|-----------------|---------|------------|
+| Estándar abierto | Sí | No | No | No |
+| Descubrimiento | Automático | Manual | Manual | Manual |
+| Aislamiento | Sí | No | Parcial | Depende |
+| Multi-modelo | Sí | Específico | Específico | Sí |
+
+## Primeros pasos con MCP
+
+Para crear un servidor MCP básico necesitas:
+
+1. Definir las herramientas que expondrás (nombre, descripción, parámetros)
+2. Implementar la lógica de cada herramienta
+3. Elegir un transporte (stdio para pruebas locales)
+4. Iniciar el servidor y conectarlo a tu agente
+
+<Callout type="info">
+El SDK de MCP está disponible para Python y TypeScript. Puedes encontrar ejemplos y documentación en modelcontextprotocol.io.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Qué problema resuelve MCP en el desarrollo de agentes?
+2. Explica la diferencia entre cliente MCP y servidor MCP
+3. ¿Por qué MCP mejora la seguridad en los agentes?
+4. ¿En qué caso usarías un servidor MCP remoto vs local?
+
+En la siguiente lección veremos **RAG avanzado**, una técnica clave para que los agentes accedan a información externa de forma inteligente.

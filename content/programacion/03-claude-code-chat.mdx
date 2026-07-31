@@ -1,0 +1,106 @@
+---
+title: "Claude Code y asistentes conversacionales"
+description: "Chats de IA especializados en generación y depuración de código"
+---
+
+## Más allá del IDE
+
+Además de los asistentes integrados en el editor, existen poderosos asistentes conversacionales que pueden ayudarte con tareas de programación en un chat interactivo. Estas herramientas son ideales para explorar soluciones, depurar problemas complejos y aprender nuevas tecnologías.
+
+<Callout type="info">
+Los asistentes conversacionales ofrecen un espacio de trabajo más amplio que el autocompletado del IDE: puedes pegar fragmentos grandes, pedir explicaciones detalladas y mantener conversaciones complejas sobre arquitectura de software.
+</Callout>
+
+## Claude Code (Anthropic)
+
+### ¿Qué es?
+
+Claude Code es una herramienta de terminal que permite a Claude interactuar directamente con tu código base. No es un chat web: es un agente que vive en tu terminal y puede leer, escribir y ejecutar código.
+
+### Capacidades
+
+- **Leer y navegar** tu proyecto completo
+- **Editar archivos** directamente
+- **Ejecutar comandos** (tests, lint, build)
+- **Crear múltiples archivos** en una sola petición
+- **Depurar** errores de compilación y runtime
+- **Refactorizar** código a gran escala
+
+### Cuándo usarlo
+
+- Refactorizaciones que afectan a múltiples archivos
+- Depuración de errores complejos
+- Configuración inicial de proyectos
+- Migraciones de código (cambiar de API, framework o lenguaje)
+
+```
+claude "Refactoriza este componente para usar el patrón server component
+de Next.js. Afecta a los archivos en src/components/client/.
+Mueve la lógica de datos a server components y mantén solo la UI en cliente."
+```
+
+## ChatGPT (OpenAI)
+
+### Para programación
+
+ChatGPT, especialmente con GPT-4o, es un asistente versátil para desarrollo. Aunque no tiene acceso directo a tu código, puedes pegar fragmentos y trabajar con ellos.
+
+### Funciones útiles
+
+- **Analizar errores:** pega el error y el contexto, obtén soluciones
+- **Generar boilerplate:** crea estructuras de proyecto desde cero
+- **Traducir código:** convierte entre lenguajes
+- **Explicar conceptos:** comprende patrones y algoritmos
+- **Revisar seguridad:** detecta vulnerabilidades comunes
+
+### Limitaciones
+
+- Sin acceso al proyecto completo
+- Sin ejecución de código
+- Contexto limitado al chat
+- Puede alucinar APIs que no existen
+
+<Callout type="warning">
+ChatGPT a veces inventa nombres de funciones, librerías o parámetros que no existen. Siempre verifica en la documentación oficial antes de usar código generado.
+</Callout>
+
+## Gemini (Google)
+
+### Ventajas específicas
+
+- **Contexto largo:** hasta 1 millón de tokens (proyectos completos)
+- **Integración con Google Cloud:** ideal si usas GCP
+- **Análisis de repositorios:** puedes subir archivos completos
+- **Razonamiento visual:** analiza diagramas de arquitectura
+
+## Tabla comparativa
+
+| Herramienta | Acceso al código | Ejecución | Contexto | Precio |
+|-------------|------------------|-----------|----------|--------|
+| Claude Code | Terminal / proyecto completo | Sí | 200K tokens | $20/mes |
+| ChatGPT | Solo lo que pegas | No | 128K tokens | $20/mes |
+| Gemini | Archivos subidos | No | 1M tokens | Gratuito |
+| Claude.ai | Proyectos + artefactos | Sí (artefactos) | 200K tokens | $20/mes |
+
+## Flujo de trabajo híbrido
+
+El enfoque más eficaz combina ambas herramientas:
+
+1. **Planificación:** Claude Code o ChatGPT para diseñar la solución
+2. **Implementación:** Copilot o Cursor en el IDE
+3. **Revisión:** Claude Code para revisar el código generado
+4. **Depuración:** ChatGPT o Claude para analizar errores
+5. **Documentación:** asistente conversacional para generar docs
+
+<Callout type="tip">
+No uses una sola herramienta para todo. Cada asistente tiene fortalezas distintas: Copilot para velocidad en el día a día, Claude Code para refactorizaciones grandes, ChatGPT para explorar soluciones nuevas.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Qué diferencia a Claude Code de un chat conversacional como ChatGPT?
+2. ¿Cuándo es mejor usar un asistente en el IDE y cuándo uno conversacional?
+3. ¿Qué riesgos tiene confiar ciegamente en código generado por asistentes conversacionales?
+4. Diseña un flujo de trabajo que combine al menos tres herramientas de programación asistida
+
+En la siguiente lección exploraremos los **agentes autónomos de codificación** como Devin y Factory.

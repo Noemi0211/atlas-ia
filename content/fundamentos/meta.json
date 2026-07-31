@@ -1,0 +1,87 @@
+{
+  "bloque": 1,
+  "titulo": "Fundamentos de IA",
+  "descripcion": "Conceptos esenciales: Machine Learning, Deep Learning, LLM, Transformers y más",
+  "lecciones": [
+    {
+      "slug": "01-que-es-ia",
+      "titulo": "Qué es Inteligencia Artificial",
+      "descripcion": "Definición clara, qué es y qué no es la IA",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-historia-ia",
+      "titulo": "Breve historia de la IA",
+      "descripcion": "De Turing a ChatGPT: los hitos que nos han traído hasta aquí",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-machine-learning",
+      "titulo": "Machine Learning explicado",
+      "descripcion": "Cómo aprenden las máquinas sin ser programadas explícitamente",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-deep-learning",
+      "titulo": "Deep Learning y redes neuronales",
+      "descripcion": "Las redes inspiradas en el cerebro que lo están cambiando todo",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-llm",
+      "titulo": "Large Language Models (LLM)",
+      "descripcion": "Qué son, cómo se entrenan y por qué son tan potentes",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-transformers",
+      "titulo": "Transformers: la revolución",
+      "descripcion": "La arquitectura que cambió todo y sigue dominando la IA",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "07-tokens-contexto",
+      "titulo": "Tokens, contexto e inferencia",
+      "descripcion": "Las piezas fundamentales para entender cómo funciona un LLM",
+      "orden": 7,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-alucinaciones-sesgos",
+      "titulo": "Alucinaciones, sesgos y limitaciones",
+      "descripcion": "Lo que la IA no puede hacer y por qué es vital saberlo",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "09-modelos-principales",
+      "titulo": "Los modelos principales",
+      "descripcion": "GPT, Claude, Gemini, Llama y más: un mapa del terrain",
+      "orden": 9,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "10-resumen-fundamentos",
+      "titulo": "Resumen y autoevaluación",
+      "descripcion": "Comprueba lo que has aprendido y consolida los fundamentos",
+      "orden": 10,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    }
+  ]
+}

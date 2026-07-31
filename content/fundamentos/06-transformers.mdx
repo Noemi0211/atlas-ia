@@ -1,0 +1,116 @@
+---
+title: "Transformers: la revolución"
+description: "La arquitectura que cambió todo y sigue dominando la IA"
+---
+
+## Transformers: la revolución
+
+Si tuvieras que señalar **un solo momento** que cambió la IA moderna, sería la publicación del paper "Attention Is All You Need" en 2017.
+
+Este paper introdujo los **Transformers**, y nada ha sido igual desde entonces.
+
+## Antes de los Transformers
+
+Los modelos de lenguaje usaban **redes recurrentes (RNN/LSTM)**. Procesaban el texto **palabra por palabra**, en secuencia.
+
+### El problema
+
+- **Lentitud**: No podían procesar texto en paralelo
+- **Memoria corta**: Olvidaban información de las primeras palabras al llegar a las últimas
+- **Escalabilidad limitada**: No podían crecer mucho
+
+Era como leer un libro palabra por palabra sin poder mirar hacia atrás.
+
+## La revolución: el mecanismo de atención
+
+Los Transformers no procesan el texto en secuencia. Procesan **toda la secuencia a la vez**.
+
+### La analogía del traductor
+
+Imagina que traduces una frase del español al inglés:
+
+> "El gato se sentó en la alfombra"
+
+Un traductor humano no traduce palabra por palabra. Mira **toda la frase** y entiende las relaciones:
+
+- "El" se refiere a "gato"
+- "se sentó" es la acción
+- "en la alfombra" es la ubicación
+
+El mecanismo de **atención** hace exactamente esto: calcula la **relevancia** de cada palabra en relación con todas las demás palabras de la secuencia.
+
+## Cómo funciona el Transformer
+
+### Codificador (Encoder)
+
+Procesa la entrada y crea una representación comprensible del texto. Cada palabra se representa como un vector que captura su significado en el contexto de la frase.
+
+### Descodificador (Decoder)
+
+Genera la salida, palabra por palabra, usando la representación creada por el codificador.
+
+### Multi-Head Attention
+
+En lugar de mirar las relaciones desde un solo ángulo, el Transformer mira **desde múltiples ángulos simultáneamente**. Es como si varios traductores expertos analizaran la misma frase desde diferentes perspectivas.
+
+### Positional Encoding
+
+Como el Transformer procesa todo a la vez (no en orden), necesita una forma de saber **el orden de las palabras**. El positional encoding añade información sobre la posición de cada palabra.
+
+## Por qué los Transformers ganaron
+
+| Característica | RNN/LSTM | Transformer |
+|---------------|----------|------------|
+| Procesamiento | Secuencial | Paralelo |
+| Memoria | Corta | Larga (ventana de contexto) |
+| Escalabilidad | Limitada | Enorme |
+| Velocidad de entrenamiento | Lenta | Rápida |
+| Calidad | Buena | Excelente |
+
+<Callout type="info">
+Los Transformers pueden procesar textos completos de golpe porque usan un mecanismo llamado "self-attention" que calcula todas las relaciones simultáneamente. Esto permite entrenar modelos enormes en paralelo usando GPUs.
+</Callout>
+
+## Variantes del Transformer
+
+### Encoder-only (BERT)
+
+Solo codifica. Excelente para **entender** texto — clasificación, análisis de sentimiento, extracción de información.
+
+### Decoder-only (GPT)
+
+Solo decodifica. Excelente para **generar** texto — chatbots, generación de contenido, código.
+
+### Encoder-Decoder (T5, BART)
+
+Ambos. Excelente para **transformar** texto — traducción, resumen, reformulación.
+
+## Los Transformers en la actualidad
+
+Hoy, **prácticamente todos** los modelos de lenguaje importantes son Transformers:
+
+- GPT-4 / GPT-4o (OpenAI)
+- Claude 3.5 Sonnet (Anthropic)
+- Gemini 1.5 Pro (Google)
+- Llama 3 (Meta)
+- Mistral (Mistral AI)
+- BERT (Google, para búsqueda)
+
+No solo en lenguaje. También en:
+
+- **Visión por computadora** (ViT — Vision Transformer)
+- **Audio** (Whisper para transcripción)
+- **Multimodal** (modelos que entienden texto + imagen + audio)
+
+<Callout type="tip">
+Si solo puedes recordar un concepto técnico de todo este curso, recuerda este: **Transformer = atención = procesar todo a la vez = escalar**. Es la base de la revolución actual.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Cuál era el problema principal de las RNNs?
+2. ¿Qué hace el mecanismo de atención?
+3. ¿Por qué los Transformers pueden procesar texto en paralelo?
+4. ¿Qué variantes del Transformer existen y para qué sirven cada una?
+
+¿Listo? Siguiente lección: **Tokens, contexto e inferencia**.

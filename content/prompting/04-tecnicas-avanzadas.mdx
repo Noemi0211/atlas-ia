@@ -1,0 +1,147 @@
+---
+title: "Técnicas de prompting avanzadas"
+description: "Chain-of-Thought, Tree-of-Thought, ReAct y más"
+---
+
+## Cuando lo básico no es suficiente
+
+Las técnicas básicas funcionan para la mayoría de tareas cotidianas. Pero cuando necesitas **razonamiento complejo, múltiples pasos o toma de decisiones**, necesitas técnicas más potentes.
+
+## Chain-of-Thought (CoT) Avanzado
+
+Ya viste la versión básica. Ahora profundicemos.
+
+### CoT con pocos ejemplos
+```
+Pregunta: Si Juan tiene 3 manzanas y María le da 5 más, ¿cuántas tiene?
+Respuesta: Juan empieza con 3 manzanas. María le da 5 más. 3 + 5 = 8. Juan tiene 8 manzanas.
+
+Pregunta: Un rectángulo tiene 12 cm de largo y 8 cm de ancho. ¿Cuál es su perímetro?
+Respuesta:
+```
+
+### CoT automático
+Solo añade "**Paso a paso**" o "**Razona antes de responder**" al final de tu prompt.
+
+**Funciona mejor cuando:** El problema requiere múltiples pasos lógicos.
+
+## Tree-of-Thought (ToT)
+
+Es una extensión de CoT donde la IA **explora múltiples líneas de razonamiento** en paralelo y elige la mejor.
+
+**Cómo pedirlo:**
+```
+Explora 3 enfoques diferentes para resolver este problema, evalúa cada uno, y dime cuál es el mejor con su justificación.
+
+Problema: Una empresa quiere reducir sus costes operativos un 20% en 6 meses sin despedir personal.
+```
+
+**Funciona mejor cuando:** Hay múltiples soluciones posibles y necesitas evaluarlas.
+
+## ReAct (Razonamiento + Acción)
+
+Combina **razonamiento** con la capacidad de **buscar información** o usar herramientas.
+
+**Cómo pedirlo:**
+```
+Piensa paso a paso para responder a esta pregunta. Cuando necesites información actualizada, indica que buscarías y luego usa ese conocimiento.
+
+Pregunta: ¿Cuál fue el modelo de IA más potente lanzado en 2025 y cómo se compara con GPT-4?
+```
+
+**Funciona mejor cuando:** Necesitas información actualizada o verificar hechos.
+
+## Prompt de contraste
+
+Pides a la IA que **compare dos o más opciones** y explique las diferencias.
+
+**Ejemplo:**
+```
+Compara estos dos enfoques para enseñar programación a niños:
+
+Enfoque A: Usar Scratch con bloques visuales
+Enfoque B: Usar Python directamente
+
+Para cada enfoque, analiza:
+- Edad recomendada
+- Curva de aprendizaje
+- Resultados a largo plazo
+- Coste de implementación
+
+Concluye cuál recomiendas y por qué.
+```
+
+## Prompt de refinamiento iterativo
+
+Le pides a la IA que **mejore su propia respuesta**.
+
+```
+Escribe un email de ventas para un producto SaaS.
+
+[Respuesta inicial]
+
+Ahora mejora ese email. Hazlo más persuasivo, reduce la longitud un 30% y añade un llamado a la acción más fuerte.
+```
+
+## Prompt de múltiples perspectivas
+
+Pides a la IA que **analice desde diferentes puntos de vista**.
+
+```
+Analiza el impacto de la IA en el empleo desde 3 perspectivas:
+
+1. Perspectiva de un economista
+2. Perspectiva de un trabajador
+3. Perspectiva de un CEO tecnológico
+
+Para cada una, da 2 argumentos principales y una conclusión.
+```
+
+## Prompt de restricciones creativas
+
+Pones **límites específicos** para forzar respuestas más creativas.
+
+```
+Escribe un microrrelato de ciencia ficción que:
+- Ocupe exactamente 100 palabras
+- No use la letra "a"
+- Termine con la frase "y entonces despertó"
+```
+
+## Sistema de meta-prompt
+
+Creases un prompt que **genera prompts** para ti.
+
+```
+Eres un experto en prompt engineering. Necesito:
+Tarea: Crear un plan de marketing para un curso online
+Audiencia: Emprendedores noveles
+Formato: 5 pasos con ejemplos
+
+Diseña el mejor prompt posible para obtener este resultado.
+```
+
+## Tabla de técnicas avanzadas
+
+| Técnica | Uso principal | Ejemplo |
+|---------|--------------|---------|
+| Chain-of-Thought | Razonamiento lógico | Problemas matemáticos |
+| Tree-of-Thought | Múltiples soluciones | Toma de decisiones |
+| ReAct | Información externa | Preguntas factuales |
+| Contraste | Comparación de opciones | Decisiones de compra |
+| Refinamiento | Mejora iterativa | Escritura profesional |
+| Múltiples perspectivas | Análisis completo | Temas complejos |
+| Restricciones | Creatividad | Escritura creativa |
+| Meta-prompt | Automatización | Diseño de prompts |
+
+<Callout type="tip">
+No necesitas dominar todas las técnicas. Empieza con Chain-of-Thought y Contraste, que son las más útiles en el día a día.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia entre Chain-of-Thought y Tree-of-Thought?
+2. ¿Cuándo usarías ReAct en lugar de CoT?
+3. ¿Cómo puede ayudar el refinamiento iterativo a mejorar un prompt?
+
+¿Listo? Siguiente lección: **Prompting para diferentes modelos**.

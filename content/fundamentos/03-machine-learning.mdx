@@ -1,0 +1,123 @@
+---
+title: "Machine Learning explicado"
+description: "Cómo aprenden las máquinas sin ser programadas explícitamente"
+---
+
+## Machine Learning explicado
+
+Si tuvieras que explicar el Machine Learning a un niño de 10 años, lo dirías así:
+
+> En lugar de enseñarle a un ordenador las reglas, le damos miles de ejemplos y él solo descubre las reglas.
+
+Eso es Machine Learning. Nada más, nada menos.
+
+## La diferencia fundamental
+
+### Programación tradicional
+
+```
+Entrada + Reglas → Salida
+```
+
+Un programador escribe las reglas explícitamente. Si A, entonces B. Si温度 > 30, entonces "hace calor".
+
+### Machine Learning
+
+```
+Entrada + Salida → Reglas
+```
+
+Le damos al ordenador muchos ejemplos de entrada y salida, y él **descubre las reglas** solo.
+
+## Los tres tipos de Machine Learning
+
+### Aprendizaje supervisado
+
+El más común. Le damos al modelo **datos etiquetados**: "esto es un gato", "esto es un perro". El modelo aprende la relación y luego puede clasificar imágenes nuevas.
+
+**Ejemplo real**: Filtrar spam. Le enseñas miles de correos etiquetados como "spam" o "no spam". El modelo aprende a distinguirlos.
+
+### Aprendizaje no supervisado
+
+Sin etiquetas. El modelo recibe datos y **encuentra patrones** por sí mismo.
+
+**Ejemplo real**: Segmentación de clientes. Un comercio online agrupa automáticamente a sus clientes por comportamiento de compra, sin decirle cómo hacerlo.
+
+### Aprendizaje por refuerzo
+
+El modelo aprende por **prueba y error**. Recibe recompensas por aciertos y penalizaciones por errores.
+
+**Ejemplo real**: AlphaGo. La IA aprendió a jugar Go jugando millones de partidas contra sí misma.
+
+## Cómo funciona en la práctica
+
+Imagina que quieres crear un modelo que reconozca si un correo es spam:
+
+1. **Recopilas datos**: Miles de correos etiquetados
+2. **Entrenas el modelo**: Le muestras los datos una y otra vez
+3. **El modelo ajusta sus parámetros**: Internamente, el modelo tiene millones de "interruptores" que van ajustándose
+4. **Validas**: Pruebas con datos que el modelo no ha visto
+5. **Despliegues**: El modelo empieza a funcionar en producción
+
+<Callout type="tip">
+El Machine Learning no es magia. Es estadística a gran escala. El modelo encuentra correlaciones en los datos que los humanos no podemos ver por la cantidad de variables involucradas.
+</Callout>
+
+## Conceptos clave
+
+### Features (características)
+
+Son las variables que el modelo usa para tomar decisiones. En un modelo de predicción de precios de casas, las features serían: metros cuadrados, número de habitaciones, ubicación, etc.
+
+### Modelo
+
+Es la función matemática que transforma las entradas en salidas. Puede ser una regresión lineal simple o una red neuronal con mil millones de parámetros.
+
+### Entrenamiento
+
+El proceso de ajustar los parámetros del modelo usando datos. Es como estudiar para un examen: el modelo "estudia" los datos una y otra vez hasta que mejora.
+
+### Pérdida (loss)
+
+Una medida de cuánto se equivoca el modelo. El objetivo del entrenamiento es **minimizar la pérdida**. Es como una nota negativa: cuanto más baja, mejor.
+
+### Generalización
+
+La capacidad del modelo de funcionar bien con datos que **nunca ha visto**. Un modelo que memoriza los datos de entrenamiento pero falla con datos nuevos tiene un problema llamado **overfitting**.
+
+<Callout type="warning">
+El error más común en Machine Learning es confundir memorización con aprendizaje. Un modelo puede obtener 100% de precisión en los datos de entrenamiento y ser inútil en el mundo real. Por eso siempre separamos datos de entrenamiento y de prueba.
+</Callout>
+
+## Ejemplos cotidianos
+
+| Aplicación | Tipo de ML | Qué hace |
+|------------|-----------|----------|
+| Spotify | No supervisado + refuerzo | Recomienda música basándose en patrones de escucha |
+| Gmail | Supervisado | Filtra spam y clasifica correos |
+| Netflix | No supervisado | Sugiere películas según tu historial |
+| Siri/Alexa | Supervisado | Reconoce voz y comprender lenguaje |
+| Uber | Supervisado + refuerzo | Predice tiempos de llegada y optimiza rutas |
+
+## Machine Learning y su relación con la IA
+
+Machine Learning es **un subconjunto de la IA**. No toda IA usa Machine Learning, pero la mayoría de la IA moderna sí.
+
+```
+Inteligencia Artificial (campo amplio)
+├── Machine Learning (aprendizaje de datos)
+│   ├── Deep Learning (redes neuronales profundas)
+│   │   ├── LLM (modelos de lenguaje)
+│   │   ├── Computer Vision (visión por computadora)
+│   │   └── ...
+│   └── Otros métodos (árboles de decisión, SVM, etc.)
+└── IA simbólica, sistemas expertos, etc.
+```
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia entre programación tradicional y Machine Learning?
+2. Nombra los tres tipos de Machine Learning
+3. ¿Qué es el overfitting y por qué es un problema?
+
+¿Listo? Siguiente lección: **Deep Learning y redes neuronales**.

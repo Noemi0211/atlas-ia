@@ -1,0 +1,90 @@
+---
+title: "Conceptos fundamentales de agentes IA"
+description: "Qué son los agentes de IA, cómo funcionan y por qué son el futuro"
+---
+
+## Qué es un agente de IA
+
+Un **agente de IA** es un sistema autónomo que percibe su entorno, procesa información y ejecuta acciones para alcanzar un objetivo específico.
+
+A diferencia de un modelo de lenguaje tradicional que solo genera texto, un agente puede:
+
+- Tomar decisiones basadas en contexto
+- Utilizar herramientas externas (APIs, bases de datos, navegadores)
+- Mantener memoria a largo plazo
+- Ejecutar acciones en el mundo real
+- Aprender y adaptarse con la experiencia
+
+<Callout type="info">
+Un LLM sin herramientas es como un profesor que sabe mucho pero no puede escribir en la pizarra. Un agente es ese mismo profesor con pizarra, libros y conexión a internet.
+</Callout>
+
+## Componentes esenciales
+
+### Percepción
+
+El agente recibe información del entorno. Esto puede ser texto, imágenes, datos estructurados o señales de sensores. La calidad de la percepción determina la calidad de la decisión.
+
+### Razonamiento
+
+El cerebro del agente. Utiliza un modelo de lenguaje (LLM) como motor de razonamiento para analizar la información, planificar acciones y evaluar resultados.
+
+### Acción
+
+El agente ejecuta acciones: llamar a una API, escribir un archivo, enviar un correo, controlar un dispositivo. Las acciones pueden ser deterministas o requerir evaluación posterior.
+
+### Memoria
+
+Los agentes pueden tener:
+
+- **Memoria a corto plazo:** contexto de la conversación actual
+- **Memoria a largo plazo:** información persistente almacenada en vectores o bases de datos
+- **Memoria episódica:** registro de acciones pasadas y sus resultados
+
+## El ciclo agente
+
+El funcionamiento de un agente sigue un ciclo continuo:
+
+1. **Observar** el estado actual del entorno
+2. **Razonar** sobre qué hacer a continuación
+3. **Actuar** ejecutando una herramienta o devolviendo una respuesta
+4. **Evaluar** el resultado de la acción
+5. **Repetir** hasta alcanzar el objetivo
+
+<Callout type="tip">
+El ciclo agente es similar al bucle de control de un robot: sensor → procesador → actuador → feedback. La diferencia es que aquí el "procesador" es un LLM que puede razonar de forma flexible.
+</Callout>
+
+## Por qué los agentes son importantes
+
+Los agentes representan un salto cualitativo respecto a los chatbots tradicionales por varias razones:
+
+- **Autonomía:** pueden trabajar sin supervisión constante
+- **Integración:** se conectan con sistemas existentes
+- **Escalabilidad:** un agente puede gestionar tareas que requerirían horas humanas
+- **Precisión:** al poder consultar fuentes externas, reducen alucinaciones
+
+| Aspecto | Chatbot tradicional | Agente IA |
+|---------|-------------------|-----------|
+| Alcance | Conversación | Ejecución de tareas |
+| Herramientas | Ninguna | APIs, BD, navegador |
+| Memoria | Contexto limitado | Persistente |
+| Autonomía | Baja | Alta |
+
+## Ejemplos cotidianos
+
+Ya usas agentes sin saberlo:
+
+- **Asistentes de código** como Copilot y Cursor que leen archivos, ejecutan comandos y editan código
+- **Automatizaciones** en Make o Zapier que deciden qué flujo ejecutar según el contexto
+- **Chatbots avanzados** que buscan información en tiempo real antes de responder
+- **Sistemas RAG** que recuperan documentos relevantes para generar respuestas precisas
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia principal entre un LLM y un agente?
+2. Nombra los cuatro componentes esenciales de un agente
+3. ¿Por qué la memoria a largo plazo es importante en un agente?
+4. ¿Qué ventaja tiene un agente frente a un chatbot tradicional?
+
+En la siguiente lección exploraremos los distintos **tipos de agentes** que existen y cómo elegir el adecuado para cada tarea.

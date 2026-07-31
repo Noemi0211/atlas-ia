@@ -1,0 +1,63 @@
+{
+  "bloque": 4,
+  "titulo": "IA Aplicada a la Docencia",
+  "descripcion": "Herramientas y técnicas para transformar la enseñanza con IA",
+  "lecciones": [
+    {
+      "slug": "01-fundamentos-docencia",
+      "titulo": "Fundamentos de IA en la educación",
+      "descripcion": "Cómo la IA está transformando los procesos de enseñanza y aprendizaje",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-herramientas-ensenanza",
+      "titulo": "Herramientas IA para la enseñanza",
+      "descripcion": "Plataformas, asistentes y recursos que todo docente debería conocer",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-planificacion-curricular",
+      "titulo": "Planificación curricular con IA",
+      "descripcion": "Diseño de unidades didácticas, secuencias y objetivos con apoyo de IA",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-creacion-contenido",
+      "titulo": "Creación de contenido educativo con IA",
+      "descripcion": "Generación de materiales, actividades y recursos multimedia",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-evaluacion-aprendizaje",
+      "titulo": "Evaluación y retroalimentación con IA",
+      "descripcion": "Rúbricas, corrección automatizada y feedback personalizado",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-etica-desafios",
+      "titulo": "Ética y desafíos de la IA en la docencia",
+      "descripcion": "Privacidad, equidad, sesgo y el rol docente en la era digital",
+      "orden": 6,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "07-resumen-recursos",
+      "titulo": "Resumen y recursos",
+      "descripcion": "Repaso, autoevaluación y recursos para seguir aprendiendo",
+      "orden": 7,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

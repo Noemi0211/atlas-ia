@@ -1,0 +1,55 @@
+{
+  "bloque": 8,
+  "titulo": "Ética y Responsabilidad",
+  "descripcion": "Privacidad, RGPD, copyright y uso responsable de la IA",
+  "lecciones": [
+    {
+      "slug": "01-introduccion-etica",
+      "titulo": "Introducción a la ética en IA",
+      "descripcion": "Por qué la ética es fundamental en el desarrollo y uso de inteligencia artificial",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-privacidad-datos",
+      "titulo": "Privacidad y protección de datos",
+      "descripcion": "RGPD, consentimiento y gobernanza de datos en la era de la IA",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-sesgo-equidad",
+      "titulo": "Sesgo algorítmico y equidad",
+      "descripcion": "Cómo los sesgos se introducen en los modelos y cómo mitigarlos",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-copyright-propiedad",
+      "titulo": "Copyright y propiedad intelectual",
+      "descripcion": "Derechos de autor, contenido generado y atribución en la era de la IA",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "05-regulacion-futuro",
+      "titulo": "Regulación y futuro de la IA responsable",
+      "descripcion": "Leyes, marcos regulatorios y el camino hacia una IA ética",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Resumen y recursos",
+      "descripcion": "Repaso, autoevaluación y recursos para seguir aprendiendo",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "bloque": 0,
+  "titulo": "Antes de Empezar",
+  "descripcion": "Introducción y cómo aprovechar al máximo esta plataforma",
+  "lecciones": [
+    {
+      "slug": "01-bienvenido",
+      "titulo": "Bienvenido a Atlas IA",
+      "descripcion": "Qué es Atlas IA, para qué sirve y qué encontrarás aquí",
+      "orden": 1,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-como-aprender",
+      "titulo": "Cómo aprender Inteligencia Artificial",
+      "descripcion": "Metodología del curso, cómo estudiar y cómo sacar el máximo partido",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-como-evoluciona",
+      "titulo": "Cómo evoluciona la IA",
+      "descripcion": "El ritmo de cambio, por qué importa actualizarse y cómo mantenerse relevante",
+      "orden": 3,
+      "duracion": "6 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-ia-para-aprender",
+      "titulo": "Usar IA para aprender IA",
+      "descripcion": "Prompts para aprender, estrategias de estudio y cómo usar las herramientas a tu favor",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-primer-contacto",
+      "titulo": "Tu primer contacto con la IA",
+      "descripcion": "Ejercicio práctico guiado para que experimentes con una IA desde cero",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-antes-de-continuar",
+      "titulo": "Antes de continuar",
+      "descripcion": "Qué necesitas, requisitos, mentalidad y cómo seguir adelante",
+      "orden": 6,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    }
+  ]
+}

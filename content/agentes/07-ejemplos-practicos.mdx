@@ -1,0 +1,138 @@
+---
+title: "Ejemplos prácticos de agentes"
+description: "Casos de uso reales: asistentes, automatización, análisis y más"
+---
+
+## Agentes en acción
+
+Los agentes de IA ya están transformando industrias enteras. En esta lección veremos casos de uso reales que ilustran el potencial de esta tecnología.
+
+<Callout type="info">
+Cada ejemplo sigue el mismo patrón: un objetivo complejo que un agente descompone, ejecuta y verifica de forma autónoma.
+</Callout>
+
+## Caso 1: Asistente de investigación académica
+
+### Problema
+
+Un investigador necesita revisar 50 artículos científicos a la semana para mantenerse actualizado. Hacerlo manualmente le lleva horas.
+
+### Solución con agente
+
+Un agente multiagente con:
+
+1. **Agente buscador:** consulta bases de datos académicas (arXiv, PubMed, Google Scholar)
+2. **Agente extractor:** lee cada artículo y extrae: resumen, metodología, resultados, limitaciones
+3. **Agente analizador:** identifica tendencias, contradicciones y conexiones entre artículos
+4. **Agente redactor:** genera un informe semanal personalizado con los hallazgos más relevantes
+
+### Resultado
+
+El investigador recibe un informe de 5 páginas cada lunes con lo esencial, ahorrando 10+ horas semanales.
+
+## Caso 2: Automatización de soporte técnico
+
+### Problema
+
+Un equipo de soporte recibe 200 tickets al día. El 60% son preguntas repetitivas que podrían resolverse automáticamente.
+
+### Solución con agente
+
+1. **Clasificador:** categoriza el ticket (técnico, facturación, cuenta)
+2. **Buscador RAG:** busca en la base de conocimiento artículos relevantes
+3. **Generador:** redacta una respuesta personalizada basada en la documentación
+4. **Verificador:** confirma que la respuesta resuelve la pregunta
+5. **Escalador:** si no puede resolverlo, pasa a un humano con todo el contexto
+
+### Resultado
+
+El 45% de los tickets se resuelven sin intervención humana. Tiempo medio de respuesta: 2 minutos vs 4 horas.
+
+<Callout type="tip">
+La clave del éxito en soporte técnico con agentes no es reemplazar al humano, sino darle más contexto y tiempo para los casos complejos.
+</Callout>
+
+## Caso 3: Análisis de sentimiento en redes sociales
+
+### Problema
+
+Una marca necesita monitorizar 10,000 menciones diarias en redes sociales para detectar crisis de reputación.
+
+### Solución con agente
+
+1. **Recolector:** captura menciones de múltiples fuentes (Twitter, Instagram, Reddit, foros)
+2. **Analizador:** clasifica cada mención por sentimiento (positivo, negativo, neutro) e intensidad
+3. **Detector de anomalías:** identifica picos de sentimiento negativo y los agrupa por tema
+4. **Generador de alertas:** si detecta una posible crisis, envía un informe urgente al equipo de comunicación
+
+### Resultado
+
+Las crisis se detectan en minutos en lugar de horas. El equipo puede responder antes de que el problema escale.
+
+## Caso 4: Asistente de código para desarrollo
+
+### Problema
+
+Un equipo de desarrollo quiere revisar y mantener un código base legacy de 500,000 líneas.
+
+### Solución con agente
+
+1. **Agente analizador:** mapea la arquitectura del código y documenta dependencias
+2. **Agente revisor:** identifica code smells, vulnerabilidades y deuda técnica
+3. **Agente refactorizador:** sugiere y aplica mejoras de código (con aprobación humana)
+4. **Agente documentador:** genera documentación automática de funciones y módulos
+5. **Agente tester:** crea tests unitarios para el código no cubierto
+
+### Resultado
+
+Reducción del 40% en bugs. El equipo dedica un 30% menos de tiempo a mantenimiento.
+
+## Caso 5: Gestión de proyectos automatizada
+
+### Problema
+
+Un project manager gestiona 5 equipos y 15 proyectos simultáneamente. El seguimiento manual es inviable.
+
+### Solución con agente
+
+1. **Monitor de progreso:** revisa diariamente el estado de cada tarea en Jira/Asana
+2. **Detector de riesgos:** identifica tareas bloqueadas, dependencias incumplidas y desviaciones de plazo
+3. **Generador de informes:** produce informes de estado personalizados para stakeholders
+4. **Coordinador de reuniones:** agenda automáticamente las reuniones necesarias según el estado del proyecto
+
+### Resultado
+
+El project manager recupera 8 horas semanales que dedica a decisiones estratégicas en lugar de tareas operativas.
+
+## Patrones comunes
+
+Estos casos comparten patrones que puedes replicar:
+
+1. **Observar** una fuente de datos (tickets, artículos, menciones, código)
+2. **Analizar** usando un LLM con contexto especializado
+3. **Decidir** qué acción tomar basándose en reglas o criterios
+4. **Actuar** ejecutando una herramienta (enviar correo, crear ticket, generar informe)
+5. **Aprender** del resultado para mejorar futuras decisiones
+
+<Callout type="info">
+El patrón más exitoso es el "humano en el loop": el agente hace el trabajo pesado, pero las decisiones críticas siempre pasan por una persona.
+</Callout>
+
+## Cómo diseñar tu propio agente
+
+1. **Identifica** un proceso que consuma tiempo y sea repetitivo
+2. **Define** el objetivo en términos medibles
+3. **Divide** el proceso en pasos ejecutables por un agente
+4. **Lista** las herramientas que necesitará (APIs, bases de datos)
+5. **Prototipa** con un framework (LangChain, CrewAI)
+6. **Prueba** con casos reales y mide resultados
+7. **Itera** basándote en el feedback
+
+## Autoevaluación
+
+1. ¿Qué patrón común comparten todos los casos de uso?
+2. ¿Por qué el "humano en el loop" es importante?
+3. Diseña un agente para un problema en tu ámbito profesional
+4. ¿Qué métricas usarías para medir el éxito de tu agente?
+
+En la última lección haremos un **resumen completo** del bloque con recursos para seguir aprendiendo.

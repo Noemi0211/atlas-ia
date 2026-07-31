@@ -1,0 +1,55 @@
+{
+  "bloque": 10,
+  "titulo": "Novedades",
+  "descripcion": "Noticias, nuevos modelos, actualizaciones y tendencias del ecosistema",
+  "lecciones": [
+    {
+      "slug": "01-modelos-recientes",
+      "titulo": "Modelos de lenguaje recientes",
+      "descripcion": "GPT-4o, Claude 4, Gemini 2.5, Llama 4 y Mistral Large",
+      "orden": 1,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "02-tendencias-ecosistema",
+      "titulo": "Tendencias del ecosistema IA",
+      "descripcion": "Agentes autónomos, MCP, IA en el navegador y código abierto",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-multimodal-avances",
+      "titulo": "Avances en IA multimodal",
+      "descripcion": "Video nativo, audio en tiempo real y modelos unificados",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-ia-aplicada",
+      "titulo": "IA aplicada: nuevos horizontes",
+      "descripcion": "Ciencia, salud, educación y productividad con los últimos avances",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-regulacion-actualidad",
+      "titulo": "Regulación y ética: estado actual",
+      "descripcion": "AI Act, tratados internacionales y debates éticos emergentes",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "06-recursos-actualizarse",
+      "titulo": "Cómo mantenerse actualizado en IA",
+      "descripcion": "Fuentes, comunidades y métodos para seguir el ritmo de la innovación",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

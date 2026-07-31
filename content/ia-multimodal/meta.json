@@ -1,0 +1,55 @@
+{
+  "bloque": 5,
+  "titulo": "IA Multimodal",
+  "descripcion": "Imagen, vídeo, audio y presentaciones con inteligencia artificial",
+  "lecciones": [
+    {
+      "slug": "01-introduccion-multimodal",
+      "titulo": "Introducción a la IA multimodal",
+      "descripcion": "Qué es la multimodalidad y cómo los modelos procesan múltiples formatos",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-imagen-vision",
+      "titulo": "Imagen y visión con IA",
+      "descripcion": "Generación, edición y análisis de imágenes con modelos multimodales",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-video-animacion",
+      "titulo": "Video y animación con IA",
+      "descripcion": "Creación y edición de video, animaciones y presentaciones dinámicas",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-audio-voz",
+      "titulo": "Audio, voz y música con IA",
+      "descripcion": "Síntesis de voz, clonación, transcripción y generación musical",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-aplicaciones-multimodales",
+      "titulo": "Aplicaciones multimodales en el mundo real",
+      "descripcion": "Casos de uso integrados que combinan imagen, texto, audio y video",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Resumen y recursos",
+      "descripcion": "Repaso, autoevaluación y recursos para seguir aprendiendo",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

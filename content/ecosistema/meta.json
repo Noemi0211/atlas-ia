@@ -1,0 +1,71 @@
+{
+  "bloque": 2,
+  "titulo": "Mapa del Ecosistema",
+  "descripcion": "Explora las principales herramientas de IA y compara entre ellas",
+  "lecciones": [
+    {
+      "slug": "01-panorama-ecosistema",
+      "titulo": "Panorama del Ecosistema IA",
+      "descripcion": "Una vista general de las categorías de herramientas y cómo se organizan",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-asistentes-conversacion",
+      "titulo": "Asistentes de Conversación",
+      "descripcion": "ChatGPT, Claude, Gemini: los chatbots que están cambiando todo",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-herramientas-codigo",
+      "titulo": "Herramientas de Código",
+      "descripcion": "Copilot, Cursor y más: IA para programadores",
+      "orden": 3,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-generacion-imagenes",
+      "titulo": "Generación de Imágenes",
+      "descripcion": "DALL-E, Midjourney, Stable Diffusion: arte y diseño con IA",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-audio-video",
+      "titulo": "Audio y Vídeo con IA",
+      "descripcion": "Herramientas para crear, editar y transformar contenido multimedia",
+      "orden": 5,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-plataformas-nocode",
+      "titulo": "Plataformas No-Code de IA",
+      "descripcion": "Automatiza y crea sin programar con plataformas inteligentes",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-comparador-interactivo",
+      "titulo": "Comparador Interactivo",
+      "descripcion": "Compara herramientas lado a lado según tus necesidades",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "08-arbol-decision",
+      "titulo": "Árbol de Decisión",
+      "descripcion": "Responde preguntas y descubre qué herramienta es ideal para ti",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

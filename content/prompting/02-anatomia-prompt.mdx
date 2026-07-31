@@ -1,0 +1,94 @@
+---
+title: "Anatomía de un buen prompt"
+description: "Los elementos clave que componen un prompt efectivo"
+---
+
+## Un prompt efectivo tiene estructura
+
+Igual que una receta de cocina tiene ingredientes y pasos, un buen prompt tiene elementos clave que lo hacen funcionar. No necesitas usarlos todos siempre, pero conocerlos te ayudará a diseñar mejores prompts.
+
+## Los 7 elementos clave
+
+### 1. Rol
+Dile a la IA **quién es**. Esto establece el tono, la profundidad y el enfoque de la respuesta.
+
+**Sin rol:** "Explícame qué es el machine learning"
+**Con rol:** "Eres un profesor universitario de IA dando una clase a estudiantes de primero. Explícame qué es el machine learning"
+
+### 2. Contexto
+Dale a la IA **información relevante** sobre la situación.
+
+**Sin contexto:** "Escribe un email"
+**Con contexto:** "Escribe un email a un cliente que acaba de comprar nuestro software. Quiere saber cómo instalarlo. El tono debe ser amable y profesional."
+
+### 3. Tarea específica
+Di exactamente **qué quieres** que haga. Sé concreto.
+
+**Vaga:** "Háblame de Python"
+**Específica:** "Compara Python y JavaScript en 3 aspectos: velocidad de ejecución, facilidad de aprendizaje y uso en desarrollo web"
+
+### 4. Formato de salida
+Indica **cómo quieres** la respuesta: lista, tabla, párrafos, código...
+
+**Sin formato:** "Dame consejos para ahorrar dinero"
+**Con formato:** "Dame 5 consejos para ahorrar dinero en formato tabla: Consejo | Cómo aplicarlo | Ahorro estimado"
+
+### 5. Restricciones
+Pon **límites** a la respuesta: extensión, tono, audiencia, términos a evitar...
+
+**Ejemplo:** "Explícame qué es un transformer en menos de 100 palabras, como si se lo explicaras a un niño de 12 años."
+
+### 6. Ejemplos (few-shot)
+Muestra a la IA **ejemplos** del tipo de respuesta que esperas.
+
+**Sin ejemplo:** "Traduce al inglés: El gato está en el tejado"
+**Con ejemplo:** "Traduce estas frases al inglés siguiendo este formato:
+'El perro corre rápido' → 'The dog runs fast'
+'El gato está en el tejado' → ..."
+
+### 7. Paso a paso
+Pídele que **razone** antes de responder (Chain-of-Thought).
+
+**Normal:** "Calcula 24 × 37"
+**Paso a paso:** "Calcula 24 × 37 paso a paso, explicando cada operación"
+
+## Plantilla universal
+
+```
+[Rol] Eres un [experto en X] especializado en [Y].
+[Contexto] Actualmente estoy [situación] y necesito [necesidad].
+[Tarea] Quiero que [descripción específica de la tarea].
+[Formato] Responde en formato [lista/tabla/párrafos].
+[Restricciones] Usa un tono [formal/informal], máximo [N] palabras, dirigido a [audiencia].
+```
+
+### Ejemplo práctico
+
+```
+Eres un experto en marketing digital especializado en LinkedIn.
+Actualmente estoy creando mi perfil profesional y necesito destacar mi experiencia en IA.
+Quiero que escribas un titular de perfil y un resumen de 3 líneas.
+Usa un tono profesional pero accesible, dirigido a reclutadores tecnológicos.
+```
+
+## Errores comunes
+
+### Pedir todo a la vez
+**Mal:** "Hazme un plan de negocio, un análisis de mercado y una proyección financiera"
+**Bien:** Pide una cosa cada vez o estructura el prompt en secciones
+
+### Ser demasiado vago
+**Mal:** "Ayúdame con mi trabajo"
+**Bien:** "Necesito preparar una presentación de 10 minutos sobre tendencias de IA en 2026 para mi equipo de ventas"
+
+### No especificar el formato
+**Mal:** "Dime cosas sobre la IA"
+**Bien:** "Dame 5 aplicaciones prácticas de IA en el sector salud, en formato tabla con columna de beneficio y ejemplo"
+
+## Autoevaluación
+
+1. ¿Cuáles son los 7 elementos clave de un buen prompt?
+2. ¿Por qué es importante especificar el formato de salida?
+3. Escribe un prompt para una tarea cotidiana usando al menos 4 de los 7 elementos
+
+¿Listo? Siguiente lección: **Técnicas de prompting básicas**.

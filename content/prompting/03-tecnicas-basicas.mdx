@@ -1,0 +1,129 @@
+---
+title: "Técnicas de prompting básicas"
+description: "Role prompting, few-shot, zero-shot y cómo aplicarlas"
+---
+
+## Hay técnicas comprobadas que funcionan
+
+No tienes que inventar prompts desde cero cada vez. Existen técnicas probadas que puedes aprender y aplicar según lo que necesites.
+
+## Zero-shot prompting
+
+Es la técnica más básica: **le pides a la IA que haga algo sin darle ejemplos**.
+
+**Ejemplo:**
+```
+Clasifica este texto como "positivo" o "negativo":
+"La película fue increíble, la mejor del año."
+```
+
+La IA sabe lo que significa "positivo" y "negativo" sin que le des ejemplos.
+
+**Funciona bien para:** Tareas simples y bien definidas.
+
+**No funciona bien para:** Tareas complejas o con formatos muy específicos.
+
+## Few-shot prompting
+
+Le das a la IA **ejemplos** de lo que esperas antes de pedirle la tarea real.
+
+**Ejemplo:**
+```
+Traduce estas frases al inglés formal:
+
+Español: "Hola, ¿cómo estás?"
+Inglés: "Hello, how are you?"
+
+Español: "Muchas gracias por tu ayuda"
+Inglés: "Thank you very much for your help"
+
+Español: "¿Podrías enviarme el informe?"
+Inglés:
+```
+
+**Funciona bien para:** Tareas con un patrón claro que quieres que siga.
+
+**Consejo:** Usa 2 o 3 ejemplos. Más de 5 puede confundir al modelo y aumentar el costo.
+
+## Role prompting
+
+Le asignas un **rol o personalidad** específica a la IA antes de hacerle la pregunta.
+
+**Ejemplo:**
+```
+Eres un abogado especializado en propiedad intelectual.
+Un cliente quiere saber si puede usar imágenes de Google en su blog.
+Explícale los riesgos legales en términos simples.
+```
+
+**Funciona bien para:** Obtener respuestas con perspectiva profesional.
+
+**Variantes útiles:**
+- "Eres un profesor que explica a niños de 10 años..."
+- "Eres un CEO dando feedback a un empleado..."
+- "Eres un crítico gastronómico evaluando un restaurante..."
+
+## Chain-of-Thought (Cadena de pensamiento) - Básico
+
+Le pides a la IA que **razone paso a paso** antes de responder.
+
+**Ejemplo:**
+```
+Si un tren viaja a 120 km/h durante 2 horas y luego a 80 km/h durante 1 hora, ¿qué distancia total recorre? Piensa paso a paso.
+```
+
+La IA no solo da el resultado, sino que muestra el razonamiento:
+1. Primera parte: 120 km/h × 2 h = 240 km
+2. Segunda parte: 80 km/h × 1 h = 80 km
+3. Total: 240 + 80 = 320 km
+
+**Funciona bien para:** Problemas matemáticos, lógicos, análisis y decisiones complejas.
+
+## Prompt de formato
+
+Especificas **cómo quieres** que se estructure la respuesta.
+
+**Ejemplo:**
+```
+Dame un plan de alimentación semanal saludable. Usa este formato exacto:
+
+Día:
+- Desayuno: [comida]
+- Almuerzo: [comida]
+- Cena: [comida]
+- Snack: [comida]
+```
+
+## Comparativa de técnicas
+
+| Técnica | Cuándo usarla | Ejemplo de uso |
+|---------|--------------|----------------|
+| Zero-shot | Tareas simples | Clasificar un sentimiento |
+| Few-shot | Tareas con patrón | Traducciones, formatos específicos |
+| Role | Perspectiva específica | Consejo legal, médico, técnico |
+| Chain-of-Thought | Razonamiento | Problemas matemáticos, análisis |
+| Formato | Salida estructurada | Tablas, listas, JSON |
+
+## Cómo combinar técnicas
+
+Lo más potente es **combinar varias técnicas**:
+
+**Ejemplo combinado:**
+```
+Eres un chef profesional (rol).
+Dame 3 recetas de cenas rápidas (tarea).
+Para cada receta usa este formato:
+- Nombre:
+- Ingredientes:
+- Tiempo:
+- Pasos: (formato)
+Las recetas deben ser vegetarianas (restricción).
+```
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia entre zero-shot y few-shot prompting?
+2. ¿Cuándo es más útil el role prompting?
+3. ¿Por qué funciona mejor pedir paso a paso en problemas complejos?
+
+¿Listo? Siguiente lección: **Técnicas de prompting avanzadas**.

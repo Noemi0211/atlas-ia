@@ -1,0 +1,119 @@
+---
+title: "Deep Learning y redes neuronales"
+description: "Las redes inspiradas en el cerebro que lo están cambiando todo"
+---
+
+## Deep Learning y redes neuronales
+
+Si Machine Learning es aprender de los datos, Deep Learning es aprender de los datos **con capas y capas de abstracción**.
+
+Es como la diferencia entre aprender a sumar y aprender cálculo. Ambos son matemáticas, pero uno tiene mucha más profundidad que el otro.
+
+## ¿Qué es una red neuronal artificial?
+
+Una red neuronal es un sistema inspirado en el cerebro humano. Está compuesta por **neuronas artificiales** organizadas en capas.
+
+### La analogía del equipo de trabajo
+
+Imagina una empresa con tres departamentos:
+
+1. **Departamento de entrada** (capa de entrada): Recibe la información cruda — una imagen, un texto, unos datos
+2. **Departamentos intermedios** (capas ocultas): Procesan la información, cada uno a su nivel de abstracción
+3. **Departamento de salida** (capa de salida): Produce el resultado — "esto es un gato", "este correo es spam"
+
+En una imagen por computadora, por ejemplo:
+
+- La primera capa detecta **bordes** y colores
+- La segunda capa combina bordes para detectar **formas**
+- La tercera capa combina formas para detectar **objetos** (ojos, orejas)
+- La capa final reconoce el **animal completo** (gato, perro)
+
+## ¿Por qué "deep" (profundo)?
+
+Porque tiene **muchas capas intermedias**. Una red "pocas" capas podría tener 3-5 capas. Una red "profunda" puede tener **decenas o cien de capas**.
+
+Cada capa aprende representaciones **más complejas** de los datos.
+
+```
+Entrada → [Capa 1: bordes] → [Capa 2: formas] → [Capa 3: objetos] → Salida
+```
+
+<Callout type="info">
+El Deep Learning funciona especialmente bien cuando hay **muchos datos** y el problema requiere entender patrones **jerárquicos** — como en imágenes, texto, audio o vídeo.
+</Callout>
+
+## Cómo funciona el entrenamiento
+
+### Forward pass (paso hacia adelante)
+
+Los datos entran por la capa inicial y van pasando por cada capa hasta producir una salida. Cada neurona aplica una operación matemática simple.
+
+### Cálculo de error
+
+Se compara la salida del modelo con la respuesta correcta. La diferencia es el **error**.
+
+### Backpropagation (propagación hacia atrás)
+
+Aquí está la magia. El error se envía **hacia atrás** por la red, ajustando los parámetros de cada neurona para reducir el error.
+
+### Iteración
+
+Este proceso se repite **millones de veces** con miles de ejemplos. gradualmente, la red va mejorando.
+
+## Tipos de redes neuronales importantes
+
+### Redes neuronales convolucionales (CNN)
+
+Especializadas en **imágenes**. Detectan patrones visuales como bordes, texturas y objetos.
+
+**Uso**: Reconocimiento facial, diagnóstico médico por imagen, conducción autónoma.
+
+### Redes neuronales recurrentes (RNN/LSTM)
+
+Diseñadas para **secuencias** — texto, audio, series temporales. Procesan la información en orden.
+
+**Uso**: Traducción, predicción de texto, análisis de sentimiento.
+
+### Transformers
+
+La arquitectura dominante actual. Procesan **toda la secuencia a la vez** en lugar de uno por uno. Esto los hace mucho más rápidos y potentes.
+
+**Uso**: ChatGPT, Claude, Gemini — todos los grandes modelos de lenguaje.
+
+### Redes generativas adversarias (GAN)
+
+Dos redes compiten entre sí: una genera contenido falsa y la otra intenta detectar si es falso. El resultado es contenido cada vez más realista.
+
+**Uso**: Generación de imágenes, deepfakes, superresolución.
+
+## Deep Learning en la vida real
+
+| Aplicación | Red utilizada | Impacto |
+|------------|--------------|---------|
+| ChatGPT/Claude | Transformer | Conversación y generación de texto |
+| DALL-E/Midjourney | Diffusion + Transformer | Generación de imágenes |
+| Reconocimiento facial | CNN | Seguridad, desbloqueo de móvil |
+| Coche autónomo | CNN + Transformer | Conducción asistida |
+| Diagnóstico médico | CNN | Detección temprana de enfermedades |
+| Traducción | Transformer | Traducción automática de alta calidad |
+
+## Limitaciones del Deep Learning
+
+No todo es perfecto:
+
+- **Necesita muchísimos datos**: Funciona bien con millones de ejemplos
+- **Es computacionalmente costoso**: Entrenar un modelo grande puede costar millones de dólares
+- **Es una caja negra**: A veces no sabemos por qué toma ciertas decisiones
+- **Es propenso a overfitting**: Puede memorizar en lugar de aprender
+
+<Callout type="warning">
+El Deep Learning no es la solución a todo. Para muchos problemas, un modelo simple (como una regresión o un árbol de decisión) funciona igual de bien o mejor. Elegir la herramienta adecuada es clave.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Por qué se llama "deep" learning?
+2. ¿Cuál es la diferencia entre CNN y Transformers?
+3. ¿Por qué el Deep Learning necesita tantos datos?
+
+¿Listo? Siguiente lección: **Large Language Models (LLM)**.

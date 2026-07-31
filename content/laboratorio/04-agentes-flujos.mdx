@@ -1,0 +1,116 @@
+---
+title: "Agentes y flujos prácticos"
+description: "Construcción de pipelines de agentes y automatización"
+---
+
+## Diseñando flujos inteligentes
+
+Agent Flow te permite visualizar y construir pipelines de agentes conectando nodos. Es como dibujar un diagrama de flujo, pero cada nodo es un componente funcional que procesa información de forma autónoma.
+
+<Callout type="info">
+Un pipeline de agentes es una cadena de procesamiento donde cada etapa recibe información de la anterior, la transforma y la pasa a la siguiente. El diseño del flujo determina la calidad del resultado final.
+</Callout>
+
+## Nodos disponibles
+
+### Input
+Punto de entrada del flujo. Define qué información recibe el pipeline: texto libre, un prompt, un documento o datos estructurados.
+
+### LLM
+Nodo de procesamiento con modelo de lenguaje. Es el cerebro del flujo. Puedes configurar el prompt específico que guiará su comportamiento en esta etapa.
+
+### RAG
+Nodo de recuperación de información. Consulta una base de conocimiento externa para enriquecer el contexto antes de generar una respuesta.
+
+### Tool
+Nodo de acción. Ejecuta una operación externa: buscar en internet, hacer una API call, transformar datos o generar un archivo.
+
+### Output
+Punto de salida. Define cómo se entrega el resultado: texto, resumen estructurado o datos formateados.
+
+## Cómo construir un pipeline
+
+### Pipeline básico: Asistente simple
+
+```
+Input → LLM → Output
+```
+
+El flujo más simple. Útil para tareas de pregunta-respuesta donde no se necesita contexto externo.
+
+### Pipeline intermedio: Asistente con conocimiento
+
+```
+Input → RAG → LLM → Output
+```
+
+El modelo recupera información relevante antes de generar su respuesta. Ideal para preguntas sobre documentación específica.
+
+### Pipeline avanzado: Agente autónomo
+
+```
+Input → LLM → Tool → LLM → Output
+```
+
+El modelo decide qué herramienta usar, ejecuta la acción y luego procesa el resultado. Similar a cómo funcionan los agentes autónomos reales.
+
+## Ejercicios prácticos
+
+### Ejercicio 1: Resumen inteligente
+
+**Objetivo:** crear un pipeline que resuma documentos largos.
+
+**Flujo sugerido:**
+1. Input: documento extenso
+2. LLM: "Extrae las ideas principales de este texto"
+3. Output: resumen estructurado
+
+### Ejercicio 2: Investigador automático
+
+**Objetivo:** pipeline que investiga un tema y genera un informe.
+
+**Flujo sugerido:**
+1. Input: tema de investigación
+2. RAG: busca información relevante
+3. LLM: "Sintetiza la información en un informe"
+4. Output: informe estructurado
+
+### Ejercicio 3: Asistente multicapa
+
+**Objetivo:** sistema que analiza, mejora y formatea texto.
+
+**Flujo sugerido:**
+1. Input: texto original
+2. LLM (analizar): "Identifica errores y áreas de mejora"
+3. LLM (mejorar): "Reescribe el texto aplicando las mejoras"
+4. Tool: "Formatea en markdown"
+5. Output: texto mejorado y formateado
+
+<Callout type="tip">
+Piensa en cada nodo LLM como un especialista. Dale un prompt específico para su tarea, no uno genérico. Un especialista enfocado rinde mejor que un generalista.
+</Callout>
+
+## Configuración de nodos
+
+### Prompts por nodo
+
+Cada nodo LLM permite configurar su propio prompt. Esto es fundamental:
+
+**Nodo 1:** "Eres un analista. Extrae los datos clave de este texto."
+**Nodo 2:** "Eres un redactor. Genera un informe profesional con los datos proporcionados."
+
+### Orden y flujo
+
+El orden de los nodos importa. Un mismo conjunto de nodos en diferente orden produce resultados distintos:
+
+- `Input → RAG → LLM → Output`: el LLM usa el contexto recuperado
+- `Input → LLM → RAG → Output`: el LLM primero interpreta y luego busca
+
+## Autoevaluación
+
+1. ¿Cuáles son los cinco tipos de nodo disponibles en Agent Flow?
+2. ¿Qué ventaja tiene añadir un nodo RAG antes del LLM?
+3. Diseña un pipeline para un asistente que traduzca textos técnicos de inglés a español, manteniendo la terminología especializada
+4. ¿Por qué es importante configurar prompts específicos por nodo?
+
+En la última lección desarrollaremos **proyectos integrados** combinando todas las herramientas del laboratorio.

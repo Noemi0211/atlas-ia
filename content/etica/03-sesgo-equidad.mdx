@@ -1,0 +1,103 @@
+---
+title: "Sesgo algorítmico y equidad"
+description: "Cómo los sesgos se introducen en los modelos y cómo mitigarlos"
+---
+
+## El espejo de los datos
+
+Los modelos de IA aprenden de datos históricos. Si esos datos reflejan desigualdades, discriminación o prejuicios, la IA los aprenderá y, peor aún, los amplificará. El sesgo algorítmico no es un fallo técnico: es un reflejo de sesgos sociales codificados en software.
+
+<Callout type="info">
+Un modelo de IA es como un espejo: refleja lo que ve en sus datos de entrenamiento. Si los datos tienen sesgos, el modelo los tendrá. La diferencia es que un espejo no actúa sobre lo que refleja, pero un modelo de IA sí.
+</Callout>
+
+## Fuentes de sesgo
+
+### Sesgo en los datos
+
+- **Datos históricos:** reflejan desigualdades pasadas
+- **Muestreo:** ciertos grupos están infrarrepresentados
+- **Etiquetado:** sesgos humanos al anotar datos
+- **Medición:** lo que se mide no siempre refleja la realidad
+
+### Sesgo en el modelo
+
+- **Arquitectura:** algunas arquitecturas favorecen ciertos patrones
+- **Objetivo de optimización:** lo que maximiza el modelo no siempre es lo éticamente correcto
+- **Evaluación:** métricas que no capturan impacto desigual
+
+### Sesgo en el despliegue
+
+- **Contexto:** un modelo que funciona bien en un contexto puede fallar en otro
+- **Interpretación:** cómo se usan e interpretan las predicciones
+- **Feedback loop:** las decisiones del modelo afectan a los datos futuros
+
+## Ejemplos reales
+
+### Reconocimiento facial
+
+Estudios demostraron que sistemas comerciales de reconocimiento facial tenían tasas de error del 0.8% para hombres blancos y del 35% para mujeres de piel oscura. El problema: datos de entrenamiento con mayoría de hombres blancos.
+
+### Contratación laboral
+
+Amazon desarrolló un sistema de reclutamiento con IA que penalizaba currículums que contenían la palabra "mujeres". El modelo aprendió de 10 años de contrataciones en un sector mayoritariamente masculino.
+
+### Justicia penal
+
+En Estados Unidos, el sistema COMPAS, usado para evaluar riesgo de reincidencia, mostraba sesgo racial: predecía mayor riesgo para personas afroamericanas y menor para personas blancas en condiciones similares.
+
+| Caso | Tipo de sesgo | Consecuencia |
+|------|---------------|--------------|
+| Reconocimiento facial | Racial | Falsos positivos en minorías |
+| Reclutamiento Amazon | Género | Discriminación en contratación |
+| COMPAS | Racial | Sentencias más duras para minorías |
+| Créditos hipotecarios | Socioeconómico | Denegación sistemática |
+
+<Callout type="warning">
+El sesgo algorítmico no es solo un problema técnico. Tiene consecuencias reales en la vida de las personas: empleo, vivienda, libertad, salud. Ignorarlo no es una opción.
+</Callout>
+
+## Mitigación del sesgo
+
+### Antes del entrenamiento
+
+- Auditar los datos de entrenamiento
+- Equilibrar la representación de grupos
+- Documentar el origen y limitaciones de los datos
+- Involucrar a equipos diversos en el diseño
+
+### Durante el entrenamiento
+
+- Usar técnicas de debiasing (eliminación de sesgos)
+- Implementar restricciones de equidad en la optimización
+- Evaluar el rendimiento por subgrupos
+- Probar con datos adversariales
+
+### Después del despliegue
+
+- Monitorizar continuamente el rendimiento por grupos
+- Establecer umbrales de equidad
+- Permitir apelaciones y revisiones humanas
+- Actualizar modelos cuando se detecten sesgos
+
+## Equidad: definiciones en conflicto
+
+No hay una única definición de equidad. Diferentes enfoques pueden entrar en conflicto:
+
+- **Equidad demográfica:** misma tasa de acierto para todos los grupos
+- **Igualdad de oportunidades:** misma tasa de verdaderos positivos
+- **Paridad predictiva:** misma precisión para todos los grupos
+- **Impacto equitativo:** mismo impacto en la distribución de recursos
+
+<Callout type="tip">
+No existe una definición universal de equidad. La elección de qué métrica usar depende del contexto, los valores de la comunidad y el impacto potencial en las personas afectadas.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Cuáles son las tres fuentes principales de sesgo en sistemas de IA?
+2. Nombra dos ejemplos reales de sesgo algorítmico y sus consecuencias
+3. ¿En qué etapas del desarrollo de IA se puede mitigar el sesgo?
+4. ¿Por qué no existe una única definición de equidad en IA?
+
+En la siguiente lección exploraremos el complejo tema del **copyright y la propiedad intelectual** en relación con la IA.

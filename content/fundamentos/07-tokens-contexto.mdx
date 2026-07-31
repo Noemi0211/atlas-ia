@@ -1,0 +1,131 @@
+---
+title: "Tokens, contexto e inferencia"
+description: "Las piezas fundamentales para entender cómo funciona un LLM"
+---
+
+## Tokens, contexto e inferencia
+
+Estos tres conceptos son la base práctica de cómo interactúas con cualquier LLM. Entenderlos te ayudará a usar las herramientas de IA de forma más efectiva.
+
+## ¿Qué es un token?
+
+Un token es la **unidad básica de texto** que un modelo procesa. No es exactamente una palabra — es un fragmento de texto que el modelo usa para entender y generar lenguaje.
+
+### Ejemplo real
+
+La frase "Inteligencia Artificial" podría dividirse en:
+
+```
+"Inteligencia" → 1 token
+"Artificial" → 1 token
+```
+
+Pero la palabra "desarrolladores" podría dividirse en:
+
+```
+"des" + "arrolla" + "dores" → 3 tokens
+```
+
+### ¿Por qué importan los tokens?
+
+1. **Coste**: Las APIs cobran por tokens. Más tokens = más caro
+2. **Velocidad**: Más tokens = más tiempo de procesamiento
+3. **Límites de contexto**: La ventana de contexto se mide en tokens
+
+<Callout type="info">
+Como regla general en español: **1 token ≈ 0.75 palabras**. O dicho de otro modo, 100 palabras son aproximadamente 130 tokens. Los textos en español suelen usar más tokens que en inglés porque los tokenizadores están más optimizados para inglés.
+</Callout>
+
+### Tokenización
+
+El proceso de dividir el texto en tokens se llama **tokenización**. Cada modelo usa su propio tokenizador.
+
+Puedes experimentar con la tokenización de diferentes modelos usando herramientas como [tiktoken](https://tiktokenizer.vercel.app/).
+
+## ¿Qué es la ventana de contexto?
+
+La ventana de contexto es la **cantidad de texto** que un modelo puede "ver" y tener en cuenta al generar una respuesta.
+
+### Ejemplo práctico
+
+Si le preguntas a ChatGPT sobre un documento de 10 páginas, el modelo necesita que todo el documento quepa en su ventana de contexto.
+
+| Modelo | Ventana de contexto | Equivalente |
+|--------|-------------------|-------------|
+| GPT-3.5 | 4.096 tokens | ~3.000 palabras |
+| GPT-4o | 128.000 tokens | ~96.000 palabras |
+| Claude 3.5 Sonnet | 200.000 tokens | ~150.000 palabras |
+| Gemini 1.5 Pro | 2.000.000 tokens | ~1.500.000 palabras |
+
+### ¿Por qué importa?
+
+- **Conversaciones largas**: Una ventana pequeña significa que el modelo olvida lo que dijiste antes
+- **Documentos extensos**: Para analizar documentos largos necesitas una ventana amplia
+- **Coste**: Procesar toda la ventana tiene un coste computacional
+
+<Callout type="warning">
+No confundas ventana de contexto con memoria. El modelo no "recuerda" conversaciones anteriores fuera de la ventana actual. Cada nueva conversación empieza de cero (a menos que la plataforma guarde el historial).
+</Callout>
+
+## ¿Qué es la inferencia?
+
+La inferencia es el proceso de **usar un modelo entrenado** para generar respuestas a nuevas preguntas.
+
+### La analogía del examen
+
+- **Entrenamiento** = Estudiar para el examen (el modelo aprende de los datos)
+- **Inferencia** = Hacer el examen (el modelo aplica lo que aprendió a preguntas nuevas)
+
+### Cómo funciona la inferencia
+
+1. Escribes un prompt
+2. El prompt se convierte en tokens
+3. El modelo procesa esos tokens
+4. Genera tokens de respuesta uno por uno
+5. Los tokens se convierten en texto
+
+### Velocidad de inferencia
+
+La velocidad depende de:
+
+- **Tamaño del modelo**: Modelos más grandes son más lentos
+- **Longitud del prompt**: Más tokens de entrada = más procesamiento
+- **Longitud de la respuesta**: Más tokens de salida = más tiempo
+- **Hardware**: GPUs más potentes = respuestas más rápidas
+
+### Tokens por segundo
+
+Los modelos suelen generar entre **20 y 100 tokens por segundo**. Esto se conoce como **velocidad de generación** o **throughput**.
+
+## Cómo usar esta información
+
+### Para ahorrar costes
+
+- Sé conciso en tus prompts
+- Usa modelos más pequeños para tareas simples
+- No incluyas texto irrelevante en tu prompt
+
+### Para mejores resultados
+
+- Entiende los límites de la ventana de contexto
+- Para documentos largos, divide en partes
+- Para conversaciones largas, resume periodicamente
+
+### Para entender las limitaciones
+
+- Si un modelo se "olvida" de algo, puede ser por la ventana de contexto
+- Si una respuesta tarda mucho, puede ser por la cantidad de tokens
+- Si algo parece "cortado", puede haber alcanzado el límite de tokens de salida
+
+<Callout type="tip">
+Cuando uses un LLM para analizar un documento largo, pídele que resuma por secciones. Esto reduce el número de tokens y mejora la calidad de la atención del modelo.
+</Callout>
+
+## Autoevaluación
+
+1. ¿Qué es un token y por qué no es exactamente una palabra?
+2. ¿Cuál es la diferencia entre ventana de contexto y memoria?
+3. ¿Qué es la inferencia y cómo se diferencia del entrenamiento?
+4. ¿Por qué los textos en español usan más tokens que en inglés?
+
+¿Listo? Siguiente lección: **Alucinaciones, sesgos y limitaciones**.

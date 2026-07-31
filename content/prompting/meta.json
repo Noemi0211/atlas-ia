@@ -1,0 +1,71 @@
+{
+  "bloque": 3,
+  "titulo": "Ingeniería de Prompt",
+  "descripcion": "Domina el arte de comunicarte eficazmente con la IA",
+  "lecciones": [
+    {
+      "slug": "01-que-es-prompting",
+      "titulo": "Introducción a la Ingeniería de Prompt",
+      "descripcion": "Qué es el prompting y por qué es una habilidad clave en la era de la IA",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-anatomia-prompt",
+      "titulo": "Anatomía de un buen prompt",
+      "descripcion": "Los elementos clave que componen un prompt efectivo",
+      "orden": 2,
+      "duracion": "9 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-tecnicas-basicas",
+      "titulo": "Técnicas de prompting básicas",
+      "descripcion": "Role prompting, few-shot, zero-shot y cómo aplicarlas",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-tecnicas-avanzadas",
+      "titulo": "Técnicas de prompting avanzadas",
+      "descripcion": "Chain-of-Thought, Tree-of-Thought, ReAct y más",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-prompting-por-modelo",
+      "titulo": "Prompting para diferentes modelos",
+      "descripcion": "ChatGPT vs Claude vs Gemini: cómo adaptar tus prompts",
+      "orden": 5,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-refinamiento-iterativo",
+      "titulo": "Refinamiento iterativo de prompts",
+      "descripcion": "Cómo mejorar tus prompts paso a paso con feedback de la IA",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-calculadora-prompts",
+      "titulo": "Calculadora de Prompts",
+      "descripcion": "Diseña prompts personalizados con nuestra herramienta interactiva",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-resumen-prompting",
+      "titulo": "Resumen y mejores prácticas",
+      "descripcion": "Consolida lo aprendido y lleva tu prompting al siguiente nivel",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

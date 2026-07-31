@@ -1,0 +1,90 @@
+---
+title: "Introducción a la IA multimodal"
+description: "Qué es la multimodalidad y cómo los modelos procesan múltiples formatos"
+---
+
+## Más allá del texto
+
+Hasta ahora, la mayoría de los modelos de IA que hemos visto trabajan principalmente con texto. Pero el mundo real es multimodal: combinamos imágenes, sonidos, palabras y gestos para comunicarnos. La IA multimodal busca replicar esta capacidad.
+
+<Callout type="info">
+Un modelo multimodal es aquel que puede procesar y generar información en múltiples formatos: texto, imágenes, audio y video, todo dentro de un mismo sistema.
+</Callout>
+
+## ¿Qué significa multimodal?
+
+El término **multimodal** se refiere a la capacidad de trabajar con múltiples modalidades o formatos de datos. Mientras que un modelo de lenguaje tradicional solo entiende texto, un modelo multimodal puede:
+
+- Leer y describir imágenes
+- Transcribir y generar audio
+- Analizar y crear video
+- Combinar todas las anteriores
+
+## Principales modelos multimodales
+
+### GPT-4V / GPT-4o
+
+OpenAI integró visión en GPT-4, permitiendo analizar imágenes, diagramas y documentos escaneados. GPT-4o añadió capacidad de audio en tiempo real.
+
+### Claude 3 / 4 (Sonnet)
+
+Anthropic incorporó visión con capacidades avanzadas de análisis de imágenes, gráficos y documentos complejos.
+
+### Gemini
+
+El modelo de Google nació multimodal: texto, imágenes, audio y video de forma nativa. Está diseñado para razonar a través de múltiples formatos simultáneamente.
+
+### Llama 3.2 (Meta)
+
+La versión más reciente de Meta añadió capacidades multimodales de código abierto, democratizando el acceso a esta tecnología.
+
+| Modelo | Texto | Imagen | Audio | Video |
+|--------|-------|--------|-------|-------|
+| GPT-4o | ✅ | ✅ | ✅ | ✅ |
+| Claude 3.5 | ✅ | ✅ | ❌ | ❌ |
+| Gemini 2.0 | ✅ | ✅ | ✅ | ✅ |
+| Llama 3.2 | ✅ | ✅ | ❌ | ❌ |
+
+## Cómo funciona la multimodalidad
+
+### Arquitectura unificada
+
+Los modelos multimodales modernos utilizan una arquitectura que convierte todas las modalidades a un espacio común de representación. El texto se tokeniza, las imágenes se dividen en parches, el audio se convierte en espectrogramas, y todo se procesa con un mismo transformer.
+
+### Encoders especializados
+
+Cada modalidad tiene un encoder que extrae características relevantes:
+
+- **Visión:** CNNs o ViTs (Vision Transformers) para procesar píxeles
+- **Audio:** Wave2Vec o Whisper para convertir sonido en representaciones
+- **Texto:** embeddings tradicionales de lenguaje
+
+### Fusión multimodal
+
+El paso clave es combinar la información de diferentes fuentes. Existen tres enfoques principales:
+
+1. **Temprana:** fusionar antes de procesar
+2. **Tardía:** procesar por separado y combinar al final
+3. **Híbrida:** mezclar en múltiples etapas
+
+<Callout type="tip">
+La fusión temprana es más potente porque permite que el modelo aprenda relaciones entre modalidades, pero es computacionalmente más costosa.
+</Callout>
+
+## Aplicaciones transversales
+
+La multimodalidad abre posibilidades que van más allá de la suma de sus partes:
+
+- **Búsqueda multimodal:** encontrar imágenes describiéndolas con texto
+- **Asistentes universales:** que ven, oyen y hablan
+- **Análisis de documentos:** extraer información de facturas, informes y gráficos
+- **Traducción visual:** describir una imagen en otro idioma
+
+## Autoevaluación
+
+1. ¿Qué significa que un modelo sea multimodal?
+2. Nombra tres modelos multimodales actuales
+3. ¿Cuál es la diferencia entre fusión temprana y tardía?
+4. ¿Qué ventaja tiene un asistente multimodal frente a uno solo de texto?
+
+En la siguiente lección exploraremos en detalle la **generación y edición de imágenes** con IA.

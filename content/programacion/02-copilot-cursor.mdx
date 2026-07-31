@@ -1,0 +1,104 @@
+---
+title: "GitHub Copilot y Cursor"
+description: "Asistentes de código integrados en el IDE"
+---
+
+## Asistentes en el editor
+
+Los asistentes de código integrados en el IDE son la forma más directa de usar IA en el día a día del desarrollo. Se activan mientras escribes y te ofrecen sugerencias en tiempo real sin interrumpir tu flujo de trabajo.
+
+<Callout type="info">
+La diferencia principal entre un chat de IA y un asistente integrado es el contexto: Copilot y Cursor ven todo tu proyecto, no solo lo que escribes en el chat.
+</Callout>
+
+## GitHub Copilot
+
+### Qué es
+
+Lanzado en 2021, Copilot fue el primer asistente de código ampliamente adoptado. Utiliza modelos de OpenAI entrenados específicamente para código.
+
+### Capacidades
+
+- **Autocompletado inline:** sugerencias mientras escribes
+- **Chat en el IDE:** conversación contextual sobre tu código
+- **Explicación de código:** selecciona un bloque y pide una explicación
+- **Generación de tests:** crea tests para funciones seleccionadas
+- **Refactorización:** sugiere mejoras de estructura
+- **Multilenguaje:** soporta prácticamente cualquier lenguaje
+
+### Cómo usarlo eficazmente
+
+1. **Escribe comentarios descriptivos** antes del código para guiar la generación
+2. **Define bien las funciones** con nombres y tipos claros
+3. **Acepta o rechaza** cada sugerencia con criterio
+4. **Usa el chat** para tareas complejas, no solo autocompletado
+
+## Cursor
+
+### Qué es
+
+Cursor es un IDE construido desde cero con IA en el centro. A diferencia de Copilot que es una extensión, Cursor es el editor mismo.
+
+### Capacidades exclusivas
+
+- **Composer:** genera múltiples archivos simultáneamente
+- **Contexto profundo:** entiende todo tu proyecto
+- **Edición por instrucciones:** selecciona código y pide cambios en lenguaje natural
+- **Agent mode:** la IA puede ejecutar comandos, leer archivos y navegar tu proyecto
+- **Chat con contexto:** conversación consciente de todo el repositorio
+
+### Diferencias clave
+
+| Aspecto | Copilot | Cursor |
+|---------|---------|--------|
+| Tipo | Extensión | IDE completo |
+| Contexto | Archivo actual + abiertos | Todo el proyecto |
+| Multiarchivo | Limitado | Nativo |
+| Control | Sugerencias | Edición directa |
+| Precio | $10/mes | $20/mes |
+
+<Callout type="warning">
+Cursor puede editar archivos directamente. Revisa siempre los cambios que hace antes de guardarlos, especialmente en proyectos con varios archivos afectados.
+</Callout>
+
+## Configuración y mejores prácticas
+
+### Para ambos
+
+- **Mantén el proyecto limpio:** código bien estructurado = mejores sugerencias
+- **Usa archivos de configuración:** tsconfig, eslint, prettier ayudan a la IA
+- **Escribe tests:** la IA genera mejores código cuando ve los tests
+- **Personaliza las instrucciones:** ambos permiten dar reglas globales
+
+### Reglas personalizadas
+
+Cursor permite crear un archivo `.cursorrules` con instrucciones globales:
+
+```
+Eres un experto en TypeScript y Next.js.
+Usa siempre tipos explícitos.
+Sigue el patrón de componentes server por defecto.
+Genera tests con Vitest.
+```
+
+Copilot tiene una función similar con `copilot-instructions.md`.
+
+<Callout type="tip">
+Invertir 10 minutos en configurar las reglas de tu asistente mejora la calidad del código generado durante semanas. Es una de las tareas con mejor retorno de inversión.
+</Callout>
+
+## Limitaciones
+
+- **Código repetitivo:** tienden a generar patrones comunes, no siempre la solución óptima
+- **Contexto limitado:** aunque mejoran, aún no abarcan proyectos muy grandes
+- **Dependencia:** riesgo de perder habilidad para escribir código sin ayuda
+- **Seguridad:** pueden reproducir vulnerabilidades si no se revisan
+
+## Autoevaluación
+
+1. ¿Cuál es la diferencia principal entre Copilot y Cursor?
+2. ¿Qué ventajas tiene un IDE con IA integrada frente a una extensión?
+3. ¿Cómo puedes mejorar la calidad de las sugerencias de tu asistente?
+4. ¿Qué riesgos tiene la dependencia excesiva de asistentes de código?
+
+En la siguiente lección exploraremos **Claude Code y otros asistentes conversacionales** para programación.

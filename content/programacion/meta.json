@@ -1,0 +1,55 @@
+{
+  "bloque": 6,
+  "titulo": "Programación Asistida",
+  "descripcion": "Cursor, Copilot, Claude Code y más herramientas para desarrolladores",
+  "lecciones": [
+    {
+      "slug": "01-introduccion",
+      "titulo": "Introducción a la programación asistida por IA",
+      "descripcion": "Cómo la IA está transformando la forma de escribir código",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-copilot-cursor",
+      "titulo": "GitHub Copilot y Cursor",
+      "descripcion": "Asistentes de código integrados en el IDE",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-claude-code-chat",
+      "titulo": "Claude Code y asistentes conversacionales",
+      "descripcion": "Chats de IA especializados en generación y depuración de código",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-agentes-codigo",
+      "titulo": "Agentes autónomos de codificación",
+      "descripcion": "Devin, Factory, OpenHands y el futuro de la programación autónoma",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-buenas-practicas",
+      "titulo": "Buenas prácticas y debugging con IA",
+      "descripcion": "Revisión de código, testing y depuración asistida",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Resumen y recursos",
+      "descripcion": "Repaso, autoevaluación y recursos para seguir aprendiendo",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}
