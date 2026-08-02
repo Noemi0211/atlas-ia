@@ -2,19 +2,21 @@
 
 import { useState, useMemo, useCallback } from "react";
 import {
-  HERRAMIENTAS,
-  CATEGORIAS,
-  CRITERIOS_COMPARACION,
-} from "@/lib/ecosistema-data";
-import {
   HerramientaIA,
   CategoriaHerramienta,
 } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { Check, Star, ChevronDown, ChevronUp } from "lucide-react";
 import { useProgress } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
+import {
+  getHerramientas,
+  getCategoriasHerramientas,
+  getCriteriosComparacion,
+} from "@/lib/i18n/data";
 
 export function ComparadorHerramientas() {
+  const { t } = useI18n();
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
     useState<CategoriaHerramienta>("asistente-conversacion");
   const [herramientasSeleccionadas, setHerramientasSeleccionadas] = useState<
@@ -27,12 +29,16 @@ export function ComparadorHerramientas() {
   const { unlockComparadorBadge, badges } = useProgress();
   const yaDesbloqueado = badges.includes("comparador-user");
 
+  const herramientas = useMemo(() => getHerramientas(t), [t]);
+  const categorias = useMemo(() => getCategoriasHerramientas(t), [t]);
+  const criterios = useMemo(() => getCriteriosComparacion(t), [t]);
+
   const herramientasFiltradas = useMemo(
     () =>
-      HERRAMIENTAS.filter(
+      herramientas.filter(
         (h) => h.categoria === categoriaSeleccionada
       ),
-    [categoriaSeleccionada]
+    [herramientas, categoriaSeleccionada]
   );
 
   const toggleHerramienta = (id: string) => {
@@ -68,7 +74,7 @@ export function ComparadorHerramientas() {
   );
 
   const herramientasParaComparar = herramientasSeleccionadas
-    .map((id) => HERRAMIENTAS.find((h) => h.id === id))
+    .map((id) => herramientas.find((h) => h.id === id))
     .filter(Boolean) as HerramientaIA[];
 
   const ganador = useMemo(() => {
@@ -95,15 +101,15 @@ export function ComparadorHerramientas() {
   return (
     <div className="my-8 p-6 bg-bg-secondary border border-border rounded-2xl">
       <h3 className="text-xl font-bold text-fg mb-4">
-        Comparador de herramientas de IA
+        {t.lab.comparador.title}
       </h3>
 
       <div className="mb-6">
         <label className="block text-sm font-medium text-fg mb-2">
-          Selecciona una categoría:
+          {t.lab.comparador.selectCategory}
         </label>
         <div className="flex flex-wrap gap-2">
-          {(Object.keys(CATEGORIAS) as CategoriaHerramienta[]).map((cat) => (
+          {(Object.keys(categorias) as CategoriaHerramienta[]).map((cat) => (
             <button
               key={cat}
               onClick={() => {
@@ -119,7 +125,7 @@ export function ComparadorHerramientas() {
                   : "bg-bg border border-border text-fg-muted hover:bg-bg-secondary"
               )}
             >
-              {CATEGORIAS[cat].icono} {CATEGORIAS[cat].nombre}
+              {categorias[cat].icono} {categorias[cat].nombre}
             </button>
           ))}
         </div>
@@ -127,7 +133,7 @@ export function ComparadorHerramientas() {
 
       <div className="mb-6">
         <label className="block text-sm font-medium text-fg mb-2">
-          Elige hasta 3 herramientas para comparar:
+          {t.lab.comparador.chooseTools}
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {herramientasFiltradas.map((h) => (
@@ -165,13 +171,13 @@ export function ComparadorHerramientas() {
       {herramientasSeleccionadas.length >= 2 && (
         <div className="mb-6">
           <h4 className="font-semibold text-fg mb-3">
-            Evalúa cada herramienta (1-5 estrellas):
+            {t.lab.comparador.evaluate}
           </h4>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2 text-fg-muted">Criterio</th>
+                  <th className="text-left py-2 text-fg-muted">{t.lab.comparador.criterio}</th>
                   {herramientasParaComparar.map((h) => (
                     <th key={h.id} className="text-center py-2 text-fg-muted">
                       {h.nombre}
@@ -180,7 +186,7 @@ export function ComparadorHerramientas() {
                 </tr>
               </thead>
               <tbody>
-                {CRITERIOS_COMPARACION.map((criterio) => (
+                {criterios.map((criterio) => (
                   <tr key={criterio.id} className="border-b border-border/50">
                     <td className="py-3">
                       <p className="font-medium text-fg">{criterio.nombre}</p>
@@ -216,7 +222,7 @@ export function ComparadorHerramientas() {
                   </tr>
                 ))}
                 <tr className="font-bold">
-                  <td className="py-3 text-fg">TOTAL</td>
+                  <td className="py-3 text-fg">{t.lab.comparador.total}</td>
                   {herramientasParaComparar.map((h) => (
                     <td
                       key={h.id}
@@ -226,7 +232,7 @@ export function ComparadorHerramientas() {
                       )}
                     >
                       {calcularTotal(h.id)} /{" "}
-                      {CRITERIOS_COMPARACION.length * 5}
+                      {criterios.length * 5}
                       {ganador === h.id && (
                         <span className="ml-1 text-xs">🏆</span>
                       )}
@@ -243,11 +249,11 @@ export function ComparadorHerramientas() {
           >
             {mostrarResultados ? (
               <>
-                Ocultar detalles <ChevronUp className="w-4 h-4" />
+                {t.lab.comparador.hideDetails} <ChevronUp className="w-4 h-4" />
               </>
             ) : (
               <>
-                Ver detalles de cada herramienta{" "}
+                {t.lab.comparador.showDetails}{" "}
                 <ChevronDown className="w-4 h-4" />
               </>
             )}
@@ -270,18 +276,18 @@ export function ComparadorHerramientas() {
                   <p className="text-sm text-fg mb-2">{h.descripcion}</p>
                   <div className="text-xs text-fg-muted">
                     <p>
-                      <strong>Fortaleza:</strong> {h.fortalezaPrincipal}
+                      <strong>{t.lab.comparador.fortaleza}</strong> {h.fortalezaPrincipal}
                     </p>
                     <p>
-                      <strong>Debilidad:</strong> {h.debilidadPrincipal}
+                      <strong>{t.lab.comparador.debilidad}</strong> {h.debilidadPrincipal}
                     </p>
                     <p>
-                      <strong>Precio:</strong> {h.precioDetalle}
+                      <strong>{t.lab.comparador.precio}</strong> {h.precioDetalle}
                     </p>
                   </div>
                   {ganador === h.id && (
                     <div className="mt-2 text-sm font-medium text-primary">
-                      🏆 Mejor opción según tu evaluación
+                      {t.lab.comparador.bestOption}
                     </div>
                   )}
                 </div>
@@ -293,8 +299,7 @@ export function ComparadorHerramientas() {
 
       <div className="text-xs text-fg-muted mt-4">
         <p>
-          Este comparador es una guía interactiva. Las puntuaciones son
-          subjetivas y dependen de tus necesidades específicas.
+          {t.lab.comparador.footer}
         </p>
       </div>
     </div>

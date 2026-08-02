@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { SITE_CONFIG } from "@/lib/constants";
+import { useI18n } from "@/lib/i18n/provider";
 
 export function Footer() {
+  const { t } = useI18n();
+
   return (
     <footer className="border-t border-border bg-bg-secondary/50" role="contentinfo">
       <div className="max-w-wide mx-auto px-6 py-12">
@@ -15,28 +20,28 @@ export function Footer() {
               <span className="font-bold text-fg">{SITE_CONFIG.name}</span>
             </div>
             <p className="text-sm text-fg-secondary leading-relaxed">
-              {SITE_CONFIG.description}
+              {t.footer.tagline}
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold text-sm text-fg mb-3">Plataforma</h3>
+            <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.plataforma}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/bloques" className="text-sm text-fg-secondary hover:text-fg transition-colors">
-                  Bloques
+                  {t.footer.bloques}
                 </Link>
               </li>
               <li>
                 <Link href="/glosario" className="text-sm text-fg-secondary hover:text-fg transition-colors">
-                  Glosario
+                  {t.footer.glosario}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold text-sm text-fg mb-3">Recursos</h3>
+            <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.recursos}</h3>
             <ul className="space-y-2">
               <li>
                 <a href="https://roadmap.sh" target="_blank" rel="noopener noreferrer" className="text-sm text-fg-secondary hover:text-fg transition-colors">
@@ -52,26 +57,26 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-sm text-fg mb-3">Legal</h3>
+            <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.legal}</h3>
             <ul className="space-y-2">
               <li>
-                <span className="text-sm text-fg-muted">Privacidad</span>
+                <span className="text-sm text-fg-muted">{t.footer.privacidad}</span>
               </li>
               <li>
-                <span className="text-sm text-fg-muted">Términos</span>
+                <span className="text-sm text-fg-muted">{t.footer.terminos}</span>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-border flex flex-col items-center gap-2 text-xs text-fg-muted">
-          <p>&copy; 2026 Atlas IA por Noemí Celaya Mingot</p>
+          <p>&copy; 2026 Atlas IA {t.footer.copyright}</p>
           <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-fg-secondary transition-colors"
-            aria-label="Licencia Creative Commons CC BY-NC-SA 4.0"
+            aria-label={t.footer.licenciaAria}
           >
             <Image
               src="/icons/cc_by_nc_sa.png"
@@ -81,7 +86,7 @@ export function Footer() {
               className="h-5 w-auto shrink-0"
               aria-hidden="true"
             />
-            Licencia Creative Commons CC BY-NC-SA 4.0
+            {t.footer.licencia}
           </a>
         </div>
       </div>

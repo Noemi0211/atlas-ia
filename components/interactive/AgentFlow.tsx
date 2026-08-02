@@ -3,6 +3,7 @@
 import { useState, useCallback, useRef } from "react";
 import { useProgress } from "@/stores/progress";
 import { Plus, X, ArrowRight, GripVertical, Bot, Brain, Search, Wrench, Terminal } from "lucide-react";
+import { useI18n } from "@/lib/i18n/provider";
 
 type NodeType = "input" | "llm" | "rag" | "tool" | "output";
 
@@ -13,28 +14,36 @@ interface FlowNode {
   config: string;
 }
 
-const NODE_TEMPLATES: { type: NodeType; label: string; icon: React.ReactNode; color: string; defaultConfig: string }[] = [
-  { type: "input", label: "Entrada", icon: <Terminal className="w-4 h-4" />, color: "border-blue-500 bg-blue-500/10", defaultConfig: "Texto del usuario" },
-  { type: "llm", label: "LLM", icon: <Brain className="w-4 h-4" />, color: "border-purple-500 bg-purple-500/10", defaultConfig: "gpt-4o-mini" },
-  { type: "rag", label: "RAG", icon: <Search className="w-4 h-4" />, color: "border-emerald-500 bg-emerald-500/10", defaultConfig: "top_k: 5" },
-  { type: "tool", label: "Herramienta", icon: <Wrench className="w-4 h-4" />, color: "border-orange-500 bg-orange-500/10", defaultConfig: "web_search" },
-  { type: "output", label: "Salida", icon: <Bot className="w-4 h-4" />, color: "border-primary bg-primary/10", defaultConfig: "Respuesta formateada" },
-];
+function getNodeTemplates(t: ReturnType<typeof useI18n>["t"]) {
+  return [
+    { type: "input" as const, label: t.lab.agentFlow.nodeLabels.input, icon: <Terminal className="w-4 h-4" />, color: "border-blue-500 bg-blue-500/10", defaultConfig: t.lab.agentFlow.nodeConfigs.input },
+    { type: "llm" as const, label: t.lab.agentFlow.nodeLabels.llm, icon: <Brain className="w-4 h-4" />, color: "border-purple-500 bg-purple-500/10", defaultConfig: t.lab.agentFlow.nodeConfigs.llm },
+    { type: "rag" as const, label: t.lab.agentFlow.nodeLabels.rag, icon: <Search className="w-4 h-4" />, color: "border-emerald-500 bg-emerald-500/10", defaultConfig: t.lab.agentFlow.nodeConfigs.rag },
+    { type: "tool" as const, label: t.lab.agentFlow.nodeLabels.tool, icon: <Wrench className="w-4 h-4" />, color: "border-orange-500 bg-orange-500/10", defaultConfig: t.lab.agentFlow.nodeConfigs.tool },
+    { type: "output" as const, label: t.lab.agentFlow.nodeLabels.output, icon: <Bot className="w-4 h-4" />, color: "border-primary bg-primary/10", defaultConfig: t.lab.agentFlow.nodeConfigs.output },
+  ];
+}
 
 export function AgentFlow() {
-  const [nodes, setNodes] = useState<FlowNode[]>([
-    { id: "node-0", type: "input", label: "Entrada", config: "Texto del usuario" },
-    { id: "node-1", type: "llm", label: "LLM", config: "gpt-4o-mini" },
-    { id: "node-2", type: "output", label: "Salida", config: "Respuesta formateada" },
-  ]);
+  const { t } = useI18n();
+  const [nodes, setNodes] = useState<FlowNode[]>(() => {
+    const templates = getNodeTemplates(t);
+    return [
+      { id: "node-0", type: "input", label: templates[0].label, config: templates[0].defaultConfig },
+      { id: "node-1", type: "llm", label: templates[1].label, config: templates[1].defaultConfig },
+      { id: "node-2", type: "output", label: templates[4].label, config: templates[4].defaultConfig },
+    ];
+  });
   const [draggedType, setDraggedType] = useState<NodeType | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [pipelineCreated, setPipelineCreated] = useState(false);
   const counterRef = useRef(3);
   const { addBadge, addXP } = useProgress();
 
+  const nodeTemplates = getNodeTemplates(t);
+
   const addNode = useCallback((type: NodeType) => {
-    const template = NODE_TEMPLATES.find((n) => n.type === type);
+    const template = nodeTemplates.find((n) => n.type === type);
     if (!template) return;
     const newNode: FlowNode = {
       id: `node-${counterRef.current++}`,
@@ -43,7 +52,7 @@ export function AgentFlow() {
       config: template.defaultConfig,
     };
     setNodes((prev) => [...prev, newNode]);
-  }, []);
+  }, [nodeTemplates]);
 
   const removeNode = useCallback((id: string) => {
     setNodes((prev) => {
@@ -79,32 +88,33 @@ export function AgentFlow() {
   }, [pipelineCreated, addBadge, addXP]);
 
   const clearPipeline = useCallback(() => {
+    const templates = getNodeTemplates(t);
     setNodes([
-      { id: "node-0", type: "input", label: "Entrada", config: "Texto del usuario" },
-      { id: "node-1", type: "llm", label: "LLM", config: "gpt-4o-mini" },
-      { id: "node-2", type: "output", label: "Salida", config: "Respuesta formateada" },
+      { id: "node-0", type: "input", label: templates[0].label, config: templates[0].defaultConfig },
+      { id: "node-1", type: "llm", label: templates[1].label, config: templates[1].defaultConfig },
+      { id: "node-2", type: "output", label: templates[4].label, config: templates[4].defaultConfig },
     ]);
-  }, []);
+  }, [t]);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       <div className="lg:w-48 shrink-0 space-y-3">
         <h3 className="text-sm font-semibold text-fg flex items-center gap-2">
           <Plus className="w-4 h-4 text-primary" />
-          Bloques
+          {t.lab.agentFlow.title}
         </h3>
-        <p className="text-xs text-fg-muted">Arrastra o haz clic para añadir</p>
+        <p className="text-xs text-fg-muted">{t.lab.agentFlow.addHint}</p>
         <div className="space-y-2">
-          {NODE_TEMPLATES.map((t) => (
+          {nodeTemplates.map((template) => (
             <button
-              key={t.type}
+              key={template.type}
               draggable
-              onDragStart={() => setDraggedType(t.type)}
-              onClick={() => addNode(t.type)}
-              className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-xs transition-all ${t.color} hover:shadow-sm`}
+              onDragStart={() => setDraggedType(template.type)}
+              onClick={() => addNode(template.type)}
+              className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg border text-xs transition-all ${template.color} hover:shadow-sm`}
             >
-              {t.icon}
-              <span className="text-fg">{t.label}</span>
+              {template.icon}
+              <span className="text-fg">{template.label}</span>
             </button>
           ))}
         </div>
@@ -113,16 +123,15 @@ export function AgentFlow() {
           onClick={clearPipeline}
           className="w-full px-3 py-2 rounded-lg border border-border text-xs text-fg-muted hover:text-fg hover:bg-bg-secondary transition-colors"
         >
-          Limpiar
+          {t.lab.agentFlow.clear}
         </button>
 
         <div className="pt-3 border-t border-border">
-          <h4 className="text-xs font-medium text-fg-secondary mb-2">Consejos</h4>
+          <h4 className="text-xs font-medium text-fg-secondary mb-2">{t.lab.agentFlow.tips}</h4>
           <ul className="text-2xs text-fg-muted space-y-1 list-disc pl-4">
-            <li>Ordena los nodos en secuencia</li>
-            <li>Usa RAG para búsqueda</li>
-            <li>Conecta herramientas al LLM</li>
-            <li>Termina siempre con Salida</li>
+            {t.lab.agentFlow.tipsList.map((tip) => (
+              <li key={tip}>{tip}</li>
+            ))}
           </ul>
         </div>
       </div>
@@ -130,10 +139,10 @@ export function AgentFlow() {
       <div className="flex-1 p-6 rounded-xl border border-border bg-bg-secondary/30 min-h-[400px]">
         <div className="flex items-center gap-2 mb-4">
           <Bot className="w-5 h-5 text-primary" />
-          <h3 className="text-sm font-semibold text-fg">Pipeline de agente</h3>
+          <h3 className="text-sm font-semibold text-fg">{t.lab.agentFlow.pipeline}</h3>
           {nodes.length > 2 && (
             <span className="text-2xs text-fg-muted ml-auto">
-              {nodes.length} nodos
+              {nodes.length} {t.lab.agentFlow.nodes}
             </span>
           )}
         </div>
@@ -150,7 +159,7 @@ export function AgentFlow() {
           onDragOver={(e) => e.preventDefault()}
         >
           {nodes.map((node, index) => {
-            const template = NODE_TEMPLATES.find((n) => n.type === node.type);
+            const template = nodeTemplates.find((n) => n.type === node.type);
             if (!template) return null;
             return (
               <div key={node.id} className="flex items-center gap-2">
@@ -203,7 +212,7 @@ export function AgentFlow() {
         {nodes.length === 0 && (
           <div className="flex flex-col items-center justify-center h-64 text-center">
             <Bot className="w-10 h-10 text-fg-muted mb-3" />
-            <p className="text-sm text-fg-muted">Arrastra bloques para crear tu flujo</p>
+            <p className="text-sm text-fg-muted">{t.lab.agentFlow.empty}</p>
           </div>
         )}
 
@@ -211,10 +220,10 @@ export function AgentFlow() {
           <div className="mt-4 p-3 rounded-lg bg-accent/10 border border-accent/20">
             <p className="text-xs text-accent">
               {nodes.some((n) => n.type === "rag") && nodes.some((n) => n.type === "llm")
-                ? " Pipeline RAG detectado: los datos recuperados se pasarán al contexto del LLM"
+                ? t.lab.agentFlow.ragDetected
                 : nodes.some((n) => n.type === "tool") && nodes.some((n) => n.type === "llm")
-                ? " Pipeline herramienta+LLM: el LLM podrá usar la herramienta para obtener información"
-                : " Pipeline básico: el flujo de datos sigue el orden de los nodos"}
+                ? t.lab.agentFlow.toolDetected
+                : t.lab.agentFlow.basicDetected}
             </p>
           </div>
         )}

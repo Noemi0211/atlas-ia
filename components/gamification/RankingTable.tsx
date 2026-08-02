@@ -5,8 +5,10 @@ import { Trophy, Medal, ChevronDown, ChevronUp, Search } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { useProgress, RankingEntry } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
 
 function RankingRow({ entry, index }: { entry: RankingEntry; index: number }) {
+  const { t } = useI18n();
   const isYou = entry.name === "Tú";
   const medalColors = ["text-warning", "text-fg-secondary", "text-orange-600"];
 
@@ -27,28 +29,29 @@ function RankingRow({ entry, index }: { entry: RankingEntry; index: number }) {
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-fg truncate">
-            {entry.name}
+            {isYou ? t.gamification.ranking.you : entry.name}
           </span>
           {isYou && (
             <Badge variant="primary" size="sm">
-              Tú
+              {t.gamification.ranking.you}
             </Badge>
           )}
         </div>
         <div className="flex items-center gap-3 text-2xs text-fg-muted mt-0.5">
-          <span>{entry.badges} insignias</span>
-          <span>🔥 {entry.streak} días</span>
+          <span>{entry.badges} {t.gamification.ranking.badges}</span>
+          <span>🔥 {entry.streak} {t.gamification.ranking.days}</span>
         </div>
       </div>
       <div className="text-right shrink-0">
         <p className="text-sm font-semibold text-fg">{entry.xp.toLocaleString()}</p>
-        <p className="text-2xs text-fg-muted">XP</p>
+        <p className="text-2xs text-fg-muted">{t.gamification.xp.xp}</p>
       </div>
     </div>
   );
 }
 
 export function RankingTable() {
+  const { t } = useI18n();
   const [expanded, setExpanded] = useState(false);
   const [search, setSearch] = useState("");
   const { getRankingData } = useProgress();
@@ -74,11 +77,11 @@ export function RankingTable() {
         <div className="flex items-center justify-between">
           <CardTitle className="text-base flex items-center gap-2">
             <Trophy className="w-4 h-4 text-warning" />
-            Ranking global
+            {t.gamification.ranking.title}
           </CardTitle>
           {userRank > 0 && (
             <span className="text-xs text-fg-muted">
-              Tu puesto: <strong className="text-fg">#{userRank}</strong>
+              {t.gamification.ranking.yourRank} <strong className="text-fg">#{userRank}</strong>
             </span>
           )}
         </div>
@@ -88,7 +91,7 @@ export function RankingTable() {
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-fg-muted" />
         <input
           type="text"
-          placeholder="Buscar en el ranking..."
+          placeholder={t.gamification.ranking.searchPlaceholder}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full h-9 pl-9 pr-3 rounded-lg bg-bg-secondary border border-border text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-primary/30"
@@ -107,9 +110,9 @@ export function RankingTable() {
           className="flex items-center justify-center gap-1.5 w-full mt-3 py-2 text-xs text-fg-muted hover:text-fg transition-colors"
         >
           {expanded ? (
-            <>Mostrar menos <ChevronUp className="w-3.5 h-3.5" /></>
+            <>{t.gamification.ranking.showLess} <ChevronUp className="w-3.5 h-3.5" /></>
           ) : (
-            <>Mostrar todos ({filtered.length}) <ChevronDown className="w-3.5 h-3.5" /></>
+            <>{t.gamification.ranking.showAll.replace("{count}", String(filtered.length))} <ChevronDown className="w-3.5 h-3.5" /></>
           )}
         </button>
       )}

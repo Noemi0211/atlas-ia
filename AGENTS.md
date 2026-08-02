@@ -138,10 +138,23 @@ npm run lint      # ESLint
 - `meta.json`: descripciones de las lecciones 01, 02, 03 y 05 actualizadas
 - Lint y tsc limpios tras los cambios
 
+### Fase 16 ✅ (i18n: español, inglés y valenciano)
+- Infraestructura i18n nueva en `lib/i18n/`: `config.ts` (locales `es`/`en`/`val`, cookie `atlas-locale`, `localeToIntl`), `server.ts` (`getLocale` lee la cookie), `runtime.ts`, `provider.tsx` (`I18nProvider` + hook `useI18n` → `{ locale, t, setLocale }`), `dictionaries/` (`es.ts` fuente de verdad con `type Dictionary`, `en.ts` y `val.ts` con `satisfies Dictionary`), `data.ts` (builders localizados: `getBLOQUES`, `getBloqueMeta`, `getNavItems`, `getGlosario`, `getCategoriasGlosario`, `getCronologia`, `getHerramientas`, `getHerramientaPorId`, `getCategoriasHerramientas`, `getCriteriosComparacion`, `getNodoDecision`, roles/formatos/tonos/audiencias/extensiones, `generarPromptLocalizado`, `getBadgeText`, `getRetoText`, `getProyectoText`)
+- Selector de idioma `components/layout/LanguageSelector.tsx` en el header (es/en/val); `setLocale` escribe localStorage + cookie `atlas-locale` y recarga la página (sin prefijo de URL)
+- Patrón servidor: `getLocale()` + `getDictionary(locale)` en server components y `generateMetadata`; `app/layout.tsx` async con `html lang` dinámico y `<I18nProvider locale>`; patrón cliente: `useI18n()`
+- `getBadgeText`, `getRetoText`, `getProyectoText` devuelven objetos `{ nombre, descripcion }`
+- UI completa localizada: Header, Sidebar, Footer, Breadcrumbs, home, bloques (lista/bloque/lección), glosario (client), cronología, laboratorio, perfil, auth, not-found y todos los componentes client (auth, content, gamification, interactive incl. `TokenSimulator` y `ComparadorHerramientas`)
+- Chat IA localizado: `lib/ai.ts` recibe `locale` (lee cookie en `/api/chat`), system prompt y respuestas generales en `t.ai.*`; el conocimiento offline (12 temas) permanece en español como contenido
+- Búsqueda localizada: `searchContent(query, locale)` usa `getBLOQUES/getGlosario/getHerramientas`; `/api/search` lee la cookie; las lecciones MDX siguen en español (fase posterior)
+- Recomptes reales en los diccionarios: glosario 47 (por índice), cronología 28 (por índice), badges 36, retos 6, proyectos 6, herramientas 13
+- `t.lab.tokenSimulator` NO tiene clave `examplesTexts`; `localeToIntl`: en→"en", val→"ca-ES-valencia", es→"es"
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `1a9c35c` (Fase 14, ajustes de UI)
-- Cambios SIN commitear al cerrar esta sesión: contenido del Bloque 10 (`content/novedades/`) y `AGENTS.md` (ver Fase 15)
-- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 15
+- Último commit: `09208a5` (Fase 15, Bloque 10 Novedades 2026)
+- Cambios SIN commitear al cerrar esta sesión: todo el trabajo de i18n de la Fase 16 (infraestructura `lib/i18n/`, `LanguageSelector`, diccionarios y UI/páginas/componentes localizados, `lib/ai.ts`, `lib/content.ts`, rutas `/api/chat` y `/api/search`) y `AGENTS.md` (ver Fase 16)
+- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 16
+- Siguientes pasos posibles: traducir las 71 lecciones MDX (contenido), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma
 
 ## Bloques de contenido (MDX)
 
@@ -178,7 +191,7 @@ app/api/              → API Routes
 
 components/
   ui/                 → Card, Button, Badge, ProgressBar, Callout, CodeBlock
-  layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs
+  layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs, LanguageSelector
   interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats
   content/            → MDXRenderer (usa next-mdx-remote/rsc), LessonNav, LessonSidebar, TableOfContents
@@ -189,16 +202,23 @@ proxy.ts              → Protección de rutas (Next.js 16, reemplaza middleware
 lib/
   types.ts            → Interfaces (BloqueMeta, LeccionMeta, HerramientaIA, etc.)
   constants.ts        → SITE_CONFIG, BLOQUES (meta), NAV_ITEMS
-  utils.ts            → cn(), slugify(), capitalize(), formatDate()
-  content.ts          → Carga de MDX (getBloqueMeta, getLeccionMeta, getLeccionContent)
+  utils.ts            → cn(), slugify(), capitalize(), formatDate(locale)
+  content.ts          → Carga de MDX (getBloqueMeta, getLeccionMeta, getLeccionContent) + searchContent(query, locale)
   ecosistema-data.ts  → 13 herramientas + categorías + criterios
   prompting-data.ts   → Roles, formatos, tonos, audiencias
-  glosario-data.ts    → 48 términos con definiciones
+  glosario-data.ts    → 47 términos con definiciones
   cronologia-data.ts  → 28 hitos históricos
-  ai.ts               → Servicio de IA (OpenAI + fallback offline)
+  ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
   auth.ts             → NextAuth config (Credentials)
   prisma.ts           → PrismaClient singleton
   getServerSession.ts → Helper servidor
+  i18n/
+    config.ts         → Locale ("es"|"en"|"val"), cookie atlas-locale, localeToIntl
+    server.ts         → getLocale() (lee la cookie, async)
+    runtime.ts        → helpers de idioma en cliente
+    provider.tsx      → I18nProvider + hook useI18n() → { locale, t, setLocale }
+    data.ts           → Builders localizados (getBLOQUES, getGlosario, getHerramientas, getBadgeText, ...)
+    dictionaries/     → es.ts (fuente de verdad, exporta Dictionary), en.ts, val.ts, index.ts
 
 stores/
   progress.ts         → Zustand + persist localStorage (XP, badges, retos, proyectos, notificaciones)
@@ -242,6 +262,13 @@ Los estilos globales en `app/globals.css` (html, body, a, h1-h6, etc.) están en
 
 ### Licencia
 Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlace a https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+### i18n
+- Idiomas: `es`, `en`, `val` (valenciano). Idioma persistido en cookie `atlas-locale` + localStorage (sin prefijo de URL). Cambio de idioma recarga la página.
+- `es.ts` es la fuente de verdad de la estructura `Dictionary`; `en.ts` y `val.ts` usan `satisfies Dictionary` para que TypeScript avise si falta una clave.
+- En `data` los arrays de glosario (47) y cronología (28) se emparejan por **índice** con las fuentes en español; los demás datos se casan por clave/slug/id. No añadir/quitar entradas de glosario o cronología sin sincronizar los tres diccionarios.
+- `getBadgeText`, `getRetoText` y `getProyectoText` devuelven objetos `{ nombre, descripcion }`.
+- Las lecciones MDX (71) permanecen en español; traducirlas es una fase posterior.
 
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión

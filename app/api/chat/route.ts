@@ -1,14 +1,20 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { streamChatResponse } from "@/lib/ai";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { DEFAULT_LOCALE, resolveLocale } from "@/lib/i18n/config";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   try {
     const { messages } = await req.json();
+    const cookieStore = await cookies();
+    const locale = resolveLocale(cookieStore.get("atlas-locale")?.value);
+    const t = getDictionary(locale);
 
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: "Debes enviar al menos un mensaje" }, { status: 400 });
+      return NextResponse.json({ error: t.ai.badRequest }, { status: 400 });
     }
 
     const encoder = new TextEncoder();
@@ -27,6 +33,7 @@ export async function POST(req: Request) {
             controller.enqueue(encoder.encode(`data: ${JSON.stringify({ error })}\n\n`));
             controller.close();
           },
+          locale,
         );
       },
     });
@@ -39,6 +46,9 @@ export async function POST(req: Request) {
       },
     });
   } catch {
-    return NextResponse.json({ error: "Error interno" }, { status: 500 });
+    return NextResponse.json(
+      { error: getDictionary(DEFAULT_LOCALE).ai.internalError },
+      { status: 500 }
+    );
   }
 }

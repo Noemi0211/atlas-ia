@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { BLOQUES } from "@/lib/constants";
 import { useProgress } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
+import { getBLOQUES } from "@/lib/i18n/data";
 import {
   Home,
   BookOpen,
@@ -57,18 +58,20 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
   const pathname = usePathname();
   const [expandedBloque, setExpandedBloque] = useState<string | null>(null);
   const { getLessonProgress, completedLessons } = useProgress();
+  const { t } = useI18n();
+  const bloques = useMemo(() => getBLOQUES(t), [t]);
 
   const navItems = [
-    { href: "/", label: "Inicio", icon: "Home" },
-    { href: "/bloques", label: "Todos los bloques", icon: "BookOpen" },
-    { href: "/cronologia", label: "Cronología", icon: "Calendar" },
-    { href: "/glosario", label: "Glosario", icon: "BookMarked" },
-    { href: "/laboratorio", label: "Laboratorio", icon: "FlaskConical" },
-    { href: "/perfil", label: "Mi perfil", icon: "User" },
+    { href: "/", label: t.nav.inicio, icon: "Home" },
+    { href: "/bloques", label: t.nav.todosLosBloques, icon: "BookOpen" },
+    { href: "/cronologia", label: t.nav.cronologia, icon: "Calendar" },
+    { href: "/glosario", label: t.nav.glosario, icon: "BookMarked" },
+    { href: "/laboratorio", label: t.nav.laboratorio, icon: "FlaskConical" },
+    { href: "/perfil", label: t.nav.perfil, icon: "User" },
   ];
 
   const totalCompleted = completedLessons.length;
-  const totalLessons = BLOQUES.reduce((acc, b) => acc + b.lecciones, 0);
+  const totalLessons = bloques.reduce((acc, b) => acc + b.lecciones, 0);
 
   return (
     <aside
@@ -90,7 +93,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
         {!collapsed && (
           <div className="min-w-0">
             <h1 className="font-bold text-fg text-base leading-tight truncate">Atlas IA</h1>
-            <p className="text-2xs text-fg-muted truncate">Aprende Inteligencia Artificial</p>
+            <p className="text-2xs text-fg-muted truncate">{t.sidebar.subtitle}</p>
           </div>
         )}
       </div>
@@ -128,12 +131,12 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
           <>
             <div className="mt-6 mb-2 px-3">
               <p className="text-2xs font-semibold uppercase tracking-wider text-fg-muted">
-                Bloques
+                {t.sidebar.sectionBloques}
               </p>
             </div>
 
             <ul className="space-y-0.5">
-              {BLOQUES.map((bloque) => {
+              {bloques.map((bloque) => {
                 const Icon = iconMap[bloque.icono] || Compass;
                 const isExpanded = expandedBloque === bloque.slug;
                 const isActive = pathname.includes(`/bloques/${bloque.slug}`);
@@ -180,9 +183,8 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
                           onClick={onClose}
                           className="block text-xs text-primary hover:text-primary-hover py-1 transition-colors"
                         >
-                          Ver bloque completo
-                        </Link>
-                      </div>
+                          {t.sidebar.viewFullBlock}
+                        </Link>                      </div>
                     )}
                   </li>
                 );
@@ -195,7 +197,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
       {!collapsed && (
         <div className="p-4 border-t border-border">
           <div className="rounded-lg bg-bg-secondary p-3">
-            <p className="text-xs font-medium text-fg mb-1">Progreso total</p>
+            <p className="text-xs font-medium text-fg mb-1">{t.sidebar.totalProgress}</p>
             <ProgressBar
               value={totalCompleted}
               max={totalLessons}
@@ -204,7 +206,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
               color="accent"
             />
             <p className="text-2xs text-fg-muted mt-1">
-              {totalCompleted} de {totalLessons} lecciones
+              {totalCompleted} {t.sidebar.of} {totalLessons} {t.sidebar.lessons}
             </p>
           </div>
         </div>

@@ -2,43 +2,51 @@
 
 import { useState, useMemo } from "react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
-import { GLOSARIO, CATEGORIAS_GLOSARIO, agruparPorLetra } from "@/lib/glosario-data";
+import { agruparPorLetra } from "@/lib/glosario-data";
+import { useI18n } from "@/lib/i18n/provider";
+import { getGlosario, getCategoriasGlosario } from "@/lib/i18n/data";
 import { cn } from "@/lib/utils";
 import { Search, BookMarked } from "lucide-react";
 
 export default function GlosarioPage() {
+  const { t } = useI18n();
+  const glosario = useMemo(() => getGlosario(t), [t]);
+  const categorias = useMemo(() => getCategoriasGlosario(t), [t]);
+  const todas = t.data.glosarioCategorias.todas;
+
   const [busqueda, setBusqueda] = useState("");
-  const [categoria, setCategoria] = useState("Todas");
+  const [categoria, setCategoria] = useState(todas);
 
   const terminosFiltrados = useMemo(() => {
     const query = busqueda
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    return GLOSARIO.filter((t) => {
-      const matchesCategoria = categoria === "Todas" || t.categoria === categoria;
+    return glosario.filter((termino) => {
+      const matchesCategoria =
+        categoria === todas || termino.categoria === categoria;
       const matchesBusqueda =
         !query ||
-        t.termino.toLowerCase().includes(query) ||
-        t.definicion
+        termino.termino.toLowerCase().includes(query) ||
+        termino.definicion
           .toLowerCase()
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
           .includes(query);
       return matchesCategoria && matchesBusqueda;
     });
-  }, [busqueda, categoria]);
+  }, [busqueda, categoria, glosario, todas]);
 
   const grupos = useMemo(() => agruparPorLetra(terminosFiltrados), [terminosFiltrados]);
 
   return (
     <div className="max-w-content mx-auto px-6 py-10">
-      <Breadcrumbs items={[{ label: "Glosario" }]} className="mb-6" />
+      <Breadcrumbs items={[{ label: t.glosario.title }]} className="mb-6" />
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-fg mb-3">Glosario</h1>
+        <h1 className="text-3xl font-bold text-fg mb-3">{t.glosario.title}</h1>
         <p className="text-fg-secondary text-lg max-w-xl">
-          Términos clave de Inteligencia Artificial explicados de forma clara y sencilla.
+          {t.glosario.subtitle}
         </p>
       </div>
 
@@ -49,12 +57,12 @@ export default function GlosarioPage() {
             type="text"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            placeholder="Buscar términos..."
+            placeholder={t.glosario.searchPlaceholder}
             className="w-full pl-10 pr-4 py-2.5 bg-bg border border-border rounded-xl text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:border-primary"
           />
         </div>
         <div className="flex flex-wrap gap-1.5">
-          {CATEGORIAS_GLOSARIO.map((cat) => (
+          {categorias.map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoria(cat)}
@@ -72,21 +80,21 @@ export default function GlosarioPage() {
       </div>
 
       <div className="mb-4 text-sm text-fg-muted">
-        {terminosFiltrados.length} término{terminosFiltrados.length !== 1 ? "s" : ""}
-        {busqueda && ` para "${busqueda}"`}
+        {terminosFiltrados.length} {t.glosario.termsCount}
+        {busqueda && ` ${t.glosario.for} "${busqueda}"`}
       </div>
 
       {grupos.length === 0 ? (
         <div className="py-16 text-center">
           <BookMarked className="w-12 h-12 text-fg-muted mx-auto mb-4" />
           <p className="text-fg-muted text-lg">
-            No se encontraron términos
+            {t.glosario.noResults}
           </p>
           <button
-            onClick={() => { setBusqueda(""); setCategoria("Todas"); }}
+            onClick={() => { setBusqueda(""); setCategoria(todas); }}
             className="mt-3 text-sm text-primary hover:underline"
           >
-            Limpiar filtros
+            {t.common.clearFilters}
           </button>
         </div>
       ) : (
@@ -101,19 +109,19 @@ export default function GlosarioPage() {
                 <span className="text-xs text-fg-muted">{terminos.length}</span>
               </div>
               <div className="space-y-3 ml-0 md:ml-[52px]">
-                {terminos.map((t) => (
+                {terminos.map((termino) => (
                   <div
-                    key={t.termino}
+                    key={termino.termino}
                     className="p-4 rounded-xl border border-border bg-bg"
                   >
                     <div className="flex items-start justify-between gap-4">
-                      <h3 className="font-semibold text-fg mb-1">{t.termino}</h3>
+                      <h3 className="font-semibold text-fg mb-1">{termino.termino}</h3>
                       <span className="shrink-0 px-2 py-0.5 rounded text-xs bg-bg-secondary text-fg-muted border border-border">
-                        {t.categoria}
+                        {termino.categoria}
                       </span>
                     </div>
                     <p className="text-sm text-fg-secondary leading-relaxed">
-                      {t.definicion}
+                      {termino.definicion}
                     </p>
                   </div>
                 ))}

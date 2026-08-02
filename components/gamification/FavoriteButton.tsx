@@ -3,6 +3,7 @@
 import { useProgress } from "@/stores/progress";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface FavoriteButtonProps {
   lessonId: string;
@@ -10,6 +11,7 @@ interface FavoriteButtonProps {
 }
 
 export function FavoriteButton({ lessonId, className }: FavoriteButtonProps) {
+  const { t } = useI18n();
   const { favorites, toggleFavorite } = useProgress();
   const isFavorite = favorites.includes(lessonId);
 
@@ -23,7 +25,7 @@ export function FavoriteButton({ lessonId, className }: FavoriteButtonProps) {
           : "text-fg-muted hover:text-fg hover:bg-bg-secondary",
         className
       )}
-      aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+      aria-label={isFavorite ? t.leccion.quitarFavoritos : t.leccion.anadirFavoritos}
     >
       <Heart
         className={cn("w-5 h-5", isFavorite && "fill-current")}

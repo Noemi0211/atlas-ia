@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface TocItem {
   id: string;
@@ -15,6 +16,7 @@ interface TableOfContentsProps {
 }
 
 export function TableOfContents({ headings, className }: TableOfContentsProps) {
+  const { t } = useI18n();
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -45,10 +47,10 @@ export function TableOfContents({ headings, className }: TableOfContentsProps) {
         "hidden xl:block sticky top-24 w-56 shrink-0",
         className
       )}
-      aria-label="Índice de contenido"
+      aria-label={t.leccion.indice}
     >
       <p className="text-2xs font-semibold uppercase tracking-wider text-fg-muted mb-3">
-        En esta página
+        {t.leccion.enEstaPagina}
       </p>
       <ul className="space-y-1.5">
         {headings.map((heading) => (

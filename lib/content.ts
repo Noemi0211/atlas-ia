@@ -3,8 +3,9 @@ import path from "path";
 import matter from "gray-matter";
 import { BloqueMeta, LeccionMeta } from "./types";
 import { BLOQUES } from "./constants";
-import { GLOSARIO } from "./glosario-data";
-import { HERRAMIENTAS } from "./ecosistema-data";
+import { getDictionary } from "./i18n/dictionaries";
+import { DEFAULT_LOCALE, type Locale } from "./i18n/config";
+import { getBloqueMeta as getBloqueMetaLocalizada, getGlosario, getHerramientas } from "./i18n/data";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
 
@@ -70,12 +71,14 @@ export function getAllLecciones(): (LeccionMeta & { bloqueSlug: string; bloqueNu
   return all;
 }
 
-export function searchContent(query: string) {
+export function searchContent(query: string, locale: Locale = DEFAULT_LOCALE) {
+  const t = getDictionary(locale);
   const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const results: { titulo: string; excerpt: string; href: string; bloque: string }[] = [];
 
   for (const bloque of BLOQUES) {
     const lecciones = getLeccionesBloque(bloque.slug);
+    const bloqueLocalizado = getBloqueMetaLocalizada(t, bloque.slug);
     for (const leccion of lecciones) {
       const filePath = path.join(CONTENT_DIR, bloque.slug, `${leccion.slug}.mdx`);
       if (!fs.existsSync(filePath)) continue;
@@ -90,13 +93,13 @@ export function searchContent(query: string) {
           titulo: leccion.titulo,
           excerpt: plainText + "...",
           href: `/bloques/${bloque.slug}/${leccion.slug}`,
-          bloque: bloque.titulo,
+          bloque: bloqueLocalizado?.titulo ?? bloque.titulo,
         });
       }
     }
   }
 
-  for (const termino of GLOSARIO) {
+  for (const termino of getGlosario(t)) {
     const texto = `${termino.termino} ${termino.definicion}`;
     const normalizedTexto = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (normalizedTexto.includes(normalizedQuery)) {
@@ -104,12 +107,12 @@ export function searchContent(query: string) {
         titulo: termino.termino,
         excerpt: termino.definicion.substring(0, 200) + "...",
         href: "/glosario",
-        bloque: "Glosario",
+        bloque: t.nav.glosario,
       });
     }
   }
 
-  for (const herramienta of HERRAMIENTAS) {
+  for (const herramienta of getHerramientas(t)) {
     const texto = `${herramienta.nombre} ${herramienta.descripcion} ${herramienta.fortalezaPrincipal}`;
     const normalizedTexto = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (normalizedTexto.includes(normalizedQuery)) {
@@ -117,7 +120,7 @@ export function searchContent(query: string) {
         titulo: herramienta.nombre,
         excerpt: herramienta.descripcion.substring(0, 200) + "...",
         href: "/bloques/ecosistema",
-        bloque: "Ecosistema IA",
+        bloque: getBloqueMetaLocalizada(t, "ecosistema")?.titulo ?? "Ecosistema IA",
       });
     }
   }

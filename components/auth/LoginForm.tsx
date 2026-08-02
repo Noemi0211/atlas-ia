@@ -7,8 +7,10 @@ import Link from "next/link";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
+import { useI18n } from "@/lib/i18n/provider";
 
 export function LoginForm() {
+  const { t } = useI18n();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +31,7 @@ export function LoginForm() {
       });
 
       if (result?.error) {
-        setError("Correo electrónico o contraseña incorrectos");
+        setError(t.auth.login.errorCredentials);
         setLoading(false);
         return;
       }
@@ -37,7 +39,7 @@ export function LoginForm() {
       router.push("/");
       router.refresh();
     } catch {
-      setError("Error al iniciar sesión");
+      setError(t.auth.login.errorGeneric);
       setLoading(false);
     }
   }
@@ -48,9 +50,9 @@ export function LoginForm() {
         <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mx-auto mb-4">
           <span className="text-white font-bold text-xl">A</span>
         </div>
-        <CardTitle>Iniciar sesión</CardTitle>
+        <CardTitle>{t.auth.login.title}</CardTitle>
         <CardDescription>
-          Accede a tu cuenta de Atlas IA
+          {t.auth.login.subtitle}
         </CardDescription>
       </CardHeader>
 
@@ -63,7 +65,7 @@ export function LoginForm() {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-fg mb-1.5">
-            Correo electrónico
+            {t.auth.login.email}
           </label>
           <div className="relative">
             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-fg-muted" />
@@ -81,7 +83,7 @@ export function LoginForm() {
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-fg mb-1.5">
-            Contraseña
+            {t.auth.login.password}
           </label>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-fg-muted" />
@@ -109,7 +111,7 @@ export function LoginForm() {
             <Loader2 className="w-4 h-4 animate-spin" />
           ) : (
             <>
-              Iniciar sesión
+              {t.auth.login.submit}
               <ArrowRight className="w-4 h-4" />
             </>
           )}
@@ -118,9 +120,9 @@ export function LoginForm() {
 
       <div className="mt-6 text-center">
         <p className="text-sm text-fg-muted">
-          ¿No tienes cuenta?{" "}
+          {t.auth.login.noAccount}{" "}
           <Link href="/auth/register" className="text-primary hover:text-primary-hover font-medium">
-            Registrarse
+            {t.auth.login.registerLink}
           </Link>
         </p>
       </div>

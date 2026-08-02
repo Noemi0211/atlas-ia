@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getBloqueMeta, getLeccionesBloque, getLeccion } from "@/lib/content";
+import { getLeccionesBloque, getLeccion } from "@/lib/content";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { MDXRenderer } from "@/components/content/MDXRenderer";
 import { LessonNav } from "@/components/content/LessonNav";
@@ -8,6 +8,9 @@ import { LessonSidebar } from "@/components/content/LessonSidebar";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { LessonCompleteButton } from "@/components/gamification/LessonCompleteButton";
 import { FavoriteButton } from "@/components/gamification/FavoriteButton";
+import { getLocale } from "@/lib/i18n/server";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getBloqueMeta } from "@/lib/i18n/data";
 
 interface Props {
   params: Promise<{ slug: string; leccion: string }>;
@@ -29,8 +32,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, leccion } = await params;
+  const locale = await getLocale();
+  const t = getDictionary(locale);
   const data = getLeccion(slug, leccion);
-  if (!data) return { title: "Lección no encontrada" };
+  if (!data) return { title: t.leccion.notFound };
 
   return {
     title: data.meta.titulo,
@@ -60,10 +65,12 @@ function extractHeadings(mdxContent: string) {
 
 export default async function LeccionPage({ params }: Props) {
   const { slug, leccion } = await params;
+  const locale = await getLocale();
+  const t = getDictionary(locale);
   const data = getLeccion(slug, leccion);
   if (!data) notFound();
 
-  const bloque = getBloqueMeta(slug);
+  const bloque = getBloqueMeta(t, slug);
   if (!bloque) notFound();
 
   const lecciones = getLeccionesBloque(slug);
@@ -81,7 +88,7 @@ export default async function LeccionPage({ params }: Props) {
     <div className="max-w-wide mx-auto px-6 py-10">
       <Breadcrumbs
         items={[
-          { label: "Bloques", href: "/bloques" },
+          { label: t.bloques.title, href: "/bloques" },
           { label: bloque.titulo, href: `/bloques/${slug}` },
           { label: data.meta.titulo },
         ]}
@@ -99,9 +106,9 @@ export default async function LeccionPage({ params }: Props) {
           <header className="mb-8 pb-6 border-b border-border">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2 text-xs text-fg-muted">
-                <span>Bloque {bloque.numero}</span>
+                <span>{t.bloques.label} {bloque.numero}</span>
                 <span>·</span>
-                <span>Lección {currentIndex + 1} de {lecciones.length}</span>
+                <span>{t.bloques.leccion} {currentIndex + 1} {t.bloques.de} {lecciones.length}</span>
                 {data.meta.duracion && (
                   <>
                     <span>·</span>

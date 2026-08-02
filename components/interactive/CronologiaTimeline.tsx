@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { CRONOLOGIA, HitoIA } from "@/lib/cronologia-data";
+import { HitoIA } from "@/lib/cronologia-data";
 import { cn } from "@/lib/utils";
 import { Brain, Building2, FlaskConical, Wrench, Star } from "lucide-react";
+import { useI18n } from "@/lib/i18n/provider";
+import { getCronologia } from "@/lib/i18n/data";
 
 const iconosCategoria: Record<string, React.ReactNode> = {
   modelo: <Brain className="w-4 h-4" />,
@@ -29,15 +31,8 @@ const coloresBadge: Record<string, string> = {
   hito: "text-rose-600 bg-rose-50 border-rose-200",
 };
 
-const etiquetasCategoria: Record<string, string> = {
-  modelo: "Modelo",
-  empresa: "Empresa",
-  investigacion: "Investigación",
-  herramienta: "Herramienta",
-  hito: "Hito histórico",
-};
-
 function HitoCard({ hito }: { hito: HitoIA }) {
+  const { t } = useI18n();
 
   return (
     <div className="relative">
@@ -69,7 +64,7 @@ function HitoCard({ hito }: { hito: HitoIA }) {
                 "shrink-0 px-2 py-0.5 rounded text-xs font-medium border",
                 coloresBadge[hito.categoria]
               )}>
-                {etiquetasCategoria[hito.categoria]}
+                {t.cronologia.badges[hito.categoria as keyof typeof t.cronologia.badges]}
               </span>
             </div>
             <h3 className="text-base font-semibold text-fg mb-1.5">{hito.titulo}</h3>
@@ -82,20 +77,23 @@ function HitoCard({ hito }: { hito: HitoIA }) {
 }
 
 export function CronologiaTimeline() {
+  const { t } = useI18n();
   const [filtroCategoria, setFiltroCategoria] = useState<string>("todas");
 
+  const cronologia = useMemo(() => getCronologia(t), [t]);
+
   const hitosFiltrados = useMemo(() => {
-    if (filtroCategoria === "todas") return CRONOLOGIA;
-    return CRONOLOGIA.filter((h) => h.categoria === filtroCategoria);
-  }, [filtroCategoria]);
+    if (filtroCategoria === "todas") return cronologia;
+    return cronologia.filter((h) => h.categoria === filtroCategoria);
+  }, [filtroCategoria, cronologia]);
 
   const categorias = [
-    { id: "todas", label: "Todas" },
-    { id: "modelo", label: "Modelos" },
-    { id: "empresa", label: "Empresas" },
-    { id: "investigacion", label: "Investigación" },
-    { id: "herramienta", label: "Herramientas" },
-    { id: "hito", label: "Hitos" },
+    { id: "todas", label: t.cronologia.filterAll },
+    { id: "modelo", label: t.cronologia.filters.modelos },
+    { id: "empresa", label: t.cronologia.filters.empresas },
+    { id: "investigacion", label: t.cronologia.filters.investigacion },
+    { id: "herramienta", label: t.cronologia.filters.herramientas },
+    { id: "hito", label: t.cronologia.filters.hitos },
   ];
 
   return (

@@ -5,8 +5,10 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { User, LogOut, ChevronDown } from "lucide-react";
 import { useProgress } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
 
 export function UserMenu() {
+  const { t } = useI18n();
   const { data: session } = useSession();
   const { xp } = useProgress();
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +49,7 @@ export function UserMenu() {
         <div className="absolute right-0 top-full mt-2 w-56 rounded-xl border border-border bg-bg shadow-lg z-50 overflow-hidden">
           <div className="px-4 py-3 border-b border-border">
             <p className="text-sm font-medium text-fg truncate">
-              {session.user.name || "Usuario"}
+              {session.user.name || t.auth.userMenu.user}
             </p>
             <p className="text-2xs text-fg-muted truncate">{session.user.email}</p>
             <p className="text-2xs text-warning mt-1">{xp} XP</p>
@@ -60,7 +62,7 @@ export function UserMenu() {
               className="flex items-center gap-2 px-4 py-2 text-sm text-fg-secondary hover:text-fg hover:bg-bg-secondary transition-colors"
             >
               <User className="w-4 h-4" />
-              Mi perfil
+              {t.auth.userMenu.profile}
             </Link>
           </div>
 
@@ -70,7 +72,7 @@ export function UserMenu() {
               className="flex items-center gap-2 px-4 py-2 text-sm text-error hover:bg-error-light/50 w-full text-left transition-colors"
             >
               <LogOut className="w-4 h-4" />
-              Cerrar sesión
+              {t.auth.userMenu.logout}
             </button>
           </div>
         </div>

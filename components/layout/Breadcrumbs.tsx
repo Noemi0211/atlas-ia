@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/provider";
 
 export interface BreadcrumbItem {
   label: string;
@@ -13,15 +16,17 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
+  const { t } = useI18n();
+
   return (
     <nav
-      aria-label="Migas de pan"
+      aria-label={t.breadcrumbs.home}
       className={cn("flex items-center gap-1.5 text-sm", className)}
     >
       <Link
         href="/"
         className="text-fg-muted hover:text-fg transition-colors p-0.5"
-        aria-label="Inicio"
+        aria-label={t.breadcrumbs.home}
       >
         <Home className="w-3.5 h-3.5" />
       </Link>

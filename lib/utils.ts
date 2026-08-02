@@ -19,8 +19,8 @@ export function capitalize(text: string): string {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-export function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("es-ES", {
+export function formatDate(date: Date, locale: string = "es"): string {
+  return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "long",
     day: "numeric",

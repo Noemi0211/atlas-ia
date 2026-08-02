@@ -1,11 +1,20 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { ROLES, FORMATOS, TONOS, AUDIENCIAS, EXTENSIONES, generarPrompt } from "@/lib/prompting-data";
+import { useState, useCallback, useMemo } from "react";
 import { useProgress } from "@/stores/progress";
 import { Copy, Check, Wand2, Sparkles } from "lucide-react";
+import { useI18n } from "@/lib/i18n/provider";
+import {
+  getRoles,
+  getFormatos,
+  getTonos,
+  getAudiencias,
+  getExtensiones,
+  generarPromptLocalizado,
+} from "@/lib/i18n/data";
 
 export function PromptSandbox() {
+  const { t } = useI18n();
   const [config, setConfig] = useState({
     tarea: "",
     rol: "ninguno",
@@ -20,8 +29,15 @@ export function PromptSandbox() {
   const [used, setUsed] = useState(false);
   const { addXP, unlockCalculadoraBadge } = useProgress();
 
+  const roles = useMemo(() => getRoles(t), [t]);
+  const formatos = useMemo(() => getFormatos(t), [t]);
+  const tonos = useMemo(() => getTonos(t), [t]);
+  const audiencias = useMemo(() => getAudiencias(t), [t]);
+  const extensiones = useMemo(() => getExtensiones(t), [t]);
+  const suggestions = useMemo(() => t.lab.promptSandbox.suggestions, [t]);
+
   const generatedPrompt = config.tarea.trim()
-    ? generarPrompt(config)
+    ? generarPromptLocalizado(t, config)
     : "";
 
   const handleCopy = useCallback(() => {
@@ -41,26 +57,20 @@ export function PromptSandbox() {
     setConfig((prev) => ({ ...prev, tarea: suggestion }));
   }, []);
 
-  const suggestions = [
-    "Explica qué es el Machine Learning",
-    "Crea un plan de estudios semanal sobre IA",
-    "Escribe un artículo sobre RAG",
-  ];
-
   return (
     <div className="flex flex-col lg:flex-row gap-6">
       <div className="flex-1 space-y-4">
         <div className="flex items-center gap-2 mb-2">
           <Wand2 className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-semibold text-fg">Configura tu prompt</h3>
+          <h3 className="text-sm font-semibold text-fg">{t.lab.promptSandbox.title}</h3>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-fg-secondary mb-1.5">Tarea</label>
+          <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.task}</label>
           <textarea
             value={config.tarea}
             onChange={(e) => setConfig((prev) => ({ ...prev, tarea: e.target.value }))}
-            placeholder="Describe qué quieres que haga la IA..."
+            placeholder={t.lab.promptSandbox.taskPlaceholder}
             rows={3}
             className="w-full px-3 py-2 rounded-lg bg-bg-secondary border border-border text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
           />
@@ -79,52 +89,52 @@ export function PromptSandbox() {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-fg-secondary mb-1.5">Rol</label>
+            <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.role}</label>
             <select
               value={config.rol}
               onChange={(e) => setConfig((prev) => ({ ...prev, rol: e.target.value }))}
               className="w-full h-9 px-3 rounded-lg bg-bg-secondary border border-border text-sm text-fg focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
-              {ROLES.map((r) => (
+              {roles.map((r) => (
                 <option key={r.id} value={r.id}>{r.label}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-fg-secondary mb-1.5">Formato</label>
+            <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.format}</label>
             <select
               value={config.formato}
               onChange={(e) => setConfig((prev) => ({ ...prev, formato: e.target.value }))}
               className="w-full h-9 px-3 rounded-lg bg-bg-secondary border border-border text-sm text-fg focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
-              {FORMATOS.map((f) => (
+              {formatos.map((f) => (
                 <option key={f.id} value={f.id}>{f.label}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-fg-secondary mb-1.5">Tono</label>
+            <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.tone}</label>
             <select
               value={config.tono}
               onChange={(e) => setConfig((prev) => ({ ...prev, tono: e.target.value }))}
               className="w-full h-9 px-3 rounded-lg bg-bg-secondary border border-border text-sm text-fg focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
-              {TONOS.map((t) => (
-                <option key={t.id} value={t.id}>{t.label}</option>
+              {tonos.map((tn) => (
+                <option key={tn.id} value={tn.id}>{tn.label}</option>
               ))}
             </select>
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-fg-secondary mb-1.5">Audiencia</label>
+            <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.audience}</label>
             <select
               value={config.audiencia}
               onChange={(e) => setConfig((prev) => ({ ...prev, audiencia: e.target.value }))}
               className="w-full h-9 px-3 rounded-lg bg-bg-secondary border border-border text-sm text-fg focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
-              {AUDIENCIAS.map((a) => (
+              {audiencias.map((a) => (
                 <option key={a.id} value={a.id}>{a.label}</option>
               ))}
             </select>
@@ -132,9 +142,9 @@ export function PromptSandbox() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-fg-secondary mb-1.5">Extensión</label>
+          <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.extension}</label>
           <div className="flex flex-wrap gap-2">
-            {EXTENSIONES.map((e) => (
+            {extensiones.map((e) => (
               <button
                 key={e.id}
                 onClick={() => setConfig((prev) => ({ ...prev, extension: e.id }))}
@@ -151,11 +161,11 @@ export function PromptSandbox() {
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-fg-secondary mb-1.5">Contexto adicional</label>
+          <label className="block text-xs font-medium text-fg-secondary mb-1.5">{t.lab.promptSandbox.context}</label>
           <textarea
             value={config.contexto}
             onChange={(e) => setConfig((prev) => ({ ...prev, contexto: e.target.value }))}
-            placeholder="Información adicional que la IA debe conocer..."
+            placeholder={t.lab.promptSandbox.contextPlaceholder}
             rows={2}
             className="w-full px-3 py-2 rounded-lg bg-bg-secondary border border-border text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
           />
@@ -166,7 +176,7 @@ export function PromptSandbox() {
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-warning" />
-            <h3 className="text-sm font-semibold text-fg">Prompt generado</h3>
+            <h3 className="text-sm font-semibold text-fg">{t.lab.promptSandbox.generated}</h3>
           </div>
           {generatedPrompt && (
             <button
@@ -174,7 +184,7 @@ export function PromptSandbox() {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs bg-bg-secondary border border-border text-fg-secondary hover:text-fg transition-colors"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-success" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? "Copiado" : "Copiar"}
+              {copied ? t.lab.promptSandbox.copied : t.lab.promptSandbox.copy}
             </button>
           )}
         </div>
@@ -188,7 +198,7 @@ export function PromptSandbox() {
             <div className="flex flex-col items-center justify-center h-full text-center">
               <Wand2 className="w-8 h-8 text-fg-muted mb-2" />
               <p className="text-sm text-fg-muted">
-                Escribe una tarea para ver tu prompt generado
+                {t.lab.promptSandbox.emptyHint}
               </p>
             </div>
           )}

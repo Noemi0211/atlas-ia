@@ -8,8 +8,11 @@ import { ProjectList } from "@/components/gamification/ProjectCard";
 import { useProgress, BADGES } from "@/stores/progress";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Award } from "lucide-react";
+import { useI18n } from "@/lib/i18n/provider";
+import { getBadgeText } from "@/lib/i18n/data";
 
 function AllBadges() {
+  const { t } = useI18n();
   const { badges } = useProgress();
 
   return (
@@ -17,7 +20,7 @@ function AllBadges() {
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <Award className="w-4 h-4 text-warning" />
-          Todas las insignias
+          {t.gamification.profile.allBadges}
         </CardTitle>
       </CardHeader>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
@@ -31,13 +34,13 @@ function AllBadges() {
                   ? "border-primary/20 bg-primary/5"
                   : "border-border bg-bg-secondary/50 opacity-50"
               }`}
-              title={badge.descripcion}
+              title={getBadgeText(t, id)?.descripcion}
             >
               <span className="text-2xl block mb-1">{unlocked ? badge.icono : "🔒"}</span>
               <p className={`text-xs font-medium ${unlocked ? "text-fg" : "text-fg-muted"}`}>
-                {badge.nombre}
+                {getBadgeText(t, id)?.nombre}
               </p>
-              <p className="text-2xs text-fg-muted mt-0.5">{badge.descripcion}</p>
+              <p className="text-2xs text-fg-muted mt-0.5">{getBadgeText(t, id)?.descripcion}</p>
             </div>
           );
         })}

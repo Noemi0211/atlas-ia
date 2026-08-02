@@ -5,14 +5,17 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { useProgress, Project } from "@/stores/progress";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { useI18n } from "@/lib/i18n/provider";
+import { localeToIntl } from "@/lib/i18n/config";
 
 const difficultyConfig = {
-  basico: { label: "Básico", color: "primary" as const, xp: 100 },
-  intermedio: { label: "Intermedio", color: "accent" as const, xp: 200 },
-  avanzado: { label: "Avanzado", color: "purple" as const, xp: 350 },
+  basico: { color: "primary" as const, xp: 100 },
+  intermedio: { color: "accent" as const, xp: 200 },
+  avanzado: { color: "purple" as const, xp: 350 },
 };
 
 function ProjectItem({ project }: { project: Project }) {
+  const { t, locale } = useI18n();
   const { completeProject } = useProgress();
   const config = difficultyConfig[project.difficulty];
 
@@ -28,11 +31,11 @@ function ProjectItem({ project }: { project: Project }) {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <Badge variant={config.color} size="sm">
-              {config.label}
+              {t.gamification.dificultad[project.difficulty]}
             </Badge>
             {project.completed && (
               <Badge variant="accent" size="sm">
-                Completado
+                {t.gamification.proyectos.completed}
               </Badge>
             )}
           </div>
@@ -45,7 +48,8 @@ function ProjectItem({ project }: { project: Project }) {
             </span>
             {project.completedAt && (
               <span className="text-2xs text-fg-muted">
-                Completado {new Date(project.completedAt).toLocaleDateString()}
+                {t.gamification.proyectos.completedAt}{" "}
+                {new Date(project.completedAt).toLocaleDateString(localeToIntl(locale))}
               </span>
             )}
           </div>
@@ -59,7 +63,7 @@ function ProjectItem({ project }: { project: Project }) {
               ? "text-accent cursor-default"
               : "text-fg-muted hover:text-accent hover:bg-accent/10"
           }`}
-          title={project.completed ? "Completado" : "Marcar como completado"}
+          title={project.completed ? t.gamification.proyectos.completed : t.gamification.proyectos.markComplete}
         >
           {project.completed ? (
             <CheckCircle className="w-5 h-5" />
@@ -73,6 +77,7 @@ function ProjectItem({ project }: { project: Project }) {
 }
 
 export function ProjectList() {
+  const { t } = useI18n();
   const { projects } = useProgress();
   const completed = projects.filter((p) => p.completed).length;
 
@@ -82,7 +87,7 @@ export function ProjectList() {
         <div className="flex items-center justify-between">
           <CardTitle className="text-base flex items-center gap-2">
             <Award className="w-4 h-4 text-purple" />
-            Proyectos prácticos
+            {t.gamification.proyectos.title}
           </CardTitle>
           <span className="text-xs text-fg-muted">
             {completed}/{projects.length}

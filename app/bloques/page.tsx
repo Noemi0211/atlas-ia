@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { BLOQUES } from "@/lib/constants";
 import { Card, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -18,11 +17,19 @@ import {
   FlaskConical,
   Sparkles,
 } from "lucide-react";
+import { getLocale } from "@/lib/i18n/server";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getBLOQUES } from "@/lib/i18n/data";
 
-export const metadata: Metadata = {
-  title: "Bloques del curso",
-  description: "Explora todos los bloques temáticos de Atlas IA",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getDictionary(locale);
+
+  return {
+    title: t.bloques.title,
+    description: t.bloques.subtitle,
+  };
+}
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Compass,
@@ -44,23 +51,26 @@ const colorMap: Record<string, string> = {
   purple: "text-purple bg-purple-light",
 };
 
-export default function BloquesPage() {
+export default async function BloquesPage() {
+  const locale = await getLocale();
+  const t = getDictionary(locale);
+  const bloques = getBLOQUES(t);
+
   return (
     <div className="max-w-content mx-auto px-6 py-10">
-      <Breadcrumbs items={[{ label: "Bloques" }]} className="mb-6" />
+      <Breadcrumbs items={[{ label: t.bloques.title }]} className="mb-6" />
 
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-fg mb-3">
-          Todos los bloques
+          {t.bloques.title}
         </h1>
         <p className="text-fg-secondary text-lg max-w-xl">
-          La plataforma está organizada en 11 bloques temáticos. Puedes
-          recorrerlos en orden o saltar directamente al que más te interese.
+          {t.bloques.subtitle}
         </p>
       </div>
 
       <div className="space-y-4">
-        {BLOQUES.map((bloque) => {
+        {bloques.map((bloque) => {
           const Icon = iconMap[bloque.icono] || Compass;
           const colorClass = colorMap[bloque.color] || colorMap.primary;
           const progreso = bloque.progreso || 0;
@@ -80,7 +90,7 @@ export default function BloquesPage() {
                     <div className="flex items-start justify-between gap-4 mb-1">
                       <div>
                         <Badge variant="default" size="sm" className="mb-2">
-                          Bloque {bloque.numero}
+                          {t.bloques.label} {bloque.numero}
                         </Badge>
                         <CardTitle className="text-lg group-hover:text-primary transition-colors">
                           {bloque.titulo}
@@ -93,8 +103,8 @@ export default function BloquesPage() {
                     <div className="flex items-center gap-4 mt-3">
                       <span className="text-xs text-fg-muted">
                         {bloque.lecciones > 0
-                          ? `${bloque.lecciones} lecciones`
-                          : "Próximamente"}
+                          ? `${bloque.lecciones} ${t.bloques.lecciones}`
+                          : t.bloques.proximamente}
                       </span>
                       {progreso > 0 && (
                         <ProgressBar

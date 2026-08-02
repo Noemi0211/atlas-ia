@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getBloqueMeta, getLeccionesBloque } from "@/lib/content";
+import { getLeccionesBloque } from "@/lib/content";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
@@ -19,6 +19,9 @@ import {
   FlaskConical,
   Sparkles,
 } from "lucide-react";
+import { getLocale } from "@/lib/i18n/server";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getBloqueMeta } from "@/lib/i18n/data";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Compass,
@@ -51,18 +54,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const bloque = getBloqueMeta(slug);
-  if (!bloque) return { title: "Bloque no encontrado" };
+  const locale = await getLocale();
+  const t = getDictionary(locale);
+  const bloque = getBloqueMeta(t, slug);
+  if (!bloque) return { title: t.bloques.notFound };
 
   return {
-    title: `Bloque ${bloque.numero}: ${bloque.titulo}`,
+    title: `${t.bloques.label} ${bloque.numero}: ${bloque.titulo}`,
     description: bloque.descripcion,
   };
 }
 
 export default async function BloquePage({ params }: Props) {
   const { slug } = await params;
-  const bloque = getBloqueMeta(slug);
+  const locale = await getLocale();
+  const t = getDictionary(locale);
+  const bloque = getBloqueMeta(t, slug);
   if (!bloque) notFound();
 
   const lecciones = getLeccionesBloque(slug);
@@ -73,7 +80,7 @@ export default async function BloquePage({ params }: Props) {
     <div className="max-w-content mx-auto px-6 py-10">
       <Breadcrumbs
         items={[
-          { label: "Bloques", href: "/bloques" },
+          { label: t.bloques.title, href: "/bloques" },
           { label: bloque.titulo },
         ]}
         className="mb-6"
@@ -85,7 +92,7 @@ export default async function BloquePage({ params }: Props) {
         </div>
         <div>
           <Badge variant="default" size="sm" className="mb-2">
-            Bloque {bloque.numero}
+            {t.bloques.label} {bloque.numero}
           </Badge>
           <h1 className="text-3xl font-bold text-fg mb-2">{bloque.titulo}</h1>
           <p className="text-fg-secondary text-lg">{bloque.descripcion}</p>
@@ -139,7 +146,7 @@ export default async function BloquePage({ params }: Props) {
                     )}
                     {leccion.dificultad && (
                       <Badge variant="default" size="sm">
-                        {leccion.dificultad}
+                        {t.gamification.dificultad[leccion.dificultad]}
                       </Badge>
                     )}
                   </div>
@@ -150,9 +157,9 @@ export default async function BloquePage({ params }: Props) {
         </div>
       ) : (
         <div className="text-center py-16 border border-dashed border-border rounded-xl">
-          <p className="text-fg-muted text-lg mb-2">Próximamente</p>
+          <p className="text-fg-muted text-lg mb-2">{t.bloques.proximamente}</p>
           <p className="text-fg-secondary text-sm">
-            Este bloque aún está en preparación. Vuelve pronto.
+            {t.bloques.enPreparacion}
           </p>
         </div>
       )}

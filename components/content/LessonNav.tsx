@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LeccionMeta } from "@/lib/types";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface LessonNavProps {
   bloqueSlug: string;
@@ -10,6 +13,8 @@ interface LessonNavProps {
 }
 
 export function LessonNav({ bloqueSlug, anterior, siguiente }: LessonNavProps) {
+  const { t } = useI18n();
+
   return (
     <nav className="flex items-center justify-between gap-4 mt-12 pt-8 border-t border-border">
       {anterior ? (
@@ -22,7 +27,7 @@ export function LessonNav({ bloqueSlug, anterior, siguiente }: LessonNavProps) {
         >
           <ArrowLeft className="w-4 h-4 text-fg-muted group-hover:text-primary transition-colors shrink-0" />
           <div className="min-w-0">
-            <p className="text-xs text-fg-muted mb-0.5">Anterior</p>
+            <p className="text-xs text-fg-muted mb-0.5">{t.leccion.anterior}</p>
             <p className="text-sm font-medium text-fg truncate group-hover:text-primary transition-colors">
               {anterior.titulo}
             </p>
@@ -41,7 +46,7 @@ export function LessonNav({ bloqueSlug, anterior, siguiente }: LessonNavProps) {
           )}
         >
           <div className="min-w-0 flex-1">
-            <p className="text-xs text-fg-muted mb-0.5">Siguiente</p>
+            <p className="text-xs text-fg-muted mb-0.5">{t.leccion.siguiente}</p>
             <p className="text-sm font-medium text-fg truncate group-hover:text-primary transition-colors">
               {siguiente.titulo}
             </p>

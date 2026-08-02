@@ -1,24 +1,17 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Send, Bot, User, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { useProgress } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-const SUGGESTED_QUESTIONS = [
-  "¿Qué es Machine Learning?",
-  "¿Diferencia entre GPT, Claude y Gemini?",
-  "¿Qué técnicas de prompting recomiendas?",
-  "¿Qué es un LLM?",
-  "¿Qué herramientas IA me recomiendas?",
-  "¿Qué es RAG?",
-];
-
 export function AIChat() {
+  const { t } = useI18n();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,6 +22,7 @@ export function AIChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { addBadge } = useProgress();
+  const suggestedQuestions = useMemo(() => t.lab.aiChat.suggestedQuestions, [t]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -65,11 +59,11 @@ export function AIChat() {
       });
 
       if (!res.ok) {
-        throw new Error("Error al conectar con el servidor");
+        throw new Error(t.lab.aiChat.errorServer);
       }
 
       const reader = res.body?.getReader();
-      if (!reader) throw new Error("No se pudo leer la respuesta");
+      if (!reader) throw new Error(t.lab.aiChat.errorStream);
 
       const decoder = new TextDecoder();
 
@@ -113,7 +107,7 @@ export function AIChat() {
         acc = processLines(chunk.split("\n"), acc);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error de conexión");
+      setError(err instanceof Error ? err.message : t.lab.aiChat.errorConnection);
       setLoading(false);
     }
   }
@@ -134,11 +128,11 @@ export function AIChat() {
           <Bot className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1">
-          <h3 className="text-sm font-semibold text-fg">Atlas IA Chat</h3>
+          <h3 className="text-sm font-semibold text-fg">{t.lab.aiChat.title}</h3>
           <p className="text-2xs text-fg-muted">
             {process.env.NEXT_PUBLIC_OPENAI_API_KEY
-              ? "Potenciado por GPT-4o mini"
-              : "Modo educativo (demo)"}
+              ? t.lab.aiChat.poweredBy
+              : t.lab.aiChat.demoMode}
           </p>
         </div>
         <Sparkles className="w-4 h-4 text-warning" />
@@ -151,14 +145,13 @@ export function AIChat() {
               <Bot className="w-8 h-8 text-primary" />
             </div>
             <h2 className="text-lg font-bold text-fg mb-2">
-              ¡Te damos la bienvenida al laboratorio!
+              {t.lab.aiChat.welcome}
             </h2>
             <p className="text-sm text-fg-muted max-w-md mx-auto mb-6">
-              Pregúntame cualquier cosa sobre Inteligencia Artificial.
-              Estoy aquí para ayudarte a aprender.
+              {t.lab.aiChat.welcomeDesc}
             </p>
             <div className="flex flex-wrap justify-center gap-2">
-              {SUGGESTED_QUESTIONS.slice(0, 3).map((q) => (
+              {suggestedQuestions.slice(0, 3).map((q) => (
                 <button
                   key={q}
                   onClick={() => handleSuggestion(q)}
@@ -241,7 +234,7 @@ export function AIChat() {
 
         {showSuggestions && started && messages.length > 0 && (
           <div className="flex flex-wrap gap-2 pt-2">
-            {SUGGESTED_QUESTIONS.map((q) => (
+            {suggestedQuestions.map((q) => (
               <button
                 key={q}
                 onClick={() => handleSuggestion(q)}
@@ -263,7 +256,7 @@ export function AIChat() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Pregunta sobre IA..."
+            placeholder={t.lab.aiChat.placeholder}
             disabled={loading}
             className="flex-1 h-11 px-4 rounded-lg bg-bg-secondary border border-border text-sm text-fg placeholder:text-fg-muted focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-50"
           />

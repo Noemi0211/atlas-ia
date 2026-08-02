@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, FileText, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface SearchResult {
   titulo: string;
@@ -18,6 +19,7 @@ interface SearchModalProps {
 }
 
 export function SearchModal({ isOpen, onClose }: SearchModalProps) {
+  const { t } = useI18n();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -106,7 +108,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Buscar en Atlas IA..."
+            placeholder={t.search.placeholder}
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -121,7 +123,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             </button>
           )}
           <kbd className="hidden sm:inline-flex px-1.5 py-0.5 rounded text-2xs text-fg-muted bg-bg-secondary border border-border">
-            ESC
+            {t.search.esc}
           </kbd>
         </div>
 
@@ -135,7 +137,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {!loading && query.length >= 2 && results.length === 0 && (
             <div className="py-8 text-center">
               <p className="text-fg-muted text-sm">
-                No se encontraron resultados para &ldquo;{query}&rdquo;
+                {t.search.noResults.replace("{query}", query)}
               </p>
             </div>
           )}
@@ -172,7 +174,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
           {query.length < 2 && (
             <div className="py-8 text-center">
               <p className="text-fg-muted text-sm">
-                Escribe al menos 2 caracteres para buscar
+                {t.search.minChars}
               </p>
             </div>
           )}

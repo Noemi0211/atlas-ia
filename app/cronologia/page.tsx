@@ -1,22 +1,31 @@
 import { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { CronologiaTimeline } from "@/components/interactive/CronologiaTimeline";
+import { getLocale } from "@/lib/i18n/server";
+import { getDictionary } from "@/lib/i18n/dictionaries";
 
-export const metadata: Metadata = {
-  title: "Cronología de la IA",
-  description: "Recorre los hitos más importantes en la historia de la Inteligencia Artificial",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const t = getDictionary(locale);
 
-export default function CronologiaPage() {
+  return {
+    title: t.cronologia.title,
+    description: t.cronologia.subtitle,
+  };
+}
+
+export default async function CronologiaPage() {
+  const locale = await getLocale();
+  const t = getDictionary(locale);
+
   return (
     <div className="max-w-content mx-auto px-6 py-10">
-      <Breadcrumbs items={[{ label: "Cronología" }]} className="mb-6" />
+      <Breadcrumbs items={[{ label: t.cronologia.title }]} className="mb-6" />
 
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-fg mb-3">Cronología de la IA</h1>
+        <h1 className="text-3xl font-bold text-fg mb-3">{t.cronologia.title}</h1>
         <p className="text-fg-secondary text-lg max-w-2xl">
-          Recorre los hitos más importantes en la historia de la Inteligencia Artificial,
-          desde el Test de Turing hasta los modelos multimodales actuales.
+          {t.cronologia.subtitle}
         </p>
       </div>
 

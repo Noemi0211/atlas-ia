@@ -1,19 +1,10 @@
 import OpenAI from "openai";
+import { getDictionary } from "./i18n/dictionaries";
+import { DEFAULT_LOCALE, type Locale } from "./i18n/config";
 
 const openai = process.env.OPENAI_API_KEY
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
-
-const SYSTEM_PROMPT = `Eres Atlas, un tutor experto en Inteligencia Artificial. Tus características:
-
-- Explicas conceptos de IA de forma clara, didáctica y adaptada al nivel de cada persona
-- Usas ejemplos prácticos del mundo real
-- Cuando te preguntan sobre herramientas (ChatGPT, Claude, Gemini, etc.), comparas sus fortalezas
-- Hablas siempre en español, con tono amigable pero profesional
-- Puedes explicar desde conceptos básicos (qué es un LLM) hasta avanzados (RAG, ajuste fino, MCP)
-- Si no sabes algo, lo admites y sugieres dónde buscar en Atlas IA
-- Mantienes respuestas concisas pero completas (3-5 párrafos como máximo salvo que se pidan más)
-- Usas markdown básico para formato (**negrita**, listas, \`código\`)`;
 
 const FALLBACK_RESPONSES: Record<string, (query: string) => string> = {
   "hola": () => "¡Hola! Soy Atlas, tu tutor de IA. ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre conceptos de inteligencia artificial, herramientas, prompting, o cualquier tema que estés aprendiendo en la plataforma.",
@@ -42,13 +33,7 @@ function findFallbackResponse(query: string): string | null {
     }
   }
 
-  const generalResponses = [
-    `¡Excelente pregunta! En Atlas IA cubrimos muchos temas relacionados con inteligencia artificial. ¿Podrías concretar un poco más?\n\nPuedes preguntarme sobre:\n- **Conceptos**: qué es IA, ML, Deep Learning, LLM\n- **Herramientas**: ChatGPT, Claude, Gemini, Cursor\n- **Técnicas**: prompting, RAG, ajuste fino, agentes\n- **Historia**: hitos, evolución, Turing\n- **Recursos**: qué bloque te recomiendo según tu nivel`,
-    `Interesante. Como tutor de IA, puedo ayudarte con conceptos, herramientas y técnicas. Algunos temas populares:\n\n- **Fundamentos**: Machine Learning, Deep Learning, Transformers\n- **Prompting**: técnicas avanzadas, roles, formatos\n- **Ecosistema**: comparativa de herramientas\n- **Ética**: sesgo, privacidad, impacto social\n\n¿Sobre cuál te gustaría aprender?`,
-    `Buena pregunta. Para darte la mejor respuesta, ¿puedes decirme si te interesa más la **teoría** (conceptos, fundamentos) o la **práctica** (herramientas, prompting, proyectos)?\n\nAsí puedo adaptar mi explicación a tu nivel e intereses.`,
-  ];
-
-  return generalResponses[Math.floor(Math.random() * generalResponses.length)];
+  return null;
 }
 
 export async function streamChatResponse(
@@ -56,13 +41,16 @@ export async function streamChatResponse(
   onToken: (token: string) => void,
   onDone: () => void,
   onError: (error: string) => void,
+  locale: Locale = DEFAULT_LOCALE,
 ) {
+  const t = getDictionary(locale);
+
   if (openai) {
     try {
       const stream = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: t.ai.systemPrompt },
           ...messages.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
         ],
         stream: true,
@@ -76,14 +64,17 @@ export async function streamChatResponse(
       }
       onDone();
     } catch (err) {
-      const message = err instanceof Error ? err.message : "Error al conectar con la IA";
+      const message = err instanceof Error ? err.message : t.ai.error;
       onError(message);
     }
     return;
   }
 
   const userQuery = messages.filter((m) => m.role === "user").pop()?.content || "";
-  const response = findFallbackResponse(userQuery) || "No tengo una respuesta preparada para eso. ¿Puedes reformular tu pregunta?";
+  const response =
+    findFallbackResponse(userQuery) ||
+    t.ai.generalResponses[Math.floor(Math.random() * t.ai.generalResponses.length)] ||
+    t.ai.noAnswer;
   const words = response.split(" ");
   for (let i = 0; i < words.length; i++) {
     onToken((i > 0 ? " " : "") + words[i]);

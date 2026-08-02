@@ -6,9 +6,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/hooks/useTheme";
 import { useSession } from "next-auth/react";
+import { useI18n } from "@/lib/i18n/provider";
 import { SearchModal } from "@/components/interactive/SearchModal";
 import { NotificationBell } from "@/components/gamification/NotificationBell";
 import { UserMenu } from "@/components/auth/UserMenu";
+import { LanguageSelector } from "@/components/layout/LanguageSelector";
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -20,6 +22,7 @@ interface HeaderProps {
 export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = false, onSidebarToggle }: HeaderProps) {
   const { resolved, toggleTheme } = useTheme();
   const { data: session } = useSession();
+  const { t } = useI18n();
   const [searchOpen, setSearchOpen] = useState(false);
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -54,7 +57,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
             <button
               onClick={onMenuToggle}
               className="lg:hidden p-2 rounded-lg hover:bg-bg-secondary text-fg-secondary transition-colors"
-              aria-label={isMobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-label={isMobileMenuOpen ? t.header.closeMenu : t.header.openMenu}
             >
               {isMobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -66,7 +69,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
             <button
               onClick={onSidebarToggle}
               className="hidden lg:flex p-2 rounded-lg hover:bg-bg-secondary text-fg-secondary hover:text-fg transition-colors"
-              aria-label={sidebarCollapsed ? "Expandir barra lateral" : "Colapsar barra lateral"}
+              aria-label={sidebarCollapsed ? t.header.expandSidebar : t.header.collapseSidebar}
             >
               {sidebarCollapsed ? (
                 <PanelLeftOpen className="w-5 h-5" />
@@ -93,7 +96,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
               )}
             >
               <Search className="w-4 h-4 shrink-0" />
-              <span className="flex-1 text-left">Buscar en Atlas IA...</span>
+              <span className="flex-1 text-left">{t.header.searchPlaceholder}</span>
               <kbd className="hidden md:inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs text-fg-muted bg-bg border border-border">
                 /
               </kbd>
@@ -103,10 +106,12 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
           <div className="flex items-center gap-1">
             <NotificationBell />
 
+            <LanguageSelector />
+
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-bg-secondary text-fg-secondary hover:text-fg transition-colors"
-              aria-label={mounted ? (resolved === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro") : "Cambiar tema"}
+              aria-label={mounted ? (resolved === "dark" ? t.header.toLightMode : t.header.toDarkMode) : t.header.changeTheme}
             >
               {!mounted ? <div className="w-5 h-5" /> : resolved === "dark" ? (
                 <Sun className="w-5 h-5" />
@@ -121,7 +126,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
                 className="flex items-center gap-1.5 h-9 px-3 rounded-lg bg-primary text-white dark:text-slate-900 text-sm font-medium hover:bg-primary-hover transition-colors shadow-sm"
               >
                 <LogIn className="w-4 h-4" />
-                <span className="hidden sm:inline">Iniciar sesión</span>
+                <span className="hidden sm:inline">{t.header.login}</span>
               </Link>
             )}
           </div>

@@ -5,27 +5,29 @@ import { Zap, Clock, CheckCircle, Flame, Target } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { useProgress, Challenge } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
 
-function getTimeLeft(expiresAt: string): string {
+function getTimeLeft(expiresAt: string, t: ReturnType<typeof useI18n>["t"]): string {
   const now = Date.now();
   const diff = new Date(expiresAt).getTime() - now;
-  if (diff <= 0) return "Expirado";
+  if (diff <= 0) return t.gamification.retos.expired;
   const hours = Math.ceil(diff / 3600000);
-  if (hours < 24) return `${hours}h restantes`;
-  return `${Math.ceil(hours / 24)}d restantes`;
+  if (hours < 24) return `${hours}${t.gamification.retos.hoursLeft}`;
+  return `${Math.ceil(hours / 24)}${t.gamification.retos.daysLeft}`;
 }
 
 function ChallengeItem({ challenge }: { challenge: Challenge }) {
-  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(challenge.expiresAt));
+  const { t } = useI18n();
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(challenge.expiresAt, t));
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimeLeft(getTimeLeft(challenge.expiresAt));
+      setTimeLeft(getTimeLeft(challenge.expiresAt, t));
     }, 60000);
     return () => clearInterval(interval);
-  }, [challenge.expiresAt]);
+  }, [challenge.expiresAt, t]);
 
-  const isExpired = timeLeft === "Expirado";
+  const isExpired = timeLeft === t.gamification.retos.expired;
 
   return (
     <div
@@ -56,7 +58,7 @@ function ChallengeItem({ challenge }: { challenge: Challenge }) {
           <span className="text-sm font-medium text-fg">{challenge.title}</span>
           {challenge.completed && (
             <Badge variant="accent" size="sm">
-              Hecho
+              {t.gamification.retos.done}
             </Badge>
           )}
         </div>
@@ -77,6 +79,7 @@ function ChallengeItem({ challenge }: { challenge: Challenge }) {
 }
 
 export function RetosCard() {
+  const { t } = useI18n();
   const { challenges, generateDailyChallenges, generateWeeklyChallenges } = useProgress();
 
   useEffect(() => {
@@ -94,10 +97,10 @@ export function RetosCard() {
         <div className="flex items-center justify-between">
           <CardTitle className="text-base flex items-center gap-2">
             <Flame className="w-4 h-4 text-error" />
-            Retos
+            {t.gamification.retos.title}
           </CardTitle>
           <span className="text-xs text-fg-muted">
-            {completedCount}/{challenges.length} completados
+            {completedCount}/{challenges.length} {t.gamification.retos.completedCount}
           </span>
         </div>
       </CardHeader>
@@ -106,7 +109,7 @@ export function RetosCard() {
         <div className="mb-4">
           <p className="text-xs font-semibold text-fg-muted uppercase tracking-wider mb-2 flex items-center gap-1.5">
             <Zap className="w-3 h-3" />
-            Diarios
+            {t.gamification.retos.diarios}
           </p>
           <div className="space-y-2">
             {dailyChallenges.map((c) => (
@@ -120,7 +123,7 @@ export function RetosCard() {
         <div>
           <p className="text-xs font-semibold text-fg-muted uppercase tracking-wider mb-2 flex items-center gap-1.5">
             <Zap className="w-3 h-3" />
-            Semanales
+            {t.gamification.retos.semanales}
           </p>
           <div className="space-y-2">
             {weeklyChallenges.map((c) => (
@@ -132,7 +135,7 @@ export function RetosCard() {
 
       {challenges.length === 0 && (
         <p className="text-sm text-fg-muted text-center py-4">
-          No hay retos disponibles aún
+          {t.gamification.retos.noChallenges}
         </p>
       )}
     </Card>

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, Circle } from "lucide-react";
 import { LeccionMeta } from "@/lib/types";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface LessonSidebarProps {
   bloqueSlug: string;
@@ -13,12 +14,13 @@ interface LessonSidebarProps {
 }
 
 export function LessonSidebar({ bloqueSlug, bloqueTitle, lecciones }: LessonSidebarProps) {
+  const { t } = useI18n();
   const pathname = usePathname();
 
   return (
     <nav
       className="hidden xl:block w-56 shrink-0"
-      aria-label="Lecciones del bloque"
+      aria-label={t.leccion.leccionesBloque}
     >
       <Link
         href={`/bloques/${bloqueSlug}`}

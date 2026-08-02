@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ARBOL_DECISION, getHerramientaPorId } from "@/lib/ecosistema-data";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, RotateCcw, ExternalLink } from "lucide-react";
 import { useProgress } from "@/stores/progress";
+import { useI18n } from "@/lib/i18n/provider";
+import { getNodoDecision, getHerramientaPorId } from "@/lib/i18n/data";
 
 export function ArbolDecision() {
+  const { t } = useI18n();
   const [nodoActualId, setNodoActualId] = useState("inicio");
   const [historial, setHistorial] = useState<string[]>([]);
   const [herramientaRecomendada, setHerramientaRecomendada] = useState<
@@ -14,9 +16,9 @@ export function ArbolDecision() {
   >(null);
   const { unlockArbolDecisionBadge } = useProgress();
 
-  const nodoActual = ARBOL_DECISION.find((n) => n.id === nodoActualId);
+  const nodoActual = getNodoDecision(t, nodoActualId);
   const herramienta = herramientaRecomendada
-    ? getHerramientaPorId(herramientaRecomendada)
+    ? getHerramientaPorId(t, herramientaRecomendada)
     : null;
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export function ArbolDecision() {
           >
             <RotateCcw className="w-4 h-4" />
           </button>
-          <span className="text-sm text-fg-muted">Recomendación</span>
+          <span className="text-sm text-fg-muted">{t.lab.arbol.recomendacion}</span>
         </div>
 
         <div className="p-6 bg-bg rounded-xl border border-primary">
@@ -89,17 +91,17 @@ export function ArbolDecision() {
               )}
             >
               {herramienta.precio === "gratis"
-                ? "Gratis"
+                ? t.lab.arbol.gratis
                 : herramienta.precio === "freemium"
-                ? "Freemium"
-                : "De pago"}
+                ? t.lab.arbol.freemium
+                : t.lab.arbol.dePago}
             </span>
           </div>
 
           <p className="text-fg mb-4">{herramienta.descripcion}</p>
 
           <div className="mb-4">
-            <h4 className="font-semibold text-fg mb-2">Lo mejor:</h4>
+            <h4 className="font-semibold text-fg mb-2">{t.lab.arbol.loMejor}</h4>
             <p className="text-sm text-primary font-medium">
               {herramienta.fortalezaPrincipal}
             </p>
@@ -107,7 +109,7 @@ export function ArbolDecision() {
 
           <div className="mb-4">
             <h4 className="font-semibold text-fg mb-2">
-              Características principales:
+              {t.lab.arbol.caracteristicas}
             </h4>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1">
               {herramienta.caracteristicas.slice(0, 4).map((car, i) => (
@@ -120,7 +122,7 @@ export function ArbolDecision() {
           </div>
 
           <div className="mb-4">
-            <h4 className="font-semibold text-fg mb-2">Ideal para:</h4>
+            <h4 className="font-semibold text-fg mb-2">{t.lab.arbol.idealPara}</h4>
             <div className="flex flex-wrap gap-1">
               {herramienta.idealPara.map((uso, i) => (
                 <span
@@ -135,7 +137,7 @@ export function ArbolDecision() {
 
           {herramienta.precioDetalle && (
             <p className="text-sm text-fg-muted mb-4">
-              <strong>Precio:</strong> {herramienta.precioDetalle}
+              <strong>{t.lab.arbol.precio}</strong> {herramienta.precioDetalle}
             </p>
           )}
 
@@ -145,14 +147,13 @@ export function ArbolDecision() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 px-4 py-2 bg-primary text-white dark:text-slate-900 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
           >
-            Visitar sitio web
+            {t.lab.arbol.visitSite}
             <ExternalLink className="w-4 h-4" />
           </a>
         </div>
 
         <p className="mt-4 text-xs text-fg-muted text-center">
-          Esta es una recomendación basada en tus respuestas. Explora otras
-          opciones también.
+          {t.lab.arbol.footer}
         </p>
       </div>
     );
@@ -161,12 +162,12 @@ export function ArbolDecision() {
   if (!nodoActual) {
     return (
       <div className="my-8 p-6 bg-bg-secondary border border-border rounded-2xl text-center">
-        <p className="text-fg-muted">Nodo no encontrado.</p>
+        <p className="text-fg-muted">{t.lab.arbol.nodeNotFound}</p>
         <button
           onClick={reiniciar}
           className="mt-4 px-4 py-2 bg-primary text-white dark:text-slate-900 rounded-lg text-sm font-medium"
         >
-          Reiniciar
+          {t.lab.arbol.reiniciar}
         </button>
       </div>
     );

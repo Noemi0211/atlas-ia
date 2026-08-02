@@ -3,6 +3,7 @@
 import { useProgress } from "@/stores/progress";
 import { CheckCircle2, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/provider";
 
 interface LessonCompleteButtonProps {
   lessonId: string;
@@ -13,6 +14,7 @@ export function LessonCompleteButton({
   lessonId,
   className,
 }: LessonCompleteButtonProps) {
+  const { t } = useI18n();
   const { completedLessons, completeLesson } = useProgress();
   const isCompleted = completedLessons.includes(lessonId);
 
@@ -30,12 +32,12 @@ export function LessonCompleteButton({
       {isCompleted ? (
         <>
           <CheckCircle2 className="w-4 h-4" />
-          Completada
+          {t.leccion.completada}
         </>
       ) : (
         <>
           <Circle className="w-4 h-4" />
-          Marcar como completada
+          {t.leccion.completar}
         </>
       )}
     </button>
