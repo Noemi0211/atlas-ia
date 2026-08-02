@@ -121,6 +121,18 @@ npm run lint      # ESLint
 - Sin tocar: código, JSX, bloques de código, URLs, slugs, ids, nombres de productos/herramientas
 - Verificación: lint 0/0, tsc sin errores, build OK (102 páginas SSG)
 
+### Fase 14 ✅ (ajustes de UI tras la revisión lingüística)
+- Fix `Sidebar.tsx`: en modo colapsado (`w-[60px]`) los iconos se desplazaron 4px a la izquierda (`-translate-x-1` en los links) para que no queden pegados al borde de la pantalla principal
+- Fix `Shell.tsx`: el `Footer` se envolvió en un contenedor con el mismo padding que el contenido principal (`lg:pl-[280px]`, `lg:pl-[60px]` colapsado) para que la columna izquierda no quede oculta bajo la barra lateral fija
+- Fix contenido: en `content/fundamentos/01-que-es-ia.mdx` el guion largo de "Siri, ChatGPT, el filtro de tu cámara — todo eso es IA estrecha" se sustituyó por paréntesis: "(todo eso es IA estrecha)."
+- Verificado: no existe la forma errónea "empatar" en el proyecto; solo "empatía" y "empatizar" (correctas)
+- Lint y tsc limpios tras los cambios
+
+## Estado actual (para retomar la sesión)
+- Último commit: `44a7bfc` (revisión lingüística, 108 archivos)
+- Cambios SIN commitear al cerrar esta sesión: `components/layout/Shell.tsx`, `components/layout/Sidebar.tsx`, `content/fundamentos/01-que-es-ia.mdx` (ver Fase 14)
+- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 14
+
 ## Bloques de contenido (MDX)
 
 | Bloque | Slug | Lecciones | Estado |
@@ -223,6 +235,6 @@ Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlac
 
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión
-2. Revisar el estado de bloques pendientes (todos completos hasta Bloque 10)
+2. Revisar la sección "Estado actual" (último commit, cambios pendientes)
 3. El asistente leerá este archivo y sabrá exactamente el estado y qué hacer
-4. `npm run dev` para desarrollo, `npx tsc --noEmit` para typecheck
+4. `npm run dev` para desarrollo, `npx tsc --noEmit` y `npm run lint` para verificar

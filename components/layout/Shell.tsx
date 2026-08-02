@@ -40,7 +40,12 @@ export function Shell({ children }: ShellProps) {
         {children}
       </main>
 
-      <Footer />
+      <div className={cn(
+        "transition-all duration-300 ease-in-out",
+        sidebarCollapsed ? "lg:pl-[60px]" : "lg:pl-[280px]"
+      )}>
+        <Footer />
+      </div>
     </>
   );
 }

@@ -108,7 +108,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
                   className={cn(
                     "flex items-center rounded-lg text-sm font-medium transition-colors",
                     collapsed
-                      ? "justify-center w-9 h-9 mx-auto"
+                      ? "justify-center w-9 h-9 mx-auto -translate-x-1"
                       : "gap-3 px-3 py-2",
                     isActive
                       ? "bg-primary-light text-primary"
