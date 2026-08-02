@@ -1,60 +1,67 @@
 ---
 title: "Avances en IA multimodal"
-description: "Vídeo nativo, audio en tiempo real y modelos unificados"
+description: "Vídeo con audio nativo, voz en tiempo real y modelos unificados"
 ---
 
 ## La multimodalidad como norma
 
-Si 2024 fue el año en que la multimodalidad se generalizó, 2025 y 2026 están siendo los años en que se perfecciona. La capacidad de procesar y generar múltiples formatos ya no es un diferenciador: es un estándar esperado.
+Si 2024 fue el año en que la multimodalidad se generalizó, 2025 y 2026 han sido los años en que se perfeccionó. La capacidad de procesar y generar múltiples formatos ya no es un diferenciador: es un estándar esperado.
 
 <Callout type="info">
-La frontera actual de la multimodalidad no está en procesar múltiples formatos, sino en hacerlo en tiempo real, con coherencia entre modalidades y con capacidades de generación nativas.
+La frontera actual de la multimodalidad no está en procesar múltiples formatos, sino en hacerlo en tiempo real, con coherencia entre modalidades y con generación nativa (incluido el sonido).
 </Callout>
 
 ## Vídeo nativo
 
-La generación de vídeo ha dado un salto cualitativo:
+La generación de vídeo ha dado un salto cualitativo en 2026: clips de 20 a 60 segundos, consistencia de personajes entre planos, resolución nativa 1080p o 4K y, sobre todo, **audio sincronizado generado en la misma pasada**.
 
-### Runway Gen-4
+### Veo 3.1 (Google)
 
-- Vídeos de hasta 60 segundos con coherencia temporal
-- Control de cámara y movimiento precisos
-- Personajes consistentes entre planos
-- Edición por instrucciones de texto
+- **Audio nativo sincronizado:** genera diálogo, efectos y ambiente que coinciden con la imagen
+- **Física realista:** movimientos convincentes que obedecen leyes físicas plausibles
+- **Alta fidelidad:** entre la mejor calidad visual del mercado
 
-### Sora (OpenAI)
+### Sora 2 (OpenAI)
 
-Aunque de acceso limitado, Sora representa un avance conceptual:
+- **Comprensión de prompts:** sigue instrucciones complejas con coherencia narrativa
+- **Simulación del mundo:** escenas con lógica física interna
+- **A tener en cuenta:** OpenAI retiró la aplicación de consumo de Sora en 2026 y concentró el modelo en su API
 
-- Comprensión de la física del mundo real
-- Escenas complejas con múltiples personajes
-- Movimiento de cámara cinematográfico
-- Capacidad de extender y modificar vídeos existentes
+### Kling 3.0 (Kuaishou)
 
-### Veo 2 (Google)
+- **Mejor relación calidad-precio** para creadores
+- **Lip-sync y narración multi-plano** para contenido social
+- Acceso amplio y económico
 
-- Competidor directo de Sora con calidad similar
-- Integración con el ecosistema Google Cloud
-- Marcas de agua digitales SynthID
-- Enfoque en usos comerciales y creativos
+### Runway Gen-4.5
 
-| Herramienta | Duración máxima | Coherencia | Control | Disponibilidad |
-|-------------|-----------------|------------|---------|----------------|
-| Runway Gen-4 | 60s | Alta | Alto | Pública |
-| Sora | 60s | Muy alta | Medio | Limitada |
-| Veo 2 | 60s | Alta | Alto | Limitada |
-| Pika 2.0 | 10s | Media | Medio | Pública |
+- **Flujo de trabajo de edición:** el editor integrado sigue siendo el mejor del sector
+- **Consistencia de marca:** ideal para marketing y producción creativa
+- **Control fino de cámara y movimiento**
 
-## Audio en tiempo real
+### Otras opciones
 
-### GPT-4o audio
+**Seedance 2.0** (ByteDance) destaca en narración multi-imagen y multi-vídeo, y **Wan 2.6** es la opción abierta más eficiente para generación de vídeo.
 
-OpenAI habilitó conversaciones de voz en tiempo real con:
+| Herramienta | Audio nativo | Puntos fuertes | Disponibilidad |
+|-------------|--------------|----------------|----------------|
+| Veo 3.1 | ✅ | Realismo, física y sonido | Pública |
+| Sora 2 | ✅ | Comprensión de prompts | API |
+| Kling 3.0 | ✅ | Lip-sync y calidad-precio | Pública |
+| Runway Gen-4.5 | Parcial | Edición y control de cámara | Pública |
+| Seedance 2.0 | Parcial | Narración multi-vídeo | Pública |
+| Wan 2.6 | No | Código abierto y eficiente | Abierta |
 
-- **Detección de tono y emoción:** responde al estado de ánimo
+## Audio y voz en tiempo real
+
+### Voz a voz nativa
+
+Los modelos de vanguardia (GPT-5.x, Gemini 3) procesan audio directamente, sin transcripción intermedia:
+
+- **Detección de tono y emoción:** responden al estado de ánimo
 - **Interrupción natural:** puedes interrumpir como en una conversación humana
 - **Múltiples voces:** selección de personalidad vocal
-- **Latencia reducida:** respuesta en milisegundos
+- **Latencia mínima:** respuesta en milisegundos
 
 ### ElevenLabs Conversational AI
 
@@ -64,17 +71,17 @@ OpenAI habilitó conversaciones de voz en tiempo real con:
 - Integración con sistemas telefónicos
 
 <Callout type="tip">
-Los asistentes de voz con IA están madurando rápidamente. En los próximos años, interactuar por voz con sistemas de IA será tan natural como hacerlo con otra persona.
+Los asistentes de voz con IA han madurado: en 2026, interactuar por voz con un sistema de IA es tan natural como hacerlo con otra persona.
 </Callout>
 
 ## Modelos unificados
 
 La tendencia hacia modelos únicos que procesan todas las modalidades:
 
-- **GPT-4o:** un solo modelo para texto, imagen y audio
-- **Gemini 2.5:** procesa texto, imagen, audio y vídeo de forma nativa
-- **Claude 4:** visión integrada con razonamiento textual
-- **Llama 4:** multimodal en modelo abierto
+- **GPT-5.6:** un solo modelo para texto, imagen, audio y vídeo
+- **Gemini 3:** procesa texto, imagen, audio y vídeo de forma nativa
+- **Claude 5:** visión y audio integrados con razonamiento
+- **DeepSeek V4 y Qwen:** multimodal abierto a bajo coste
 
 ### Ventajas de los modelos unificados
 
@@ -97,12 +104,12 @@ La tendencia hacia modelos únicos que procesan todas las modalidades:
 ### Creación de contenido unificada
 - De un prompt de texto a vídeo completo con música y narración
 - Edición multimodal: cambia el texto y el vídeo se ajusta
-- Generación de presentaciones con coherencia visual y narrativa
+- Generación de prototipos interactivos (juegos, apps) a partir de descripciones
 
 ## Autoevaluación
 
-1. ¿Qué avances ha traído Runway Gen-4 en generación de vídeo?
-2. ¿Qué capacidades tiene GPT-4o audio que lo hacen revolucionario?
+1. ¿Qué avances ha traído Veo 3.1 en generación de vídeo?
+2. ¿Qué capacidades tiene la voz a voz nativa que la hacen revolucionaria?
 3. ¿Qué ventajas tienen los modelos unificados frente a modelos separados por modalidad?
 4. ¿Qué aplicación emergente de la IA multimodal te parece más prometedora?
 

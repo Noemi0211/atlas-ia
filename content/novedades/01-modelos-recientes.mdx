@@ -1,108 +1,122 @@
 ---
 title: "Modelos de lenguaje recientes"
-description: "GPT-4o, Claude 4, Gemini 2.5, Llama 4 y Mistral Large"
+description: "GPT-5.6, Claude 5, Gemini 3, Grok 4.5 y DeepSeek V4"
 ---
 
 ## El panorama actual de los LLM
 
-El ecosistema de modelos de lenguaje evoluciona a un ritmo vertiginoso. Cada pocos meses surgen nuevos modelos que superan a los anteriores en capacidades, eficiencia y especialización. Esta lección ofrece una panorámica de los modelos más relevantes del momento.
+El ecosistema de modelos de lenguaje evoluciona a un ritmo vertiginoso. Entre 2024 y 2026 hemos pasado de ventanas de contexto de 128K a modelos con más de un millón de tokens, y de precios elevados a un colapso del coste de inferencia. Esta lección ofrece una panorámica de los modelos más relevantes a mediados de 2026.
 
 <Callout type="info">
-El ritmo de innovación en LLM es tan rápido que cualquier lista actualizada puede quedar desactualizada en semanas. Considera esta lección como una instantánea del estado del arte en el momento de escribirla.
+El ritmo de innovación en LLM es tan rápido que cualquier lista actualizada puede quedar desactualizada en semanas. Considera esta lección como una instantánea del estado del arte en julio de 2026.
 </Callout>
 
-## GPT-4o y GPT-4.1 (OpenAI)
+## GPT-5.6 (OpenAI)
 
-### GPT-4o
+Lanzada en julio de 2026, la familia GPT-5.6 es la generación más reciente de OpenAI. Se presenta en varias variantes orientadas a distintos usos:
 
-Lanzado en 2024, GPT-4o (omni) fue un salto significativo al integrar texto, imagen y audio en un mismo modelo con latencia reducida. Sus características principales:
+- **GPT-5.6 Sol:** el modelo de mayor capacidad, pensado para agentes complejos y trabajo profesional exigente
+- **GPT-5.6 Terra y Luna:** versiones con mejor equilibrio entre coste, velocidad y rendimiento
+- **Contexto de más de 1M de tokens:** procesa libros completos, bases de código enormes o larguísimas conversaciones
+- **Multimodal nativo:** texto, imagen, audio y vídeo en un mismo modelo
 
-- **Multimodal nativo:** procesa texto, imágenes y audio
-- **Velocidad mejorada:** respuestas mucho más rápidas que GPT-4
-- **Coste reducido:** 50% más barato que GPT-4 Turbo
-- **Ventana de contexto:** 128K tokens
+OpenAI ya ha anunciado el desarrollo de la siguiente generación, **GPT-6**.
 
-### GPT-4.1
+## Claude 5 (Anthropic)
 
-La versión 4.1 trajo mejoras incrementales:
+La generación Claude 5 llegó en 2026 con tres modelos diferenciados:
 
-- Mayor precisión en instrucciones complejas
-- Mejor seguimiento de contexto largo
-- Reducción de alucinaciones
-- API más eficiente para desarrolladores
+### Claude Fable 5
 
-## Claude 3.5 Sonnet y Claude 4 (Anthropic)
+- **Razonamiento profundo:** pensado para tareas difíciles y trabajo autónomo de alto valor
+- **Contexto de 1M de tokens**
+- **Precio premium:** es el modelo de pago más caro de Anthropic
 
-### Claude 3.5 Sonnet
+### Claude Sonnet 5
 
-Considerado durante meses el mejor modelo en relación calidad-precio:
+- **Conductor diario:** excelente equilibrio calidad-precio
+- **Ideal para codificación, agentes y computer use**
+- **Contexto de 1M de tokens** a un precio competitivo
 
-- **Excelente en código:** líder en benchmarks de programación
-- **Gran capacidad de razonamiento:** superaba a GPT-4 en varias tareas
-- **Seguridad:** entrenamiento constitucional avanzado
-- **200K tokens** de contexto
+### Claude Opus 5
 
-### Claude 4
-
-La generación más reciente de Anthropic:
-
-- **Razonamiento profundo:** mejoras significativas en matemáticas y ciencias
-- **Modo extendido:** capacidad de análisis más detallado
-- **Computer use:** puede interactuar con interfaces de usuario
-- **Claude Code:** agente de terminal integrado
-
-## Gemini 2.5 (Google)
-
-La apuesta de Google con Gemini 2.5 Pro:
-
-- **Ventana de contexto de 1M tokens:** líder en procesamiento de documentos largos
-- **Razonamiento multimodal:** análisis profundo de vídeo, audio y texto
-- **Integración con Google Cloud:** ideal para empresas
-- **Native tool use:** capacidades de agente integradas
+La versión más reciente (julio de 2026) impresionó por su capacidad de **generar prototipos completos** — como videojuegos 3D funcionales con física y música — a partir de un solo prompt.
 
 <Callout type="tip">
-Gemini 2.5 Pro es especialmente útil si trabajas con documentos muy extensos. Su ventana de 1M de tokens permite procesar libros completos, bases de código enormes o largas conversaciones.
+Si trabajas con agentes autónomos, Claude Sonnet 5 y Fable 5 son dos de las opciones más valoradas en 2026 por su capacidad de usar herramientas y mantener largas cadenas de trabajo.
 </Callout>
 
-## Llama 4 (Meta)
+## Gemini 3 (Google)
 
-Meta continúa liderando el ecosistema de código abierto con Llama 4:
+Google ha consolidado su línea Gemini 3 durante 2025 y 2026:
 
-- **Código abierto:** disponible para descargar y ejecutar localmente
-- **Múltiples tamaños:** desde 8B hasta 405B parámetros
-- **Multimodal:** visión integrada en los modelos más grandes
-- **Competitivo:** rendimiento cercano a modelos propietarios
+- **Gemini 3.5 Flash:** modelo multimodal rápido disponible desde mayo de 2026, ideal para tareas de alto volumen a bajo coste
+- **Gemini 3.5 Pro:** lanzado en julio de 2026 tras un rediseño completo
+- **Contexto enorme:** la generación Gemini 3 Pro alcanzó los 2M de tokens, líder en procesamiento de documentos extensos
+- **Multimodal integral:** vídeo, audio, texto e imágenes en tiempo real
 
-## Mistral Large (Mistral AI)
+## Grok 4.5 (xAI)
 
-La empresa emergente francesa Mistral AI se ha posicionado como referente europeo:
+La empresa xAI se ha afianzado como competidora seria de la frontera:
 
-- **Eficiencia:** modelos más pequeños con rendimiento competitivo
-- **Multilingüe:** excelente rendimiento en español y otros idiomas
-- **Le Chat:** asistente conversacional con capacidades avanzadas
-- **Apertura:** modelos abiertos y propietarios
+- **Acceso en tiempo real:** integración con X para información actualizada
+- **Fuerte en código y uso de herramientas**
+- **Contexto de 500K tokens**
+- **Precio competitivo:** de los más bajos entre los modelos de vanguardia
+
+## Código abierto: DeepSeek V4, Qwen, Llama 4 y Mistral
+
+El ecosistema de código abierto ha madurado de forma espectacular:
+
+### DeepSeek V4
+
+La empresa emergente china DeepSeek sacudió el sector con precios sin precedentes:
+
+- **V4 Flash:** cerca de 0,14 $ por millón de tokens de entrada, un coste que ha derrumbado el mercado
+- **V4 Pro:** razonamiento y código de alta calidad a una fracción del precio de los modelos propietarios
+
+### Qwen 3.7 (Alibaba)
+
+La familia Qwen de Alibaba es una de las más completas del ecosistema abierto, con variantes optimizadas para distintos tamaños y tareas.
+
+### Llama 4 (Meta)
+
+Aunque ya no marca la frontera, Llama 4 sigue siendo el ecosistema más maduro para desplegar modelos propios de forma local, con un enorme soporte de herramientas.
+
+### Mistral Large 3 (Mistral AI)
+
+La empresa emergente europea continúa siendo el referente de Europa, con modelos multilingües y opciones de despliegue respetuosas con la soberanía de datos.
+
+<Callout type="info">
+En 2026 se dice que "una categoría por debajo de la frontera es abierta": los modelos abiertos como DeepSeek V4, Qwen y Llama igualan a los propietarios en muchas tareas, a una fracción del coste.
+</Callout>
+
+## Tabla comparativa
 
 | Modelo | Contexto | Multimodal | Precio | Código abierto |
 |--------|----------|------------|--------|----------------|
-| GPT-4o | 128K | ✅ | $$ | ❌ |
-| Claude 4 | 200K | ✅ | $$ | ❌ |
-| Gemini 2.5 Pro | 1M | ✅ | $$$ | ❌ |
+| GPT-5.6 | 1M+ | ✅ | $$$ | ❌ |
+| Claude Fable 5 | 1M | ✅ | $$$ | ❌ |
+| Gemini 3.5 | 1M+ | ✅ | $$$ | ❌ |
+| Grok 4.5 | 500K | ✅ | $$ | ❌ |
+| DeepSeek V4 | 1M | ✅ | $ | ✅ |
+| Qwen 3.7 | 1M | ✅ | $ | ✅ |
 | Llama 4 | 128K | ✅ | Gratis | ✅ |
-| Mistral Large | 128K | ❌ | $ | Parcial |
+| Mistral Large 3 | 128K | ✅ | $ | Parcial |
 
 ## Tendencias clave
 
-1. **Multi-modalidad como estándar:** todos los modelos nuevos integran visión
-2. **Contextos largos:** la carrera por ventanas de contexto más grandes continúa
-3. **Agentes:** los modelos se diseñan para usar herramientas y actuar
-4. **Eficiencia:** modelos más pequeños pero capaces (competición abierta)
-5. **Especialización:** modelos afinados para dominios específicos
+1. **Contexto gigante:** el millón de tokens se está convirtiendo en el estándar
+2. **Colapso de precios:** la competencia de código abierto ha reducido drásticamente el coste de inferencia
+3. **Agentes por defecto:** los modelos se diseñan para usar herramientas y actuar, no solo responder
+4. **Multi-modalidad como estándar:** texto, imagen, audio y vídeo en un mismo modelo
+5. **Especialización:** modelos afinados para dominios concretos (código, medicina, derecho)
 
 ## Autoevaluación
 
-1. ¿Qué ventaja tiene Gemini 2.5 sobre otros modelos?
-2. ¿Cuál es la principal diferencia entre GPT-4o y GPT-4.1?
-3. ¿Por qué es relevante Llama 4 en el ecosistema?
-4. ¿Qué tendencias definen la evolución de los LLM?
+1. ¿Qué ventaja tiene la familia GPT-5.6 frente a generaciones anteriores?
+2. ¿Qué diferencias hay entre Claude Fable 5, Sonnet 5 y Opus 5?
+3. ¿Por qué DeepSeek V4 ha sacudido el mercado de la IA?
+4. ¿Qué tendencias definen la evolución de los LLM en 2026?
 
 En la siguiente lección exploraremos las **tendencias del ecosistema IA** más allá de los modelos.

@@ -5,7 +5,7 @@ description: "Agentes autónomos, MCP, IA en el navegador y código abierto"
 
 ## Más allá de los modelos
 
-Mientras los modelos de lenguaje acaparan titulares, el ecosistema que los rodea evoluciona con tendencias igualmente transformadoras. Desde protocolos que conectan modelos con herramientas hasta agentes que actúan de forma autónoma.
+Mientras los modelos de lenguaje acaparan titulares, el ecosistema que los rodea evoluciona con tendencias igualmente transformadoras. En 2026 la protagonista no es una arquitectura nueva, sino la **aplicación práctica**: agentes que actúan, protocolos que conectan y un coste que se desploma.
 
 <Callout type="info">
 El modelo es solo una pieza del puzle. La verdadera revolución está en cómo los modelos se conectan, despliegan y aplican en el mundo real.
@@ -20,86 +20,103 @@ La tendencia más importante del ecosistema: pasar de modelos que responden preg
 1. **2023:** chatbots conversacionales
 2. **2024:** agentes simples con herramientas
 3. **2025:** agentes multi-paso con planificación
-4. **2026:** sistemas multi-agente coordinados
+4. **2026:** sistemas multi-agente coordinados en producción
+
+### Adopción real
+
+La IA agéntica ha pasado de la demostración a la producción:
+
+- El 79% de las empresas declara que ya utiliza agentes de IA en escenarios reales de negocio
+- Gartner proyecta que el 40% de las aplicaciones empresariales incluirá agentes a finales de 2026 (frente a menos del 5% en 2025)
+- Algunas estimaciones señalan que el 80% de las nuevas aplicaciones empresariales se desarrollan ya con agentes integrados
 
 ### Plataformas destacadas
 
 - **Claude Code:** agente de terminal que lee, escribe y ejecuta código
-- **OpenHands:** alternativa de código abierto a Devin
-- **CrewAI:** marco de trabajo para orquestar equipos de agentes
-- **LangGraph:** construcción de flujos de agentes complejos
+- **Cursor:** editor con agentes de codificación integrados
+- **OpenHands:** alternativa de código abierto a los asistentes de codificación
+- **CrewAI y LangGraph:** marcos de trabajo para orquestar equipos de agentes
 
-## Model Context Protocol (MCP)
+## Protocolos: MCP, A2A y ACP
 
-Anthropic introdujo MCP como un estándar abierto para conectar modelos de lenguaje con herramientas externas.
+### MCP (Model Context Protocol)
 
-### ¿Por qué es importante?
+Anthropic introdujo MCP en 2024 como estándar abierto para conectar modelos con herramientas. En 2026 se ha convertido en el estándar de facto:
 
-- **Estandarización:** un solo protocolo para conectar cualquier herramienta
-- **Seguridad:** control granular sobre qué puede acceder el modelo
-- **Extensibilidad:** cualquier servicio puede implementar un servidor MCP
-- **Adopción:** soportado por Claude, Cursor y creciente comunidad
+- **"El USB-C de la IA":** un único protocolo para conectar cualquier herramienta o fuente de datos
+- **Adopción masiva:** más de 97 millones de descargas mensuales del SDK y soporte de todas las grandes empresas (OpenAI, Google, Microsoft, Anthropic y AWS)
+- **Gobernanza abierta:** desde diciembre de 2025 el protocolo se gestiona en la Linux Foundation, dentro de la Agentic AI Foundation, con más de 140 organizaciones miembros
 
-### Ejemplos de uso
+### A2A (Agent-to-Agent)
 
-- Conectar un modelo a una base de datos SQL
-- Acceder a APIs de servicios externos (Slack, GitHub, Notion)
-- Leer y escribir archivos del sistema local
-- Navegación web automatizada
+Google impulsa A2A, el protocolo para la comunicación entre agentes:
+
+- Permite que agentes de distintos fabricantes se descubran, deleguen tareas y colaboren
+- Alcanzó la versión 1.0 en 2026
+
+### Cómo se relacionan
+
+- **MCP** conecta el agente con las herramientas (conexión vertical)
+- **A2A** conecta agentes entre sí (coordinación horizontal)
 
 <Callout type="tip">
 MCP está llamado a ser lo que HTTP fue para la web: un estándar que permite la interoperabilidad. Si trabajas con agentes IA, MCP es una de las tecnologías más importantes que puedes aprender.
 </Callout>
 
-## IA en el navegador
+### El reto de la seguridad
 
-La ejecución de modelos directamente en el navegador está democratizando el acceso:
+Con la adopción masiva llegan los riesgos. Estudios recientes señalan que muchos servidores MCP tienen vulnerabilidades conocidas (acceso a rutas o inyección de código), y que las organizaciones a menudo no ven cómo se conectan sus agentes a los datos. **La gobernanza y la monitorización son ahora tan importantes como la integración.**
+
+## IA en el navegador y en el dispositivo
+
+La ejecución de modelos en el navegador y en dispositivos locales está democratizando el acceso:
 
 - **WebLLM:** ejecuta modelos como Llama y Gemma en el navegador
 - **Transformers.js:** inferencia de transformers directamente en JavaScript
 - **ONNX Runtime Web:** ejecución optimizada en el navegador
 - **Chrome Built-in AI:** APIs de IA nativas en Chrome
 
-### Ventajas
+### Los modelos pequeños (SLM)
+
+Los modelos de lenguaje pequeños, optimizados para ejecutarse en local, han recortado drásticamente los costes de inferencia y permiten la IA privada en dispositivos:
 
 - Sin necesidad de servidor
 - Privacidad total (datos locales)
 - Sin latencia de red
-- Gratuito para la persona usuaria
 - Funciona offline
 
 ## Código abierto y democratización
 
 El ecosistema de código abierto de IA ha madurado enormemente:
 
-- **Modelos:** Llama 4, Mistral, Gemma, Qwen, DeepSeek
+- **Modelos:** DeepSeek V4, Qwen 3.7, Llama 4, GLM-5.2, Mistral
 - **Marcos de trabajo:** LangChain, Haystack, DSPy, LlamaIndex
 - **Infraestructura:** vLLM, Ollama, TGI, llama.cpp
 - **Conjuntos de datos:** Hugging Face lidera con millones de conjuntos de datos
 
 <Callout type="info">
-El ecosistema de código abierto está cerrando la brecha con los modelos propietarios. Para finales de 2026 se espera que modelos abiertos igualen o superen a GPT-4 en la mayoría de tareas.
+En 2026 se cumplió la predicción de que los modelos abiertos igualarían a los propietarios en la mayoría de tareas. DeepSeek V4 y Qwen ofrecen calidad de frontera a una fracción del coste.
 </Callout>
 
 ## Otras tendencias relevantes
 
 **IA Generativa de Vídeo**
-Runway Gen-4, Sora y Veo 2 están llevando la generación de vídeo a nuevos niveles de realismo y control.
+Veo 3.1, Sora 2, Kling 3.0 y Runway Gen-4.5 generan vídeo con audio sincronizado, personajes consistentes y calidad casi cinematográfica.
 
 **Razonamiento y cadenas de pensamiento**
-Modelos que explicitan su proceso de razonamiento (o1 de OpenAI, Gemini Thinking, Claude Extended Thinking).
+Modelos que explicitan su proceso de razonamiento, como la familia GPT-5.x o Claude 5, con modos de razonamiento profundo.
 
 **Personalización masiva**
 El ajuste fino y RAG hacen posible crear asistentes especializados para cada persona usuaria u organización.
 
 **Voz a voz**
-Modelos que procesan audio directamente sin transcripción intermedia, permitiendo conversaciones más naturales.
+Modelos que procesan audio directamente sin transcripción intermedia, permitiendo conversaciones naturales en tiempo real.
 
 ## Autoevaluación
 
-1. ¿Qué es MCP y por qué es importante?
-2. ¿Qué ventajas tiene ejecutar modelos de IA en el navegador?
-3. ¿Cómo ha evolucionado el ecosistema de código abierto de IA?
-4. ¿Cuál de estas tendencias crees que tendrá mayor impacto?
+1. ¿Qué es MCP y por qué se le llama "el USB-C de la IA"?
+2. ¿Qué diferencia hay entre MCP y A2A?
+3. ¿Qué ventajas tiene ejecutar modelos de IA en el navegador o en el dispositivo?
+4. ¿Cuál de estas tendencias crees que tendrá mayor impacto en tu ámbito profesional?
 
 En la siguiente lección profundizaremos en los **avances en IA multimodal**.

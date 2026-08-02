@@ -128,10 +128,20 @@ npm run lint      # ESLint
 - Verificado: no existe la forma errónea "empatar" en el proyecto; solo "empatía" y "empatizar" (correctas)
 - Lint y tsc limpios tras los cambios
 
+### Fase 15 ✅ (actualización del Bloque 10 Novedades a 2026)
+- Lección 01 reescrita al estado de la técnica de julio 2026: GPT-5.6 (Sol/Terra/Luna), Claude 5 (Fable 5, Sonnet 5, Opus 5), Gemini 3.5, Grok 4.5, código abierto (DeepSeek V4, Qwen 3.7, Llama 4, Mistral Large 3) + tabla comparativa actualizada
+- Lección 02 actualizada: adopción real de agentes (Gartner 40% a finales de 2026), protocolos MCP ("USB-C de la IA", 97M descargas, Agentic AI Foundation en Linux Foundation), A2A/ACP, SLM en el dispositivo, retos de seguridad de MCP
+- Lección 03 actualizada: vídeo con audio nativo (Veo 3.1, Sora 2, Kling 3.0, Runway Gen-4.5, Seedance, Wan), voz a voz en tiempo real, modelos unificados
+- Lección 04 actualizada: laboratorios autónomos, Nobel 2024 (Hassabis/Jumper/Hinton/Hopfield), agentes tutores, asistentes de codificación agénticos
+- Lección 05 actualizada: AI Act en aplicación plena desde el 2/8/2026 (Anexo III), Digital Omnibus, Oficina Europea de IA, multas hasta 35M €/7%, AI Gigafactories (30.000M €), proyecto EUROPA, Convenio Marco del Consejo de Europa en vigor desde 2025
+- Lección 06: añadidas fuentes de documentación técnica (MCP/A2A) y referencia a protocolos en la rutina diaria
+- `meta.json`: descripciones de las lecciones 01, 02, 03 y 05 actualizadas
+- Lint y tsc limpios tras los cambios
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `44a7bfc` (revisión lingüística, 108 archivos)
-- Cambios SIN commitear al cerrar esta sesión: `components/layout/Shell.tsx`, `components/layout/Sidebar.tsx`, `content/fundamentos/01-que-es-ia.mdx` (ver Fase 14)
-- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 14
+- Último commit: `1a9c35c` (Fase 14, ajustes de UI)
+- Cambios SIN commitear al cerrar esta sesión: contenido del Bloque 10 (`content/novedades/`) y `AGENTS.md` (ver Fase 15)
+- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 15
 
 ## Bloques de contenido (MDX)
 
