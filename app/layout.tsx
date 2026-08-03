@@ -6,6 +6,8 @@ import { AuthProvider } from "@/components/auth/AuthProvider";
 import { I18nProvider } from "@/lib/i18n/provider";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getLocale } from "@/lib/i18n/server";
+import { localeToIntl } from "@/lib/i18n/config";
+import { SITE_CONFIG } from "@/lib/constants";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -24,6 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const t = getDictionary(locale);
 
   return {
+    metadataBase: new URL(SITE_CONFIG.url),
     title: {
       default: "Atlas IA — Aprende Inteligencia Artificial",
       template: "%s | Atlas IA",
@@ -41,6 +44,14 @@ export async function generateMetadata(): Promise<Metadata> {
       "educación",
       "español",
     ],
+    openGraph: {
+      type: "website",
+      locale: localeToIntl(locale),
+      url: SITE_CONFIG.url,
+      siteName: SITE_CONFIG.name,
+      title: "Atlas IA — Aprende Inteligencia Artificial",
+      description: t.home.subtitle1,
+    },
   };
 }
 

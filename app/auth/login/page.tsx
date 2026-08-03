@@ -10,6 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.auth.login.title,
     description: t.auth.login.subtitle,
+    alternates: { canonical: "/auth/login" },
+    robots: { index: false, follow: false },
   };
 }
 

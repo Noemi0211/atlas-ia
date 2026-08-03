@@ -28,6 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.bloques.title,
     description: t.bloques.subtitle,
+    alternates: { canonical: "/bloques" },
   };
 }
 

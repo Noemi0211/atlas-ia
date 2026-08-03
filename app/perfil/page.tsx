@@ -11,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.perfil.title,
     description: t.perfil.subtitle,
+    alternates: { canonical: "/perfil" },
   };
 }
 

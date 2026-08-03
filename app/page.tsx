@@ -30,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Atlas IA — Aprende Inteligencia Artificial desde cero",
     description: t.home.subtitle1,
+    alternates: { canonical: "/" },
   };
 }
 
@@ -77,7 +78,7 @@ export default async function HomePage() {
             <p className="text-lg text-fg-secondary leading-relaxed mb-8 max-w-xl">
               {t.home.subtitle1} <strong>{t.home.subtitle2}</strong>{" "}
               <strong>{t.home.subtitle3}</strong>{" "}
-              <strong>{t.home.subtitle4}</strong>.
+              <strong>{t.home.subtitle4}</strong>
             </p>
 
             <div className="flex flex-wrap gap-3">

@@ -180,12 +180,23 @@ npm run lint      # ESLint
 - Lint respetado: `setState` síncrono en effects envuelto en `setTimeout(0)` (deep-link del glosario); posicionamiento del popover con manipulación directa de `style` vía refs
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
 
+### Fase 20 ✅ (SEO: metadataBase, canonical, Content-Language, sitemap y robots)
+- `metadataBase: new URL(SITE_CONFIG.url)` + `openGraph` (type website, locale `localeToIntl`, url, siteName, title, description) en `app/layout.tsx` → URLs absolutas para canonical/OG
+- `alternates.canonical` en 8 páginas server: home `/`, bloques `/bloques`, bloque `/bloques/[slug]`, lección `/bloques/[slug]/[leccion]`, cronología `/cronologia`, perfil `/perfil`, auth `/auth/login` y `/auth/register`
+- Layouts server nuevos para páginas client que no pueden exportar metadata: `app/glosario/layout.tsx` (canonical `/glosario`) y `app/laboratorio/layout.tsx` (canonical `/laboratorio`), ambos con `generateMetadata` y que devuelven `children`
+- `proxy.ts`: matcher ampliado a `["/((?!_next|.*\\..*).*)"]` (excluye `_next` y archivos estáticos); lee la cookie `atlas-locale` (con `isLocale`, default `es`) y fija la cabecera `Content-Language` en todas las respuestas; conserva la protección de `/perfil`
+- `app/sitemap.ts`: 92 URLs (5 estáticas + 11 bloques + 76 lecciones) con `changeFrequency: "weekly"` y prioridades 1/0.9/0.8/0.7/0.6
+- `app/robots.ts`: `allow: "/"`, `disallow: ["/auth/login", "/auth/register"]`, referencia a `/sitemap.xml`
+- `noindex` (`robots: { index: false, follow: false }`) en login y registro
+- Decisión técnica: NO se usa `alternates.languages` (hreflang) porque el i18n es por cookie sin prefijos de URL y Google ignora hreflang hacia la misma URL; la señal correcta en este caso es `Content-Language` dinámico + `<html lang>` + canonical único
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (104 páginas, robots.txt y sitemap.xml generados), curl confirma Content-Language es/en/val según cookie, canonical absolutos y redirect de /perfil protegido
+
 ## Estado actual (para retomar la sesión)
 - Último commit: `2b38f01` (Fase 18 + 19, accesibilidad: lectura por voz y términos interactivos del glosario)
 - Árbol de trabajo limpio: las Fases 18 y 19 están commiteadas (lib/speech.ts, SpeechReader, GlossaryProvider/Popover/TermLinks, lib/glossary-match.ts, getGlosarioTerminos, secciones speech+glossaryPopover en diccionarios, data-read-aloud en 8 páginas, deep-link del glosario, estilos .glossary-term, AGENTS.md)
+- Fase 20 (SEO) en curso, sin commitear: metadataBase + openGraph en app/layout.tsx, canonical en 8 páginas server, layouts server para glosario/laboratorio, Content-Language dinámico en proxy.ts, sitemap.ts + robots.ts, noindex en auth
 - Recomendado al retomar: `git status` para confirmar el árbol limpio
-- Siguientes pasos posibles: revisar manualmente popover y lectura por voz en dev (`npm run dev`), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`
-- Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
+- Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), revisar manualmente el texto de las traducciones en/val, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real
 
 ## Bloques de contenido (MDX)
 
@@ -208,10 +219,12 @@ npm run lint      # ESLint
 app/                  → Páginas (App Router)
   bloques/            → Lista + [slug] + [slug]/[leccion]
   cronologia/         → Timeline interactivo
-  glosario/           → Búsqueda + filtros
+  glosario/           → Búsqueda + filtros (layout.tsx con canonical)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
-  laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens)
+  laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register
+  sitemap.ts          → 92 URLs (estáticas + bloques + lecciones)
+  robots.ts           → allow "/", disallow auth, sitemap.xml
 
 app/api/              → API Routes
   auth/[...nextauth]  → NextAuth
@@ -229,7 +242,7 @@ components/
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
 
-proxy.ts              → Protección de rutas (Next.js 16, reemplaza middleware.ts)
+proxy.ts              → Protección de rutas + cabecera Content-Language dinámica (Next.js 16, reemplaza middleware.ts)
 
 lib/
   types.ts            → Interfaces (BloqueMeta, LeccionMeta, HerramientaIA, etc.)

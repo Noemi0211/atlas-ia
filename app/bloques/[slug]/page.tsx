@@ -62,6 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${t.bloques.label} ${bloque.numero}: ${bloque.titulo}`,
     description: bloque.descripcion,
+    alternates: { canonical: `/bloques/${slug}` },
   };
 }
 

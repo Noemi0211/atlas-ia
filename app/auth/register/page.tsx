@@ -10,6 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.auth.register.title,
     description: t.auth.register.subtitle,
+    alternates: { canonical: "/auth/register" },
+    robots: { index: false, follow: false },
   };
 }
 

@@ -11,6 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t.cronologia.title,
     description: t.cronologia.subtitle,
+    alternates: { canonical: "/cronologia" },
   };
 }
 
