@@ -181,10 +181,10 @@ npm run lint      # ESLint
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `0359dff` (Fase 17, lecciones MDX localizadas es/en/val)
-- **Cambios SIN commitear**: Fase 18 (lectura por voz) y Fase 19 (términos interactivos del glosario) completas y verificadas (tsc/lint/build OK)
-- Pendiente de commitear si el usuario lo confirma: `lib/speech.ts`, `components/accessibility/SpeechReader.tsx`, `components/accessibility/GlossaryProvider.tsx`, `components/accessibility/GlossaryPopover.tsx`, `components/accessibility/GlossaryTermLinks.tsx`, `lib/glossary-match.ts`, cambios en `lib/i18n/data.ts`, `lib/i18n/dictionaries/{es,en,val}.ts`, `components/layout/Shell.tsx`, `app/globals.css`, `app/glosario/page.tsx`, este AGENTS.md
-- Recomendado al retomar: `git status` para confirmar el estado de los cambios sin commitear
+- Último commit: `2b38f01` (Fase 18 + 19, accesibilidad: lectura por voz y términos interactivos del glosario)
+- Árbol de trabajo limpio: las Fases 18 y 19 están commiteadas (lib/speech.ts, SpeechReader, GlossaryProvider/Popover/TermLinks, lib/glossary-match.ts, getGlosarioTerminos, secciones speech+glossaryPopover en diccionarios, data-read-aloud en 8 páginas, deep-link del glosario, estilos .glossary-term, AGENTS.md)
+- Recomendado al retomar: `git status` para confirmar el árbol limpio
+- Siguientes pasos posibles: revisar manualmente popover y lectura por voz en dev (`npm run dev`), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`
 - Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
 
 ## Bloques de contenido (MDX)
