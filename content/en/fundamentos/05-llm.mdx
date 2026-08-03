@@ -1,0 +1,132 @@
+---
+title: "Large Language Models (LLM)"
+description: "What they are, how they are trained and why they are so powerful"
+---
+
+## Large Language Models (LLM)
+
+LLMs are the models behind ChatGPT, Claude, Gemini and almost all the generative AI we use today.
+
+They are, possibly, the most impactful technology of the last decade.
+
+## What is an LLM?
+
+A Large Language Model is a Machine Learning model trained on **enormous amounts of text** to learn patterns of human language.
+
+It can:
+
+- Generate coherent text
+- Answer questions
+- Translate languages
+- Summarize documents
+- Write code
+- Hold conversations
+
+All without being specifically programmed for each task. It is a **generalist** model of language.
+
+## The voracious reader analogy
+
+Imagine someone who has read **everything ever written on the internet** — all the books, articles, code, conversations, everything.
+
+That person would not be an expert in any one thing, but would have an **incredibly broad** understanding of language and human knowledge.
+
+That is an LLM. It has "read" an immense amount of text and has learned:
+
+- How sentences are structured
+- Which words go together
+- How to respond to different types of questions
+- What tone to use in different contexts
+
+## How they are trained
+
+### Step 1: Data collection
+
+**Billions of tokens** of text are collected from the internet, books, scientific articles, code, etc.
+
+### Step 2: Predictive training
+
+The model is trained to **predict the next word**. Given a text, what is the most likely word that comes next?
+
+> "The sky is..." → "blue" (with high probability)
+
+This process is repeated **billions of times** with different texts.
+
+### Step 3: Fine-tuning
+
+After general training, the model is tuned to follow instructions and be useful.
+
+### Step 4: RLHF (Reinforcement Learning from Human Feedback)
+
+Humans evaluate the model's responses and give it feedback on what is good and what is not. The model learns to produce more useful and safer responses.
+
+<Callout type="info">
+The RLHF process is what makes ChatGPT so useful. Without it, the model would generate correct text but not necessarily useful or safe text.
+</Callout>
+
+## Parameters: size matters
+
+LLMs are measured by their number of **parameters**. Parameters are the "internal switches" the model adjusts during training.
+
+| Model | Year | Parameters |
+|--------|-----|-----------|
+| GPT-2 | 2019 | 1.5 billion |
+| GPT-3 | 2020 | 175 billion |
+| GPT-4 | 2023 | ~1.8 trillion (estimated) |
+| Claude 3.5 | 2024 | Not disclosed |
+| Gemini Ultra | 2024 | ~540 billion |
+
+The more parameters, generally the more capability, but also the more computational cost.
+
+## Emergent capabilities
+
+Something fascinating happens when models reach a certain size: they develop **capabilities for which they were not explicitly trained**.
+
+- Logical reasoning
+- Solving mathematical problems
+- Coding
+- Understanding metaphors
+- Reasoning about the real world
+
+These capabilities **"emerge"** from the size and diversity of the training data.
+
+## Limitations of LLMs
+
+### Limited memory
+
+LLMs do not really "remember" previous conversations. The context window limits how much text they can process at once.
+
+### No real-time internet access
+
+A pure LLM does not know what is happening right now. It only knows what was in its training data.
+
+### They can be wrong
+
+LLMs **invent data** with total confidence. This is called hallucination and it is one of the most important limitations.
+
+### They do not reason like humans
+
+Although it seems like they reason, they are actually **predicting statistical patterns**. They have no real understanding of the world.
+
+<Callout type="warning">
+Never blindly trust an LLM with critical data. Always verify important information with primary sources.
+</Callout>
+
+## Popular LLMs
+
+| Model | Company | Main strength |
+|--------|---------|-------------------|
+| GPT-4o | OpenAI | Generalist, versatile |
+| Claude 3.5 Sonnet | Anthropic | Long-form analysis, code |
+| Gemini 1.5 Pro | Google | Multimodal, extended context |
+| Llama 3 | Meta | Open source, free |
+| Mistral | Mistral AI | European, efficient |
+| DeepSeek | DeepSeek | Chinese, very powerful |
+
+## Self-assessment
+
+1. How is an LLM trained to predict the next word?
+2. What is RLHF and why is it important?
+3. What are emergent capabilities?
+4. Why can LLMs invent information?
+
+Ready? Next lesson: **Transformers: the revolution**.

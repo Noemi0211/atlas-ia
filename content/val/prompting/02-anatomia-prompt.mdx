@@ -1,0 +1,94 @@
+---
+title: "Anatomia d'un bon prompt"
+description: "Els elements clau que componen un prompt efectiu"
+---
+
+## Un prompt efectiu té estructura
+
+Igual que una recepta de cuina té ingredients i passos, un bon prompt té elements clau que el fan funcionar. No necessites usar-los tots sempre, però conéixer-los t'ajudarà a dissenyar millors prompts.
+
+## Els 7 elements clau
+
+### 1. Rol
+Digues-li a la IA **qui és**. Això estableix el to, la profunditat i l'enfocament de la resposta.
+
+**Sense rol:** "Explica'm què és l'aprenentatge automàtic"
+**Amb rol:** "Ets un professor universitari d'IA donant una classe a estudiants de primer. Explica'm què és l'aprenentatge automàtic"
+
+### 2. Context
+Dóna-li a la IA **informació rellevant** sobre la situació.
+
+**Sense context:** "Escriu un correu"
+**Amb context:** "Escriu un correu a un client que acaba de comprar el nostre programari. Vol saber com instal·lar-lo. El to ha de ser amable i professional."
+
+### 3. Tasca específica
+Digues exactament **què vols** que faça. Sigues concret.
+
+**Vaga:** "Parla'm de Python"
+**Específica:** "Compara Python i JavaScript en 3 aspectes: velocitat d'execució, facilitat d'aprenentatge i ús en desenvolupament web"
+
+### 4. Format d'eixida
+Indica **com vols** la resposta: llista, taula, paràgrafs, codi...
+
+**Sense format:** "Dóna'm consells per a estalviar diners"
+**Amb format:** "Dóna'm 5 consells per a estalviar diners en format taula: Consell | Com aplicar-lo | Estalvi estimat"
+
+### 5. Restriccions
+Posa **límits** a la resposta: extensió, to, audiència, termes a evitar...
+
+**Exemple:** "Explica'm què és un transformer en menys de 100 paraules, com si li ho explicasses a un xiquet de 12 anys."
+
+### 6. Exemples (few-shot)
+Mostra a la IA **exemples** del tipus de resposta que esperes.
+
+**Sense exemple:** "Tradueix a l'anglés: El gat està a la teulada"
+**Amb exemple:** "Tradueix aquestes frases a l'anglés seguint aquest format:
+'El gos corre ràpid' → 'The dog runs fast'
+'El gat està a la teulada' → ..."
+
+### 7. Pas a pas
+Demana-li que **raone** abans de respondre (Chain-of-Thought).
+
+**Normal:** "Calcula 24 × 37"
+**Pas a pas:** "Calcula 24 × 37 pas a pas, explicant cada operació"
+
+## Plantilla universal
+
+```
+[Role] You are an [expert in X] specialised in [Y].
+[Context] I am currently [situation] and I need [need].
+[Task] I want you to [specific task description].
+[Format] Answer in [list/table/paragraph] format.
+[Constraints] Use a [formal/informal] tone, maximum [N] words, aimed at [audience].
+```
+
+### Exemple pràctic
+
+```
+You are a digital marketing expert specialised in LinkedIn.
+I am currently creating my professional profile and I need to highlight my experience in AI.
+I want you to write a profile headline and a 3-line summary.
+Use a professional but accessible tone, aimed at tech recruiters.
+```
+
+## Errors comuns
+
+### Demanar-ho tot alhora
+**Malament:** "Fes-me un pla de negoci, una anàlisi de mercat i una projecció financera"
+**Bé:** Demana una cosa cada vegada o estructura el prompt en seccions
+
+### Ser massa vague
+**Malament:** "Ajuda'm amb el meu treball"
+**Bé:** "Necessite preparar una presentació de 10 minuts sobre tendències d'IA el 2026 per al meu equip de vendes"
+
+### No especificar el format
+**Malament:** "Digues-me coses sobre la IA"
+**Bé:** "Dóna'm 5 aplicacions pràctiques d'IA en el sector salut, en format taula amb columna de benefici i exemple"
+
+## Autoavaluació
+
+1. Quins són els 7 elements clau d'un bon prompt?
+2. Per què és important especificar el format d'eixida?
+3. Escriu un prompt per a una tasca quotidiana usant almenys 4 dels 7 elements
+
+Llest? Següent lliçó: **Tècniques de prompting bàsiques**.

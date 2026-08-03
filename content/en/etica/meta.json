@@ -1,0 +1,55 @@
+{
+  "bloque": 8,
+  "titulo": "Ethics and Responsibility",
+  "descripcion": "Privacy, GDPR, copyright and responsible use of AI",
+  "lecciones": [
+    {
+      "slug": "01-introduccion-etica",
+      "titulo": "Introduction to AI ethics",
+      "descripcion": "Why ethics is fundamental to the development and use of artificial intelligence",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-privacidad-datos",
+      "titulo": "Privacy and data protection",
+      "descripcion": "GDPR, consent and data governance in the age of AI",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-sesgo-equidad",
+      "titulo": "Algorithmic bias and fairness",
+      "descripcion": "How biases are introduced into models and how to mitigate them",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-copyright-propiedad",
+      "titulo": "Copyright and intellectual property",
+      "descripcion": "Copyright, generated content and attribution in the age of AI",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "05-regulacion-futuro",
+      "titulo": "Regulation and the future of responsible AI",
+      "descripcion": "Laws, regulatory frameworks and the path towards ethical AI",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Summary and resources",
+      "descripcion": "Review, self-assessment and resources to keep learning",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

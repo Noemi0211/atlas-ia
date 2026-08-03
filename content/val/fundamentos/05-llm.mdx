@@ -1,0 +1,132 @@
+---
+title: "Models de llenguatge gran (LLM)"
+description: "Què són, com s'entrenen i per què són tan potents"
+---
+
+## Models de llenguatge gran (LLM)
+
+Els LLM són els models que estan darrere de ChatGPT, Claude, Gemini i gairebé tota la IA generativa que usem hui.
+
+Són, possiblement, la tecnologia més impactant de l'última dècada.
+
+## Què és un LLM?
+
+Un Model de Llenguatge Gran és un model de Machine Learning entrenat amb **enormes quantitats de text** per a aprendre patrons del llenguatge humà.
+
+Pot:
+
+- Generar text coherent
+- Respondre preguntes
+- Traduir idiomes
+- Resumir documents
+- Escriure codi
+- Mantindre converses
+
+Tot això sense ser programat específicament per a cada tasca. És un model **generalista** del llenguatge.
+
+## L'analogia de l'escriptor voraç
+
+Imagina algú que ha llegit **tot el que està escrit a internet** — tots els llibres, articles, codi, converses, tot.
+
+Aquesta persona no seria experta en res en particular, però tindria una comprensió **increïblement àmplia** del llenguatge i del coneixement humà.
+
+Això és un LLM. Ha "llegit" una quantitat immensa de text i ha après:
+
+- Com s'estructuren les oracions
+- Quines paraules van juntes
+- Com respondre a diferents tipus de preguntes
+- Quin to usar en diferents contextos
+
+## Com s'entrenen
+
+### Pas 1: Recopilació de dades
+
+Es recopilen **bilions de tokens** de text d'internet, llibres, articles científics, codi, etc.
+
+### Pas 2: Entrenament predictiu
+
+El model s'entrena per a **predir la paraula següent**. Donat un text, quina és la paraula més probable que ve després?
+
+> "El cel és de color..." → "blau" (amb alta probabilitat)
+
+Aquest procés es repeteix **bilions de vegades** amb diferents textos.
+
+### Pas 3: Ajustament fi (fine-tuning)
+
+Després de l'entrenament general, el model s'ajusta per a seguir instruccions i ser útil.
+
+### Pas 4: RLHF (Reinforcement Learning from Human Feedback)
+
+Els humans avaluen les respostes del model i li donen retroalimentació sobre què és bo i què no. El model aprén a produir respostes més útils i segures.
+
+<Callout type="info">
+El procés RLHF és el que fa que ChatGPT siga tan útil. Sense ell, el model generaria text correcte però no necessàriament útil o segur.
+</Callout>
+
+## Paràmetres: la mida importa
+
+Els LLM es mesuren pel seu nombre de **paràmetres**. Els paràmetres són els "interruptors interns" que el model ajusta durant l'entrenament.
+
+| Model | Any | Paràmetres |
+|--------|-----|-----------|
+| GPT-2 | 2019 | 1.500 milions |
+| GPT-3 | 2020 | 175.000 milions |
+| GPT-4 | 2023 | ~1.8 bilions (estimat) |
+| Claude 3.5 | 2024 | No revelat |
+| Gemini Ultra | 2024 | ~540.000 milions |
+
+A més paràmetres, generalment més capacitat, però també més cost computacional.
+
+## Capacitats emergents
+
+Alguna cosa fascinant ocorre quan els models aconsegueixen certa grandària: desenvolupen **capacitats per a les quals no van ser entrenats explícitament**.
+
+- Raonament lògic
+- Resolució de problemes matemàtics
+- Programació de codi
+- Comprensió de metàfores
+- Raonament sobre el món real
+
+Aquestes capacitats **"emergeixen"** de la grandària i la diversitat de les dades d'entrenament.
+
+## Limitacions dels LLM
+
+### Memòria limitada
+
+Els LLM no "recordem" converses anteriors de veritat. La finestra de context limita quant text poden processar alhora.
+
+### Sense accés a internet en temps real
+
+Un LLM pur no sap què està passant ara mateix. Només sap el que estava en les seues dades d'entrenament.
+
+### Poden equivocar-se
+
+Els LLM **inventen dades** amb total seguretat. Això s'anomena al·lucinació i és una de les limitacions més importants.
+
+### No raonen com els humans
+
+Encara que semble que raonen, en realitat estan **predint patrons estadístics**. No tenen comprensió real del món.
+
+<Callout type="warning">
+Mai confies a cegues en un LLM per a dades crítiques. Sempre verifica la informació important amb fonts primàries.
+</Callout>
+
+## LLM populars
+
+| Model | Empresa | Fortalesa principal |
+|--------|---------|-------------------|
+| GPT-4o | OpenAI | Generalista, versàtil |
+| Claude 3.5 Sonnet | Anthropic | Anàlisi llarga, codi |
+| Gemini 1.5 Pro | Google | Multimodal, context extens |
+| Llama 3 | Meta | Open source, gratuït |
+| Mistral | Mistral AI | Europeu, eficient |
+| DeepSeek | DeepSeek | Xinès, molt potent |
+
+## Autoavaluació
+
+1. Com s'entrena un LLM per a predir la paraula següent?
+2. Què és RLHF i per què és important?
+3. Què són les capacitats emergents?
+4. Per què els LLM poden inventar informació?
+
+Llest? Següent lliçó: **Transformers: la revolució**.

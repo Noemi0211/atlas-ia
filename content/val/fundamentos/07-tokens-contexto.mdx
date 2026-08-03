@@ -1,0 +1,131 @@
+---
+title: "Tokens, context i inferència"
+description: "Les peces fonamentals per a entendre com funciona un LLM"
+---
+
+## Tokens, context i inferència
+
+Aquests tres conceptes són la base pràctica de com interactues amb qualsevol LLM. Entendre'ls t'ajudarà a usar les eines d'IA de manera més efectiva.
+
+## Què és un token?
+
+Un token és la **unitat bàsica de text** que un model processa. No és exactament una paraula — és un fragment de text que el model usa per a entendre i generar llenguatge.
+
+### Exemple real
+
+La frase "Intel·ligència Artificial" podria dividir-se en:
+
+```
+"Inteligencia" → 1 token
+"Artificial" → 1 token
+```
+
+Però la paraula "desenvolupadors" podria dividir-se en:
+
+```
+"des" + "arrolla" + "dores" → 3 tokens
+```
+
+### Per què importen els tokens?
+
+1. **Cost**: Les APIs cobren per tokens. Més tokens = més car
+2. **Velocitat**: Més tokens = més temps de processament
+3. **Límits de context**: La finestra de context es mesura en tokens
+
+<Callout type="info">
+Com a regla general en espanyol: **1 token ≈ 0.75 paraules**. O dit d'una altra manera, 100 paraules són aproximadament 130 tokens. Els textos en espanyol solen usar més tokens que en anglés perquè els tokenitzadors estan més optimitzats per a l'anglés.
+</Callout>
+
+### Tokenització
+
+El procés de dividir el text en tokens s'anomena **tokenització**. Cada model usa el seu propi tokenitzador.
+
+Pots experimentar amb la tokenització de diferents models usant eines com [tiktoken](https://tiktokenizer.vercel.app/).
+
+## Què és la finestra de context?
+
+La finestra de context és la **quantitat de text** que un model pot "veure" i tindre en compte en generar una resposta.
+
+### Exemple pràctic
+
+Si li preguntes a ChatGPT sobre un document de 10 pàgines, el model necessita que tot el document capiga en la seua finestra de context.
+
+| Model | Finestra de context | Equivalent |
+|--------|-------------------|-------------|
+| GPT-3.5 | 4.096 tokens | ~3.000 paraules |
+| GPT-4o | 128.000 tokens | ~96.000 paraules |
+| Claude 3.5 Sonnet | 200.000 tokens | ~150.000 paraules |
+| Gemini 1.5 Pro | 2.000.000 tokens | ~1.500.000 paraules |
+
+### Per què importa?
+
+- **Converses llargues**: Una finestra xicoteta significa que el model oblida el que vas dir abans
+- **Documents extensos**: Per a analitzar documents llargs necessites una finestra àmplia
+- **Cost**: Processar tota la finestra té un cost computacional
+
+<Callout type="warning">
+No confongues finestra de context amb memòria. El model no "recorda" converses anteriors fora de la finestra actual. Cada nova conversa comença de zero (llevat que la plataforma guarde l'historial).
+</Callout>
+
+## Què és la inferència?
+
+La inferència és el procés d'**usar un model entrenat** per a generar respostes a noves preguntes.
+
+### L'analogia de l'examen
+
+- **Entrenament** = Estudiar per a l'examen (el model aprén de les dades)
+- **Inferència** = Fer l'examen (el model aplica el que va aprendre a preguntes noves)
+
+### Com funciona la inferència
+
+1. Escrius un prompt
+2. El prompt es converteix en tokens
+3. El model processa aquests tokens
+4. Genera tokens de resposta un a un
+5. Els tokens es converteixen en text
+
+### Velocitat d'inferència
+
+La velocitat depén de:
+
+- **Grandària del model**: Els models més grans són més lents
+- **Longitud del prompt**: Més tokens d'entrada = més processament
+- **Longitud de la resposta**: Més tokens d'eixida = més temps
+- **Hardware**: GPUs més potents = respostes més ràpides
+
+### Tokens per segon
+
+Els models solen generar entre **20 i 100 tokens per segon**. Això es coneix com a **velocitat de generació** o **throughput**.
+
+## Com usar aquesta informació
+
+### Per a estalviar costos
+
+- Sigues concís en els teus prompts
+- Usa models més xicotets per a tasques simples
+- No inclogues text irrellevant en el teu prompt
+
+### Per a millors resultats
+
+- Entén els límits de la finestra de context
+- Per a documents llargs, divideix en parts
+- Per a converses llargues, resumeix periòdicament
+
+### Per a entendre les limitacions
+
+- Si un model s'"oblida" d'alguna cosa, pot ser per la finestra de context
+- Si una resposta tarda molt, pot ser per la quantitat de tokens
+- Si alguna cosa sembla "tallada", pot haver aconseguit el límit de tokens d'eixida
+
+<Callout type="tip">
+Quan uses un LLM per a analitzar un document llarg, demana-li que resumisca per seccions. Això reduïx el nombre de tokens i millora la qualitat de l'atenció del model.
+</Callout>
+
+## Autoavaluació
+
+1. Què és un token i per què no és exactament una paraula?
+2. Quina és la diferència entre finestra de context i memòria?
+3. Què és la inferència i com es diferencia de l'entrenament?
+4. Per què els textos en espanyol usen més tokens que en anglés?
+
+Llest? Següent lliçó: **Al·lucinacions, biaixos i limitacions**.

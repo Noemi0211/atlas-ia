@@ -1,0 +1,71 @@
+{
+  "bloque": 2,
+  "titulo": "Map of the AI Ecosystem",
+  "descripcion": "Explore the main AI tools and compare them against each other",
+  "lecciones": [
+    {
+      "slug": "01-panorama-ecosistema",
+      "titulo": "Overview of the AI Ecosystem",
+      "descripcion": "An overview of the tool categories and how they are organised",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-asistentes-conversacion",
+      "titulo": "Conversational Assistants",
+      "descripcion": "ChatGPT, Claude, Gemini: the chatbots that are changing everything",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-herramientas-codigo",
+      "titulo": "Coding Tools",
+      "descripcion": "Copilot, Cursor and more: AI for programmers",
+      "orden": 3,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-generacion-imagenes",
+      "titulo": "Image Generation",
+      "descripcion": "DALL-E, Midjourney, Stable Diffusion: art and design with AI",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-audio-video",
+      "titulo": "Audio and Video with AI",
+      "descripcion": "Tools to create, edit and transform multimedia content",
+      "orden": 5,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-plataformas-nocode",
+      "titulo": "No-Code AI Platforms",
+      "descripcion": "Automate and create without coding using smart platforms",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-comparador-interactivo",
+      "titulo": "Interactive Comparator",
+      "descripcion": "Compare tools against each other according to your needs",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "08-arbol-decision",
+      "titulo": "Decision Tree",
+      "descripcion": "Answer questions and discover which tool is ideal for you",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+---
+title: "Tècniques de prompting avançades"
+description: "Chain-of-Thought, Tree-of-Thought, ReAct i més"
+---
+
+## Quan el bàsic no és suficient
+
+Les tècniques bàsiques funcionen per a la majoria de tasques quotidianes. Però quan necessites **raonament complex, múltiples passos o presa de decisions**, necessites tècniques més potents.
+
+## Chain-of-Thought (CoT) Avançat
+
+Ja vas veure la versió bàsica. Ara aprofundim.
+
+### CoT amb pocs exemples
+```
+Question: If John has 3 apples and Mary gives him 5 more, how many does he have?
+Answer: John starts with 3 apples. Mary gives him 5 more. 3 + 5 = 8. John has 8 apples.
+
+Question: A rectangle is 12 cm long and 8 cm wide. What is its perimeter?
+Answer:
+```
+
+### CoT automàtic
+Només afig "**Pas a pas**" o "**Raona abans de respondre**" al final del teu prompt.
+
+**Funciona millor quan:** El problema requereix múltiples passos lògics.
+
+## Tree-of-Thought (ToT)
+
+És una extensió de CoT on la IA **explora múltiples línies de raonament** en paral·lel i tria la millor.
+
+**Com demanar-ho:**
+```
+Explore 3 different approaches to solve this problem, evaluate each one, and tell me which is the best with its justification.
+
+Problem: A company wants to reduce its operating costs by 20% in 6 months without laying off staff.
+```
+
+**Funciona millor quan:** Hi ha múltiples solucions possibles i necessites avaluar-les.
+
+## ReAct (Raonament + Acció)
+
+Combina **raonament** amb la capacitat de **buscar informació** o usar eines.
+
+**Com demanar-ho:**
+```
+Think step by step to answer this question. Whenever you need up-to-date information, indicate what you would look up and then use that knowledge.
+
+Question: What was the most powerful AI model released in 2025 and how does it compare with GPT-4?
+```
+
+**Funciona millor quan:** Necessites informació actualitzada o verificar fets.
+
+## Prompt de contrast
+
+Li demanes a la IA que **compare dues o més opcions** i explique les diferències.
+
+**Exemple:**
+```
+Compare these two approaches to teaching programming to children:
+
+Approach A: Using Scratch with visual blocks
+Approach B: Using Python directly
+
+For each approach, analyse:
+- Recommended age
+- Learning curve
+- Long-term results
+- Implementation cost
+
+Conclude which one you recommend and why.
+```
+
+## Prompt de refinament iteratiu
+
+Li demanes a la IA que **millore la seua pròpia resposta**.
+
+```
+Write a sales email for a SaaS product.
+
+[Initial answer]
+
+Now improve that email. Make it more persuasive, reduce the length by 30% and add a stronger call to action.
+```
+
+## Prompt de múltiples perspectives
+
+Li demanes a la IA que **analitze des de diferents punts de vista**.
+
+```
+Analyse the impact of AI on employment from 3 perspectives:
+
+1. Economist's perspective
+2. Worker's perspective
+3. Tech CEO's perspective
+
+For each one, give 2 main arguments and a conclusion.
+```
+
+## Prompt de restriccions creatives
+
+Poses **límits específics** per a forçar respostes més creatives.
+
+```
+Write a sci-fi micro-story that:
+- Is exactly 100 words long
+- Does not use the letter "a"
+- Ends with the phrase "and then he woke up"
+```
+
+## Sistema de meta-prompt
+
+Crees un prompt que **genera prompts** per a tu.
+
+```
+You are a prompt engineering expert. I need:
+Task: Create a marketing plan for an online course
+Audience: Novice entrepreneurs
+Format: 5 steps with examples
+
+Design the best possible prompt to get this result.
+```
+
+## Taula de tècniques avançades
+
+| Tècnica | Ús principal | Exemple |
+|---------|--------------|---------|
+| Chain-of-Thought | Raonament lògic | Problemes matemàtics |
+| Tree-of-Thought | Múltiples solucions | Presa de decisions |
+| ReAct | Informació externa | Preguntes factuals |
+| Contrast | Comparació d'opcions | Decisions de compra |
+| Refinament | Millora iterativa | Escriptura professional |
+| Múltiples perspectives | Anàlisi complet | Temes complexos |
+| Restriccions | Creativitat | Escriptura creativa |
+| Meta-prompt | Automatització | Disseny de prompts |
+
+<Callout type="tip">
+No necessites dominar totes les tècniques. Comença amb Chain-of-Thought i Contrast, que són les més útils en el dia a dia.
+</Callout>
+
+## Autoavaluació
+
+1. Quina és la diferència entre Chain-of-Thought i Tree-of-Thought?
+2. Quan usaries ReAct en lloc de CoT?
+3. Com pot ajudar el refinament iteratiu a millorar un prompt?
+
+Llest? Següent lliçó: **Prompting per a diferents models**.

@@ -1,0 +1,103 @@
+---
+title: "Biaix algorítmic i equitat"
+description: "Com s'introdueixen els biaixos en els models i com mitigar-los"
+---
+
+## L'espill de les dades
+
+Els models d'IA aprenen de dades històriques. Si aquestes dades reflectixen desigualtats, discriminació o prejudicis, la IA els aprendrà i, encara pitjor, els amplificarà. El biaix algorítmic no és una fallada tècnica: és un reflex de biaixos socials codificats en programari.
+
+<Callout type="info">
+Un model d'IA és com un espill: reflectix allò que veu en les seues dades d'entrenament. Si les dades tenen biaixos, el model els tindrà. La diferència és que un espill no actua sobre allò que reflectix, però un model d'IA sí.
+</Callout>
+
+## Fonts de biaix
+
+### Biaix en les dades
+
+- **Dades històriques:** reflectixen desigualtats passades
+- **Mostreig:** certs grups estan infrarrepresentats
+- **Etiquetatge:** biaixos humans en anotar dades
+- **Mesura:** allò que es mesura no sempre reflectix la realitat
+
+### Biaix en el model
+
+- **Arquitectura:** algunes arquitectures afavoreixen certs patrons
+- **Objectiu d'optimització:** allò que maximitza el model no sempre és èticament correcte
+- **Avaluació:** mètriques que no capturen l'impacte desigual
+
+### Biaix en el desplegament
+
+- **Context:** un model que funciona bé en un context pot fallar en un altre
+- **Interpretació:** com s'usen i s'interpreten les prediccions
+- **Bucle de retroalimentació:** les decisions del model afecten les dades futures
+
+## Exemples reals
+
+### Reconeixement facial
+
+Estudis van demostrar que sistemes comercials de reconeixement facial tenien taxes d'error del 0.8% per a homes blancs i del 35% per a dones de pell fosca. El problema: dades d'entrenament amb majoria d'homes blancs.
+
+### Contractació laboral
+
+Amazon va desenvolupar un sistema de reclutament amb IA que penalitzava currículums que contenien la paraula "dones". El model va aprendre de 10 anys de contractacions en un sector majoritàriament masculí.
+
+### Justícia penal
+
+Als Estats Units, el sistema COMPAS, usat per a avaluar el risc de reincidència, mostrava biaix racial: predia major risc per a persones afroamericanes i menor per a persones blanques en condicions similars.
+
+| Cas | Tipus de biaix | Conseqüència |
+|-----|----------------|--------------|
+| Reconeixement facial | Racial | Falsos positius en minories |
+| Reclutament Amazon | Gènere | Discriminació en la contractació |
+| COMPAS | Racial | Sentències més dures per a minories |
+| Crèdits hipotecaris | Socioeconòmic | Denegació sistemàtica |
+
+<Callout type="warning">
+El biaix algorítmic no és només un problema tècnic. Té conseqüències reals en la vida de les persones: feina, habitatge, llibertat, salut. Ignorar-lo no és una opció.
+</Callout>
+
+## Mitigació del biaix
+
+### Abans de l'entrenament
+
+- Auditar les dades d'entrenament
+- Equilibrar la representació de grups
+- Documentar l'origen i les limitacions de les dades
+- Implicar equips diversos en el disseny
+
+### Durant l'entrenament
+
+- Usar tècniques d'eliminació de biaixos
+- Implementar restriccions d'equitat en l'optimització
+- Avaluar el rendiment per subgrups
+- Provar amb dades adversarials
+
+### Després del desplegament
+
+- Monitoritzar contínuament el rendiment per grups
+- Establir llindars d'equitat
+- Permetre apel·lacions i revisions humanes
+- Actualitzar models quan es detecten biaixos
+
+## Equitat: definicions en conflicte
+
+No hi ha una única definició d'equitat. Diferents enfocaments poden entrar en conflicte:
+
+- **Equitat demogràfica:** mateixa taxa d'encert per a tots els grups
+- **Igualtat d'oportunitats:** mateixa taxa de vertaders positius
+- **Paritat predictiva:** mateixa precisió per a tots els grups
+- **Impacte equitatiu:** mateix impacte en la distribució de recursos
+
+<Callout type="tip">
+No existeix una definició universal d'equitat. L'elecció de quina mètrica usar depén del context, dels valors de la comunitat i de l'impacte potencial en les persones afectades.
+</Callout>
+
+## Autoavaluació
+
+1. Quines són les tres fonts principals de biaix en sistemes d'IA?
+2. Anomena dos exemples reals de biaix algorítmic i les seues conseqüències
+3. En quines etapes del desenvolupament d'IA es pot mitigar el biaix?
+4. Per què no existeix una única definició d'equitat en IA?
+
+En la següent lliçó explorarem el complex tema del **copyright i la propietat intel·lectual** en relació amb la IA.

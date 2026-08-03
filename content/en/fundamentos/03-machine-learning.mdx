@@ -1,0 +1,123 @@
+---
+title: "Machine Learning explained"
+description: "How machines learn without being explicitly programmed"
+---
+
+## Machine Learning explained
+
+If you had to explain Machine Learning to a 10-year-old, you would say it like this:
+
+> Instead of teaching a computer the rules, we give it thousands of examples and it discovers the rules on its own.
+
+That is Machine Learning. Nothing more, nothing less.
+
+## The fundamental difference
+
+### Traditional programming
+
+```
+Entrada + Reglas → Salida
+```
+
+A programmer writes the rules explicitly. If A, then B. If temperature > 30, then "it's hot".
+
+### Machine Learning
+
+```
+Entrada + Salida → Reglas
+```
+
+We give the computer many examples of inputs and outputs, and it **discovers the rules** on its own.
+
+## The three types of Machine Learning
+
+### Supervised learning
+
+The most common one. We give the model **labeled data**: "this is a cat", "this is a dog". The model learns the relationship and can then classify new images.
+
+**Real example**: Spam filtering. You teach it thousands of emails labeled as "spam" or "not spam". The model learns to distinguish them.
+
+### Unsupervised learning
+
+No labels. The model receives data and **finds patterns** on its own.
+
+**Real example**: Customer segmentation. An online store automatically groups its customers by purchasing behavior, without being told how to do it.
+
+### Reinforcement learning
+
+The model learns by **trial and error**. It receives rewards for successes and penalties for mistakes.
+
+**Real example**: AlphaGo. The AI learned to play Go by playing millions of games against itself.
+
+## How it works in practice
+
+Imagine you want to create a model that recognizes whether an email is spam:
+
+1. **You collect data**: Thousands of labeled emails
+2. **You train the model**: You show it the data over and over again
+3. **The model adjusts its parameters**: Internally, the model has millions of "switches" that keep adjusting
+4. **You validate**: You test with data the model has not seen
+5. **You deploy**: The model starts working in production
+
+<Callout type="tip">
+Machine Learning is not magic. It is statistics at scale. The model finds correlations in the data that humans cannot see because of the number of variables involved.
+</Callout>
+
+## Key concepts
+
+### Features
+
+They are the variables the model uses to make decisions. In a house price prediction model, the features would be: square meters, number of bedrooms, location, etc.
+
+### Model
+
+It is the mathematical function that transforms inputs into outputs. It can be a simple linear regression or a neural network with a billion parameters.
+
+### Training
+
+The process of adjusting the model's parameters using data. It is like studying for an exam: the model "studies" the data over and over until it improves.
+
+### Loss
+
+A measure of how wrong the model is. The goal of training is to **minimize the loss**. It is like a negative grade: the lower it is, the better.
+
+### Generalization
+
+The model's ability to perform well with data it **has never seen**. A model that memorizes the training data but fails with new data has a problem called **overfitting**.
+
+<Callout type="warning">
+The most common mistake in Machine Learning is confusing memorization with learning. A model can get 100% accuracy on training data and be useless in the real world. That is why we always separate training and test data.
+</Callout>
+
+## Everyday examples
+
+| Application | Type of ML | What it does |
+|------------|-----------|----------|
+| Spotify | Unsupervised + reinforcement | Recommends music based on listening patterns |
+| Gmail | Supervised | Filters spam and classifies emails |
+| Netflix | Unsupervised | Suggests movies based on your history |
+| Siri/Alexa | Supervised | Recognizes voice and understands language |
+| Uber | Supervised + reinforcement | Predicts arrival times and optimizes routes |
+
+## Machine Learning and its relationship with AI
+
+Machine Learning is **a subset of AI**. Not all AI uses Machine Learning, but most modern AI does.
+
+```
+Inteligencia Artificial (campo amplio)
+├── Machine Learning (aprendizaje de datos)
+│   ├── Deep Learning (redes neuronales profundas)
+│   │   ├── LLM (modelos de lenguaje)
+│   │   ├── Computer Vision (visión por computadora)
+│   │   └── ...
+│   └── Otros métodos (árboles de decisión, SVM, etc.)
+└── IA simbólica, sistemas expertos, etc.
+```
+
+## Self-assessment
+
+1. What is the difference between traditional programming and Machine Learning?
+2. Name the three types of Machine Learning
+3. What is overfitting and why is it a problem?
+
+Ready? Next lesson: **Deep Learning and neural networks**.

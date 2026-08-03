@@ -1,0 +1,103 @@
+---
+title: "Algorithmic bias and fairness"
+description: "How biases are introduced into models and how to mitigate them"
+---
+
+## The mirror of the data
+
+AI models learn from historical data. If that data reflects inequalities, discrimination or prejudice, the AI will learn them and, worse still, amplify them. Algorithmic bias is not a technical failure: it is a reflection of social biases encoded in software.
+
+<Callout type="info">
+An AI model is like a mirror: it reflects what it sees in its training data. If the data has biases, the model will have them. The difference is that a mirror does not act on what it reflects, but an AI model does.
+</Callout>
+
+## Sources of bias
+
+### Bias in the data
+
+- **Historical data:** reflects past inequalities
+- **Sampling:** certain groups are underrepresented
+- **Labelling:** human biases when annotating data
+- **Measurement:** what is measured does not always reflect reality
+
+### Bias in the model
+
+- **Architecture:** some architectures favour certain patterns
+- **Optimisation objective:** what the model maximises is not always what is ethically right
+- **Evaluation:** metrics that do not capture unequal impact
+
+### Bias in deployment
+
+- **Context:** a model that works well in one context can fail in another
+- **Interpretation:** how predictions are used and interpreted
+- **Feedback loop:** the model's decisions affect future data
+
+## Real examples
+
+### Facial recognition
+
+Studies showed that commercial facial recognition systems had error rates of 0.8% for white men and 35% for women with dark skin. The problem: training data with a majority of white men.
+
+### Job recruitment
+
+Amazon developed an AI recruitment system that penalised CVs containing the word "women". The model learned from 10 years of hiring in a predominantly male sector.
+
+### Criminal justice
+
+In the United States, the COMPAS system, used to assess the risk of reoffending, showed racial bias: it predicted a higher risk for Black people and a lower risk for white people in similar conditions.
+
+| Case | Type of bias | Consequence |
+|------|--------------|-------------|
+| Facial recognition | Racial | False positives for minorities |
+| Amazon recruitment | Gender | Discrimination in hiring |
+| COMPAS | Racial | Harsher sentences for minorities |
+| Mortgage credit | Socioeconomic | Systematic denial |
+
+<Callout type="warning">
+Algorithmic bias is not just a technical problem. It has real consequences in people's lives: employment, housing, freedom, health. Ignoring it is not an option.
+</Callout>
+
+## Mitigating bias
+
+### Before training
+
+- Audit the training data
+- Balance the representation of groups
+- Document the origin and limitations of the data
+- Involve diverse teams in the design
+
+### During training
+
+- Use bias-removal techniques
+- Implement fairness constraints in the optimisation
+- Evaluate performance by subgroups
+- Test with adversarial data
+
+### After deployment
+
+- Continuously monitor performance by group
+- Set fairness thresholds
+- Allow appeals and human reviews
+- Update models when biases are detected
+
+## Fairness: conflicting definitions
+
+There is no single definition of fairness. Different approaches can come into conflict:
+
+- **Demographic parity:** the same success rate for all groups
+- **Equal opportunity:** the same true positive rate
+- **Predictive parity:** the same precision for all groups
+- **Equitable impact:** the same impact on the distribution of resources
+
+<Callout type="tip">
+There is no universal definition of fairness. The choice of which metric to use depends on the context, the values of the community and the potential impact on the people affected.
+</Callout>
+
+## Self-assessment
+
+1. What are the three main sources of bias in AI systems?
+2. Name two real examples of algorithmic bias and their consequences
+3. At which stages of AI development can bias be mitigated?
+4. Why is there no single definition of fairness in AI?
+
+In the next lesson we will explore the complex topic of **copyright and intellectual property** in relation to AI.

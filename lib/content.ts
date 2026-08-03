@@ -17,13 +17,30 @@ export function getBloques(): BloqueMeta[] {
   return BLOQUES;
 }
 
-export function getLeccionesBloque(bloqueSlug: string): LeccionMeta[] {
-  const bloqueDir = path.join(CONTENT_DIR, bloqueSlug);
+function contentRoot(locale: Locale): string {
+  return locale === DEFAULT_LOCALE ? CONTENT_DIR : path.join(CONTENT_DIR, locale);
+}
 
-  if (!fs.existsSync(bloqueDir)) return [];
+function findMetaPath(bloqueSlug: string, locale: Locale): string {
+  const localPath = path.join(contentRoot(locale), bloqueSlug, "meta.json");
+  if (fs.existsSync(localPath)) return localPath;
+  const fallbackPath = path.join(CONTENT_DIR, bloqueSlug, "meta.json");
+  if (fs.existsSync(fallbackPath)) return fallbackPath;
+  return "";
+}
 
-  const metaPath = path.join(bloqueDir, "meta.json");
-  if (!fs.existsSync(metaPath)) return [];
+function findLeccionPath(bloqueSlug: string, leccionSlug: string, locale: Locale): string {
+  const localPath = path.join(contentRoot(locale), bloqueSlug, `${leccionSlug}.mdx`);
+  if (fs.existsSync(localPath)) return localPath;
+  const fallbackPath = path.join(CONTENT_DIR, bloqueSlug, `${leccionSlug}.mdx`);
+  if (fs.existsSync(fallbackPath)) return fallbackPath;
+  return "";
+}
+
+export function getLeccionesBloque(bloqueSlug: string, locale: Locale = DEFAULT_LOCALE): LeccionMeta[] {
+  const metaPath = findMetaPath(bloqueSlug, locale);
+
+  if (!metaPath) return [];
 
   const metaContent = fs.readFileSync(metaPath, "utf-8");
   const meta = JSON.parse(metaContent) as { lecciones: LeccionMeta[] };
@@ -33,16 +50,17 @@ export function getLeccionesBloque(bloqueSlug: string): LeccionMeta[] {
 
 export function getLeccion(
   bloqueSlug: string,
-  leccionSlug: string
+  leccionSlug: string,
+  locale: Locale = DEFAULT_LOCALE
 ): { content: string; meta: LeccionMeta; frontmatter: Record<string, unknown> } | null {
-  const lecciones = getLeccionesBloque(bloqueSlug);
+  const lecciones = getLeccionesBloque(bloqueSlug, locale);
   const leccionMeta = lecciones.find((l) => l.slug === leccionSlug);
 
   if (!leccionMeta) return null;
 
-  const filePath = path.join(CONTENT_DIR, bloqueSlug, `${leccionSlug}.mdx`);
+  const filePath = findLeccionPath(bloqueSlug, leccionSlug, locale);
 
-  if (!fs.existsSync(filePath)) return null;
+  if (!filePath) return null;
 
   const raw = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(raw);
@@ -54,11 +72,11 @@ export function getLeccion(
   };
 }
 
-export function getAllLecciones(): (LeccionMeta & { bloqueSlug: string; bloqueNumero: number })[] {
+export function getAllLecciones(locale: Locale = DEFAULT_LOCALE): (LeccionMeta & { bloqueSlug: string; bloqueNumero: number })[] {
   const all: (LeccionMeta & { bloqueSlug: string; bloqueNumero: number })[] = [];
 
   for (const bloque of BLOQUES) {
-    const lecciones = getLeccionesBloque(bloque.slug);
+    const lecciones = getLeccionesBloque(bloque.slug, locale);
     for (const leccion of lecciones) {
       all.push({
         ...leccion,
@@ -77,11 +95,11 @@ export function searchContent(query: string, locale: Locale = DEFAULT_LOCALE) {
   const results: { titulo: string; excerpt: string; href: string; bloque: string }[] = [];
 
   for (const bloque of BLOQUES) {
-    const lecciones = getLeccionesBloque(bloque.slug);
+    const lecciones = getLeccionesBloque(bloque.slug, locale);
     const bloqueLocalizado = getBloqueMetaLocalizada(t, bloque.slug);
     for (const leccion of lecciones) {
-      const filePath = path.join(CONTENT_DIR, bloque.slug, `${leccion.slug}.mdx`);
-      if (!fs.existsSync(filePath)) continue;
+      const filePath = findLeccionPath(bloque.slug, leccion.slug, locale);
+      if (!filePath) continue;
 
       const raw = fs.readFileSync(filePath, "utf-8");
       const { content } = matter(raw);

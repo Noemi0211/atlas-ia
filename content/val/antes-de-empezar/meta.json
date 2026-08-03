@@ -1,0 +1,55 @@
+{
+  "bloque": 0,
+  "titulo": "Abans de Començar",
+  "descripcion": "Introducció i com aprofitar al màxim aquesta plataforma",
+  "lecciones": [
+    {
+      "slug": "01-bienvenido",
+      "titulo": "Benvingut a Atlas IA",
+      "descripcion": "Què és Atlas IA, per a què serveix i què trobaràs ací",
+      "orden": 1,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-como-aprender",
+      "titulo": "Com aprendre Intel·ligència Artificial",
+      "descripcion": "Metodologia del curs, com estudiar i com traure'n el màxim partit",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-como-evoluciona",
+      "titulo": "Com evoluciona la IA",
+      "descripcion": "El ritme de canvi, per què importa actualitzar-se i com mantindre's rellevant",
+      "orden": 3,
+      "duracion": "6 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-ia-para-aprender",
+      "titulo": "Usar IA per a aprendre IA",
+      "descripcion": "Prompts per a aprendre, estratègies d'estudi i com usar les eines al teu favor",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-primer-contacto",
+      "titulo": "El teu primer contacte amb la IA",
+      "descripcion": "Exercici pràctic guiat perquè experimentes amb una IA des de zero",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-antes-de-continuar",
+      "titulo": "Abans de continuar",
+      "descripcion": "Què necessites, requisits, mentalitat i com continuar avant",
+      "orden": 6,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    }
+  ]
+}

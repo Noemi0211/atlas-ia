@@ -1,0 +1,120 @@
+---
+title: "Best practices and debugging with AI"
+description: "Code review, testing and assisted debugging"
+---
+
+## Augmented code quality
+
+AI is not only useful for generating code: it is also an excellent tool for improving it. Code review, testing and debugging are areas where AI can provide immense value.
+
+<Callout type="info">
+The best use of AI in programming is not writing more code, but writing better code. Use AI to review, refine and harden what you have already created.
+</Callout>
+
+## Code review with AI
+
+### What it can review
+
+- **Style and conventions:** follows the project's style guides
+- **Potential errors:** detects patterns that often cause errors
+- **Performance:** identifies bottlenecks and inefficient operations
+- **Security:** finds common vulnerabilities (injection, XSS, CSRF)
+- **Maintainability:** suggests improvements in readability and organisation
+
+### Tools
+
+- **CodeRabbit:** automated PR review with AI
+- **Copilot Code Review:** integrated into GitHub
+- **ChatGPT + Claude:** paste snippets for ad-hoc review
+
+```
+Prompt para code review:
+
+"Actúa como un revisor senior experto en TypeScript y Next.js.
+Revisa este código y señala:
+1. Posibles bugs o edge cases no cubiertos
+2. Problemas de rendimiento
+3. Violaciones de buenas prácticas
+4. Oportunidades de refactorización
+5. Problemas de seguridad
+
+Sé constructivo y sugiere soluciones concretas."
+```
+
+## Testing with AI
+
+### Test generation
+
+AI can generate unit, integration and end-to-end tests from the source code:
+
+> "Generate unit tests with Vitest for this function. Cover normal cases, edge cases and expected errors."
+
+### What AI does well in testing
+
+- Tests for pure and predictable functions
+- Coverage of obvious edge cases
+- Generation of mocks and fixtures
+- Regression tests for fixed bugs
+
+### What requires supervision
+
+- Complex integration tests
+- Realistic usage scenarios
+- Validation of test correctness
+- Maintenance of the test suite
+
+<Callout type="tip">
+Ask AI to generate tests before writing the implementation (assisted TDD). This forces you to think about the interface and use cases before the internal code.
+</Callout>
+
+## Debugging with AI
+
+### How to debug with AI
+
+1. **Describe the symptom:** what happens and what should happen
+2. **Provide context:** the error, the relevant code, the input data
+3. **Include what you have tried:** saves obvious suggestions
+4. **Ask for hypotheses:** not just the solution, but why it happens
+
+### Assisted debugging strategies
+
+- **Log analysis:** AI can find patterns in large logs
+- **Version comparison:** identify which change introduced the error
+- **Stack traces:** explain the meaning of complex errors
+- **Reverse debugging:** start from the error and trace backwards
+
+## General best practices
+
+### For generating code
+
+1. **Be specific:** the more detail, the better the result
+2. **Divide and conquer:** small, concrete tasks work better
+3. **Iterate:** ask for improvements on the generated code
+4. **Always verify:** do not trust blindly
+
+### For reviewing code
+
+1. **Keep the context:** AI needs to know the project and its conventions
+2. **Prioritise:** ask it to focus on security or performance depending on the case
+3. **Combine tools:** different AIs detect different problems
+4. **Review the review:** AI also makes mistakes
+
+### For testing
+
+1. **Generate before implementing:** assisted TDD
+2. **Ask for edge-case coverage:** the cases you did not consider
+3. **Review the generated tests:** incorrect tests are worse than having no tests
+4. **Maintain the tests:** AI can update tests when the code changes
+
+<Callout type="warning">
+An incorrect test that always passes is more dangerous than having no test at all. It gives a false sense of security. Always check that the generated tests really test what they should test.
+</Callout>
+
+## Self-assessment
+
+1. What aspects can AI review in a code review?
+2. How can AI help with automated testing?
+3. Describe the process for debugging an error with AI assistance
+4. Why is it important to review AI-generated tests?
+
+In the final lesson we will do an **overall review** of the block and offer you resources to keep learning.

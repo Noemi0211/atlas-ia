@@ -1,0 +1,116 @@
+---
+title: "Agents i fluxos pràctics"
+description: "Construcció de fluxos d'agents i automatització"
+---
+
+## Dissenyant fluxos intel·ligents
+
+Flux d'Agents et permet visualitzar i construir cadenes d'agents connectant nodes. És com dibuixar un diagrama de flux, però cada node és un component funcional que processa informació de manera autònoma.
+
+<Callout type="info">
+Un flux d'agents és una cadena de processament on cada etapa rep informació de l'anterior, la transforma i la passa a la següent. El disseny del flux determina la qualitat del resultat final.
+</Callout>
+
+## Nodes disponibles
+
+### Input
+Punt d'entrada del flux. Defineix quina informació rep el flux: text lliure, un prompt, un document o dades estructurades.
+
+### LLM
+Node de processament amb model de llenguatge. És el cervell del flux. Pots configurar el prompt específic que guiarà el seu comportament en aquesta etapa.
+
+### RAG
+Node de recuperació d'informació. Consulta una base de coneixement externa per a enriquir el context abans de generar una resposta.
+
+### Tool
+Node d'acció. Executa una operació externa: buscar a internet, fer una crida a una API, transformar dades o generar un fitxer.
+
+### Output
+Punt d'eixida. Defineix com s'entrega el resultat: text, resum estructurat o dades formatades.
+
+## Com construir un flux
+
+### Flux bàsic: Assistent simple
+
+```
+Input → LLM → Output
+```
+
+El flux més simple. Útil per a tasques de pregunta-resposta on no es necessita context extern.
+
+### Flux intermedi: Assistent amb coneixement
+
+```
+Input → RAG → LLM → Output
+```
+
+El model recupera informació rellevant abans de generar la seua resposta. Ideal per a preguntes sobre documentació específica.
+
+### Flux avançat: Agent autònom
+
+```
+Input → LLM → Tool → LLM → Output
+```
+
+El model decideix quina eina usar, executa l'acció i després processa el resultat. Similar a com funcionen els agents autònoms reals.
+
+## Exercicis pràctics
+
+### Exercici 1: Resum intel·ligent
+
+**Objectiu:** crear un flux que resumisca documents llargs.
+
+**Flux suggerit:**
+1. Input: document extens
+2. LLM: "Extrae las ideas principales de este texto"
+3. Output: resum estructurat
+
+### Exercici 2: Investigador automàtic
+
+**Objectiu:** flux que investiga un tema i genera un informe.
+
+**Flux suggerit:**
+1. Input: tema d'investigació
+2. RAG: busca informació rellevant
+3. LLM: "Sintetiza la información en un informe"
+4. Output: informe estructurat
+
+### Exercici 3: Assistent multicapa
+
+**Objectiu:** sistema que analitza, millora i formata text.
+
+**Flux suggerit:**
+1. Input: text original
+2. LLM (analitzar): "Identifica errores y áreas de mejora"
+3. LLM (millorar): "Reescribe el texto aplicando las mejoras"
+4. Tool: "Formatea en markdown"
+5. Output: text millorat i formatat
+
+<Callout type="tip">
+Pensa en cada node LLM com un especialista. Dona-li un prompt específic per a la seua tasca, no un de genèric. Un especialista enfocat rendeix millor que un generalista.
+</Callout>
+
+## Configuració de nodes
+
+### Prompts per node
+
+Cada node LLM permet configurar el seu propi prompt. Això és fonamental:
+
+**Node 1:** "Eres un analista. Extrae los datos clave de este texto."
+**Node 2:** "Eres un redactor. Genera un informe profesional con los datos proporcionados."
+
+### Ordre i flux
+
+L'ordre dels nodes importa. Un mateix conjunt de nodes en ordre diferent produeix resultats diferents:
+
+- `Input → RAG → LLM → Output`: el LLM usa el context recuperat
+- `Input → LLM → RAG → Output`: el LLM primer interpreta i després busca
+
+## Autoavaluació
+
+1. Quins són els cinc tipus de node disponibles a Flux d'Agents?
+2. Quin avantatge té afegir un node RAG abans del LLM?
+3. Dissenya un flux per a un assistent que traduïsca textos tècnics de l'anglés a l'espanyol, mantenint la terminologia especialitzada
+4. Per què és important configurar prompts específics per node?
+
+En l'última lliçó desenvoluparem **projectes integrats** combinant totes les eines del laboratori.

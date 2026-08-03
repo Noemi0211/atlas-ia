@@ -1,0 +1,131 @@
+---
+title: "Tokens, context and inference"
+description: "The fundamental building blocks for understanding how an LLM works"
+---
+
+## Tokens, context and inference
+
+These three concepts are the practical basis of how you interact with any LLM. Understanding them will help you use AI tools more effectively.
+
+## What is a token?
+
+A token is the **basic unit of text** that a model processes. It is not exactly a word — it is a fragment of text that the model uses to understand and generate language.
+
+### Real example
+
+The phrase "Inteligencia Artificial" could be divided into:
+
+```
+"Inteligencia" → 1 token
+"Artificial" → 1 token
+```
+
+But the word "desarrolladores" could be divided into:
+
+```
+"des" + "arrolla" + "dores" → 3 tokens
+```
+
+### Why do tokens matter?
+
+1. **Cost**: APIs charge per token. More tokens = more expensive
+2. **Speed**: More tokens = more processing time
+3. **Context limits**: The context window is measured in tokens
+
+<Callout type="info">
+As a general rule in Spanish: **1 token ≈ 0.75 words**. Or put another way, 100 words are approximately 130 tokens. Spanish texts usually use more tokens than English because tokenizers are more optimized for English.
+</Callout>
+
+### Tokenization
+
+The process of dividing text into tokens is called **tokenization**. Each model uses its own tokenizer.
+
+You can experiment with the tokenization of different models using tools like [tiktoken](https://tiktokenizer.vercel.app/).
+
+## What is the context window?
+
+The context window is the **amount of text** that a model can "see" and take into account when generating a response.
+
+### Practical example
+
+If you ask ChatGPT about a 10-page document, the model needs the whole document to fit in its context window.
+
+| Model | Context window | Equivalent |
+|--------|-------------------|-------------|
+| GPT-3.5 | 4,096 tokens | ~3,000 words |
+| GPT-4o | 128,000 tokens | ~96,000 words |
+| Claude 3.5 Sonnet | 200,000 tokens | ~150,000 words |
+| Gemini 1.5 Pro | 2,000,000 tokens | ~1,500,000 words |
+
+### Why does it matter?
+
+- **Long conversations**: A small window means the model forgets what you said before
+- **Long documents**: To analyze long documents you need a wide window
+- **Cost**: Processing the whole window has a computational cost
+
+<Callout type="warning">
+Do not confuse context window with memory. The model does not "remember" previous conversations outside the current window. Each new conversation starts from scratch (unless the platform saves the history).
+</Callout>
+
+## What is inference?
+
+Inference is the process of **using a trained model** to generate responses to new questions.
+
+### The exam analogy
+
+- **Training** = Studying for the exam (the model learns from data)
+- **Inference** = Taking the exam (the model applies what it learned to new questions)
+
+### How inference works
+
+1. You write a prompt
+2. The prompt is converted into tokens
+3. The model processes those tokens
+4. It generates response tokens one by one
+5. The tokens are converted into text
+
+### Inference speed
+
+The speed depends on:
+
+- **Model size**: Larger models are slower
+- **Prompt length**: More input tokens = more processing
+- **Response length**: More output tokens = more time
+- **Hardware**: More powerful GPUs = faster responses
+
+### Tokens per second
+
+Models usually generate between **20 and 100 tokens per second**. This is known as **generation speed** or **throughput**.
+
+## How to use this information
+
+### To save costs
+
+- Be concise in your prompts
+- Use smaller models for simple tasks
+- Do not include irrelevant text in your prompt
+
+### For better results
+
+- Understand the limits of the context window
+- For long documents, split them into parts
+- For long conversations, summarize periodically
+
+### To understand the limitations
+
+- If a model "forgets" something, it may be because of the context window
+- If a response takes a long time, it may be because of the number of tokens
+- If something seems "cut off", it may have reached the output token limit
+
+<Callout type="tip">
+When you use an LLM to analyze a long document, ask it to summarize section by section. This reduces the number of tokens and improves the quality of the model's attention.
+</Callout>
+
+## Self-assessment
+
+1. What is a token and why is it not exactly a word?
+2. What is the difference between context window and memory?
+3. What is inference and how does it differ from training?
+4. Why do Spanish texts use more tokens than English?
+
+Ready? Next lesson: **Hallucinations, biases and limitations**.

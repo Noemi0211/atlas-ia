@@ -1,0 +1,116 @@
+---
+title: "Transformers: the revolution"
+description: "The architecture that changed everything and still dominates AI"
+---
+
+## Transformers: the revolution
+
+If you had to point to **a single moment** that changed modern AI, it would be the publication of the paper "Attention Is All You Need" in 2017.
+
+That paper introduced **Transformers**, and nothing has been the same since.
+
+## Before Transformers
+
+Language models used **recurrent networks (RNN/LSTM)**. They processed text **word by word**, in sequence.
+
+### The problem
+
+- **Slowness**: They could not process text in parallel
+- **Short memory**: They forgot information from the first words by the time they reached the last ones
+- **Limited scalability**: They could not grow much
+
+It was like reading a book word by word without being able to look back.
+
+## The revolution: the attention mechanism
+
+Transformers do not process text in sequence. They process **the whole sequence at once**.
+
+### The translator analogy
+
+Imagine you translate a sentence from Spanish to English:
+
+> "El gato se sentó en la alfombra"
+
+A human translator does not translate word by word. They look at **the whole sentence** and understand the relationships:
+
+- "El" refers to "gato"
+- "se sentó" is the action
+- "en la alfombra" is the location
+
+The **attention** mechanism does exactly this: it calculates the **relevance** of each word in relation to all the other words in the sequence.
+
+## How the Transformer works
+
+### Encoder
+
+It processes the input and creates an understandable representation of the text. Each word is represented as a vector that captures its meaning in the context of the sentence.
+
+### Decoder
+
+It generates the output, word by word, using the representation created by the encoder.
+
+### Multi-Head Attention
+
+Instead of looking at the relationships from a single angle, the Transformer looks **from multiple angles simultaneously**. It is as if several expert translators analyzed the same sentence from different perspectives.
+
+### Positional Encoding
+
+Since the Transformer processes everything at once (not in order), it needs a way to know **the order of the words**. Positional encoding adds information about the position of each word.
+
+## Why Transformers won
+
+| Feature | RNN/LSTM | Transformer |
+|---------------|----------|------------|
+| Processing | Sequential | Parallel |
+| Memory | Short | Long (context window) |
+| Scalability | Limited | Enormous |
+| Training speed | Slow | Fast |
+| Quality | Good | Excellent |
+
+<Callout type="info">
+Transformers can process full texts at once because they use a mechanism called "self-attention" that calculates all the relationships simultaneously. This makes it possible to train enormous models in parallel using GPUs.
+</Callout>
+
+## Transformer variants
+
+### Encoder-only (BERT)
+
+It only encodes. Excellent for **understanding** text — classification, sentiment analysis, information extraction.
+
+### Decoder-only (GPT)
+
+It only decodes. Excellent for **generating** text — chatbots, content generation, code.
+
+### Encoder-Decoder (T5, BART)
+
+Both. Excellent for **transforming** text — translation, summarization, rewriting.
+
+## Transformers today
+
+Today, **practically all** the important language models are Transformers:
+
+- GPT-4 / GPT-4o (OpenAI)
+- Claude 3.5 Sonnet (Anthropic)
+- Gemini 1.5 Pro (Google)
+- Llama 3 (Meta)
+- Mistral (Mistral AI)
+- BERT (Google, for search)
+
+Not only in language. Also in:
+
+- **Computer vision** (ViT — Vision Transformer)
+- **Audio** (Whisper for transcription)
+- **Multimodal** (models that understand text + image + audio)
+
+<Callout type="tip">
+If you can only remember one technical concept from this whole course, remember this one: **Transformer = attention = process everything at once = scale**. It is the foundation of the current revolution.
+</Callout>
+
+## Self-assessment
+
+1. What was the main problem with RNNs?
+2. What does the attention mechanism do?
+3. Why can Transformers process text in parallel?
+4. What Transformer variants exist and what is each one for?
+
+Ready? Next lesson: **Tokens, context and inference**.

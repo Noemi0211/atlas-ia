@@ -1,0 +1,90 @@
+---
+title: "Conceptes fonamentals d'agents IA"
+description: "Què són els agents d'IA, com funcionen i per què són el futur"
+---
+
+## Què és un agent d'IA
+
+Un **agent d'IA** és un sistema autònom que percep el seu entorn, processa informació i executa accions per a aconseguir un objectiu específic.
+
+A diferència d'un model de llenguatge tradicional que només genera text, un agent pot:
+
+- Prendre decisions basades en el context
+- Utilitzar eines externes (APIs, bases de dades, navegadors)
+- Mantindre memòria a llarg termini
+- Executar accions en el món real
+- Aprendre i adaptar-se amb l'experiència
+
+<Callout type="info">
+Un LLM sense eines és com un professor que sap molt però no pot escriure en la pissarra. Un agent és eixe mateix professor amb pissarra, llibres i connexió a internet.
+</Callout>
+
+## Components essencials
+
+### Percepció
+
+L'agent rep informació de l'entorn. Açò pot ser text, imatges, dades estructurades o senyals de sensors. La qualitat de la percepció determina la qualitat de la decisió.
+
+### Raonament
+
+El cervell de l'agent. Utilitza un model de llenguatge (LLM) com a motor de raonament per a analitzar la informació, planificar accions i avaluar resultats.
+
+### Acció
+
+L'agent executa accions: cridar una API, escriure un fitxer, enviar un correu, controlar un dispositiu. Les accions poden ser deterministes o requerir una avaluació posterior.
+
+### Memòria
+
+Els agents poden tindre:
+
+- **Memòria a curt termini:** context de la conversa actual
+- **Memòria a llarg termini:** informació persistent emmagatzemada en vectors o bases de dades
+- **Memòria episòdica:** registre d'accions passades i dels seus resultats
+
+## El cicle de l'agent
+
+El funcionament d'un agent segueix un cicle continu:
+
+1. **Observar** l'estat actual de l'entorn
+2. **Raonar** sobre què fer a continuació
+3. **Actuar** executant una eina o tornant una resposta
+4. **Avaluar** el resultat de l'acció
+5. **Repetir** fins a aconseguir l'objectiu
+
+<Callout type="tip">
+El cicle de l'agent és similar al bucle de control d'un robot: sensor → processador → actuador → retroalimentació. La diferència és que ací el "processador" és un LLM que pot raonar de manera flexible.
+</Callout>
+
+## Per què els agents són importants
+
+Els agents representen un salt qualitatiu respecte als chatbots tradicionals per diverses raons:
+
+- **Autonomia:** poden treballar sense supervisió constant
+- **Integració:** es connecten amb sistemes existents
+- **Escalabilitat:** un agent pot gestionar tasques que requeririen hores humanes
+- **Precisió:** en poder consultar fonts externes, redueixen al·lucinacions
+
+| Aspecte | Chatbot tradicional | Agent IA |
+|---------|-------------------|-----------|
+| Abast | Conversa | Execució de tasques |
+| Eines | Cap | APIs, BD, navegador |
+| Memòria | Context limitat | Persistent |
+| Autonomia | Baixa | Alta |
+
+## Exemples quotidians
+
+Ja uses agents sense saber-ho:
+
+- **Assistents de codi** com Copilot i Cursor que llegeixen fitxers, executen ordres i editen codi
+- **Automatitzacions** en Make o Zapier que decideixen quin flux executar segons el context
+- **Chatbots avançats** que cerquen informació en temps real abans de respondre
+- **Sistemes RAG** que recuperen documents rellevants per a generar respostes precises
+
+## Autoavaluació
+
+1. Quina és la diferència principal entre un LLM i un agent?
+2. Anomena els quatre components essencials d'un agent
+3. Per què la memòria a llarg termini és important en un agent?
+4. Quin avantatge té un agent enfront d'un chatbot tradicional?
+
+En la següent lliçó explorarem els diferents **tipus d'agents** que existeixen i com triar l'adequat per a cada tasca.

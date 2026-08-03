@@ -1,0 +1,147 @@
+---
+title: "Advanced prompting techniques"
+description: "Chain-of-Thought, Tree-of-Thought, ReAct and more"
+---
+
+## When the basics are not enough
+
+Basic techniques work for most everyday tasks. But when you need **complex reasoning, multiple steps or decision-making**, you need more powerful techniques.
+
+## Chain-of-Thought (CoT) Advanced
+
+You already saw the basic version. Now let us go deeper.
+
+### CoT with a few examples
+```
+Question: If Juan has 3 apples and María gives him 5 more, how many does he have?
+Answer: Juan starts with 3 apples. María gives him 5 more. 3 + 5 = 8. Juan has 8 apples.
+
+Question: A rectangle is 12 cm long and 8 cm wide. What is its perimeter?
+Answer:
+```
+
+### Automatic CoT
+Just add "**Step by step**" or "**Reason before answering**" at the end of your prompt.
+
+**Works best when:** The problem requires multiple logical steps.
+
+## Tree-of-Thought (ToT)
+
+It is an extension of CoT where the AI **explores multiple lines of reasoning** in parallel and chooses the best one.
+
+**How to ask for it:**
+```
+Explore 3 different approaches to solving this problem, evaluate each one, and tell me which is the best with its justification.
+
+Problem: A company wants to reduce its operating costs by 20% in 6 months without laying off staff.
+```
+
+**Works best when:** There are multiple possible solutions and you need to evaluate them.
+
+## ReAct (Reasoning + Action)
+
+It combines **reasoning** with the ability to **search for information** or use tools.
+
+**How to ask for it:**
+```
+Think step by step to answer this question. When you need up-to-date information, indicate what you would search for and then use that knowledge.
+
+Question: What was the most powerful AI model released in 2025 and how does it compare with GPT-4?
+```
+
+**Works best when:** You need up-to-date information or need to verify facts.
+
+## Contrast prompt
+
+You ask the AI to **compare two or more options** and explain the differences.
+
+**Example:**
+```
+Compare these two approaches to teaching programming to children:
+
+Approach A: Using Scratch with visual blocks
+Approach B: Using Python directly
+
+For each approach, analyse:
+- Recommended age
+- Learning curve
+- Long-term results
+- Implementation cost
+
+Conclude which one you recommend and why.
+```
+
+## Iterative refinement prompt
+
+You ask the AI to **improve its own response**.
+
+```
+Write a sales email for a SaaS product.
+
+[Initial response]
+
+Now improve that email. Make it more persuasive, reduce the length by 30% and add a stronger call to action.
+```
+
+## Multiple perspectives prompt
+
+You ask the AI to **analyse from different points of view**.
+
+```
+Analyse the impact of AI on employment from 3 perspectives:
+
+1. The perspective of an economist
+2. The perspective of a worker
+3. The perspective of a tech CEO
+
+For each one, give 2 main arguments and a conclusion.
+```
+
+## Creative constraints prompt
+
+You set **specific limits** to force more creative responses.
+
+```
+Write a science fiction micro-story that:
+- Is exactly 100 words long
+- Does not use the letter "a"
+- Ends with the phrase "and then he woke up"
+```
+
+## Meta-prompt system
+
+You create a prompt that **generates prompts** for you.
+
+```
+You are a prompt engineering expert. I need:
+Task: Create a marketing plan for an online course
+Audience: Beginner entrepreneurs
+Format: 5 steps with examples
+
+Design the best possible prompt to obtain this result.
+```
+
+## Advanced techniques table
+
+| Technique | Main use | Example |
+|---------|--------------|---------|
+| Chain-of-Thought | Logical reasoning | Maths problems |
+| Tree-of-Thought | Multiple solutions | Decision-making |
+| ReAct | External information | Factual questions |
+| Contrast | Comparing options | Purchase decisions |
+| Refinement | Iterative improvement | Professional writing |
+| Multiple perspectives | Complete analysis | Complex topics |
+| Constraints | Creativity | Creative writing |
+| Meta-prompt | Automation | Prompt design |
+
+<Callout type="tip">
+You do not need to master all the techniques. Start with Chain-of-Thought and Contrast, which are the most useful in everyday use.
+</Callout>
+
+## Self-assessment
+
+1. What is the difference between Chain-of-Thought and Tree-of-Thought?
+2. When would you use ReAct instead of CoT?
+3. How can iterative refinement help improve a prompt?
+
+Ready? Next lesson: **Prompting for different models**.

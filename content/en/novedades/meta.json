@@ -1,0 +1,55 @@
+{
+  "bloque": 10,
+  "titulo": "What's New",
+  "descripcion": "News, new models, updates and ecosystem trends",
+  "lecciones": [
+    {
+      "slug": "01-modelos-recientes",
+      "titulo": "Recent language models",
+      "descripcion": "GPT-5.6, Claude 5, Gemini 3, Grok 4.5 and DeepSeek V4",
+      "orden": 1,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "02-tendencias-ecosistema",
+      "titulo": "AI ecosystem trends",
+      "descripcion": "Autonomous agents, MCP, AI in the browser and open source",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-multimodal-avances",
+      "titulo": "Advances in multimodal AI",
+      "descripcion": "Native-audio video, real-time voice and unified models",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-ia-aplicada",
+      "titulo": "Applied AI: new horizons",
+      "descripcion": "Science, health, education and productivity with the latest advances",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-regulacion-actualidad",
+      "titulo": "Regulation and ethics: current state",
+      "descripcion": "AI Act in full application, international treaties and ethical debates",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "06-recursos-actualizarse",
+      "titulo": "How to stay up to date with AI",
+      "descripcion": "Sources, communities and methods to keep up with innovation",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

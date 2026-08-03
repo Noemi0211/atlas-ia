@@ -1,0 +1,133 @@
+---
+title: "RAG avançat"
+description: "Retrieval-Augmented Generation: porta la recuperació d'informació al següent nivell"
+---
+
+## Què és RAG
+
+**Retrieval-Augmented Generation (RAG)** és una arquitectura que combina un sistema de recuperació d'informació amb un model de llenguatge generatiu. En lloc que el LLM genere respostes només amb el seu coneixement intern, primer cerca informació rellevant en una base de coneixement externa.
+
+<Callout type="info">
+RAG és com un estudiant que, abans de respondre un examen, pot consultar els seus apunts. El resultat és més precís i verificat que respondre de memòria.
+</Callout>
+
+## Arquitectura bàsica de RAG
+
+### Indexació
+
+Fase prèvia en la qual prepares la teua base de coneixement:
+
+1. **Dividir** documents en fragments (chunks)
+2. **Generar embeddings** per a cada fragment
+3. **Emmagatzemar** en una base de dades vectorial
+
+### Recuperació
+
+Quan arriba una consulta:
+
+1. **Generar embedding** de la consulta
+2. **Cercar** els fragments més similars per similitud cosinus
+3. **Ordenar** per rellevància
+4. **Seleccionar** els fragments top-K
+
+### Generació
+
+El LLM rep la consulta original juntament amb els fragments recuperats com a context addicional i genera una resposta basada en eixa informació.
+
+## Tècniques avançades de RAG
+
+### Chunking intel·ligent
+
+No tots els documents es divideixen igual:
+
+- **Chunking semàntic:** divideix per paràgrafs o seccions, no per un nombre fix de tokens
+- **Chunking recursiu:** diferents mides de chunk per a diferents profunditats
+- **Chunking amb solapament:** cada chunk inclou part de l'anterior per a mantindre el context
+
+### Recuperació multi-consulta
+
+En lloc de cercar una sola vegada, genera múltiples variacions de la consulta i combina els resultats. Açò millora la cobertura i redueix els falsos negatius.
+
+### Re-ranking
+
+Després de la recuperació inicial, un segon model (més petit i ràpid) reordena els resultats per rellevància. Açò millora la precisió sense el cost d'un model gran.
+
+### RAG amb fusió jeràrquica
+
+Recupera primer documents a nivell macro i després fragments específics dins d'ells. Ideal per a bases de coneixement molt grans.
+
+### RAG contextual
+
+Afegeix metadades a cada chunk: font, data, autor, secció. Durant la recuperació, filtra també per estes metadades.
+
+## RAG en agents
+
+Quan RAG s'integra en un agent, les possibilitats es multipliquen:
+
+### Memòria persistent
+
+L'agent pot emmagatzemar informació d'interaccions passades i recuperar-la quan siga rellevant.
+
+### Consultes a documentació
+
+L'agent accedeix a documentació tècnica, manuals o bases de coneixement per a respondre preguntes especialitzades.
+
+### Verificació de fets
+
+Abans de donar una resposta, l'agent consulta la seua base de coneixement per a verificar la informació.
+
+### Aprenentatge continu
+
+L'agent pot afegir informació nova a la seua base vectorial després de cada interacció, millorant amb el temps.
+
+<Callout type="tip">
+La combinació de RAG + agents és una de les arquitectures més potents actualment. L'agent decideix quan cercar, què cercar i com usar la informació trobada.
+</Callout>
+
+## Bases de dades vectorials
+
+Eines populars per a emmagatzemar i cercar embeddings:
+
+| Eina | Tipus | Escalabilitat | Open Source |
+|------------|------|---------------|-------------|
+| Pinecone | SaaS | Molt alta | No |
+| Weaviate | Autoallotjat | Alta | Sí |
+| Qdrant | Autoallotjat | Alta | Sí |
+| Chroma | Local | Mitjana | Sí |
+| Milvus | Autoallotjat | Molt alta | Sí |
+
+## Mètriques de qualitat en RAG
+
+### Precisió de recuperació
+
+Els documents recuperats són rellevants per a la consulta?
+
+### Fidelitat de generació
+
+La resposta generada es basa en els documents recuperats i no inventa?
+
+### Cobertura
+
+La resposta cobreix tota la informació necessària o falta alguna cosa?
+
+## Avaluació de RAG
+
+Pots avaluar el teu sistema RAG amb mètriques com:
+
+- **MRR (Mean Reciprocal Rank):** posició del primer resultat rellevant
+- **NDCG (Normalized Discounted Cumulative Gain):** qualitat de l'ordre dels resultats
+- **Fidelitat:** quin percentatge de la resposta és verificable en els documents
+- **Rellevància de la resposta:** com de rellevant és la resposta per a la consulta
+
+<Callout type="warning">
+RAG no és una solució miraculosa. Si els fragments estan mal dissenyats o la base de coneixement és deficient, el RAG pot donar respostes parcials o incorrectes. La qualitat del sistema depén tant de la recuperació com de la generació.
+</Callout>
+
+## Autoavaluació
+
+1. Explica les tres fases de l'arquitectura RAG
+2. Per què el re-ranking millora la qualitat de RAG?
+3. Quin avantatge aporta el RAG contextual enfront del RAG bàsic?
+4. Com s'integra RAG en un agent autònom?
+
+En la següent lliçó veurem com **automatitzar fluxos de treball** usant eines com Make, Zapier i n8n amb IA.

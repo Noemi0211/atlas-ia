@@ -1,0 +1,55 @@
+{
+  "bloque": 8,
+  "titulo": "Ètica i Responsabilitat",
+  "descripcion": "Privacitat, RGPD, copyright i ús responsable de la IA",
+  "lecciones": [
+    {
+      "slug": "01-introduccion-etica",
+      "titulo": "Introducció a l'ètica en IA",
+      "descripcion": "Per què l'ètica és fonamental en el desenvolupament i l'ús de la intel·ligència artificial",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-privacidad-datos",
+      "titulo": "Privacitat i protecció de dades",
+      "descripcion": "RGPD, consentiment i governança de dades en l'era de la IA",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-sesgo-equidad",
+      "titulo": "Biaix algorítmic i equitat",
+      "descripcion": "Com s'introdueixen els biaixos en els models i com mitigar-los",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-copyright-propiedad",
+      "titulo": "Copyright i propietat intel·lectual",
+      "descripcion": "Drets d'autor, contingut generat i atribució en l'era de la IA",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "05-regulacion-futuro",
+      "titulo": "Regulació i futur de la IA responsable",
+      "descripcion": "Lleis, marcs reguladors i el camí cap a una IA ètica",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Resum i recursos",
+      "descripcion": "Repàs, autoavaluació i recursos per a seguir aprenent",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

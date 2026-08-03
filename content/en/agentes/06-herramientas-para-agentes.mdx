@@ -1,0 +1,177 @@
+---
+title: "Tools for building agents"
+description: "LangChain, AutoGPT, CrewAI and the framework ecosystem"
+---
+
+## The framework ecosystem
+
+Building an agent from scratch is complex. Fortunately, there is a mature ecosystem of frameworks that abstract away the hard parts: memory management, tool execution, planning and more.
+
+<Callout type="info">
+Using an agent framework is like building a house with power tools instead of hand tools. The result is better, faster and with fewer errors.
+</Callout>
+
+## LangChain
+
+It is the most popular framework for building applications with LLMs. Its ecosystem includes:
+
+### LangChain Core
+
+The core provides:
+
+- **Chains:** sequences of LLM calls
+- **Agents:** implementation of the ReAct pattern
+- **Tools:** standard interface for tools
+- **Memory:** multiple types of memory
+- **Callbacks:** hooks for monitoring
+
+### LangGraph
+
+Extension for creating agents with state graphs. It allows:
+
+- Complex flows with branches
+- Loops and execution cycles
+- Shared states between nodes
+- Visualisation of the execution graph
+
+### LangSmith
+
+Observability platform for debugging and monitoring agents in production.
+
+### Example with LangChain
+
+```python
+from langchain.agents import create_react_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
+
+@tool
+def buscar_clima(ciudad: str) -> str:
+    """Obtiene el clima actual de una ciudad"""
+    return f"28°C en {ciudad}"
+
+llm = ChatOpenAI(model="gpt-4")
+agent = create_react_agent(llm, [buscar_clima])
+```
+
+## AutoGPT
+
+AutoGPT was one of the first projects to demonstrate autonomous agents. Although its initial popularity has given way to more robust frameworks, its impact was enormous.
+
+### Concept
+
+AutoGPT receives a general goal and automatically breaks it down into subtasks. Each subtask is executed and evaluated before moving on to the next.
+
+### Characteristics
+
+- Long-term memory with vectors
+- Autonomous web navigation
+- Code execution
+- File storage
+- Continuous think-act-evaluate loop
+
+### Limitations
+
+- High token consumption
+- It can deviate from the original goal
+- Difficulty with very specific tasks
+- No polished user interface
+
+<Callout type="tip">
+AutoGPT is excellent for prototyping and understanding the potential of autonomous agents. For production, LangChain or CrewAI offer more control and stability.
+</Callout>
+
+## CrewAI
+
+CrewAI is specifically designed for multi-agent systems. It allows you to define teams of agents with roles, tools and shared goals.
+
+### Key concepts
+
+**Agent:** an agent with a specific role (researcher, writer, reviewer)
+**Task:** a task that an agent must complete
+**Crew:** the team of agents that collaborate
+**Process:** the workflow (sequential or hierarchical)
+
+### Example with CrewAI
+
+```python
+from crewai import Agent, Task, Crew
+
+investigador = Agent(
+    role="Investigador",
+    goal="Buscar información relevante",
+    backstory="Experto en investigación web",
+    tools=[buscar_web]
+)
+
+redactor = Agent(
+    role="Redactor",
+    goal="Escribir informes claros",
+    backstory="Periodista tecnológico",
+)
+
+tarea = Task(
+    description="Investiga y redacta un informe sobre agentes IA",
+    agent=investigador
+)
+
+crew = Crew(agents=[investigador, redactor], tasks=[tarea])
+resultado = crew.kickoff()
+```
+
+### Advantages of CrewAI
+
+- Designed for multi-agent from the start
+- Definable roles and personalities
+- Sequential and hierarchical processes
+- Automatic delegation between agents
+
+## Other notable frameworks
+
+### Haystack
+
+Framework for building RAG systems and search flows. Ideal if your agent needs advanced information retrieval.
+
+### Semantic Kernel
+
+Created by Microsoft, it integrates deeply with the Azure ecosystem. Ideal for companies that already use Microsoft.
+
+### Dify
+
+Open source platform with a visual interface. It allows you to create agents without code, ideal for rapid prototyping.
+
+### Botpress
+
+Platform for creating chatbots with agent capabilities. Geared towards customer service.
+
+## Framework comparison
+
+| Framework | Focus | Multi-agent | RAG | Learning curve |
+|-----------|-------|-------------|-----|----------------|
+| LangChain | General | Yes (LangGraph) | Yes | Medium |
+| CrewAI | Multi-agent | Yes (native) | Partial | Low |
+| AutoGPT | Autonomous | No | Yes | High |
+| Haystack | RAG/search | No | Yes | Medium |
+| Semantic Kernel | Enterprise | Yes | Yes | High |
+| Dify | Visual | Yes | Yes | Very low |
+
+## How to choose
+
+- **To get started:** LangChain or CrewAI
+- **For RAG systems:** Haystack
+- **For corporate environments:** Semantic Kernel
+- **For visual prototyping:** Dify
+- **To experiment:** AutoGPT
+
+<Callout type="warning">
+Do not marry yourself to a framework. Learn the concepts (agents, tools, memory, RAG) and the framework will just be an implementation detail.
+</Callout>
+
+## Self-assessment
+
+1. What is the main difference between LangChain and CrewAI?
+2. What problem does LangGraph solve?
+3. In which case would you choose Dify over LangChain?
+4. Why is AutoGPT not ideal for production?
+
+In the next lesson we will look at **practical examples** of agents in action with real use cases.

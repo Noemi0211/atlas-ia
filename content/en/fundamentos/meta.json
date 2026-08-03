@@ -1,0 +1,87 @@
+{
+  "bloque": 1,
+  "titulo": "AI Fundamentals",
+  "descripcion": "Essential concepts: Machine Learning, Deep Learning, LLM, Transformers and more",
+  "lecciones": [
+    {
+      "slug": "01-que-es-ia",
+      "titulo": "What is Artificial Intelligence",
+      "descripcion": "A clear definition: what AI is and what it is not",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-historia-ia",
+      "titulo": "A brief history of AI",
+      "descripcion": "From Turing to ChatGPT: the milestones that brought us here",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-machine-learning",
+      "titulo": "Machine Learning explained",
+      "descripcion": "How machines learn without being explicitly programmed",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-deep-learning",
+      "titulo": "Deep Learning and neural networks",
+      "descripcion": "The brain-inspired networks that are changing everything",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-llm",
+      "titulo": "Large Language Models (LLM)",
+      "descripcion": "What they are, how they are trained and why they are so powerful",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-transformers",
+      "titulo": "Transformers: the revolution",
+      "descripcion": "The architecture that changed everything and still dominates AI",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "07-tokens-contexto",
+      "titulo": "Tokens, context and inference",
+      "descripcion": "The fundamental building blocks for understanding how an LLM works",
+      "orden": 7,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-alucinaciones-sesgos",
+      "titulo": "Hallucinations, biases and limitations",
+      "descripcion": "What AI cannot do and why it is vital to know it",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "09-modelos-principales",
+      "titulo": "The main models",
+      "descripcion": "GPT, Claude, Gemini, Llama and more: a map of the landscape",
+      "orden": 9,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "10-resumen-fundamentos",
+      "titulo": "Summary and self-assessment",
+      "descripcion": "Check what you have learned and consolidate the fundamentals",
+      "orden": 10,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    }
+  ]
+}

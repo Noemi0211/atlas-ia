@@ -1,0 +1,63 @@
+{
+  "bloque": 4,
+  "titulo": "AI Applied to Teaching",
+  "descripcion": "Tools and techniques to transform teaching with AI",
+  "lecciones": [
+    {
+      "slug": "01-fundamentos-docencia",
+      "titulo": "AI fundamentals in education",
+      "descripcion": "How AI is transforming teaching and learning processes",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-herramientas-ensenanza",
+      "titulo": "AI tools for teaching",
+      "descripcion": "Platforms, assistants and resources every teacher should know",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-planificacion-curricular",
+      "titulo": "Curriculum planning with AI",
+      "descripcion": "Designing teaching units, sequences and objectives with AI support",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-creacion-contenido",
+      "titulo": "Creating educational content with AI",
+      "descripcion": "Generating materials, activities and multimedia resources",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-evaluacion-aprendizaje",
+      "titulo": "Assessment and feedback with AI",
+      "descripcion": "Rubrics, automated grading and personalised feedback",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-etica-desafios",
+      "titulo": "Ethics and challenges of AI in teaching",
+      "descripcion": "Privacy, equity, bias and the teacher's role in the digital age",
+      "orden": 6,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "07-resumen-recursos",
+      "titulo": "Summary and resources",
+      "descripcion": "Review, self-assessment and resources to keep learning",
+      "orden": 7,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

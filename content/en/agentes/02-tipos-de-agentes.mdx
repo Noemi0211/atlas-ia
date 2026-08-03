@@ -1,0 +1,120 @@
+---
+title: "Types of agents"
+description: "Reactive, memory-based, autonomous and multi-agent systems"
+---
+
+## Classification of agents
+
+Not all AI agents are the same. They are classified according to their reasoning ability, memory and autonomy. Choosing the right type is key for each application.
+
+## Reactive agents
+
+They are the simplest. They respond to stimuli from the environment without maintaining internal state.
+
+### Characteristics
+
+- They have no memory of the past
+- They act based only on the current input
+- They are fast and predictable
+- Ideal for simple, well-defined tasks
+
+### Examples
+
+- A chatbot that answers frequently asked questions without context
+- An IF-THEN rule system with AI
+- An image classifier that labels without remembering previous classifications
+
+<Callout type="info">
+Reactive agents are like a mirror: they reflect what is in front of them without remembering what they saw before.
+</Callout>
+
+## Agents with memory
+
+They add the ability to remember and use information from the past. They are the most common type in current applications.
+
+### Types of memory
+
+- **Window memory:** remembers the last N messages
+- **Summary memory:** compresses long conversations into summaries
+- **Vector memory:** stores information in embeddings for semantic search
+- **Structured memory:** stores data in tables or databases
+
+### Examples
+
+- Virtual assistants that remember the preferences of each user
+- AI tutors that track students' progress
+- Recommendation systems with memory of interactions
+
+## Autonomous agents
+
+They are agents with multi-step planning and execution capabilities. They can break complex goals down into subtasks and execute them independently.
+
+### Capabilities
+
+- **Planning:** they divide a goal into steps
+- **Execution:** they complete each step using tools
+- **Adaptation:** they change strategy if something fails
+- **Reflection:** they evaluate their own results and learn
+
+### The ReAct pattern
+
+ReAct (Reasoning + Acting) is the most widely used pattern for autonomous agents. It alternates between:
+
+1. **Reason:** think about what to do based on the context
+2. **Act:** run a tool or take an action
+3. **Observe:** receive the result of the action
+4. **Repeat:** continue until the goal is complete
+
+<Callout type="tip">
+The ReAct pattern is like a scientist: they formulate a hypothesis (reason), run an experiment (act), observe the results and adjust their theory.
+</Callout>
+
+## Multi-agent systems
+
+Several agents work together to solve complex problems. Each agent has a specialised role.
+
+### Common roles
+
+- **Coordinator:** divides tasks and assigns work
+- **Researcher:** searches for information
+- **Analyst:** processes and evaluates data
+- **Executor:** performs concrete actions
+- **Validator:** verifies results
+
+### Advantages
+
+- Scalability: each agent focuses on its own task
+- Specialisation: agents trained for specific tasks
+- Resilience: if one agent fails, others can compensate
+- Collaboration: complex behaviours emerge
+
+### Practical example
+
+A team of agents to create a report:
+
+1. **Researcher agent** finds relevant sources
+2. **Writer agent** writes the draft
+3. **Reviewer agent** fixes errors and improves the style
+4. **Formatter agent** generates the final document
+
+## How to choose the right type
+
+| Type | Complexity | Memory | Autonomy | When to use it |
+|------|------------|--------|----------|----------------|
+| Reactive | Low | No | None | Frequently asked questions, simple classification |
+| With memory | Medium | Yes | Low | Assistants, tutors, chatbots |
+| Autonomous | High | Yes | High | Complex automation, analysis |
+| Multi-agent | Very high | Yes | Very high | Large projects, enterprise systems |
+
+<Callout type="warning">
+You do not always need the most complex agent. A well-designed reactive agent can be more effective than a multi-agent system for a simple task. Start simple and scale as you need to.
+</Callout>
+
+## Self-assessment
+
+1. What is the difference between a reactive agent and one with memory?
+2. Explain the ReAct pattern in your own words
+3. In which case would you choose a multi-agent system?
+4. What role would a validator agent play in a team?
+
+In the next lesson we will learn about the **Model Context Protocol (MCP)**, the standard way to connect agents with external tools.

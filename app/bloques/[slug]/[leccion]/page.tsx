@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, leccion } = await params;
   const locale = await getLocale();
   const t = getDictionary(locale);
-  const data = getLeccion(slug, leccion);
+  const data = getLeccion(slug, leccion, locale);
   if (!data) return { title: t.leccion.notFound };
 
   return {
@@ -67,13 +67,13 @@ export default async function LeccionPage({ params }: Props) {
   const { slug, leccion } = await params;
   const locale = await getLocale();
   const t = getDictionary(locale);
-  const data = getLeccion(slug, leccion);
+  const data = getLeccion(slug, leccion, locale);
   if (!data) notFound();
 
   const bloque = getBloqueMeta(t, slug);
   if (!bloque) notFound();
 
-  const lecciones = getLeccionesBloque(slug);
+  const lecciones = getLeccionesBloque(slug, locale);
   const currentIndex = lecciones.findIndex((l) => l.slug === leccion);
   const anterior = currentIndex > 0 ? lecciones[currentIndex - 1] : null;
   const siguiente =

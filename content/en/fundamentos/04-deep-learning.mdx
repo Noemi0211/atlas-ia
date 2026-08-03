@@ -1,0 +1,119 @@
+---
+title: "Deep Learning and neural networks"
+description: "The brain-inspired networks that are changing everything"
+---
+
+## Deep Learning and neural networks
+
+If Machine Learning is learning from data, Deep Learning is learning from data **with layers and layers of abstraction**.
+
+It is like the difference between learning to add and learning calculus. Both are mathematics, but one has much more depth than the other.
+
+## What is an artificial neural network?
+
+A neural network is a system inspired by the human brain. It is made up of **artificial neurons** organized in layers.
+
+### The teamwork analogy
+
+Imagine a company with three departments:
+
+1. **Input department** (input layer): Receives the raw information — an image, a text, some data
+2. **Intermediate departments** (hidden layers): Process the information, each at its own level of abstraction
+3. **Output department** (output layer): Produces the result — "this is a cat", "this email is spam"
+
+In a computer image, for example:
+
+- The first layer detects **edges** and colors
+- The second layer combines edges to detect **shapes**
+- The third layer combines shapes to detect **objects** (eyes, ears)
+- The final layer recognizes the **whole animal** (cat, dog)
+
+## Why "deep"?
+
+Because it has **many intermediate layers**. A network with few layers might have 3-5 layers. A "deep" network can have **tens or hundreds of layers**.
+
+Each layer learns **more complex** representations of the data.
+
+```
+Entrada → [Capa 1: bordes] → [Capa 2: formas] → [Capa 3: objetos] → Salida
+```
+
+<Callout type="info">
+Deep Learning works especially well when there is **a lot of data** and the problem requires understanding **hierarchical** patterns — such as in images, text, audio or video.
+</Callout>
+
+## How training works
+
+### Forward pass
+
+The data enters through the initial layer and passes through each layer until it produces an output. Each neuron applies a simple mathematical operation.
+
+### Error calculation
+
+The model's output is compared with the correct answer. The difference is the **error**.
+
+### Backpropagation
+
+Here is the magic. The error is sent **backwards** through the network, adjusting each neuron's parameters to reduce the error.
+
+### Iteration
+
+This process is repeated **millions of times** with thousands of examples. Gradually, the network improves.
+
+## Important types of neural networks
+
+### Convolutional neural networks (CNN)
+
+Specialized in **images**. They detect visual patterns such as edges, textures and objects.
+
+**Use**: Facial recognition, medical imaging diagnosis, autonomous driving.
+
+### Recurrent neural networks (RNN/LSTM)
+
+Designed for **sequences** — text, audio, time series. They process information in order.
+
+**Use**: Translation, text prediction, sentiment analysis.
+
+### Transformers
+
+The dominant architecture today. They process **the whole sequence at once** instead of one by one. This makes them much faster and more powerful.
+
+**Use**: ChatGPT, Claude, Gemini — all the big language models.
+
+### Generative adversarial networks (GAN)
+
+Two networks compete against each other: one generates fake content and the other tries to detect whether it is fake. The result is increasingly realistic content.
+
+**Use**: Image generation, deepfakes, super-resolution.
+
+## Deep Learning in real life
+
+| Application | Network used | Impact |
+|------------|--------------|---------|
+| ChatGPT/Claude | Transformer | Conversation and text generation |
+| DALL-E/Midjourney | Diffusion + Transformer | Image generation |
+| Facial recognition | CNN | Security, phone unlocking |
+| Autonomous car | CNN + Transformer | Assisted driving |
+| Medical diagnosis | CNN | Early disease detection |
+| Translation | Transformer | High-quality automatic translation |
+
+## Limitations of Deep Learning
+
+Not everything is perfect:
+
+- **It needs enormous amounts of data**: It works well with millions of examples
+- **It is computationally expensive**: Training a large model can cost millions of dollars
+- **It is a black box**: Sometimes we do not know why it makes certain decisions
+- **It is prone to overfitting**: It can memorize instead of learn
+
+<Callout type="warning">
+Deep Learning is not the solution to everything. For many problems, a simple model (such as a regression or a decision tree) works just as well or better. Choosing the right tool is key.
+</Callout>
+
+## Self-assessment
+
+1. Why is it called "deep" learning?
+2. What is the difference between CNN and Transformers?
+3. Why does Deep Learning need so much data?
+
+Ready? Next lesson: **Large Language Models (LLM)**.

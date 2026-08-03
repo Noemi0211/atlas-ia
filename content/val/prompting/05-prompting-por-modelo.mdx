@@ -1,0 +1,123 @@
+---
+title: "Prompting per a diferents models"
+description: "ChatGPT vs Claude vs Gemini: com adaptar els teus prompts"
+---
+
+## No tots els models responen igual
+
+Cada model d'IA té la seua pròpia "personalitat", fortaleses i limitacions. El mateix prompt pot donar resultats molt diferents a ChatGPT, Claude o Gemini.
+
+## ChatGPT (OpenAI)
+
+**Personalitat:** Versàtil, directe, generalista.
+
+### Funciona millor amb:
+- Instruccions clares i directes
+- Tasques pas a pas
+- Format estructurat
+
+### Exemple efectiu:
+```
+You are a research assistant. Analyse this last quarter's sales data and generate an executive report with 3 sections: summary, trends and recommendations. Use a professional tone.
+```
+
+### A evitar:
+- Instruccions massa obertes (vagues)
+- Que li demanes "sigues creatiu" sense direcció
+
+## Claude (Anthropic)
+
+**Personalitat:** Analític, matisat, acurat.
+
+### Funciona millor amb:
+- Preguntes que requereixen matisos
+- Anàlisis profundes de documents
+- Tasques que necessiten precisió
+
+### Exemple efectiu:
+```
+Analyse this 20-page document and extract the 5 main arguments for and against the proposal. For each argument, provide textual evidence from the document and rate its strength from 1 to 5.
+```
+
+### A evitar:
+- Instruccions massa directes (Claude és més reflexiu)
+- Prompts massa curts sense context
+
+### Diferències clau:
+Claude tendeix a ser més caut i matisat. Si necessites respostes més llargues i detallades, dóna-li més espai en el prompt.
+
+## Gemini (Google)
+
+**Personalitat:** Concís, factual, integrat amb Google.
+
+### Funciona millor amb:
+- Preguntes factuals i actualitzades
+- Anàlisi de documents massius
+- Integració amb Google Workspace
+
+### Exemple efectiu:
+```
+Based on current 2026 trends, tell me what the 3 most important innovations in generative AI are. Include sources and dates.
+```
+
+### A evitar:
+- Preguntes que requereixen opinió subjectiva (Gemini és més factual)
+- Instruccions llargues sense estructura
+
+## Comparativa d'estils
+
+| Aspecte | ChatGPT | Claude | Gemini |
+|---------|---------|--------|--------|
+| Estil de resposta | Directe, versàtil | Matisat, profund | Concís, factual |
+| Longitud ideal | Mitjana | Llarga | Curta-mitjana |
+| To | Neutral-professional | Acurat-formal | Directe-informatiu |
+| Creativitat | Alta | Mitjana | Baixa-mitjana |
+| Estructura | Li agrada seguir formats | Preferix text fluid | Respon amb llistes |
+
+## Com adaptar els teus prompts
+
+### Per a ChatGPT
+```
+[Clear instruction] → [Specific format] → [Optional example]
+```
+
+### Per a Claude
+```
+[Detailed context] → [Nuanced question] → [Analysis request]
+```
+
+### Per a Gemini
+```
+[Factual question] → [Response format] → [Sources request]
+```
+
+## Exemple pràctic: La mateixa petició en 3 models
+
+**Tasca:** Explicar la computació quàntica a un principiant
+
+**Per a ChatGPT:**
+```
+You are a science communicator. Explain quantum computing to someone who knows nothing about the topic. Use 3 real-world analogies and keep it under 200 words.
+```
+
+**Per a Claude:**
+```
+I need to explain quantum computing to my 70-year-old grandmother who has never heard of it. I want the explanation to be clear, use everyday analogies, highlight why it matters without scaring her, and end with a phrase that invites curiosity.
+```
+
+**Per a Gemini:**
+```
+Explain quantum computing in simple terms. Give me 3 key points and 1 analogy. Minimum technical jargon. Maximum length: 150 words.
+```
+
+<Callout type="tip">
+La millor estratègia no és aprendre a usar un sol model, sinó saber quin funciona millor per a cada tasca i adaptar el teu prompt en conseqüència.
+</Callout>
+
+## Autoavaluació
+
+1. Quines són les principals diferències entre ChatGPT, Claude i Gemini?
+2. Com adaptaries un prompt per a Claude vs ChatGPT?
+3. Per a quin tipus de tasques és millor Gemini?
+
+Llest? Següent lliçó: **Refinament iteratiu de prompts**.

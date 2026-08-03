@@ -1,0 +1,129 @@
+---
+title: "Basic prompting techniques"
+description: "Role prompting, few-shot, zero-shot and how to apply them"
+---
+
+## There are proven techniques that work
+
+You do not have to invent prompts from scratch every time. There are proven techniques you can learn and apply depending on what you need.
+
+## Zero-shot prompting
+
+It is the most basic technique: **you ask the AI to do something without giving it examples**.
+
+**Example:**
+```
+Classify this text as "positive" or "negative":
+"The movie was incredible, the best of the year."
+```
+
+The AI knows what "positive" and "negative" mean without you giving it examples.
+
+**Works well for:** Simple, well-defined tasks.
+
+**Does not work well for:** Complex tasks or tasks with very specific formats.
+
+## Few-shot prompting
+
+You give the AI **examples** of what you expect before asking it to do the real task.
+
+**Example:**
+```
+Translate these sentences into formal English:
+
+Spanish: "Hola, ¿cómo estás?"
+English: "Hello, how are you?"
+
+Spanish: "Muchas gracias por tu ayuda"
+English: "Thank you very much for your help"
+
+Spanish: "¿Podrías enviarme el informe?"
+English:
+```
+
+**Works well for:** Tasks with a clear pattern you want it to follow.
+
+**Tip:** Use 2 or 3 examples. More than 5 can confuse the model and increase cost.
+
+## Role prompting
+
+You assign a **specific role or personality** to the AI before asking your question.
+
+**Example:**
+```
+You are a lawyer specialising in intellectual property.
+A client wants to know whether they can use Google images on their blog.
+Explain the legal risks in simple terms.
+```
+
+**Works well for:** Getting responses with a professional perspective.
+
+**Useful variants:**
+- "You are a teacher explaining to 10-year-old children..."
+- "You are a CEO giving feedback to an employee..."
+- "You are a food critic reviewing a restaurant..."
+
+## Chain-of-Thought - Basic
+
+You ask the AI to **reason step by step** before responding.
+
+**Example:**
+```
+If a train travels at 120 km/h for 2 hours and then at 80 km/h for 1 hour, what total distance does it cover? Think step by step.
+```
+
+The AI not only gives the result, but also shows the reasoning:
+1. First part: 120 km/h × 2 h = 240 km
+2. Second part: 80 km/h × 1 h = 80 km
+3. Total: 240 + 80 = 320 km
+
+**Works well for:** Maths problems, logic, analysis and complex decisions.
+
+## Format prompt
+
+You specify **how you want** the response to be structured.
+
+**Example:**
+```
+Give me a healthy weekly meal plan. Use this exact format:
+
+Day:
+- Breakfast: [food]
+- Lunch: [food]
+- Dinner: [food]
+- Snack: [food]
+```
+
+## Technique comparison
+
+| Technique | When to use it | Example use |
+|---------|--------------|----------------|
+| Zero-shot | Simple tasks | Classifying a sentiment |
+| Few-shot | Tasks with a pattern | Translations, specific formats |
+| Role | Specific perspective | Legal, medical, technical advice |
+| Chain-of-Thought | Reasoning | Maths problems, analysis |
+| Format | Structured output | Tables, lists, JSON |
+
+## How to combine techniques
+
+The most powerful thing is to **combine several techniques**:
+
+**Combined example:**
+```
+You are a professional chef (role).
+Give me 3 quick dinner recipes (task).
+For each recipe use this format:
+- Name:
+- Ingredients:
+- Time:
+- Steps: (format)
+The recipes must be vegetarian (constraint).
+```
+
+## Self-assessment
+
+1. What is the difference between zero-shot and few-shot prompting?
+2. When is role prompting most useful?
+3. Why does asking step by step work better for complex problems?
+
+Ready? Next lesson: **Advanced prompting techniques**.

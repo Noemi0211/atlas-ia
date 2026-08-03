@@ -1,0 +1,138 @@
+---
+title: "Exemples pràctics d'agents"
+description: "Casos d'ús reals: assistents, automatització, anàlisi i més"
+---
+
+## Agents en acció
+
+Els agents d'IA ja estan transformant indústries senceres. En esta lliçó veurem casos d'ús reals que il·lustren el potencial d'esta tecnologia.
+
+<Callout type="info">
+Cada exemple segueix el mateix patró: un objectiu complex que un agent descompon, executa i verifica de manera autònoma.
+</Callout>
+
+## Cas 1: Assistente d'investigació acadèmica
+
+### Problema
+
+Un investigador necessita revisar 50 articles científics a la setmana per a mantindre's actualitzat. Fer-ho manualment li porta hores.
+
+### Solució amb agent
+
+Un agent multiagent amb:
+
+1. **Agent buscador:** consulta bases de dades acadèmiques (arXiv, PubMed, Google Scholar)
+2. **Agent extractor:** llig cada article i extrau: resum, metodologia, resultats, limitacions
+3. **Agent analitzador:** identifica tendències, contradiccions i connexions entre articles
+4. **Agent redactor:** genera un informe setmanal personalitzat amb les troballes més rellevants
+
+### Resultat
+
+L'investigador rep un informe de 5 pàgines cada dilluns amb l'essencial, estalviant 10+ hores setmanals.
+
+## Cas 2: Automatització de suport tècnic
+
+### Problema
+
+Un equip de suport rep 200 tickets al dia. El 60% són preguntes repetitives que podrien resoldre's automàticament.
+
+### Solució amb agent
+
+1. **Classificador:** categoritza el ticket (tècnic, facturació, compte)
+2. **Buscador RAG:** cerca en la base de coneixement articles rellevants
+3. **Generador:** redacta una resposta personalitzada basada en la documentació
+4. **Verificador:** confirma que la resposta resol la pregunta
+5. **Escalador:** si no pot resoldre-ho, passa a una persona amb tot el context
+
+### Resultat
+
+El 45% dels tickets es resolen sense intervenció humana. Temps mitjà de resposta: 2 minuts enfront de 4 hores.
+
+<Callout type="tip">
+La clau de l'èxit en el suport tècnic amb agents no és reemplaçar la persona, sinó donar-li més context i temps per als casos complexos.
+</Callout>
+
+## Cas 3: Anàlisi de sentiment en xarxes socials
+
+### Problema
+
+Una marca necessita supervisar 10 000 mencions diàries en xarxes socials per a detectar crisis de reputació.
+
+### Solució amb agent
+
+1. **Recolector:** captura mencions de múltiples fonts (Twitter, Instagram, Reddit, fòrums)
+2. **Analitzador:** classifica cada menció per sentiment (positiu, negatiu, neutre) i intensitat
+3. **Detector d'anomalies:** identifica pics de sentiment negatiu i els agrupa per tema
+4. **Generador d'alertes:** si detecta una possible crisi, envia un informe urgent a l'equip de comunicació
+
+### Resultat
+
+Les crisis es detecten en minuts en lloc d'hores. L'equip pot respondre abans que el problema escale.
+
+## Cas 4: Assistente de codi per al desenvolupament
+
+### Problema
+
+Un equip de desenvolupament vol revisar i mantindre un codi base legacy de 500.000 línies.
+
+### Solució amb agent
+
+1. **Agent analitzador:** mapa l'arquitectura del codi i documenta dependències
+2. **Agent revisor:** identifica males olors de codi, vulnerabilitats i deute tècnic
+3. **Agent refactoritzador:** suggereix i aplica millores de codi (amb aprovació humana)
+4. **Agent documentador:** genera documentació automàtica de funcions i mòduls
+5. **Agent de proves:** crea proves unitàries per al codi no cobert
+
+### Resultat
+
+Reducció del 40% en errors. L'equip dedica un 30% menys de temps al manteniment.
+
+## Cas 5: Gestió de projectes automatitzada
+
+### Problema
+
+Una persona gestora de projectes coordina 5 equips i 15 projectes simultàniament. El seguiment manual és inviable.
+
+### Solució amb agent
+
+1. **Monitor de progrés:** revisa diàriament l'estat de cada tasca en Jira/Asana
+2. **Detector de riscos:** identifica tasques bloquejades, dependències incomplides i desviacions de termini
+3. **Generador d'informes:** produeix informes d'estat personalitzats per a les parts interessades
+4. **Coordinador de reunions:** agenda automàticament les reunions necessàries segons l'estat del projecte
+
+### Resultat
+
+La persona gestora de projectes recupera 8 hores setmanals que dedica a decisions estratègiques en lloc de tasques operatives.
+
+## Patrons comuns
+
+Estos casos comparteixen patrons que pots replicar:
+
+1. **Observar** una font de dades (tickets, articles, mencions, codi)
+2. **Analitzar** usant un LLM amb context especialitzat
+3. **Decidir** quina acció prendre basant-se en regles o criteris
+4. **Actuar** executant una eina (enviar correu, crear ticket, generar informe)
+5. **Aprendre** del resultat per a millorar futures decisions
+
+<Callout type="info">
+El patró més eficaç és la "persona en el circuit": l'agent fa el treball pesat, però les decisions crítiques sempre passen per una persona.
+</Callout>
+
+## Com dissenyar el teu propi agent
+
+1. **Identifica** un procés que consumisca temps i siga repetitiu
+2. **Defineix** l'objectiu en termes mesurables
+3. **Divideix** el procés en passos executables per un agent
+4. **Llista** les eines que necessitarà (APIs, bases de dades)
+5. **Prototipa** amb un marc de treball (LangChain, CrewAI)
+6. **Prova** amb casos reals i mesura resultats
+7. **Itera** basant-te en la retroalimentació
+
+## Autoavaluació
+
+1. Quin patró comú comparteixen tots els casos d'ús?
+2. Per què és important la supervisió humana en el circuit?
+3. Dissenya un agent per a un problema del teu àmbit professional
+4. Quines mètriques usaries per a mesurar l'èxit del teu agent?
+
+En l'última lliçó farem un **resum complet** del bloc amb recursos per a seguir aprenent.

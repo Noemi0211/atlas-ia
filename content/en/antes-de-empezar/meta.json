@@ -1,0 +1,55 @@
+{
+  "bloque": 0,
+  "titulo": "Before You Begin",
+  "descripcion": "Introduction and how to get the most out of this platform",
+  "lecciones": [
+    {
+      "slug": "01-bienvenido",
+      "titulo": "Welcome to Atlas IA",
+      "descripcion": "What Atlas IA is, what it is for and what you will find here",
+      "orden": 1,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-como-aprender",
+      "titulo": "How to Learn Artificial Intelligence",
+      "descripcion": "Course methodology, how to study and how to get the most out of it",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-como-evoluciona",
+      "titulo": "How AI Evolves",
+      "descripcion": "The pace of change, why it matters to keep up to date and how to stay relevant",
+      "orden": 3,
+      "duracion": "6 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-ia-para-aprender",
+      "titulo": "Using AI to Learn AI",
+      "descripcion": "Prompts for learning, study strategies and how to use the tools to your advantage",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-primer-contacto",
+      "titulo": "Your First Contact with AI",
+      "descripcion": "A guided hands-on exercise so you can experiment with an AI from scratch",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-antes-de-continuar",
+      "titulo": "Before You Continue",
+      "descripcion": "What you need, requirements, mindset and how to move forward",
+      "orden": 6,
+      "duracion": "5 min",
+      "dificultad": "basico"
+    }
+  ]
+}

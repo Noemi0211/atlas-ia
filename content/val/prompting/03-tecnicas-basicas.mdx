@@ -1,0 +1,129 @@
+---
+title: "Tècniques de prompting bàsiques"
+description: "Role prompting, few-shot, zero-shot i com aplicar-les"
+---
+
+## Hi ha tècniques comprovades que funcionen
+
+No has d'inventar prompts des de zero cada vegada. Existeixen tècniques provades que pots aprendre i aplicar segons el que necessites.
+
+## Zero-shot prompting
+
+És la tècnica més bàsica: **li demanes a la IA que faça alguna cosa sense donar-li exemples**.
+
+**Exemple:**
+```
+Classify this text as "positive" or "negative":
+"The movie was incredible, the best of the year."
+```
+
+La IA sap el que significa "positiu" i "negatiu" sense que li dones exemples.
+
+**Funciona bé per a:** Tasques simples i ben definides.
+
+**No funciona bé per a:** Tasques complexes o amb formats molt específics.
+
+## Few-shot prompting
+
+Li dones a la IA **exemples** del que esperes abans de demanar-li la tasca real.
+
+**Exemple:**
+```
+Translate these sentences into formal English:
+
+Spanish: "Hola, ¿cómo estás?"
+English: "Hello, how are you?"
+
+Spanish: "Muchas gracias por tu ayuda"
+English: "Thank you very much for your help"
+
+Spanish: "¿Podrías enviarme el informe?"
+English:
+```
+
+**Funciona bé per a:** Tasques amb un patró clar que vols que seguisca.
+
+**Consell:** Usa 2 o 3 exemples. Més de 5 pot confondre el model i augmentar el cost.
+
+## Role prompting
+
+Li assignes un **rol o personalitat** específica a la IA abans de fer-li la pregunta.
+
+**Exemple:**
+```
+You are a lawyer specialised in intellectual property.
+A client wants to know if he can use Google images on his blog.
+Explain the legal risks in simple terms.
+```
+
+**Funciona bé per a:** Obtindre respostes amb perspectiva professional.
+
+**Variants útils:**
+- "Ets un professor que explica a xiquets de 10 anys..."
+- "Ets un CEO donant retroalimentació a un empleat..."
+- "Ets un crític gastronòmic avaluant un restaurant..."
+
+## Chain-of-Thought (Cadena de pensament) - Bàsic
+
+Li demanes a la IA que **raone pas a pas** abans de respondre.
+
+**Exemple:**
+```
+If a train travels at 120 km/h for 2 hours and then at 80 km/h for 1 hour, what total distance does it cover? Think step by step.
+```
+
+La IA no només dona el resultat, sinó que mostra el raonament:
+1. Primera part: 120 km/h × 2 h = 240 km
+2. Segona part: 80 km/h × 1 h = 80 km
+3. Total: 240 + 80 = 320 km
+
+**Funciona bé per a:** Problemes matemàtics, lògics, anàlisi i decisions complexes.
+
+## Prompt de format
+
+Especifiques **com vols** que s'estructure la resposta.
+
+**Exemple:**
+```
+Give me a healthy weekly meal plan. Use this exact format:
+
+Day:
+- Breakfast: [food]
+- Lunch: [food]
+- Dinner: [food]
+- Snack: [food]
+```
+
+## Comparativa de tècniques
+
+| Tècnica | Quan usar-la | Exemple d'ús |
+|---------|--------------|----------------|
+| Zero-shot | Tasques simples | Classificar un sentiment |
+| Few-shot | Tasques amb patró | Traduccions, formats específics |
+| Role | Perspectiva específica | Consell legal, mèdic, tècnic |
+| Chain-of-Thought | Raonament | Problemes matemàtics, anàlisi |
+| Format | Eixida estructurada | Taules, llistes, JSON |
+
+## Com combinar tècniques
+
+El més potent és **combinar diverses tècniques**:
+
+**Exemple combinat:**
+```
+You are a professional chef (role).
+Give me 3 quick dinner recipes (task).
+For each recipe use this format:
+- Name:
+- Ingredients:
+- Time:
+- Steps: (format)
+The recipes must be vegetarian (constraint).
+```
+
+## Autoavaluació
+
+1. Quina és la diferència entre zero-shot i few-shot prompting?
+2. Quan és més útil el role prompting?
+3. Per què funciona millor demanar pas a pas en problemes complexos?
+
+Llest? Següent lliçó: **Tècniques de prompting avançades**.

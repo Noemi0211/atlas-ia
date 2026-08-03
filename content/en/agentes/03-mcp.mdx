@@ -1,0 +1,143 @@
+---
+title: "Model Context Protocol (MCP)"
+description: "The protocol that connects language models with external tools"
+---
+
+## What is MCP
+
+The **Model Context Protocol (MCP)** is an open protocol created by Anthropic that standardises the way language models connect with tools and external data sources.
+
+Think of MCP as the "USB-C of AI": a universal standard so that any model can use any tool.
+
+<Callout type="info">
+Before MCP, each integration required custom code. With MCP, any compatible agent can use any MCP server without additional configuration.
+</Callout>
+
+## MCP architecture
+
+MCP follows a client-server architecture:
+
+### MCP client
+
+It is the agent or application that consumes the tools. For example, Claude Desktop, a custom assistant or your own agent.
+
+### MCP server
+
+It is an independent process that exposes tools, resources and prompts. Each server offers specific capabilities:
+
+- **Tools:** functions that the agent can run (search, calculate, read files)
+- **Resources:** data that the agent can query (documents, databases, APIs)
+- **Prompts:** predefined interaction templates
+
+### Transport
+
+Communication between client and server can be:
+
+- **stdio:** for local tools (the server runs as a subprocess)
+- **HTTP + SSE:** for remote servers
+- **WebSocket:** for real-time bidirectional communication
+
+## How it works in practice
+
+When an agent needs to perform an action, the flow is:
+
+1. The agent receives a request from the user
+2. It determines that it needs to use a tool
+3. It queries the MCP server to find out which tools are available
+4. The server returns the list of tools with their parameters
+5. The agent decides which tool to use and with which parameters
+6. The server runs the tool and returns the result
+7. The agent incorporates the result into its response
+
+### Simple example
+
+```
+User: "What is the weather today in Madrid?"
+
+Agent → Weather MCP server
+  └── Calls get_weather(city: "Madrid")
+Server → Agent
+  └── Returns { temperature: 28°, humidity: 45% }
+Agent → User
+  └── "Today in Madrid it is 28°C with 45% humidity."
+```
+
+## Tools you can expose with MCP
+
+### File processing
+
+- Read, write and modify local files
+- Process PDF, Word and Excel documents
+- Manipulate images and audio
+
+### Data access
+
+- Query SQL databases
+- Search vector indexes
+- Read REST and GraphQL APIs
+
+### Automation
+
+- Run system commands
+- Control web browsers
+- Send emails and messages
+- Manage calendars and tasks
+
+### External services
+
+- Search the internet
+- Query social networks
+- Access cloud services
+
+## Benefits of using MCP
+
+### Standardisation
+
+Any MCP-compatible agent can use any MCP server. No more ad-hoc integrations.
+
+### Security
+
+MCP servers run in isolated environments. The agent has no direct access to the system, only through the defined tools.
+
+### Maintainability
+
+Updating a tool only requires modifying the MCP server. All agents that use it benefit automatically.
+
+### Discovery
+
+Agents can dynamically discover which tools are available and how to use them, without manual configuration.
+
+<Callout type="tip">
+MCP changes the paradigm: instead of telling the agent which tools to use, you tell it which MCP servers are available and it decides how to use them.
+</Callout>
+
+## MCP vs other alternatives
+
+| Aspect | MCP | Function Calling | Plugins | Custom API |
+|--------|-----|-----------------|---------|------------|
+| Open standard | Yes | No | No | No |
+| Discovery | Automatic | Manual | Manual | Manual |
+| Isolation | Yes | No | Partial | Depends |
+| Multi-model | Yes | Specific | Specific | Yes |
+
+## Getting started with MCP
+
+To create a basic MCP server you need:
+
+1. Define the tools you will expose (name, description, parameters)
+2. Implement the logic of each tool
+3. Choose a transport (stdio for local testing)
+4. Start the server and connect it to your agent
+
+<Callout type="info">
+The MCP SDK is available for Python and TypeScript. You can find examples and documentation at modelcontextprotocol.io.
+</Callout>
+
+## Self-assessment
+
+1. What problem does MCP solve in agent development?
+2. Explain the difference between an MCP client and an MCP server
+3. Why does MCP improve security in agents?
+4. In which case would you use a remote MCP server and in which one a local one?
+
+In the next lesson we will look at **advanced RAG**, a key technique for agents to access external information intelligently.

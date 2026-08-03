@@ -1,0 +1,87 @@
+{
+  "bloque": 1,
+  "titulo": "Fonaments d'IA",
+  "descripcion": "Conceptes essencials: Machine Learning, Deep Learning, LLM, Transformers i més",
+  "lecciones": [
+    {
+      "slug": "01-que-es-ia",
+      "titulo": "Què és la Intel·ligència Artificial",
+      "descripcion": "Definició clara, què és i què no és la IA",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-historia-ia",
+      "titulo": "Breu història de la IA",
+      "descripcion": "De Turing a ChatGPT: les fites que ens han portat fins ací",
+      "orden": 2,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-machine-learning",
+      "titulo": "Machine Learning explicat",
+      "descripcion": "Com aprenen les màquines sense ser programades explícitament",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-deep-learning",
+      "titulo": "Deep Learning i xarxes neuronals",
+      "descripcion": "Les xarxes inspirades en el cervell que ho estan canviant tot",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-llm",
+      "titulo": "Models de llenguatge gran (LLM)",
+      "descripcion": "Què són, com s'entrenen i per què són tan potents",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-transformers",
+      "titulo": "Transformers: la revolució",
+      "descripcion": "L'arquitectura que ho va canviar tot i continua dominant la IA",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "07-tokens-contexto",
+      "titulo": "Tokens, context i inferència",
+      "descripcion": "Les peces fonamentals per a entendre com funciona un LLM",
+      "orden": 7,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-alucinaciones-sesgos",
+      "titulo": "Al·lucinacions, biaixos i limitacions",
+      "descripcion": "Allò que la IA no pot fer i per què és vital saber-ho",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "09-modelos-principales",
+      "titulo": "Els models principals",
+      "descripcion": "GPT, Claude, Gemini, Llama i més: un mapa del terreny",
+      "orden": 9,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "10-resumen-fundamentos",
+      "titulo": "Resum i autoavaluació",
+      "descripcion": "Comprova el que has après i consolida els fonaments",
+      "orden": 10,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    }
+  ]
+}

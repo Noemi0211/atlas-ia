@@ -1,0 +1,133 @@
+---
+title: "Advanced RAG"
+description: "Retrieval-Augmented Generation: take information retrieval to the next level"
+---
+
+## What is RAG
+
+**Retrieval-Augmented Generation (RAG)** is an architecture that combines an information retrieval system with a generative language model. Instead of the LLM generating responses only with its internal knowledge, it first searches for relevant information in an external knowledge base.
+
+<Callout type="info">
+RAG is like a student who, before answering an exam, can consult their notes. The result is more accurate and verified than answering from memory.
+</Callout>
+
+## Basic RAG architecture
+
+### Indexing
+
+The previous phase in which you prepare your knowledge base:
+
+1. **Split** documents into fragments (chunks)
+2. **Generate embeddings** for each fragment
+3. **Store** them in a vector database
+
+### Retrieval
+
+When a query arrives:
+
+1. **Generate an embedding** of the query
+2. **Search** for the most similar fragments using cosine similarity
+3. **Rank** by relevance
+4. **Select** the top-K fragments
+
+### Generation
+
+The LLM receives the original query together with the retrieved fragments as additional context and generates a response based on that information.
+
+## Advanced RAG techniques
+
+### Smart chunking
+
+Not all documents are split the same way:
+
+- **Semantic chunking:** splits by paragraphs or sections, not by a fixed number of tokens
+- **Recursive chunking:** different chunk sizes for different depths
+- **Overlapping chunking:** each chunk includes part of the previous one to maintain context
+
+### Multi-query retrieval
+
+Instead of searching once, it generates multiple variations of the query and combines the results. This improves coverage and reduces false negatives.
+
+### Re-ranking
+
+After the initial retrieval, a second (smaller and faster) model reorders the results by relevance. This improves accuracy without the cost of a large model.
+
+### Hierarchical fusion RAG
+
+It first retrieves documents at a macro level and then specific fragments within them. Ideal for very large knowledge bases.
+
+### Contextual RAG
+
+It adds metadata to each chunk: source, date, author, section. During retrieval, it also filters by these metadata.
+
+## RAG in agents
+
+When RAG is integrated into an agent, the possibilities multiply:
+
+### Persistent memory
+
+The agent can store information from past interactions and retrieve it when relevant.
+
+### Documentation queries
+
+The agent accesses technical documentation, manuals or knowledge bases to answer specialised questions.
+
+### Fact checking
+
+Before giving an answer, the agent queries its knowledge base to verify the information.
+
+### Continuous learning
+
+The agent can add new information to its vector base after each interaction, improving over time.
+
+<Callout type="tip">
+The combination of RAG + agents is one of the most powerful architectures today. The agent decides when to search, what to search and how to use the information found.
+</Callout>
+
+## Vector databases
+
+Popular tools for storing and searching embeddings:
+
+| Tool | Type | Scalability | Open Source |
+|------|------|-------------|-------------|
+| Pinecone | SaaS | Very high | No |
+| Weaviate | Self-hosted | High | Yes |
+| Qdrant | Self-hosted | High | Yes |
+| Chroma | Local | Medium | Yes |
+| Milvus | Self-hosted | Very high | Yes |
+
+## Quality metrics in RAG
+
+### Retrieval precision
+
+Are the retrieved documents relevant to the query?
+
+### Generation fidelity
+
+Is the generated response based on the retrieved documents and does it not invent information?
+
+### Coverage
+
+Does the response cover all the necessary information or is something missing?
+
+## RAG evaluation
+
+You can evaluate your RAG system with metrics such as:
+
+- **MRR (Mean Reciprocal Rank):** position of the first relevant result
+- **NDCG (Normalized Discounted Cumulative Gain):** quality of the ranking of results
+- **Fidelity:** what percentage of the response is verifiable in the documents
+- **Response relevance:** how relevant the response is to the query
+
+<Callout type="warning">
+RAG is not a miracle solution. If the chunks are poorly designed or the knowledge base is deficient, RAG can give partial or incorrect responses. The quality of the system depends as much on retrieval as on generation.
+</Callout>
+
+## Self-assessment
+
+1. Explain the three phases of the RAG architecture
+2. Why does re-ranking improve RAG quality?
+3. What advantage does contextual RAG provide over basic RAG?
+4. How is RAG integrated into an autonomous agent?
+
+In the next lesson we will see how to **automate workflows** using tools such as Make, Zapier and n8n with AI.

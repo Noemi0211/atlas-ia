@@ -1,0 +1,47 @@
+{
+  "bloque": 9,
+  "titulo": "Laboratory",
+  "descripcion": "Experiments, comparisons, challenges and real cases",
+  "lecciones": [
+    {
+      "slug": "01-bienvenido-laboratorio",
+      "titulo": "Welcome to the laboratory",
+      "descripcion": "Guide to the interactive tools and how to get the most out of them",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-chat-ia-practico",
+      "titulo": "Practical use of the AI chat",
+      "descripcion": "Strategies for getting quality answers from the conversational assistant",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-sandbox-prompts",
+      "titulo": "Prompt workshop",
+      "descripcion": "Design, experimentation and optimisation of prompts",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-agentes-flujos",
+      "titulo": "Agents and practical flows",
+      "descripcion": "Building agent flows and automation",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-proyectos-integrados",
+      "titulo": "Integrated projects",
+      "descripcion": "Real cases combining all the laboratory tools",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    }
+  ]
+}

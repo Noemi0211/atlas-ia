@@ -72,7 +72,7 @@ export default async function BloquePage({ params }: Props) {
   const bloque = getBloqueMeta(t, slug);
   if (!bloque) notFound();
 
-  const lecciones = getLeccionesBloque(slug);
+  const lecciones = getLeccionesBloque(slug, locale);
   const Icon = iconMap[bloque.icono] || Compass;
   const colorClass = colorMap[bloque.color] || colorMap.primary;
 

@@ -1,0 +1,55 @@
+{
+  "bloque": 10,
+  "titulo": "Novedats",
+  "descripcion": "Notícies, nous models, actualitzacions i tendències de l'ecosistema",
+  "lecciones": [
+    {
+      "slug": "01-modelos-recientes",
+      "titulo": "Models de llenguatge recents",
+      "descripcion": "GPT-5.6, Claude 5, Gemini 3, Grok 4.5 i DeepSeek V4",
+      "orden": 1,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "02-tendencias-ecosistema",
+      "titulo": "Tendències de l'ecosistema IA",
+      "descripcion": "Agents autònoms, MCP, IA al navegador i codi obert",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-multimodal-avances",
+      "titulo": "Avenços en IA multimodal",
+      "descripcion": "Vídeo amb àudio natiu, veu en temps real i models unificats",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-ia-aplicada",
+      "titulo": "IA aplicada: nous horitzons",
+      "descripcion": "Ciència, salut, educació i productivitat amb els últims avenços",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-regulacion-actualidad",
+      "titulo": "Regulació i ètica: estat actual",
+      "descripcion": "AI Act en aplicació plena, tractats internacionals i debats ètics",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "06-recursos-actualizarse",
+      "titulo": "Com mantindre's actualitzat en IA",
+      "descripcion": "Fonts, comunitats i mètodes per a seguir el ritme de la innovació",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

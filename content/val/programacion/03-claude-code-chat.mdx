@@ -1,0 +1,106 @@
+---
+title: "Claude Code i assistents conversacionals"
+description: "Xats d'IA especialitzats en la generació i la depuració de codi"
+---
+
+## Més enllà de l'IDE
+
+A més dels assistents integrats en l'editor, existeixen potents assistents conversacionals que et poden ajudar amb tasques de programació en un xat interactiu. Aquestes eines són ideals per a explorar solucions, depurar problemes complexos i aprendre noves tecnologies.
+
+<Callout type="info">
+Els assistents conversacionals ofereixen un espai de treball més ampli que l'autocompletat de l'IDE: pots enganxar fragments grans, demanar explicacions detallades i mantindre converses complexes sobre arquitectura de programari.
+</Callout>
+
+## Claude Code (Anthropic)
+
+### Què és?
+
+Claude Code és una eina de terminal que permet a Claude interactuar directament amb el teu codi base. No és un xat web: és un agent que viu al teu terminal i pot llegir, escriure i executar codi.
+
+### Capacitats
+
+- **Llegir i navegar** pel teu projecte complet
+- **Editar fitxers** directament
+- **Executar comandes** (tests, lint, build)
+- **Crear múltiples fitxers** en una sola petició
+- **Depurar** errors de compilació i runtime
+- **Refactoritzar** codi a gran escala
+
+### Quan usar-lo
+
+- Refactoritzacions que afecten múltiples fitxers
+- Depuració d'errors complexos
+- Configuració inicial de projectes
+- Migracions de codi (canviar d'API, de marc de treball o de llenguatge)
+
+```
+claude "Refactoriza este componente para usar el patrón server component
+de Next.js. Afecta a los archivos en src/components/client/.
+Mueve la lógica de datos a server components y mantén solo la UI en cliente."
+```
+
+## ChatGPT (OpenAI)
+
+### Per a programació
+
+ChatGPT, especialment amb GPT-4o, és un assistent versàtil per al desenvolupament. Encara que no té accés directe al teu codi, pots enganxar fragments i treballar-hi.
+
+### Funcions útils
+
+- **Analitzar errors:** enganxa l'error i el context, obtén solucions
+- **Generar boilerplate:** crea estructures de projecte des de zero
+- **Traduir codi:** converteix entre llenguatges
+- **Explicar conceptes:** comprén patrons i algoritmes
+- **Revisar seguretat:** detecta vulnerabilitats comunes
+
+### Limitacions
+
+- Sense accés al projecte complet
+- Sense execució de codi
+- Context limitat al xat
+- Pot al·lucinar APIs que no existeixen
+
+<Callout type="warning">
+ChatGPT de vegades inventa noms de funcions, llibreries o paràmetres que no existeixen. Verifica sempre en la documentació oficial abans d'usar codi generat.
+</Callout>
+
+## Gemini (Google)
+
+### Avantatges específics
+
+- **Context llarg:** fins a 1 milió de tokens (projectes complets)
+- **Integració amb Google Cloud:** ideal si uses GCP
+- **Anàlisi de repositoris:** pots pujar fitxers complets
+- **Raonament visual:** analitza diagrames d'arquitectura
+
+## Taula comparativa
+
+| Eina | Accés al codi | Execució | Context | Preu |
+|------|---------------|----------|---------|------|
+| Claude Code | Terminal / projecte complet | Sí | 200K tokens | $20/mes |
+| ChatGPT | Només el que enganxes | No | 128K tokens | $20/mes |
+| Gemini | Fitxers pujats | No | 1M tokens | Gratuït |
+| Claude.ai | Projectes + artefactes | Sí (artefactes) | 200K tokens | $20/mes |
+
+## Flux de treball híbrid
+
+L'enfocament més eficaç combina totes dues eines:
+
+1. **Planificació:** Claude Code o ChatGPT per a dissenyar la solució
+2. **Implementació:** Copilot o Cursor en l'IDE
+3. **Revisió:** Claude Code per a revisar el codi generat
+4. **Depuració:** ChatGPT o Claude per a analitzar errors
+5. **Documentació:** assistent conversacional per a generar docs
+
+<Callout type="tip">
+No uses una sola eina per a tot. Cada assistent té fortaleses diferents: Copilot per a la velocitat del dia a dia, Claude Code per a refactoritzacions grans, ChatGPT per a explorar solucions noves.
+</Callout>
+
+## Autoavaluació
+
+1. Què diferencia Claude Code d'un xat conversacional com ChatGPT?
+2. Quan és millor usar un assistent en l'IDE i quan un de conversacional?
+3. Quins riscos té confiar cegament en codi generat per assistents conversacionals?
+4. Dissenya un flux de treball que combine almenys tres eines de programació assistida
+
+En la següent lliçó explorarem els **agents autònoms de codificació** com Devin i Factory.

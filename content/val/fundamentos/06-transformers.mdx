@@ -1,0 +1,116 @@
+---
+title: "Transformers: la revolució"
+description: "L'arquitectura que ho va canviar tot i continua dominant la IA"
+---
+
+## Transformers: la revolució
+
+Si hagueres d'assenyalar **un sol moment** que va canviar la IA moderna, seria la publicació de l'article "Attention Is All You Need" en 2017.
+
+Aquest article va introduir els **Transformers**, i res ha sigut igual des de llavors.
+
+## Abans dels Transformers
+
+Els models de llenguatge usaven **xarxes recurrents (RNN/LSTM)**. Processaven el text **paraula per paraula**, en seqüència.
+
+### El problema
+
+- **Lentitud**: No podien processar text en paral·lel
+- **Memòria curta**: Oblidaven informació de les primeres paraules en arribar a les últimes
+- **Escalabilitat limitada**: No podien créixer molt
+
+Era com llegir un llibre paraula per paraula sense poder mirar cap arrere.
+
+## La revolució: el mecanisme d'atenció
+
+Els Transformers no processen el text en seqüència. Processen **tota la seqüència alhora**.
+
+### L'analogia del traductor
+
+Imagina que tradueixes una frase de l'espanyol a l'anglés:
+
+> "El gato se sentó en la alfombra"
+
+Un traductor humà no tradueix paraula per paraula. Mira **tota la frase** i entén les relacions:
+
+- "El" es refereix a "gato"
+- "se sentó" és l'acció
+- "en la alfombra" és la ubicació
+
+El mecanisme d'**atenció** fa exactament això: calcula la **rellevància** de cada paraula en relació amb totes les altres paraules de la seqüència.
+
+## Com funciona el Transformer
+
+### Codificador (Encoder)
+
+Processa l'entrada i crea una representació comprensible del text. Cada paraula es representa com un vector que captura el seu significat en el context de la frase.
+
+### Descodificador (Decoder)
+
+Genera l'eixida, paraula per paraula, usant la representació creada pel codificador.
+
+### Multi-Head Attention
+
+En lloc de mirar les relacions des d'un sol angle, el Transformer mira **des de múltiples angles simultàniament**. És com si diversos traductors experts analitzaren la mateixa frase des de diferents perspectives.
+
+### Positional Encoding
+
+Com que el Transformer processa tot alhora (no en ordre), necessita una manera de saber **l'ordre de les paraules**. El positional encoding afig informació sobre la posició de cada paraula.
+
+## Per què els Transformers van guanyar
+
+| Característica | RNN/LSTM | Transformer |
+|---------------|----------|------------|
+| Processament | Seqüencial | Paral·lel |
+| Memòria | Curta | Llarga (finestra de context) |
+| Escalabilitat | Limitada | Enorme |
+| Velocitat d'entrenament | Lenta | Ràpida |
+| Qualitat | Bona | Excel·lent |
+
+<Callout type="info">
+Els Transformers poden processar textos complets d'una vegada perquè usen un mecanisme anomenat "self-attention" que calcula totes les relacions simultàniament. Això permet entrenar models enormes en paral·lel usant GPUs.
+</Callout>
+
+## Variants del Transformer
+
+### Només codificador (BERT)
+
+Només codifica. Excel·lent per a **entendre** text — classificació, anàlisi de sentiments, extracció d'informació.
+
+### Només descodificador (GPT)
+
+Només descodifica. Excel·lent per a **generar** text — xatbots, generació de contingut, codi.
+
+### Codificador-Descodificador (T5, BART)
+
+Tots dos. Excel·lent per a **transformar** text — traducció, resum, reformulació.
+
+## Els Transformers en l'actualitat
+
+Hui, **pràcticament tots** els models de llenguatge importants són Transformers:
+
+- GPT-4 / GPT-4o (OpenAI)
+- Claude 3.5 Sonnet (Anthropic)
+- Gemini 1.5 Pro (Google)
+- Llama 3 (Meta)
+- Mistral (Mistral AI)
+- BERT (Google, per a cerca)
+
+No només en el llenguatge. També en:
+
+- **Visió per ordinador** (ViT — Vision Transformer)
+- **Àudio** (Whisper per a transcripció)
+- **Multimodal** (models que entenen text + imatge + àudio)
+
+<Callout type="tip">
+Si només pots recordar un concepte tècnic de tot aquest curs, recorda aquest: **Transformer = atenció = processar-ho tot alhora = escalar**. És la base de la revolució actual.
+</Callout>
+
+## Autoavaluació
+
+1. Quin era el problema principal de les RNN?
+2. Què fa el mecanisme d'atenció?
+3. Per què els Transformers poden processar text en paral·lel?
+4. Quines variants del Transformer existeixen i per a què serveix cadascuna?
+
+Llest? Següent lliçó: **Tokens, context i inferència**.

@@ -1,0 +1,47 @@
+{
+  "bloque": 9,
+  "titulo": "Laboratori",
+  "descripcion": "Experiments, comparatives, reptes i casos reals",
+  "lecciones": [
+    {
+      "slug": "01-bienvenido-laboratorio",
+      "titulo": "Benvingut al laboratori",
+      "descripcion": "Guia de les eines interactives i com aprofitar-les",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-chat-ia-practico",
+      "titulo": "Ús pràctic del xat d'IA",
+      "descripcion": "Estratègies per a obtindre respostes de qualitat de l'assistent conversacional",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-sandbox-prompts",
+      "titulo": "Taller de prompts",
+      "descripcion": "Disseny, experimentació i optimització de prompts",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-agentes-flujos",
+      "titulo": "Agents i fluxos pràctics",
+      "descripcion": "Construcció de fluxos d'agents i automatització",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-proyectos-integrados",
+      "titulo": "Projectes integrats",
+      "descripcion": "Casos reals combinant totes les eines del laboratori",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "avanzado"
+    }
+  ]
+}

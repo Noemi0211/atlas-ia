@@ -1,0 +1,104 @@
+---
+title: "GitHub Copilot i Cursor"
+description: "Assistents de codi integrats en l'IDE"
+---
+
+## Assistents en l'editor
+
+Els assistents de codi integrats en l'IDE són la manera més directa d'usar IA en el dia a dia del desenvolupament. S'activen mentre escrius i t'ofereixen suggeriments en temps real sense interrompre el teu flux de treball.
+
+<Callout type="info">
+La diferència principal entre un xat d'IA i un assistent integrat és el context: Copilot i Cursor veuen tot el teu projecte, no només el que escrius al xat.
+</Callout>
+
+## GitHub Copilot
+
+### Què és
+
+Llançat el 2021, Copilot va ser el primer assistent de codi àmpliament adoptat. Utilitza models d'OpenAI entrenats específicament per a codi.
+
+### Capacitats
+
+- **Autocompletat inline:** suggeriments mentre escrius
+- **Xat en l'IDE:** conversa contextual sobre el teu codi
+- **Explicació de codi:** selecciona un bloc i demana una explicació
+- **Generació de proves:** crea proves per a funcions seleccionades
+- **Refactorització:** suggereix millores d'estructura
+- **Multillenguatge:** dóna suport a pràcticament qualsevol llenguatge
+
+### Com usar-lo eficaçment
+
+1. **Escriu comentaris descriptius** abans del codi per a guiar la generació
+2. **Defineix bé les funcions** amb noms i tipus clars
+3. **Accepta o rebutja** cada suggeriment amb criteri
+4. **Usa el xat** per a tasques complexes, no només autocompletat
+
+## Cursor
+
+### Què és
+
+Cursor és un IDE construït des de zero amb la IA al centre. A diferència de Copilot, que és una extensió, Cursor és el mateix editor.
+
+### Capacitats exclusives
+
+- **Composer:** genera múltiples fitxers simultàniament
+- **Context profund:** entén tot el teu projecte
+- **Edició per instruccions:** selecciona codi i demana canvis en llenguatge natural
+- **Mode agent:** la IA pot executar comandes, llegir fitxers i navegar pel teu projecte
+- **Xat amb context:** conversa conscient de tot el repositori
+
+### Diferències clau
+
+| Aspecte | Copilot | Cursor |
+|---------|---------|--------|
+| Tipus | Extensió | IDE complet |
+| Context | Fitxer actual + oberts | Tot el projecte |
+| Multifixer | Limitat | Nativa |
+| Control | Suggeriments | Edició directa |
+| Preu | $10/mes | $20/mes |
+
+<Callout type="warning">
+Cursor pot editar fitxers directament. Revisa sempre els canvis que fa abans de desar-los, especialment en projectes amb diversos fitxers afectats.
+</Callout>
+
+## Configuració i bones pràctiques
+
+### Per a tots dos
+
+- **Mantén el projecte net:** codi ben estructurat = millors suggeriments
+- **Usa fitxers de configuració:** tsconfig, eslint, prettier ajuden la IA
+- **Escriu proves:** la IA genera millor codi quan veu les proves
+- **Personalitza les instruccions:** tots dos permeten donar regles globals
+
+### Regles personalitzades
+
+Cursor permet crear un fitxer `.cursorrules` amb instruccions globals:
+
+```
+Eres un experto en TypeScript y Next.js.
+Usa siempre tipos explícitos.
+Sigue el patrón de componentes server por defecto.
+Genera tests con Vitest.
+```
+
+Copilot té una funció similar amb `copilot-instructions.md`.
+
+<Callout type="tip">
+Invertir 10 minuts a configurar les regles del teu assistent millora la qualitat del codi generat durant setmanes. És una de les tasques amb millor retorn de la inversió.
+</Callout>
+
+## Limitacions
+
+- **Codi repetitiu:** tendeixen a generar patrons comuns, no sempre la solució òptima
+- **Context limitat:** encara que milloren, encara no abasten projectes molt grans
+- **Dependència:** risc de perdre l'habilitat per a escriure codi sense ajuda
+- **Seguretat:** poden reproduir vulnerabilitats si no es revisen
+
+## Autoavaluació
+
+1. Quina és la diferència principal entre Copilot i Cursor?
+2. Quins avantatges té un IDE amb IA integrada davant d'una extensió?
+3. Com pots millorar la qualitat dels suggeriments del teu assistent?
+4. Quins riscos té la dependència excessiva dels assistents de codi?
+
+En la següent lliçó explorarem **Claude Code i altres assistents conversacionals** per a programació.

@@ -1,0 +1,106 @@
+---
+title: "Automatització de fluxos"
+description: "Make, Zapier, n8n: com integrar IA en els teus processos automatitzats"
+---
+
+## IA + Automatització
+
+La combinació d'intel·ligència artificial amb plataformes d'automatització està transformant la productivitat. On abans havies de programar fluxos rígids, ara pots crear processos intel·ligents que prenen decisions, adapten rutes i processen informació no estructurada.
+
+<Callout type="info">
+L'automatització tradicional segueix regles fixes. Amb IA, la regla es converteix en decidir què fer segons el context.
+</Callout>
+
+## Plataformes principals
+
+### Make (abans Integromat)
+
+Make és una plataforma visual d'automatització amb un editor de fluxos intuïtiu. La seua integració amb IA permet processar text amb LLMs, classificar contingut automàticament i extraure dades de documents no estructurats.
+
+**Mòduls d'IA en Make:**
+- OpenAI (ChatGPT, DALL-E)
+- Claude (Anthropic)
+- Google AI (Gemini)
+
+### Zapier
+
+Zapier és la plataforma més coneguda, amb més de 6000 integracions. La seua capa d'IA (Zapier Central) permet crear bots que interactuen amb les teues aplicacions i automatitzar decisions amb IA.
+
+**Zapier + IA és ideal per a:**
+- Classificació automàtica de tickets de suport
+- Resums automàtics de reunions
+- Enriquiment de leads amb dades d'IA
+
+### n8n
+
+n8n és de codi obert i es pot autoallotjar. Ofereix el màxim control i personalització, amb execució local de dades sensibles i fluxos de treball complexos.
+
+**Avantatges de n8n per als agents IA:**
+- Pots executar models localment (Ollama, Llama)
+- Control total sobre les dades
+- Integració amb bases de dades vectorials
+
+<Callout type="tip">
+Si treballes amb dades sensibles, n8n autoallotjat és la millor opció. Si necessites integracions ràpides, Zapier. Si busques l'equilibri, Make.
+</Callout>
+
+## Patrons d'automatització amb IA
+
+### Classificació intel·ligent
+
+Un correu arriba a la bústia de suport. La IA el classifica per categoria, urgència i departament, i l'assigna automàticament.
+
+```
+Correo entrante - IA clasifica - Enruta a departamento - Responde con plantilla
+```
+
+### Processament de documents
+
+Un PDF amb factures es processa automàticament: la IA extrau les dades, les valida i les introdueix en el sistema comptable.
+
+```
+PDF - IA extrae datos - Valida - Introduce en ERP - Archiva
+```
+
+### Atenció al client híbrida
+
+Un chatbot IA atén el client. Si no pot resoldre-ho, escala a una persona amb tot el context.
+
+```
+Cliente - Chatbot IA - Resuelve o escala a humano con contexto
+```
+
+### Generació de contingut
+
+La IA supervisa fonts de notícies, redacta resums, els personalitza per audiència i els publica en els canals corresponents.
+
+```
+Noticias - IA analiza - Redacta - Personaliza - Publica
+```
+
+## Com començar
+
+1. Identifica un procés repetitiu que consumisca temps
+2. Mapa el flux: entrada, processament, eixida
+3. Tria la plataforma segons les teues necessitats
+4. Dissenya el flux amb un pas d'IA en el punt crític
+5. Prova amb dades reals i ajusta
+6. Escala una vegada validat
+
+<Callout type="warning">
+No automatitzes tot de cop. Comença amb un procés xicotet, valida que funciona i després escala.
+</Callout>
+
+## Exemple pràctic: Resumidor automàtic
+
+Un flux que escolta un canal de Slack, rep contingut llarg, l'envia a un LLM amb un prompt de resum, publica el resum i l'emmagatzema.
+
+Este flux, que abans requeria una persona dedicada, ara s'executa en segons.
+
+## Autoavaluació
+
+1. Quina és la diferència entre Make, Zapier i n8n?
+2. En quin cas triaries n8n per damunt de les altres plataformes?
+3. Quines precaucions has de prendre en automatitzar amb IA?
+
+En la següent lliçó explorarem els marcs de treball i les eines per a construir agents des de codi.

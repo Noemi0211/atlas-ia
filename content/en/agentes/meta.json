@@ -1,0 +1,71 @@
+{
+  "bloque": 7,
+  "titulo": "Agents and Automation",
+  "descripcion": "MCP, RAG, autonomous agents and workflow automation",
+  "lecciones": [
+    {
+      "slug": "01-conceptos-fundamentales",
+      "titulo": "Fundamental concepts of AI agents",
+      "descripcion": "What AI agents are, how they work and why they are the future",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-tipos-de-agentes",
+      "titulo": "Types of agents",
+      "descripcion": "Reactive, memory-based, autonomous and multi-agent systems",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-mcp",
+      "titulo": "Model Context Protocol (MCP)",
+      "descripcion": "The protocol that connects language models with external tools",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-rag-avanzado",
+      "titulo": "Advanced RAG",
+      "descripcion": "Retrieval-Augmented Generation: take information retrieval to the next level",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "05-automatizacion-flujos",
+      "titulo": "Workflow automation",
+      "descripcion": "Make, Zapier, n8n: how to integrate AI into your automated processes",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-herramientas-para-agentes",
+      "titulo": "Tools for building agents",
+      "descripcion": "LangChain, AutoGPT, CrewAI and the framework ecosystem",
+      "orden": 6,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "07-ejemplos-practicos",
+      "titulo": "Practical examples of agents",
+      "descripcion": "Real use cases: assistants, automation, analysis and more",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "08-resumen-agentes",
+      "titulo": "Summary and resources",
+      "descripcion": "Review, self-assessment and resources to keep learning",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

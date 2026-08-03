@@ -1,0 +1,94 @@
+---
+title: "Anatomy of a good prompt"
+description: "The key elements that make up an effective prompt"
+---
+
+## An effective prompt has structure
+
+Just as a cooking recipe has ingredients and steps, a good prompt has key elements that make it work. You do not always need to use all of them, but knowing them will help you design better prompts.
+
+## The 7 key elements
+
+### 1. Role
+Tell the AI **who it is**. This sets the tone, depth and focus of the response.
+
+**Without role:** "Explain what machine learning is"
+**With role:** "You are a university AI professor teaching first-year students. Explain what machine learning is"
+
+### 2. Context
+Give the AI **relevant information** about the situation.
+
+**Without context:** "Write an email"
+**With context:** "Write an email to a customer who has just bought our software. They want to know how to install it. The tone should be friendly and professional."
+
+### 3. Specific task
+Say exactly **what you want** it to do. Be concrete.
+
+**Vague:** "Tell me about Python"
+**Specific:** "Compare Python and JavaScript on 3 aspects: execution speed, ease of learning and use in web development"
+
+### 4. Output format
+Indicate **how you want** the response: list, table, paragraphs, code...
+
+**Without format:** "Give me tips to save money"
+**With format:** "Give me 5 tips to save money in table format: Tip | How to apply it | Estimated savings"
+
+### 5. Constraints
+Set **limits** on the response: length, tone, audience, terms to avoid...
+
+**Example:** "Explain what a transformer is in under 100 words, as if you were explaining it to a 12-year-old."
+
+### 6. Examples (few-shot)
+Show the AI **examples** of the kind of response you expect.
+
+**Without example:** "Translate to English: The cat is on the roof"
+**With example:** "Translate these sentences into English following this format:
+'The dog runs fast' → 'The dog runs fast'
+'The cat is on the roof' → ..."
+
+### 7. Step by step
+Ask it to **reason** before answering (Chain-of-Thought).
+
+**Normal:** "Calculate 24 × 37"
+**Step by step:** "Calculate 24 × 37 step by step, explaining each operation"
+
+## Universal template
+
+```
+[Role] You are an [expert in X] specialising in [Y].
+[Context] I am currently [situation] and I need [need].
+[Task] I want you to [specific description of the task].
+[Format] Respond in [list/table/paragraphs] format.
+[Constraints] Use a [formal/informal] tone, maximum [N] words, aimed at [audience].
+```
+
+### Practical example
+
+```
+You are a digital marketing expert specialising in LinkedIn.
+I am currently creating my professional profile and I need to highlight my experience in AI.
+I want you to write a profile headline and a 3-line summary.
+Use a professional but accessible tone, aimed at tech recruiters.
+```
+
+## Common mistakes
+
+### Asking for everything at once
+**Bad:** "Make me a business plan, a market analysis and a financial forecast"
+**Good:** Ask for one thing at a time or structure the prompt into sections
+
+### Being too vague
+**Bad:** "Help me with my work"
+**Good:** "I need to prepare a 10-minute presentation on AI trends in 2026 for my sales team"
+
+### Not specifying the format
+**Bad:** "Tell me things about AI"
+**Good:** "Give me 5 practical applications of AI in the healthcare sector, in table format with a benefit column and an example"
+
+## Self-assessment
+
+1. What are the 7 key elements of a good prompt?
+2. Why is it important to specify the output format?
+3. Write a prompt for an everyday task using at least 4 of the 7 elements
+
+Ready? Next lesson: **Basic prompting techniques**.

@@ -1,0 +1,143 @@
+---
+title: "Model Context Protocol (MCP)"
+description: "El protocol que connecta models de llenguatge amb eines externes"
+---
+
+## Què és MCP
+
+El **Model Context Protocol (MCP)** és un protocol obert creat per Anthropic que estandarditza la manera com els models de llenguatge es connecten amb eines i fonts de dades externes.
+
+Pensa en MCP com el "USB-C de la IA": un estàndard universal perquè qualsevol model puga usar qualsevol eina.
+
+<Callout type="info">
+Abans de MCP, cada integració requeria codi personalitzat. Amb MCP, qualsevol agent compatible pot usar qualsevol servidor MCP sense configuració addicional.
+</Callout>
+
+## Arquitectura de MCP
+
+MCP segueix una arquitectura client-servidor:
+
+### Client MCP
+
+És l'agent o l'aplicació que consumeix les eines. Per exemple, Claude Desktop, un assistent personalitzat o el teu propi agent.
+
+### Servidor MCP
+
+És un procés independent que exposa eines, recursos i prompts. Cada servidor ofereix capacitats específiques:
+
+- **Eines:** funcions que l'agent pot executar (cercar, calcular, llegir fitxers)
+- **Recursos:** dades que l'agent pot consultar (documents, bases de dades, APIs)
+- **Prompts:** plantilles d'interacció predefinides
+
+### Transport
+
+La comunicació entre el client i el servidor pot ser:
+
+- **stdio:** per a eines locals (el servidor s'executa com a subprocés)
+- **HTTP + SSE:** per a servidors remots
+- **WebSocket:** per a la comunicació bidireccional en temps real
+
+## Com funciona en la pràctica
+
+Quan un agent necessita realitzar una acció, el flux és:
+
+1. L'agent rep una petició de la persona usuària
+2. Determina que necessita usar una eina
+3. Consulta el servidor MCP per a conéixer les eines disponibles
+4. El servidor torna la llista d'eines amb els seus paràmetres
+5. L'agent decideix quina eina usar i amb quins paràmetres
+6. El servidor executa l'eina i torna el resultat
+7. L'agent incorpora el resultat en la seua resposta
+
+### Exemple simple
+
+```
+Usuario: "¿Cuál es el tiempo hoy en Madrid?"
+
+Agente → Servidor MCP de clima
+  └── Llama a get_weather(city: "Madrid")
+Servidor → Agente
+  └── Devuelve { temperatura: 28°, humedad: 45% }
+Agente → Usuario
+  └── "Hoy en Madrid hace 28°C con humedad del 45%."
+```
+
+## Eines que pots exposar amb MCP
+
+### Processament de fitxers
+
+- Llegir, escriure i modificar fitxers locals
+- Processar documents PDF, Word, Excel
+- Manipular imatges i àudio
+
+### Accés a dades
+
+- Consultar bases de dades SQL
+- Cercar en índexs vectorials
+- Llegir APIs REST i GraphQL
+
+### Automatització
+
+- Executar ordres del sistema
+- Controlar navegadors web
+- Enviar correus i missatges
+- Gestionar calendaris i tasques
+
+### Serveis externs
+
+- Cercar en internet
+- Consultar xarxes socials
+- Accedir a serveis cloud
+
+## Avantatges d'usar MCP
+
+### Estandardització
+
+Qualsevol agent compatible amb MCP pot usar qualsevol servidor MCP. No més integracions ad-hoc.
+
+### Seguretat
+
+Els servidors MCP s'executen en entorns aïllats. L'agent no té accés directe al sistema, només a través de les eines definides.
+
+### Mantenibilitat
+
+Actualitzar una eina només requereix modificar el servidor MCP. Tots els agents que l'usen se'n beneficien automàticament.
+
+### Descobriment
+
+Els agents poden descobrir dinàmicament quines eines estan disponibles i com usar-les, sense configuració manual.
+
+<Callout type="tip">
+MCP canvia el paradigma: en lloc de dir-li a l'agent quines eines usar, li dius quins servidors MCP té disponibles i ell decideix com usar-los.
+</Callout>
+
+## MCP enfront d'altres alternatives
+
+| Aspecte | MCP | Function Calling | Plugins | Custom API |
+|---------|-----|-----------------|---------|------------|
+| Estàndard obert | Sí | No | No | No |
+| Descobriment | Automàtic | Manual | Manual | Manual |
+| Aïllament | Sí | No | Parcial | Depén |
+| Multi-model | Sí | Específic | Específic | Sí |
+
+## Primers passos amb MCP
+
+Per a crear un servidor MCP bàsic necessites:
+
+1. Definir les eines que exposaràs (nom, descripció, paràmetres)
+2. Implementar la lògica de cada eina
+3. Triar un transport (stdio per a proves locals)
+4. Iniciar el servidor i connectar-lo al teu agent
+
+<Callout type="info">
+El SDK de MCP està disponible per a Python i TypeScript. Pots trobar exemples i documentació en modelcontextprotocol.io.
+</Callout>
+
+## Autoavaluació
+
+1. Quin problema resol MCP en el desenvolupament d'agents?
+2. Explica la diferència entre el client MCP i el servidor MCP
+3. Per què MCP millora la seguretat en els agents?
+4. En quin cas usaries un servidor MCP remot i en quin un de local?
+
+En la següent lliçó veurem el **RAG avançat**, una tècnica clau perquè els agents accedisquen a informació externa de manera intel·ligent.

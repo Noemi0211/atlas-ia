@@ -1,0 +1,104 @@
+---
+title: "GitHub Copilot and Cursor"
+description: "Code assistants integrated into the IDE"
+---
+
+## Assistants in the editor
+
+Code assistants integrated into the IDE are the most direct way to use AI in day-to-day development. They activate while you type and offer real-time suggestions without interrupting your workflow.
+
+<Callout type="info">
+The main difference between an AI chat and an integrated assistant is context: Copilot and Cursor see your whole project, not just what you type in the chat.
+</Callout>
+
+## GitHub Copilot
+
+### What it is
+
+Launched in 2021, Copilot was the first widely adopted code assistant. It uses OpenAI models trained specifically for code.
+
+### Capabilities
+
+- **Inline autocomplete:** suggestions while you type
+- **Chat in the IDE:** contextual conversation about your code
+- **Code explanation:** select a block and ask for an explanation
+- **Test generation:** creates tests for selected functions
+- **Refactoring:** suggests structural improvements
+- **Multilanguage:** supports virtually any language
+
+### How to use it effectively
+
+1. **Write descriptive comments** before the code to guide generation
+2. **Define functions well** with clear names and types
+3. **Accept or reject** each suggestion with judgment
+4. **Use the chat** for complex tasks, not just autocomplete
+
+## Cursor
+
+### What it is
+
+Cursor is an IDE built from scratch with AI at its core. Unlike Copilot, which is an extension, Cursor is the editor itself.
+
+### Exclusive capabilities
+
+- **Composer:** generates multiple files simultaneously
+- **Deep context:** understands your whole project
+- **Instruction-based editing:** select code and request changes in natural language
+- **Agent mode:** the AI can run commands, read files and navigate your project
+- **Context-aware chat:** conversation aware of the entire repository
+
+### Key differences
+
+| Aspect | Copilot | Cursor |
+|---------|---------|--------|
+| Type | Extension | Complete IDE |
+| Context | Current file + open files | Entire project |
+| Multi-file | Limited | Native |
+| Control | Suggestions | Direct editing |
+| Price | $10/month | $20/month |
+
+<Callout type="warning">
+Cursor can edit files directly. Always review the changes it makes before saving them, especially in projects with several affected files.
+</Callout>
+
+## Configuration and best practices
+
+### For both
+
+- **Keep the project clean:** well-structured code = better suggestions
+- **Use configuration files:** tsconfig, eslint, prettier help the AI
+- **Write tests:** the AI generates better code when it sees the tests
+- **Customize the instructions:** both allow you to set global rules
+
+### Custom rules
+
+Cursor allows you to create a `.cursorrules` file with global instructions:
+
+```
+Eres un experto en TypeScript y Next.js.
+Usa siempre tipos explícitos.
+Sigue el patrón de componentes server por defecto.
+Genera tests con Vitest.
+```
+
+Copilot has a similar feature with `copilot-instructions.md`.
+
+<Callout type="tip">
+Spending 10 minutes configuring your assistant's rules improves the quality of the generated code for weeks. It is one of the tasks with the best return on investment.
+</Callout>
+
+## Limitations
+
+- **Repetitive code:** they tend to generate common patterns, not always the optimal solution
+- **Limited context:** although they are improving, they still do not cover very large projects
+- **Dependency:** risk of losing the ability to write code without help
+- **Security:** they can reproduce vulnerabilities if not reviewed
+
+## Self-assessment
+
+1. What is the main difference between Copilot and Cursor?
+2. What advantages does an IDE with integrated AI have over an extension?
+3. How can you improve the quality of your assistant's suggestions?
+4. What risks does excessive reliance on code assistants carry?
+
+In the next lesson we will explore **Claude Code and other conversational assistants** for programming.

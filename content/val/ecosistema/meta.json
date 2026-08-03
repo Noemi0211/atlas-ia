@@ -1,0 +1,71 @@
+{
+  "bloque": 2,
+  "titulo": "Mapa de l'Ecosistema",
+  "descripcion": "Explora les principals eines d'IA i compara-les entre si",
+  "lecciones": [
+    {
+      "slug": "01-panorama-ecosistema",
+      "titulo": "Panorama de l'Ecosistema IA",
+      "descripcion": "Una visió general de les categories d'eines i com s'organitzen",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-asistentes-conversacion",
+      "titulo": "Assistents de Conversa",
+      "descripcion": "ChatGPT, Claude, Gemini: els xatbots que ho estan canviant tot",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-herramientas-codigo",
+      "titulo": "Eines de Codi",
+      "descripcion": "Copilot, Cursor i més: IA per a programadors",
+      "orden": 3,
+      "duracion": "9 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-generacion-imagenes",
+      "titulo": "Generació d'Imatges",
+      "descripcion": "DALL-E, Midjourney, Stable Diffusion: art i disseny amb IA",
+      "orden": 4,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "05-audio-video",
+      "titulo": "Àudio i Vídeo amb IA",
+      "descripcion": "Eines per a crear, editar i transformar contingut multimèdia",
+      "orden": 5,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-plataformas-nocode",
+      "titulo": "Plataformes No-Code de IA",
+      "descripcion": "Automatitza i crea sense programar amb plataformes intel·ligents",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-comparador-interactivo",
+      "titulo": "Comparador Interactiu",
+      "descripcion": "Compara eines cara a cara segons les teues necessitats",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "08-arbol-decision",
+      "titulo": "Arbre de Decisió",
+      "descripcion": "Respon preguntes i descobreix quina eina és ideal per a tu",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

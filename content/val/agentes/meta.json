@@ -1,0 +1,71 @@
+{
+  "bloque": 7,
+  "titulo": "Agents i Automatització",
+  "descripcion": "MCP, RAG, agents autònoms i automatització de fluxos de treball",
+  "lecciones": [
+    {
+      "slug": "01-conceptos-fundamentales",
+      "titulo": "Conceptes fonamentals d'agents IA",
+      "descripcion": "Què són els agents d'IA, com funcionen i per què són el futur",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-tipos-de-agentes",
+      "titulo": "Tipus d'agents",
+      "descripcion": "Reactius, amb memòria, autònoms i sistemes multiagent",
+      "orden": 2,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "03-mcp",
+      "titulo": "Model Context Protocol (MCP)",
+      "descripcion": "El protocol que connecta models de llenguatge amb eines externes",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-rag-avanzado",
+      "titulo": "RAG avançat",
+      "descripcion": "Retrieval-Augmented Generation: porta la recuperació d'informació al següent nivell",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "avanzado"
+    },
+    {
+      "slug": "05-automatizacion-flujos",
+      "titulo": "Automatització de fluxos",
+      "descripcion": "Make, Zapier, n8n: com integrar IA en els teus processos automatitzats",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-herramientas-para-agentes",
+      "titulo": "Eines per a construir agents",
+      "descripcion": "LangChain, AutoGPT, CrewAI i l'ecosistema de marcs de treball",
+      "orden": 6,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "07-ejemplos-practicos",
+      "titulo": "Exemples pràctics d'agents",
+      "descripcion": "Casos d'ús reals: assistents, automatització, anàlisi i més",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "08-resumen-agentes",
+      "titulo": "Resum i recursos",
+      "descripcion": "Repàs, autoavaluació i recursos per a seguir aprenent",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

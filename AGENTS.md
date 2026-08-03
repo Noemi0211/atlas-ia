@@ -150,11 +150,20 @@ npm run lint      # ESLint
 - `t.lab.tokenSimulator` NO tiene clave `examplesTexts`; `localeToIntl`: en→"en", val→"ca-ES-valencia", es→"es"
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
 
+### Fase 17 ✅ (lecciones MDX localizadas)
+- Infraestructura locale-aware en `lib/content.ts`: `getLeccionesBloque(bloqueSlug, locale)`, `getLeccion(bloqueSlug, leccionSlug, locale)` y `getAllLecciones(locale)` con fallback al español (lee `content/<locale>/<bloque>/` y, si no existe, `content/<bloque>/`); `searchContent(query, locale)` busca en el contenido localizado
+- Callers actualizados: `app/bloques/[slug]/page.tsx` y `app/bloques/[slug]/[leccion]/page.tsx` pasan `locale` de `getLocale()`
+- Las 71 lecciones traducidas a `content/en/` y `content/val/` (11 bloques × 71 = 76 mdx por idioma, incluye 5 meta.json+5 en la raíz de `content`); directorios de contenido: `content/` (es, raíz), `content/en/`, `content/val/`
+- `meta.json` localizados (en/val) para los 11 bloques con títulos/descripciones traducidos
+- Reglas de traducción aplicadas: frontmatter `title`/`description` traducidos; estructura MDX, `<Callout type>` (info/warning/tip/error), tablas, bloques de código y URLs intactos; términos técnicos asentados sin traducir (prompt, token, LLM, RAG, MCP, transformer, Machine Learning, AI Act…); valenciano con normativa AVL (conéixer, Eines, Avaluació, persona usuària, professorat…)
+- El conteo de líneas por lección se preserva 1:1 respecto a la fuente en español (control de integridad)
+- Verificación: 76 mdx por idioma en los 11 bloques, `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `09208a5` (Fase 15, Bloque 10 Novedades 2026)
-- Cambios SIN commitear al cerrar esta sesión: todo el trabajo de i18n de la Fase 16 (infraestructura `lib/i18n/`, `LanguageSelector`, diccionarios y UI/páginas/componentes localizados, `lib/ai.ts`, `lib/content.ts`, rutas `/api/chat` y `/api/search`) y `AGENTS.md` (ver Fase 16)
-- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 16
-- Siguientes pasos posibles: traducir las 71 lecciones MDX (contenido), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma
+- Último commit: `7da3d78` (Fase 16, i18n es/en/val)
+- Cambios SIN commitear al cerrar esta sesión: la Fase 17 completa (`lib/content.ts`, `app/bloques/[slug]/page.tsx`, `app/bloques/[slug]/[leccion]/page.tsx`, `content/en/` (76 mdx + 11 meta.json), `content/val/` (76 mdx + 11 meta.json)) y `AGENTS.md` (ver Fase 17)
+- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 17
+- Siguientes pasos posibles: mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
 
 ## Bloques de contenido (MDX)
 
@@ -268,7 +277,7 @@ Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlac
 - `es.ts` es la fuente de verdad de la estructura `Dictionary`; `en.ts` y `val.ts` usan `satisfies Dictionary` para que TypeScript avise si falta una clave.
 - En `data` los arrays de glosario (47) y cronología (28) se emparejan por **índice** con las fuentes en español; los demás datos se casan por clave/slug/id. No añadir/quitar entradas de glosario o cronología sin sincronizar los tres diccionarios.
 - `getBadgeText`, `getRetoText` y `getProyectoText` devuelven objetos `{ nombre, descripcion }`.
-- Las lecciones MDX (71) permanecen en español; traducirlas es una fase posterior.
+- Las lecciones MDX están localizadas (es/en/val, 71×3 en `content/`, `content/en/`, `content/val/`); si un bloque no está traducido, `lib/content.ts` hace fallback al español.
 
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión

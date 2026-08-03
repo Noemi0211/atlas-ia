@@ -1,0 +1,123 @@
+---
+title: "Machine Learning explicat"
+description: "Com aprenen les màquines sense ser programades explícitament"
+---
+
+## Machine Learning explicat
+
+Si hagueres d'explicar el Machine Learning a un xiquet de 10 anys, ho diries així:
+
+> En lloc d'ensenyar a un ordinador les regles, li donem milers d'exemples i ell sol descobreix les regles.
+
+Això és Machine Learning. Ni més, ni menys.
+
+## La diferència fonamental
+
+### Programació tradicional
+
+```
+Entrada + Reglas → Salida
+```
+
+Un programador escriu les regles explícitament. Si A, llavors B. Si temperatura > 30, llavors "fa calor".
+
+### Machine Learning
+
+```
+Entrada + Salida → Reglas
+```
+
+Li donem a l'ordinador molts exemples d'entrada i eixida, i ell **descobreix les regles** sol.
+
+## Els tres tipus de Machine Learning
+
+### Aprenentatge supervisat
+
+El més comú. Li donem al model **dades etiquetades**: "això és un gat", "això és un gos". El model aprén la relació i després pot classificar imatges noves.
+
+**Exemple real**: Filtrar correu brossa. Li ensenyes milers de correus etiquetats com a "brossa" o "no brossa". El model aprén a distingir-los.
+
+### Aprenentatge no supervisat
+
+Sense etiquetes. El model rep dades i **troba patrons** pel seu compte.
+
+**Exemple real**: Segmentació de clients. Un comerç en línia agrupa automàticament els seus clients per comportament de compra, sense dir-li com fer-ho.
+
+### Aprenentatge per reforç
+
+El model aprén per **assaig i error**. Rep recompenses pels encerts i penalitzacions pels errors.
+
+**Exemple real**: AlphaGo. La IA va aprendre a jugar a Go jugant milions de partides contra si mateixa.
+
+## Com funciona en la pràctica
+
+Imagina que vols crear un model que reconega si un correu és brossa:
+
+1. **Recopiles dades**: Milers de correus etiquetats
+2. **Entrenes el model**: Li mostres les dades una i altra vegada
+3. **El model ajusta els seus paràmetres**: Internament, el model té milions d'"interruptors" que van ajustant-se
+4. **Valides**: Proves amb dades que el model no ha vist
+5. **Desplegues**: El model comença a funcionar en producció
+
+<Callout type="tip">
+El Machine Learning no és màgia. És estadística a gran escala. El model troba correlacions en les dades que els humans no podem veure per la quantitat de variables implicades.
+</Callout>
+
+## Conceptes clau
+
+### Features (característiques)
+
+Són les variables que el model usa per a prendre decisions. En un model de predicció de preus de cases, les features serien: metres quadrats, nombre d'habitacions, ubicació, etc.
+
+### Model
+
+És la funció matemàtica que transforma les entrades en eixides. Pot ser una regressió lineal simple o una xarxa neuronal amb mil milions de paràmetres.
+
+### Entrenament
+
+El procés d'ajustar els paràmetres del model usant dades. És com estudiar per a un examen: el model "estudia" les dades una i altra vegada fins que millora.
+
+### Pèrdua (loss)
+
+Una mesura de quant s'equivoca el model. L'objectiu de l'entrenament és **minimitzar la pèrdua**. És com una nota negativa: com més baixa, millor.
+
+### Generalització
+
+La capacitat del model de funcionar bé amb dades que **mai ha vist**. Un model que memoritza les dades d'entrenament però falla amb dades noves té un problema anomenat **sobreajust**.
+
+<Callout type="warning">
+L'error més comú en Machine Learning és confondre memorització amb aprenentatge. Un model pot obtindre un 100% de precisió en les dades d'entrenament i ser inútil en el món real. Per això sempre separem dades d'entrenament i de prova.
+</Callout>
+
+## Exemples quotidians
+
+| Aplicació | Tipus de ML | Què fa |
+|------------|-----------|----------|
+| Spotify | No supervisat + reforç | Recomana música basant-se en patrons d'escolta |
+| Gmail | Supervisat | Filtra brossa i classifica correus |
+| Netflix | No supervisat | Sugereix pel·lícules segons el teu historial |
+| Siri/Alexa | Supervisat | Reconeix la veu i comprén el llenguatge |
+| Uber | Supervisat + reforç | Prediu temps d'arribada i optimitza rutes |
+
+## Machine Learning i la seua relació amb la IA
+
+Machine Learning és **un subconjunt de la IA**. No tota la IA usa Machine Learning, però la majoria de la IA moderna sí.
+
+```
+Inteligencia Artificial (campo amplio)
+├── Machine Learning (aprendizaje de datos)
+│   ├── Deep Learning (redes neuronales profundas)
+│   │   ├── LLM (modelos de lenguaje)
+│   │   ├── Computer Vision (visión por computadora)
+│   │   └── ...
+│   └── Otros métodos (árboles de decisión, SVM, etc.)
+└── IA simbólica, sistemas expertos, etc.
+```
+
+## Autoavaluació
+
+1. Quina és la diferència entre programació tradicional i Machine Learning?
+2. Anomena els tres tipus de Machine Learning
+3. Què és el sobreajust i per què és un problema?
+
+Llest? Següent lliçó: **Deep Learning i xarxes neuronals**.

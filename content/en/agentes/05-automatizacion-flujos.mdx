@@ -1,0 +1,106 @@
+---
+title: "Workflow automation"
+description: "Make, Zapier, n8n: how to integrate AI into your automated processes"
+---
+
+## AI + Automation
+
+The combination of artificial intelligence with automation platforms is transforming productivity. Where you used to have to program rigid flows, you can now create intelligent processes that make decisions, adapt routes and process unstructured information.
+
+<Callout type="info">
+Traditional automation follows fixed rules. With AI, the rule becomes deciding what to do based on the context.
+</Callout>
+
+## Main platforms
+
+### Make (formerly Integromat)
+
+Make is a visual automation platform with an intuitive flow editor. Its AI integration allows you to process text with LLMs, automatically classify content and extract data from unstructured documents.
+
+**AI modules in Make:**
+- OpenAI (ChatGPT, DALL-E)
+- Claude (Anthropic)
+- Google AI (Gemini)
+
+### Zapier
+
+Zapier is the best-known platform, with more than 6,000 integrations. Its AI layer (Zapier Central) allows you to create bots that interact with your applications and automate decisions with AI.
+
+**Zapier + AI is ideal for:**
+- Automatic classification of support tickets
+- Automatic meeting summaries
+- Lead enrichment with AI data
+
+### n8n
+
+n8n is open source and can be self-hosted. It offers maximum control and customisation, with local execution of sensitive data and complex workflows.
+
+**Advantages of n8n for AI agents:**
+- You can run models locally (Ollama, Llama)
+- Full control over data
+- Integration with vector databases
+
+<Callout type="tip">
+If you work with sensitive data, self-hosted n8n is the best option. If you need quick integrations, Zapier. If you are looking for a balance, Make.
+</Callout>
+
+## Automation patterns with AI
+
+### Smart classification
+
+An email arrives in the support inbox. AI classifies it by category, urgency and department, and assigns it automatically.
+
+```
+Incoming email - AI classifies - Routes to department - Responds with template
+```
+
+### Document processing
+
+A PDF with invoices is processed automatically: AI extracts the data, validates it and enters it into the accounting system.
+
+```
+PDF - AI extracts data - Validates - Enters into ERP - Archives
+```
+
+### Hybrid customer service
+
+An AI chatbot serves the customer. If it cannot resolve the issue, it escalates to a person with all the context.
+
+```
+Customer - AI chatbot - Resolves or escalates to human with context
+```
+
+### Content generation
+
+AI monitors news sources, writes summaries, personalises them by audience and publishes them to the appropriate channels.
+
+```
+News - AI analyses - Writes - Personalises - Publishes
+```
+
+## How to get started
+
+1. Identify a repetitive process that takes time
+2. Map the flow: input, processing, output
+3. Choose the platform according to your needs
+4. Design the flow with an AI step at the critical point
+5. Test with real data and adjust
+6. Scale once validated
+
+<Callout type="warning">
+Do not automate everything at once. Start with a small process, validate that it works and then scale.
+</Callout>
+
+## Practical example: Automatic summariser
+
+A flow that listens to a Slack channel, receives long content, sends it to an LLM with a summarising prompt, publishes the summary and stores it.
+
+This flow, which previously required a dedicated person, now runs in seconds.
+
+## Self-assessment
+
+1. What is the difference between Make, Zapier and n8n?
+2. In which case would you choose n8n over the other platforms?
+3. What precautions should you take when automating with AI?
+
+In the next lesson we will explore the frameworks and tools for building agents from code.

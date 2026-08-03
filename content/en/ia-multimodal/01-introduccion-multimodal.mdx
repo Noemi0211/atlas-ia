@@ -1,0 +1,90 @@
+---
+title: "Introduction to multimodal AI"
+description: "What multimodality is and how models process multiple formats"
+---
+
+## Beyond text
+
+So far, most of the AI models we have seen work mainly with text. But the real world is multimodal: we combine images, sounds, words and gestures to communicate. Multimodal AI seeks to replicate this capability.
+
+<Callout type="info">
+A multimodal model is one that can process and generate information in multiple formats: text, images, audio and video, all within a single system.
+</Callout>
+
+## What does multimodal mean?
+
+The term **multimodal** refers to the ability to work with multiple modalities or data formats. While a traditional language model only understands text, a multimodal model can:
+
+- Read and describe images
+- Transcribe and generate audio
+- Analyze and create video
+- Combine all of the above
+
+## Main multimodal models
+
+### GPT-4V / GPT-4o
+
+OpenAI integrated vision into GPT-4, making it possible to analyze images, diagrams and scanned documents. GPT-4o added real-time audio capabilities.
+
+### Claude 3 / 4 (Sonnet)
+
+Anthropic incorporated vision with advanced capabilities for analyzing images, charts and complex documents.
+
+### Gemini
+
+Google's model was born multimodal: text, images, audio and video natively. It is designed to reason across multiple formats simultaneously.
+
+### Llama 3.2 (Meta)
+
+Meta's most recent version added open-source multimodal capabilities, democratizing access to this technology.
+
+| Model | Text | Image | Audio | Video |
+|-------|------|-------|-------|-------|
+| GPT-4o | ✅ | ✅ | ✅ | ✅ |
+| Claude 3.5 | ✅ | ✅ | ❌ | ❌ |
+| Gemini 2.0 | ✅ | ✅ | ✅ | ✅ |
+| Llama 3.2 | ✅ | ✅ | ❌ | ❌ |
+
+## How multimodality works
+
+### Unified architecture
+
+Modern multimodal models use an architecture that converts all modalities into a common representation space. Text is tokenized, images are divided into patches, audio is converted into spectrograms, and everything is processed with a single transformer.
+
+### Specialized encoders
+
+Each modality has an encoder that extracts relevant features:
+
+- **Vision:** CNNs or ViTs (Vision Transformers) to process pixels
+- **Audio:** Wave2Vec or Whisper to convert sound into representations
+- **Text:** traditional language embeddings
+
+### Multimodal fusion
+
+The key step is combining information from different sources. There are three main approaches:
+
+1. **Early fusion:** fuse before processing
+2. **Late fusion:** process separately and combine at the end
+3. **Hybrid fusion:** mix at multiple stages
+
+<Callout type="tip">
+Early fusion is more powerful because it allows the model to learn relationships between modalities, but it is computationally more expensive.
+</Callout>
+
+## Cross-cutting applications
+
+Multimodality opens up possibilities that go beyond the sum of its parts:
+
+- **Multimodal search:** find images by describing them with text
+- **Universal assistants:** that see, hear and speak
+- **Document analysis:** extract information from invoices, reports and charts
+- **Visual translation:** describe an image in another language
+
+## Self-assessment
+
+1. What does it mean for a model to be multimodal?
+2. Name three current multimodal models
+3. What is the difference between early and late fusion?
+4. What advantage does a multimodal assistant have over a text-only one?
+
+In the next lesson we will explore in detail the **generation and editing of images** with AI.

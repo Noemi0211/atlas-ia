@@ -1,0 +1,120 @@
+---
+title: "Tipus d'agents"
+description: "Reactius, amb memòria, autònoms i multiagent"
+---
+
+## Classificació d'agents
+
+No tots els agents d'IA són iguals. Es classifiquen segons la seua capacitat de raonament, memòria i autonomia. Triar el tipus correcte és clau per a cada aplicació.
+
+## Agents reactius
+
+Són els més simples. Responen a estímuls de l'entorn sense mantindre un estat intern.
+
+### Característiques
+
+- No tenen memòria del passat
+- Actuen basant-se únicament en l'entrada actual
+- Són ràpids i previsibles
+- Ideals per a tasques simples i ben definides
+
+### Exemples
+
+- Un chatbot que respon preguntes freqüents sense context
+- Un sistema de regles SI-LLAVORS amb IA
+- Un classificador d'imatges que etiqueta sense recordar classificacions anteriors
+
+<Callout type="info">
+Els agents reactius són com un mirall: reflecteixen el que tenen davant sense recordar el que van veure abans.
+</Callout>
+
+## Agents amb memòria
+
+Afegeixen la capacitat de recordar i usar informació del passat. Són el tipus més comú en les aplicacions actuals.
+
+### Tipus de memòria
+
+- **Memòria de finestra:** recorda els últims N missatges
+- **Memòria resumida:** comprimeix converses llargues en resums
+- **Memòria vectorial:** emmagatzema informació en embeddings per a la cerca semàntica
+- **Memòria estructurada:** guarda dades en taules o bases de dades
+
+### Exemples
+
+- Assistents virtuals que recorden les preferències de cada persona usuària
+- Tutors d'IA que segueixen el progrés de l'estudiantat
+- Sistemes de recomanació amb memòria d'interaccions
+
+## Agents autònoms
+
+Són agents amb capacitat de planificació i execució de diversos passos. Poden descompondre objectius complexos en subtasques i executar-les de manera independent.
+
+### Capacitats
+
+- **Planificació:** divideixen un objectiu en passos
+- **Execució:** completen cada pas usant eines
+- **Adaptació:** canvien d'estratègia si alguna cosa falla
+- **Reflexió:** avaluen els seus propis resultats i aprenen
+
+### El patró ReAct
+
+ReAct (Reasoning + Acting) és el patró més usat per als agents autònoms. Alterna entre:
+
+1. **Raonar:** pensa què fer basant-se en el context
+2. **Actuar:** executa una eina o acció
+3. **Observar:** rep el resultat de l'acció
+4. **Repetir:** continua fins a completar l'objectiu
+
+<Callout type="tip">
+El patró ReAct és com un científic: formula una hipòtesi (raona), fa un experiment (actua), observa els resultats i ajusta la seua teoria.
+</Callout>
+
+## Sistemes multiagent
+
+Diversos agents treballen junts per a resoldre problemes complexos. Cada agent té un rol especialitzat.
+
+### Rols comuns
+
+- **Coordinador:** divideix les tasques i assigna el treball
+- **Investigador:** cerca informació
+- **Analista:** processa i avalua dades
+- **Executor:** realitza accions concretes
+- **Validador:** verifica resultats
+
+### Avantatges
+
+- Escalabilitat: cada agent se centra en la seua tasca
+- Especialització: agents entrenats per a tasques específiques
+- Resiliència: si un agent falla, altres poden compensar-ho
+- Col·laboració: emergeixen comportaments complexos
+
+### Exemple pràctic
+
+Un equip d'agents per a crear un informe:
+
+1. **Agent investigador** cerca fonts rellevants
+2. **Agent redactor** escriu l'esborrany
+3. **Agent revisor** corregeix errors i millora l'estil
+4. **Agent formatador** genera el document final
+
+## Com triar el tipus adequat
+
+| Tipus | Complexitat | Memòria | Autonomia | Quan usar-lo |
+|------|------------|---------|-----------|---------------|
+| Reactiu | Baixa | No | Nul·la | Preguntes freqüents, classificació simple |
+| Amb memòria | Mitjana | Sí | Baixa | Assistents, tutors, chatbots |
+| Autònom | Alta | Sí | Alta | Automatització complexa, anàlisi |
+| Multiagent | Molt alta | Sí | Molt alta | Projectes grans, sistemes empresarials |
+
+<Callout type="warning">
+No sempre necessites l'agent més complex. Un agent reactiu ben dissenyat pot ser més efectiu que un sistema multiagent per a una tasca simple. Comença simple i escala segons necessites.
+</Callout>
+
+## Autoavaluació
+
+1. Quina és la diferència entre un agent reactiu i un amb memòria?
+2. Explica el patró ReAct amb les teues pròpies paraules
+3. En quin cas triaries un sistema multiagent?
+4. Quin rol compliria un agent validador en un equip?
+
+En la següent lliçó aprendrem sobre el **Model Context Protocol (MCP)**, la forma estàndard de connectar agents amb eines externes.

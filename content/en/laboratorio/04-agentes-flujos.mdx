@@ -1,0 +1,116 @@
+---
+title: "Agents and practical flows"
+description: "Building agent flows and automation"
+---
+
+## Designing intelligent flows
+
+Agent Flow lets you visualise and build chains of agents by connecting nodes. It is like drawing a flowchart, but each node is a functional component that processes information autonomously.
+
+<Callout type="info">
+An agent flow is a processing chain where each stage receives information from the previous one, transforms it and passes it to the next. The design of the flow determines the quality of the final result.
+</Callout>
+
+## Available nodes
+
+### Input
+Entry point of the flow. Defines what information the flow receives: free text, a prompt, a document or structured data.
+
+### LLM
+Processing node with a language model. It is the brain of the flow. You can configure the specific prompt that will guide its behaviour in this stage.
+
+### RAG
+Information retrieval node. It queries an external knowledge base to enrich the context before generating an answer.
+
+### Tool
+Action node. It executes an external operation: searching the internet, making an API call, transforming data or generating a file.
+
+### Output
+Exit point. Defines how the result is delivered: text, structured summary or formatted data.
+
+## How to build a flow
+
+### Basic flow: Simple assistant
+
+```
+Input → LLM → Output
+```
+
+The simplest flow. Useful for question-and-answer tasks where no external context is needed.
+
+### Intermediate flow: Assistant with knowledge
+
+```
+Input → RAG → LLM → Output
+```
+
+The model retrieves relevant information before generating its answer. Ideal for questions about specific documentation.
+
+### Advanced flow: Autonomous agent
+
+```
+Input → LLM → Tool → LLM → Output
+```
+
+The model decides which tool to use, executes the action and then processes the result. Similar to how real autonomous agents work.
+
+## Practical exercises
+
+### Exercise 1: Smart summariser
+
+**Goal:** create a flow that summarises long documents.
+
+**Suggested flow:**
+1. Input: long document
+2. LLM: "Extract the main ideas of this text"
+3. Output: structured summary
+
+### Exercise 2: Automatic researcher
+
+**Goal:** a flow that researches a topic and generates a report.
+
+**Suggested flow:**
+1. Input: research topic
+2. RAG: searches for relevant information
+3. LLM: "Synthesise the information into a report"
+4. Output: structured report
+
+### Exercise 3: Multilayer assistant
+
+**Goal:** a system that analyses, improves and formats text.
+
+**Suggested flow:**
+1. Input: original text
+2. LLM (analyse): "Identify errors and areas for improvement"
+3. LLM (improve): "Rewrite the text applying the improvements"
+4. Tool: "Format in markdown"
+5. Output: improved and formatted text
+
+<Callout type="tip">
+Think of each LLM node as a specialist. Give it a prompt specific to its task, not a generic one. A focused specialist performs better than a generalist.
+</Callout>
+
+## Node configuration
+
+### Prompts per node
+
+Each LLM node lets you configure its own prompt. This is essential:
+
+**Node 1:** "You are an analyst. Extract the key data from this text."
+**Node 2:** "You are a writer. Generate a professional report with the data provided."
+
+### Order and flow
+
+The order of the nodes matters. The same set of nodes in a different order produces different results:
+
+- `Input → RAG → LLM → Output`: the LLM uses the retrieved context
+- `Input → LLM → RAG → Output`: the LLM first interprets and then searches
+
+## Self-assessment
+
+1. What are the five types of node available in Agent Flow?
+2. What is the advantage of adding a RAG node before the LLM?
+3. Design a flow for an assistant that translates technical texts from English to Spanish, keeping the specialised terminology
+4. Why is it important to configure specific prompts per node?
+
+In the last lesson we will develop **integrated projects** combining all the laboratory tools.

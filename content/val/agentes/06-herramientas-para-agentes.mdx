@@ -1,0 +1,177 @@
+---
+title: "Eines per a construir agents"
+description: "LangChain, AutoGPT, CrewAI i l'ecosistema de marcs de treball"
+---
+
+## L'ecosistema de marcs de treball
+
+Construir un agent des de zero és complex. Per sort, existeix un ecosistema madur de marcs de treball que abstrauen les parts difícils: gestió de memòria, execució d'eines, planificació i més.
+
+<Callout type="info">
+Usar un marc de treball per a agents és com construir una casa amb eines elèctriques en lloc de manuals. El resultat és millor, més ràpid i amb menys errors.
+</Callout>
+
+## LangChain
+
+És el marc de treball més popular per a construir aplicacions amb LLMs. El seu ecosistema inclou:
+
+### LangChain Core
+
+El nucli proporciona:
+
+- **Chains:** seqüències de crides a LLM
+- **Agents:** implementació del patró ReAct
+- **Tools:** interfície estàndard per a eines
+- **Memory:** múltiples tipus de memòria
+- **Callbacks:** hooks per a la monitorització
+
+### LangGraph
+
+Extensió per a crear agents amb grafs d'estats. Permet:
+
+- Fluxos complexos amb bifurcacions
+- Bucles i cicles d'execució
+- Estats compartits entre nodes
+- Visualització del graf d'execució
+
+### LangSmith
+
+Plataforma d'observabilitat per a depurar i monitoritzar agents en producció.
+
+### Exemple amb LangChain
+
+```python
+from langchain.agents import create_react_agent
+from langchain.tools import tool
+from langchain_openai import ChatOpenAI
+
+@tool
+def buscar_clima(ciudad: str) -> str:
+    """Obtiene el clima actual de una ciudad"""
+    return f"28°C en {ciudad}"
+
+llm = ChatOpenAI(model="gpt-4")
+agent = create_react_agent(llm, [buscar_clima])
+```
+
+## AutoGPT
+
+AutoGPT va ser un dels primers projectes a demostrar agents autònoms. Encara que la seua popularitat inicial ha donat pas a marcs de treball més robustos, el seu impacte va ser enorme.
+
+### Concepte
+
+AutoGPT rep un objectiu general i el descompon automàticament en subtasques. Cada subtasca s'executa i s'avalua abans de passar a la següent.
+
+### Característiques
+
+- Memòria a llarg termini amb vectors
+- Navegació web autònoma
+- Execució de codi
+- Emmagatzematge de fitxers
+- Cicle continu de pensar-actuar-avaluar
+
+### Limitacions
+
+- Alt consum de tokens
+- Pot desviar-se de l'objectiu original
+- Dificultat per a tasques molt específiques
+- Sense una interfície d'usuari polida
+
+<Callout type="tip">
+AutoGPT és excel·lent per a prototipar i entendre el potencial dels agents autònoms. Per a producció, LangChain o CrewAI ofereixen més control i estabilitat.
+</Callout>
+
+## CrewAI
+
+CrewAI està dissenyat específicament per a sistemes multiagent. Permet definir equips d'agents amb rols, eines i objectius compartits.
+
+### Conceptes clau
+
+**Agent:** un agent amb un rol específic (investigador, escriptor, revisor)
+**Task:** una tasca que ha de completar un agent
+**Crew:** l'equip d'agents que col·laboren
+**Process:** el flux de treball (seqüencial o jeràrquic)
+
+### Exemple amb CrewAI
+
+```python
+from crewai import Agent, Task, Crew
+
+investigador = Agent(
+    role="Investigador",
+    goal="Buscar información relevante",
+    backstory="Experto en investigación web",
+    tools=[buscar_web]
+)
+
+redactor = Agent(
+    role="Redactor",
+    goal="Escribir informes claros",
+    backstory="Periodista tecnológico",
+)
+
+tarea = Task(
+    description="Investiga y redacta un informe sobre agentes IA",
+    agent=investigador
+)
+
+crew = Crew(agents=[investigador, redactor], tasks=[tarea])
+resultado = crew.kickoff()
+```
+
+### Avantatges de CrewAI
+
+- Dissenyat per a multiagent des de l'inici
+- Rols i personalitats definibles
+- Processos seqüencials i jeràrquics
+- Delegació automàtica entre agents
+
+## Altres marcs de treball destacats
+
+### Haystack
+
+Marc de treball per a construir sistemes RAG i fluxos de cerca. Ideal si el teu agent necessita recuperació d'informació avançada.
+
+### Semantic Kernel
+
+Creat per Microsoft, s'integra profundament amb l'ecosistema Azure. Ideal per a empreses que ja usen Microsoft.
+
+### Dify
+
+Plataforma de codi obert amb interfície visual. Permet crear agents sense codi, ideal per a un prototipatge ràpid.
+
+### Botpress
+
+Plataforma per a crear chatbots amb capacitats d'agent. Orientada a l'atenció al client.
+
+## Comparativa de marcs de treball
+
+| Marc de treball | Enfocament | Multiagent | RAG | Corba d'aprenentatge |
+|-----------|---------|-------------|-----|-------------------|
+| LangChain | General | Sí (LangGraph) | Sí | Mitjana |
+| CrewAI | Multiagent | Sí (natiu) | Parcial | Baixa |
+| AutoGPT | Autònom | No | Sí | Alta |
+| Haystack | RAG/cerca | No | Sí | Mitjana |
+| Semantic Kernel | Enterprise | Sí | Sí | Alta |
+| Dify | Visual | Sí | Sí | Molt baixa |
+
+## Com triar
+
+- **Per a començar:** LangChain o CrewAI
+- **Per a sistemes RAG:** Haystack
+- **Per a entorns corporatius:** Semantic Kernel
+- **Per al prototipatge visual:** Dify
+- **Per a experimentar:** AutoGPT
+
+<Callout type="warning">
+No et cases amb un marc de treball. Aprén els conceptes (agents, eines, memòria, RAG) i el marc de treball serà només un detall d'implementació.
+</Callout>
+
+## Autoavaluació
+
+1. Quina és la diferència principal entre LangChain i CrewAI?
+2. Quin problema resol LangGraph?
+3. En quin cas triaries Dify en lloc de LangChain?
+4. Per què AutoGPT no és ideal per a producció?
+
+En la següent lliçó veurem **exemples pràctics** d'agents en acció amb casos d'ús reals.

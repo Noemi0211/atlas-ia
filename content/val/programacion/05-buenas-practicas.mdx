@@ -1,0 +1,120 @@
+---
+title: "Bones pràctiques i depuració amb IA"
+description: "Revisió de codi, proves i depuració assistida"
+---
+
+## Qualitat del codi augmentada
+
+La IA no serveix només per a generar codi: també és una eina excel·lent per a millorar-lo. La revisió de codi, les proves i la depuració són àrees on la IA pot aportar un valor immens.
+
+<Callout type="info">
+El millor ús de la IA en programació no és escriure més codi, sinó escriure millor codi. Usa la IA per a revisar, refinar i enfortir el que ja has creat.
+</Callout>
+
+## Revisió de codi amb IA
+
+### Què pot revisar
+
+- **Estil i convencions:** segueix les guies d'estil del projecte
+- **Possibles errors:** detecta patrons que solen causar errors
+- **Rendiment:** identifica colls d'ampolla i operacions ineficients
+- **Seguretat:** troba vulnerabilitats comunes (injecció, XSS, CSRF)
+- **Mantenibilitat:** suggereix millores de llegibilitat i organització
+
+### Eines
+
+- **CodeRabbit:** revisió automatitzada de PRs amb IA
+- **Copilot Code Review:** integrat a GitHub
+- **ChatGPT + Claude:** enganxa fragments per a revisió ad-hoc
+
+```
+Prompt para code review:
+
+"Actúa como un revisor senior experto en TypeScript y Next.js.
+Revisa este código y señala:
+1. Posibles bugs o edge cases no cubiertos
+2. Problemas de rendimiento
+3. Violaciones de buenas prácticas
+4. Oportunidades de refactorización
+5. Problemas de seguridad
+
+Sé constructivo y sugiere soluciones concretas."
+```
+
+## Proves amb IA
+
+### Generació de proves
+
+La IA pot generar proves unitàries, d'integració i de cap a cap a partir del codi font:
+
+> "Genera pruebas unitarias con Vitest para esta función. Cubre casos normales, casos límite y errores esperados."
+
+### El que la IA fa bé en les proves
+
+- Proves per a funcions pures i previsibles
+- Cobertura de casos límit obvis
+- Generació de mocks i fixtures
+- Proves de regressió per a errors corregits
+
+### El que requereix supervisió
+
+- Proves d'integració complexes
+- Escenaris d'ús realistes
+- Validació de la correcció de la prova
+- Manteniment del conjunt de proves
+
+<Callout type="tip">
+Demana a la IA que genere tests abans d'escriure la implementació (TDD assistit). Això t'obliga a pensar en la interfície i els casos d'ús abans del codi intern.
+</Callout>
+
+## Depuració amb IA
+
+### Com depurar amb IA
+
+1. **Descriu el símptoma:** què ocorre i què hauria d'ocórrer
+2. **Proporciona context:** l'error, el codi rellevant, les dades d'entrada
+3. **Inclou el que has provat:** estalvia suggeriments obvis
+4. **Demana hipòtesis:** no només la solució, sinó per què ocorre
+
+### Estratègies de depuració assistida
+
+- **Anàlisi de registres:** la IA pot trobar patrons en registres extensos
+- **Comparació de versions:** identificar quin canvi va introduir l'error
+- **Traces de pila:** explicar el significat d'errors complexos
+- **Depuració inversa:** partir de l'error i rastrejar cap enrere
+
+## Bones pràctiques generals
+
+### Per a generar codi
+
+1. **Sé específic:** com més detall, millor resultat
+2. **Divideix i venceràs:** les tasques petites i concretes funcionen millor
+3. **Itera:** demana millores sobre el codi generat
+4. **Verifica sempre:** no confiïs cegament
+
+### Per a revisar codi
+
+1. **Mantén el context:** la IA necessita saber el projecte i les seues convencions
+2. **Prioritza:** demana que se centre en seguretat o rendiment segons el cas
+3. **Combina eines:** diferents IA detecten diferents problemes
+4. **Revisa la revisió:** la IA també s'equivoca
+
+### Per a les proves
+
+1. **Genera abans d'implementar:** TDD assistit
+2. **Demana cobertura de casos límit:** els casos que no vas considerar
+3. **Revisa les proves generades:** unes proves incorrectes són pitjors que no tindre cap prova
+4. **Mantén els tests:** la IA pot actualitzar tests quan canvia el codi
+
+<Callout type="warning">
+Una prova incorrecta que sempre passa és més perillosa que no tindre cap prova. Dóna una falsa sensació de seguretat. Revisa sempre que les proves generades proven realment el que han de provar.
+</Callout>
+
+## Autoavaluació
+
+1. Quins aspectes pot revisar la IA en una revisió de codi?
+2. Com pot la IA ajudar en les proves automatitzades?
+3. Descriu el procés per a depurar un error amb ajuda d'IA
+4. Per què és important revisar els tests generats per IA?
+
+En l'última lliçó farem un **repàs general** del bloc i t'oferirem recursos per a seguir aprenent.

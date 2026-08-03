@@ -1,0 +1,90 @@
+---
+title: "Introducció a la IA multimodal"
+description: "Què és la multimodalitat i com els models processen múltiples formats"
+---
+
+## Més enllà del text
+
+Fins ara, la majoria dels models d'IA que hem vist treballen principalment amb text. Però el món real és multimodal: combinem imatges, sons, paraules i gestos per a comunicar-nos. La IA multimodal busca replicar aquesta capacitat.
+
+<Callout type="info">
+Un model multimodal és aquell que pot processar i generar informació en múltiples formats: text, imatges, àudio i vídeo, tot dins d'un mateix sistema.
+</Callout>
+
+## Què significa multimodal?
+
+El terme **multimodal** es refereix a la capacitat de treballar amb múltiples modalitats o formats de dades. Mentre que un model de llenguatge tradicional només entén text, un model multimodal pot:
+
+- Llegir i descriure imatges
+- Transcriure i generar àudio
+- Analitzar i crear vídeo
+- Combinar totes les anteriors
+
+## Principals models multimodals
+
+### GPT-4V / GPT-4o
+
+OpenAI va integrar la visió en GPT-4, cosa que permet analitzar imatges, diagrames i documents escanejats. GPT-4o va afegir la capacitat d'àudio en temps real.
+
+### Claude 3 / 4 (Sonnet)
+
+Anthropic va incorporar la visió amb capacitats avançades d'anàlisi d'imatges, gràfics i documents complexos.
+
+### Gemini
+
+El model de Google va nàixer multimodal: text, imatges, àudio i vídeo de manera nativa. Està dissenyat per a raonar a través de múltiples formats simultàniament.
+
+### Llama 3.2 (Meta)
+
+La versió més recent de Meta va afegir capacitats multimodals de codi obert, democratitzant l'accés a aquesta tecnologia.
+
+| Model | Text | Imatge | Àudio | Vídeo |
+|-------|------|--------|-------|-------|
+| GPT-4o | ✅ | ✅ | ✅ | ✅ |
+| Claude 3.5 | ✅ | ✅ | ❌ | ❌ |
+| Gemini 2.0 | ✅ | ✅ | ✅ | ✅ |
+| Llama 3.2 | ✅ | ✅ | ❌ | ❌ |
+
+## Com funciona la multimodalitat
+
+### Arquitectura unificada
+
+Els models multimodals moderns utilitzen una arquitectura que converteix totes les modalitats en un espai comú de representació. El text es tokenitza, les imatges es divideixen en parxes, l'àudio es converteix en espectrogrames, i tot es processa amb un mateix transformer.
+
+### Encoders especialitzats
+
+Cada modalitat té un encoder que extrau característiques rellevants:
+
+- **Visió:** CNNs o ViTs (Vision Transformers) per a processar píxels
+- **Àudio:** Wave2Vec o Whisper per a convertir el so en representacions
+- **Text:** embeddings tradicionals de llenguatge
+
+### Fusió multimodal
+
+El pas clau és combinar la informació de diferents fonts. Hi ha tres enfocaments principals:
+
+1. **Primerenca:** fusionar abans de processar
+2. **Tardana:** processar per separat i combinar al final
+3. **Híbrida:** barrejar en múltiples etapes
+
+<Callout type="tip">
+La fusió primerenca és més potent perquè permet que el model aprenga relacions entre modalitats, però és computacionalment més costosa.
+</Callout>
+
+## Aplicacions transversals
+
+La multimodalitat obri possibilitats que van més enllà de la suma de les seues parts:
+
+- **Cerca multimodal:** trobar imatges descrivint-les amb text
+- **Assistents universals:** que veuen, senten i parlen
+- **Anàlisi de documents:** extraure informació de factures, informes i gràfics
+- **Traducció visual:** descriure una imatge en un altre idioma
+
+## Autoavaluació
+
+1. Què significa que un model siga multimodal?
+2. Nomena tres models multimodals actuals
+3. Quina és la diferència entre la fusió primerenca i la tardana?
+4. Quin avantatge té un assistent multimodal davant d'un que només treballa amb text?
+
+En la següent lliçó explorarem en detall la **generació i l'edició d'imatges** amb IA.

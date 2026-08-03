@@ -1,0 +1,119 @@
+---
+title: "Deep Learning i xarxes neuronals"
+description: "Les xarxes inspirades en el cervell que ho estan canviant tot"
+---
+
+## Deep Learning i xarxes neuronals
+
+Si Machine Learning és aprendre de les dades, Deep Learning és aprendre de les dades **amb capes i capes d'abstracció**.
+
+És com la diferència entre aprendre a sumar i aprendre càlcul. Tots dos són matemàtiques, però un té molta més profunditat que l'altre.
+
+## Què és una xarxa neuronal artificial?
+
+Una xarxa neuronal és un sistema inspirat en el cervell humà. Està composta per **neurones artificials** organitzades en capes.
+
+### L'analogia de l'equip de treball
+
+Imagina una empresa amb tres departaments:
+
+1. **Departament d'entrada** (capa d'entrada): Rep la informació crua — una imatge, un text, unes dades
+2. **Departaments intermedis** (capes ocultes): Processen la informació, cadascun al seu nivell d'abstracció
+3. **Departament d'eixida** (capa d'eixida): Produïx el resultat — "això és un gat", "aquest correu és brossa"
+
+En una imatge d'ordinador, per exemple:
+
+- La primera capa detecta **vores** i colors
+- La segona capa combina vores per a detectar **formes**
+- La tercera capa combina formes per a detectar **objectes** (ulls, orelles)
+- La capa final reconeix l'**animal complet** (gat, gos)
+
+## Per què "deep" (profund)?
+
+Perquè té **moltes capes intermèdies**. Una xarxa amb poques capes podria tindre 3-5 capes. Una xarxa "profunda" pot tindre **desenes o centenars de capes**.
+
+Cada capa aprén representacions **més complexes** de les dades.
+
+```
+Entrada → [Capa 1: bordes] → [Capa 2: formas] → [Capa 3: objetos] → Salida
+```
+
+<Callout type="info">
+El Deep Learning funciona especialment bé quan hi ha **moltes dades** i el problema requereix entendre patrons **jeràrquics** — com en imatges, text, àudio o vídeo.
+</Callout>
+
+## Com funciona l'entrenament
+
+### Forward pass (pas cap avant)
+
+Les dades entren per la capa inicial i van passant per cada capa fins a produir una eixida. Cada neurona aplica una operació matemàtica simple.
+
+### Càlcul d'error
+
+Es compara l'eixida del model amb la resposta correcta. La diferència és l'**error**.
+
+### Backpropagation (propagació cap arrere)
+
+Ací està la màgia. L'error s'envia **cap arrere** per la xarxa, ajustant els paràmetres de cada neurona per a reduir l'error.
+
+### Iteració
+
+Aquest procés es repeteix **milions de vegades** amb milers d'exemples. Gradualment, la xarxa va millorant.
+
+## Tipus de xarxes neuronals importants
+
+### Xarxes neuronals convolucionals (CNN)
+
+Especialitzades en **imatges**. Detecten patrons visuals com vores, textures i objectes.
+
+**Ús**: Reconeixement facial, diagnòstic mèdic per imatge, conducció autònoma.
+
+### Xarxes neuronals recurrents (RNN/LSTM)
+
+Dissenyades per a **seqüències** — text, àudio, sèries temporals. Processen la informació en ordre.
+
+**Ús**: Traducció, predicció de text, anàlisi de sentiments.
+
+### Transformers
+
+L'arquitectura dominant actual. Processen **tota la seqüència alhora** en lloc d'un a un. Això els fa molt més ràpids i potents.
+
+**Ús**: ChatGPT, Claude, Gemini — tots els grans models de llenguatge.
+
+### Xarxes generatives adversàries (GAN)
+
+Dues xarxes competeixen entre si: una genera contingut fals i l'altra intenta detectar si és fals. El resultat és contingut cada vegada més realista.
+
+**Ús**: Generació d'imatges, deepfakes, superresolució.
+
+## Deep Learning en la vida real
+
+| Aplicació | Xarxa utilitzada | Impacte |
+|------------|--------------|---------|
+| ChatGPT/Claude | Transformer | Conversa i generació de text |
+| DALL-E/Midjourney | Diffusion + Transformer | Generació d'imatges |
+| Reconeixement facial | CNN | Seguretat, desbloqueig de mòbil |
+| Cotxe autònom | CNN + Transformer | Conducció assistida |
+| Diagnòstic mèdic | CNN | Detecció primerenca de malalties |
+| Traducció | Transformer | Traducció automàtica d'alta qualitat |
+
+## Limitacions del Deep Learning
+
+No tot és perfecte:
+
+- **Necessita moltes dades**: Funciona bé amb milions d'exemples
+- **És computacionalment costós**: Entrenar un model gran pot costar milions de dòlars
+- **És una capsa negra**: A vegades no sabem per què pren certes decisions
+- **És propens al sobreajust**: Pot memoritzar en lloc d'aprendre
+
+<Callout type="warning">
+El Deep Learning no és la solució a tot. Per a molts problemes, un model simple (com una regressió o un arbre de decisió) funciona igual de bé o millor. Elegir l'eina adequada és clau.
+</Callout>
+
+## Autoavaluació
+
+1. Per què s'anomena "deep" learning?
+2. Quina és la diferència entre CNN i Transformers?
+3. Per què el Deep Learning necessita tantes dades?
+
+Llest? Següent lliçó: **Models de llenguatge gran (LLM)**.

@@ -1,0 +1,71 @@
+{
+  "bloque": 3,
+  "titulo": "Enginyeria de Prompt",
+  "descripcion": "Domina l'art de comunicar-te eficaçment amb la IA",
+  "lecciones": [
+    {
+      "slug": "01-que-es-prompting",
+      "titulo": "Introducció a l'Enginyeria de Prompt",
+      "descripcion": "Què és el prompting i per què és una habilitat clau en l'era de la IA",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-anatomia-prompt",
+      "titulo": "Anatomia d'un bon prompt",
+      "descripcion": "Els elements clau que componen un prompt efectiu",
+      "orden": 2,
+      "duracion": "9 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-tecnicas-basicas",
+      "titulo": "Tècniques de prompting bàsiques",
+      "descripcion": "Role prompting, few-shot, zero-shot i com aplicar-les",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-tecnicas-avanzadas",
+      "titulo": "Tècniques de prompting avançades",
+      "descripcion": "Chain-of-Thought, Tree-of-Thought, ReAct i més",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-prompting-por-modelo",
+      "titulo": "Prompting per a diferents models",
+      "descripcion": "ChatGPT vs Claude vs Gemini: com adaptar els teus prompts",
+      "orden": 5,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-refinamiento-iterativo",
+      "titulo": "Refinament iteratiu de prompts",
+      "descripcion": "Com millorar els teus prompts pas a pas amb la retroalimentació de la IA",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-calculadora-prompts",
+      "titulo": "Calculadora de Prompts",
+      "descripcion": "Dissenya prompts personalitzats amb la nostra eina interactiva",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-resumen-prompting",
+      "titulo": "Resum i millors pràctiques",
+      "descripcion": "Consolida el que has après i porta el teu prompting al següent nivell",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

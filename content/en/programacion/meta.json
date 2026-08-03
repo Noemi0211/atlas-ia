@@ -1,0 +1,55 @@
+{
+  "bloque": 6,
+  "titulo": "Assisted Programming",
+  "descripcion": "Cursor, Copilot, Claude Code and more tools for developers",
+  "lecciones": [
+    {
+      "slug": "01-introduccion",
+      "titulo": "Introduction to AI-assisted programming",
+      "descripcion": "How AI is transforming the way we write code",
+      "orden": 1,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-copilot-cursor",
+      "titulo": "GitHub Copilot and Cursor",
+      "descripcion": "Code assistants integrated into the IDE",
+      "orden": 2,
+      "duracion": "12 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-claude-code-chat",
+      "titulo": "Claude Code and conversational assistants",
+      "descripcion": "AI chats specialized in code generation and debugging",
+      "orden": 3,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "04-agentes-codigo",
+      "titulo": "Autonomous coding agents",
+      "descripcion": "Devin, Factory, OpenHands and the future of autonomous programming",
+      "orden": 4,
+      "duracion": "12 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-buenas-practicas",
+      "titulo": "Best practices and AI-assisted debugging",
+      "descripcion": "Code review, testing and assisted debugging",
+      "orden": 5,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "06-resumen-recursos",
+      "titulo": "Summary and resources",
+      "descripcion": "Review, self-assessment and resources to keep learning",
+      "orden": 6,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}

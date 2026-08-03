@@ -1,0 +1,90 @@
+---
+title: "Fundamental concepts of AI agents"
+description: "What AI agents are, how they work and why they are the future"
+---
+
+## What is an AI agent
+
+An **AI agent** is an autonomous system that perceives its environment, processes information and executes actions to achieve a specific goal.
+
+Unlike a traditional language model that only generates text, an agent can:
+
+- Make decisions based on context
+- Use external tools (APIs, databases, browsers)
+- Maintain long-term memory
+- Execute actions in the real world
+- Learn and adapt from experience
+
+<Callout type="info">
+An LLM without tools is like a teacher who knows a great deal but cannot write on the whiteboard. An agent is that same teacher with a whiteboard, books and an internet connection.
+</Callout>
+
+## Essential components
+
+### Perception
+
+The agent receives information from the environment. This can be text, images, structured data or sensor signals. The quality of perception determines the quality of the decision.
+
+### Reasoning
+
+The brain of the agent. It uses a language model (LLM) as its reasoning engine to analyse information, plan actions and evaluate results.
+
+### Action
+
+The agent executes actions: calling an API, writing a file, sending an email, controlling a device. Actions can be deterministic or require later evaluation.
+
+### Memory
+
+Agents can have:
+
+- **Short-term memory:** the context of the current conversation
+- **Long-term memory:** persistent information stored in vectors or databases
+- **Episodic memory:** a record of past actions and their results
+
+## The agent loop
+
+How an agent works follows a continuous loop:
+
+1. **Observe** the current state of the environment
+2. **Reason** about what to do next
+3. **Act** by running a tool or returning a response
+4. **Evaluate** the result of the action
+5. **Repeat** until the goal is achieved
+
+<Callout type="tip">
+The agent loop is similar to the control loop of a robot: sensor → processor → actuator → feedback. The difference is that here the "processor" is an LLM that can reason flexibly.
+</Callout>
+
+## Why agents matter
+
+Agents represent a qualitative leap over traditional chatbots for several reasons:
+
+- **Autonomy:** they can work without constant supervision
+- **Integration:** they connect with existing systems
+- **Scalability:** one agent can handle tasks that would take hours of human work
+- **Accuracy:** by being able to consult external sources, they reduce hallucinations
+
+| Aspect | Traditional chatbot | AI agent |
+|--------|---------------------|----------|
+| Scope | Conversation | Task execution |
+| Tools | None | APIs, databases, browser |
+| Memory | Limited context | Persistent |
+| Autonomy | Low | High |
+
+## Everyday examples
+
+You already use agents without realising it:
+
+- **Code assistants** such as Copilot and Cursor that read files, run commands and edit code
+- **Automations** in Make or Zapier that decide which flow to run based on context
+- **Advanced chatbots** that search for information in real time before responding
+- **RAG systems** that retrieve relevant documents to generate accurate responses
+
+## Self-assessment
+
+1. What is the main difference between an LLM and an agent?
+2. Name the four essential components of an agent
+3. Why is long-term memory important in an agent?
+4. What advantage does an agent have over a traditional chatbot?
+
+In the next lesson we will explore the different **types of agents** that exist and how to choose the right one for each task.

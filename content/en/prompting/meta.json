@@ -1,0 +1,71 @@
+{
+  "bloque": 3,
+  "titulo": "Prompt Engineering",
+  "descripcion": "Master the art of communicating effectively with AI",
+  "lecciones": [
+    {
+      "slug": "01-que-es-prompting",
+      "titulo": "Introduction to Prompt Engineering",
+      "descripcion": "What prompting is and why it is a key skill in the age of AI",
+      "orden": 1,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "02-anatomia-prompt",
+      "titulo": "Anatomy of a good prompt",
+      "descripcion": "The key elements that make up an effective prompt",
+      "orden": 2,
+      "duracion": "9 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "03-tecnicas-basicas",
+      "titulo": "Basic prompting techniques",
+      "descripcion": "Role prompting, few-shot, zero-shot and how to apply them",
+      "orden": 3,
+      "duracion": "10 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "04-tecnicas-avanzadas",
+      "titulo": "Advanced prompting techniques",
+      "descripcion": "Chain-of-Thought, Tree-of-Thought, ReAct and more",
+      "orden": 4,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "05-prompting-por-modelo",
+      "titulo": "Prompting for different models",
+      "descripcion": "ChatGPT vs Claude vs Gemini: how to adapt your prompts",
+      "orden": 5,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "06-refinamiento-iterativo",
+      "titulo": "Iterative prompt refinement",
+      "descripcion": "How to improve your prompts step by step using AI feedback",
+      "orden": 6,
+      "duracion": "7 min",
+      "dificultad": "basico"
+    },
+    {
+      "slug": "07-calculadora-prompts",
+      "titulo": "Prompt Calculator",
+      "descripcion": "Design custom prompts with our interactive tool",
+      "orden": 7,
+      "duracion": "10 min",
+      "dificultad": "intermedio"
+    },
+    {
+      "slug": "08-resumen-prompting",
+      "titulo": "Summary and best practices",
+      "descripcion": "Consolidate what you have learned and take your prompting to the next level",
+      "orden": 8,
+      "duracion": "8 min",
+      "dificultad": "basico"
+    }
+  ]
+}
