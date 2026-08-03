@@ -9,6 +9,8 @@ import type {
 } from "../types";
 import { BLOQUES as BLOQUES_ES, NAV_ITEMS as NAV_ITEMS_ES } from "../constants";
 import { CRONOLOGIA as CRONOLOGIA_ES, type HitoIA } from "../cronologia-data";
+import { GLOSARIO as GLOSARIO_ES } from "../glosario-data";
+import { slugify } from "../utils";
 import {
   CATEGORIAS as CATEGORIAS_ES,
   HERRAMIENTAS as HERRAMIENTAS_ES,
@@ -84,6 +86,28 @@ export function getGlosario(t: Dictionary): GlosarioTermino[] {
 
 export function getCategoriasGlosario(t: Dictionary): string[] {
   return GLOSARIO_CATEGORY_ORDER.map((k) => t.data.glosarioCategorias[k]);
+}
+
+export interface GlosarioTerminoLocalizado {
+  slug: string;
+  termino: string;
+  definicion: string;
+  categoria: string;
+  categoriaKey: string;
+}
+
+export function getGlosarioTerminos(t: Dictionary): GlosarioTerminoLocalizado[] {
+  return t.data.glosario.map((entry, i) => {
+    const categoriaKey = entry.categoria as GlosarioCatKey;
+    const fuente = GLOSARIO_ES[i];
+    return {
+      slug: slugify(fuente ? fuente.termino : entry.termino),
+      termino: entry.termino,
+      definicion: entry.definicion,
+      categoria: t.data.glosarioCategorias[categoriaKey] ?? entry.categoria,
+      categoriaKey,
+    };
+  });
 }
 
 export function getCronologia(t: Dictionary): HitoIA[] {

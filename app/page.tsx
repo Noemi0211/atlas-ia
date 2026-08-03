@@ -59,7 +59,7 @@ export default async function HomePage() {
   const bloques = getBLOQUES(t);
 
   return (
-    <>
+    <div data-read-aloud>
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
         <div className="relative max-w-wide mx-auto px-6 pt-16 pb-20 lg:pt-24 lg:pb-28">
@@ -210,6 +210,6 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
-    </>
+    </div>
   );
 }

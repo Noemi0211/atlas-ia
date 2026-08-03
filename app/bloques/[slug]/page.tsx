@@ -77,7 +77,7 @@ export default async function BloquePage({ params }: Props) {
   const colorClass = colorMap[bloque.color] || colorMap.primary;
 
   return (
-    <div className="max-w-content mx-auto px-6 py-10">
+    <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs
         items={[
           { label: t.bloques.title, href: "/bloques" },

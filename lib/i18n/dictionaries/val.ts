@@ -155,6 +155,17 @@ export const valDict = {
     notFound: "Lliçó no trobada",
   },
 
+  speech: {
+    title: "Lectura en veu alta",
+    listen: "Escoltar contingut",
+    stop: "Detindre la lectura",
+    speed: "Velocitat de lectura",
+    reading: "Llegint...",
+    finished: "Lectura finalitzada",
+    notSupported: "El teu navegador no és compatible amb la lectura en veu alta",
+    noContent: "No hi ha contingut per a llegir en esta pàgina",
+  },
+
   glosario: {
     title: "Glossari",
     subtitle: "Termes clau d'Intel·ligència Artificial explicats de manera clara i senzilla.",
@@ -162,6 +173,13 @@ export const valDict = {
     termsCount: "termes",
     for: "per a",
     noResults: "No s'han trobat termes",
+  },
+
+  glossaryPopover: {
+    categoryLabel: "Categoria",
+    openTermAria: "Veure la definició de {termino}",
+    close: "Tanca",
+    viewFullDefinition: "Veure la definició completa",
   },
 
   cronologia: {

@@ -19,7 +19,7 @@ export default async function PerfilPage() {
   const t = getDictionary(locale);
 
   return (
-    <div className="max-w-content mx-auto px-6 py-10">
+    <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs items={[{ label: t.perfil.title }]} className="mb-6" />
 
       <div className="mb-10">

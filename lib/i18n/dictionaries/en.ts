@@ -155,6 +155,17 @@ export const enDict = {
     notFound: "Lesson not found",
   },
 
+  speech: {
+    title: "Read aloud",
+    listen: "Listen to content",
+    stop: "Stop reading",
+    speed: "Reading speed",
+    reading: "Reading...",
+    finished: "Reading finished",
+    notSupported: "Your browser does not support text-to-speech",
+    noContent: "There is no content to read on this page",
+  },
+
   glosario: {
     title: "Glossary",
     subtitle: "Key Artificial Intelligence terms explained clearly and simply.",
@@ -162,6 +173,13 @@ export const enDict = {
     termsCount: "terms",
     for: "for",
     noResults: "No terms found",
+  },
+
+  glossaryPopover: {
+    categoryLabel: "Category",
+    openTermAria: "See definition of {termino}",
+    close: "Close",
+    viewFullDefinition: "View full definition",
   },
 
   cronologia: {

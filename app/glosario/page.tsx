@@ -1,21 +1,58 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { agruparPorLetra } from "@/lib/glosario-data";
 import { useI18n } from "@/lib/i18n/provider";
-import { getGlosario, getCategoriasGlosario } from "@/lib/i18n/data";
+import {
+  getGlosario,
+  getCategoriasGlosario,
+  getGlosarioTerminos,
+} from "@/lib/i18n/data";
 import { cn } from "@/lib/utils";
 import { Search, BookMarked } from "lucide-react";
+
+const DEEPLINK_EVENT = "atlas:glossary-deeplink";
 
 export default function GlosarioPage() {
   const { t } = useI18n();
   const glosario = useMemo(() => getGlosario(t), [t]);
   const categorias = useMemo(() => getCategoriasGlosario(t), [t]);
   const todas = t.data.glosarioCategorias.todas;
+  const terminosConSlug = useMemo(() => getGlosarioTerminos(t), [t]);
 
   const [busqueda, setBusqueda] = useState("");
   const [categoria, setCategoria] = useState(todas);
+  const [destacado, setDestacado] = useState<string | null>(null);
+  const highlightedRef = useRef<string | null>(null);
+
+  const aplicarDeepLink = useCallback(
+    (slug: string) => {
+      const termino = terminosConSlug.find((item) => item.slug === slug);
+      if (!termino) return;
+      setCategoria(todas);
+      setBusqueda(termino.termino);
+      setDestacado(termino.termino);
+    },
+    [terminosConSlug, todas]
+  );
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("termino");
+    if (!slug) return;
+    const timer = window.setTimeout(() => aplicarDeepLink(slug), 0);
+    return () => window.clearTimeout(timer);
+  }, [aplicarDeepLink]);
+
+  useEffect(() => {
+    const onDeepLink = (event: Event) => {
+      const slug = (event as CustomEvent<string>).detail;
+      if (slug) aplicarDeepLink(slug);
+    };
+    window.addEventListener(DEEPLINK_EVENT, onDeepLink);
+    return () => window.removeEventListener(DEEPLINK_EVENT, onDeepLink);
+  }, [aplicarDeepLink]);
 
   const terminosFiltrados = useMemo(() => {
     const query = busqueda
@@ -39,8 +76,24 @@ export default function GlosarioPage() {
 
   const grupos = useMemo(() => agruparPorLetra(terminosFiltrados), [terminosFiltrados]);
 
+  useEffect(() => {
+    if (!destacado) return;
+    if (highlightedRef.current === destacado) return;
+    const timer = window.setTimeout(() => {
+      const el = document.querySelector<HTMLElement>(
+        `[data-glossario-termino="${CSS.escape(destacado)}"]`
+      );
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.focus({ preventScroll: true });
+        highlightedRef.current = destacado;
+      }
+    }, 60);
+    return () => window.clearTimeout(timer);
+  }, [destacado, terminosFiltrados, busqueda]);
+
   return (
-    <div className="max-w-content mx-auto px-6 py-10">
+    <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs items={[{ label: t.glosario.title }]} className="mb-6" />
 
       <div className="mb-8">
@@ -112,7 +165,14 @@ export default function GlosarioPage() {
                 {terminos.map((termino) => (
                   <div
                     key={termino.termino}
-                    className="p-4 rounded-xl border border-border bg-bg"
+                    data-glossario-termino={termino.termino}
+                    tabIndex={-1}
+                    className={cn(
+                      "p-4 rounded-xl border bg-bg outline-none",
+                      destacado === termino.termino
+                        ? "border-primary ring-2 ring-primary/30"
+                        : "border-border"
+                    )}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <h3 className="font-semibold text-fg mb-1">{termino.termino}</h3>

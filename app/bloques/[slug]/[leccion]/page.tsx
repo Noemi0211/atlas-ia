@@ -102,7 +102,7 @@ export default async function LeccionPage({ params }: Props) {
           lecciones={lecciones}
         />
 
-        <div className="flex-1 min-w-0 max-w-content">
+        <div className="flex-1 min-w-0 max-w-content" data-read-aloud>
           <header className="mb-8 pb-6 border-b border-border">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2 text-xs text-fg-muted">

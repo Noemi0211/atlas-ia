@@ -6,6 +6,9 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
+import { SpeechReader } from "@/components/accessibility/SpeechReader";
+import { GlossaryProvider } from "@/components/accessibility/GlossaryProvider";
+import { GlossaryTermLinks } from "@/components/accessibility/GlossaryTermLinks";
 
 interface ShellProps {
   children: React.ReactNode;
@@ -46,6 +49,12 @@ export function Shell({ children }: ShellProps) {
       )}>
         <Footer />
       </div>
+
+      <SpeechReader />
+
+      <GlossaryProvider>
+        <GlossaryTermLinks />
+      </GlossaryProvider>
     </>
   );
 }

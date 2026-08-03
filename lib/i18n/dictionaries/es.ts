@@ -164,6 +164,17 @@ export const esDict = {
     notFound: "Lección no encontrada",
   },
 
+  speech: {
+    title: "Lectura por voz",
+    listen: "Escuchar contenido",
+    stop: "Detener lectura",
+    speed: "Velocidad de lectura",
+    reading: "Leyendo...",
+    finished: "Lectura finalizada",
+    notSupported: "Tu navegador no es compatible con la lectura por voz",
+    noContent: "No hay contenido que leer en esta página",
+  },
+
   glosario: {
     title: "Glosario",
     subtitle: "Términos clave de Inteligencia Artificial explicados de forma clara y sencilla.",
@@ -171,6 +182,13 @@ export const esDict = {
     termsCount: "términos",
     for: "para",
     noResults: "No se encontraron términos",
+  },
+
+  glossaryPopover: {
+    categoryLabel: "Categoría",
+    openTermAria: "Ver definición de {termino}",
+    close: "Cerrar",
+    viewFullDefinition: "Ver definición completa",
   },
 
   cronologia: {

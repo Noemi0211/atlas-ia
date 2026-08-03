@@ -33,7 +33,7 @@ export default function LaboratorioPage() {
   const ActiveComponent = TABS.find((tab) => tab.id === activeTab)?.component || AIChat;
 
   return (
-    <div className="max-w-content mx-auto px-6 py-10">
+    <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs items={[{ label: t.laboratorio.title }]} className="mb-6" />
 
       <div className="mb-8">

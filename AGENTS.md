@@ -159,11 +159,33 @@ npm run lint      # ESLint
 - El conteo de líneas por lección se preserva 1:1 respecto a la fuente en español (control de integridad)
 - Verificación: 76 mdx por idioma en los 11 bloques, `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
 
+### Fase 18 ✅ (accesibilidad: lectura por voz con Web Speech API)
+- `lib/speech.ts`: utilidad de síntesis — `MAIN_CONTENT_SELECTOR` (`[data-read-aloud]`), selectores excluidos de lectura (`pre, code, script, style, svg, nav, aside, button, select, input, textarea, [aria-hidden='true'], [data-read-aloud-exclude]`), `extractReadableText`, `splitTextForSpeech` (fragmentado por frases), `createUtterance`, `getSpeechVoices`, `getVoiceForLocale`, `isSpeechSupported`
+- `components/accessibility/SpeechReader.tsx`: botones Escuchar/Detener flotantes, control de velocidad (0.5–2), avisos con `aria-live`, se detiene automáticamente al cambiar de página (fix lint: `stopReading` envuelto en `setTimeout` por `react-hooks/set-state-in-effect`)
+- Integrado en `components/layout/Shell.tsx`
+- Atributo `data-read-aloud` añadido a 8 páginas: home, bloques (lista/bloque/lección), glosario, cronología, laboratorio, perfil
+- Sección `speech` en los tres diccionarios (`title`, `listen`, `stop`, `speed`, `reading`, `finished`, `notSupported`, `noContent`)
+- Verificación: tsc correcto, lint 0/0, build OK (102 páginas)
+
+### Fase 19 ✅ (términos interactivos del glosario)
+- `lib/glossary-match.ts`: matcher de texto con **trie** — coincidencia más larga, índices originales, límites de palabra (evita "token" dentro de "tokens"), sin mayúsculas/acentos (normalización NFD). `buildGlossaryMatcher(terms)` → `GlossaryMatcher.find(text)`; pensado para cientos de términos
+- `getGlosarioTerminos(t)` en `lib/i18n/data.ts` → `{ slug, termino, definicion, categoria, categoriaKey }[]` (slug estable por índice en español vía `slugify`, `categoriaKey` de los diccionarios, `categoria` label localizado)
+- `components/accessibility/GlossaryProvider.tsx`: contexto `{ openTerm(slug, trigger), closeTerm }`; gestiona el toggle (re-click cierra), sincroniza `aria-expanded` y la clase `glossary-term-active` del trigger, renderiza el popover
+- `components/accessibility/GlossaryPopover.tsx`: `role="dialog"` con `aria-labelledby`/`aria-describedby`; muestra nombre, categoría con icono lucide (mapa por `categoriaKey`: conceptos→BookOpen, ml→Brain, modelos→Cpu, tecnico→Settings, prompting→MessageSquare, herramientas→Boxes, limitaciones→AlertTriangle), definición y botones **Cerrar** + **Ver definición completa**. Posicionado con refs (sin setState en effects): calcula `left/top` y clamp al viewport; en móvil (<640px) bottom-sheet con backdrop; foco inicial en el botón Cerrar, retorno de foco al trigger al cerrar, Escape cierra, Tab-trap dentro, click-outside cierra, scroll cierra
+- `components/accessibility/GlossaryTermLinks.tsx`: auto-detección en el DOM dentro de `[data-read-aloud]`; procesa `p, li, h1-h5, td, dt, dd, blockquote, figcaption` con TreeWalker sobre nodos de texto; salta `code/pre/a/button/kbd/samp/var/[data-glossary-term]`; **solo la 1ª aparición por término y párrafo**; envuelve cada término en `<span role="button" tabindex=0 aria-haspopup="dialog">`; `WeakSet` de bloques ya procesados; se re-ejecuta al cambiar `pathname` (cierra el popover antes)
+- Montaje en `components/layout/Shell.tsx` (provider envuelve el contenido, `GlossaryTermLinks` devuelve `null`)
+- Estilos `.glossary-term` en `app/globals.css` (`@layer components`): subrayado punteado `var(--primary)`, cursor pointer, hover/focus `var(--primary-light)`, `focus-visible` outline, `prefers-contrast: more` → subrayado sólido; los spans conservan el texto (no afecta a la lectura por voz)
+- Deep-link: `Ver definición completa` → `/glosario?termino=<slug>` (dispatch de `CustomEvent("atlas:glossary-deeplink")` + `router.push`); la página de glosario parsea `?termino=` en el mount, pre-rellena la búsqueda, hace scroll suave (`scrollIntoView`) y resalta la tarjeta (`ring-2 ring-primary/30`); funciona también estando ya en la página de glosario
+- Sección `glossaryPopover` en los tres diccionarios (`categoryLabel`, `openTermAria`, `close`, `viewFullDefinition`)
+- Lint respetado: `setState` síncrono en effects envuelto en `setTimeout(0)` (deep-link del glosario); posicionamiento del popover con manipulación directa de `style` vía refs
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
+
 ## Estado actual (para retomar la sesión)
 - Último commit: `0359dff` (Fase 17, lecciones MDX localizadas es/en/val)
-- Árbol de trabajo limpio: la Fase 17 completa está commiteada (lib/content.ts locale-aware, páginas de bloques con locale, content/en/ y content/val/ con 76 mdx + 11 meta.json cada uno)
-- Recomendado al retomar: `git status` para confirmar el árbol limpio
-- Siguientes pasos posibles: mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
+- **Cambios SIN commitear**: Fase 18 (lectura por voz) y Fase 19 (términos interactivos del glosario) completas y verificadas (tsc/lint/build OK)
+- Pendiente de commitear si el usuario lo confirma: `lib/speech.ts`, `components/accessibility/SpeechReader.tsx`, `components/accessibility/GlossaryProvider.tsx`, `components/accessibility/GlossaryPopover.tsx`, `components/accessibility/GlossaryTermLinks.tsx`, `lib/glossary-match.ts`, cambios en `lib/i18n/data.ts`, `lib/i18n/dictionaries/{es,en,val}.ts`, `components/layout/Shell.tsx`, `app/globals.css`, `app/glosario/page.tsx`, este AGENTS.md
+- Recomendado al retomar: `git status` para confirmar el estado de los cambios sin commitear
+- Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
 
 ## Bloques de contenido (MDX)
 
@@ -205,6 +227,7 @@ components/
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats
   content/            → MDXRenderer (usa next-mdx-remote/rsc), LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
+  accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
 
 proxy.ts              → Protección de rutas (Next.js 16, reemplaza middleware.ts)
 
@@ -216,7 +239,9 @@ lib/
   ecosistema-data.ts  → 13 herramientas + categorías + criterios
   prompting-data.ts   → Roles, formatos, tonos, audiencias
   glosario-data.ts    → 47 términos con definiciones
+  glossary-match.ts   → Matcher trie para términos interactivos del glosario
   cronologia-data.ts  → 28 hitos históricos
+  speech.ts           → Síntesis de voz (Web Speech API), extracción de texto legible
   ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
   auth.ts             → NextAuth config (Credentials)
   prisma.ts           → PrismaClient singleton
