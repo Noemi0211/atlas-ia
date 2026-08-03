@@ -160,9 +160,9 @@ npm run lint      # ESLint
 - Verificación: 76 mdx por idioma en los 11 bloques, `npx tsc --noEmit` correcto, lint 0/0, build OK (102 páginas)
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `7da3d78` (Fase 16, i18n es/en/val)
-- Cambios SIN commitear al cerrar esta sesión: la Fase 17 completa (`lib/content.ts`, `app/bloques/[slug]/page.tsx`, `app/bloques/[slug]/[leccion]/page.tsx`, `content/en/` (76 mdx + 11 meta.json), `content/val/` (76 mdx + 11 meta.json)) y `AGENTS.md` (ver Fase 17)
-- Recomendado al retomar: `git status` para confirmar el árbol, y si procede commitear la Fase 17
+- Último commit: `0359dff` (Fase 17, lecciones MDX localizadas es/en/val)
+- Árbol de trabajo limpio: la Fase 17 completa está commiteada (lib/content.ts locale-aware, páginas de bloques con locale, content/en/ y content/val/ con 76 mdx + 11 meta.json cada uno)
+- Recomendado al retomar: `git status` para confirmar el árbol limpio
 - Siguientes pasos posibles: mejorar SEO con `alternates.languages`, ajustar `next.config` para `headers` de idioma, revisar manualmente el texto de las traducciones en/val
 
 ## Bloques de contenido (MDX)
