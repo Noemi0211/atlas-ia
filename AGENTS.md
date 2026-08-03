@@ -192,9 +192,8 @@ npm run lint      # ESLint
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (104 páginas, robots.txt y sitemap.xml generados), curl confirma Content-Language es/en/val según cookie, canonical absolutos y redirect de /perfil protegido
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `2b38f01` (Fase 18 + 19, accesibilidad: lectura por voz y términos interactivos del glosario)
-- Árbol de trabajo limpio: las Fases 18 y 19 están commiteadas (lib/speech.ts, SpeechReader, GlossaryProvider/Popover/TermLinks, lib/glossary-match.ts, getGlosarioTerminos, secciones speech+glossaryPopover en diccionarios, data-read-aloud en 8 páginas, deep-link del glosario, estilos .glossary-term, AGENTS.md)
-- Fase 20 (SEO) en curso, sin commitear: metadataBase + openGraph en app/layout.tsx, canonical en 8 páginas server, layouts server para glosario/laboratorio, Content-Language dinámico en proxy.ts, sitemap.ts + robots.ts, noindex en auth
+- Último commit: `4ca0cad` (Fase 20, SEO: metadataBase, canonical, Content-Language dinámico, sitemap y robots)
+- Árbol de trabajo limpio: la Fase 20 está commiteada (app/layout.tsx con metadataBase+OG, alternates.canonical en 8 páginas server, app/glosario/layout.tsx y app/laboratorio/layout.tsx, Content-Language dinámico en proxy.ts, app/sitemap.ts, app/robots.ts, noindex en auth, AGENTS.md)
 - Recomendado al retomar: `git status` para confirmar el árbol limpio
 - Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), revisar manualmente el texto de las traducciones en/val, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real
 
