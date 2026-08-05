@@ -191,11 +191,42 @@ npm run lint      # ESLint
 - Decisión técnica: NO se usa `alternates.languages` (hreflang) porque el i18n es por cookie sin prefijos de URL y Google ignora hreflang hacia la misma URL; la señal correcta en este caso es `Content-Language` dinámico + `<html lang>` + canonical único
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (104 páginas, robots.txt y sitemap.xml generados), curl confirma Content-Language es/en/val según cookie, canonical absolutos y redirect de /perfil protegido
 
+### Fase 21 ✅ (Progressive Web App: instalable, offline y auditada Lighthouse)
+- `app/manifest.ts`: manifest.json completo y localizado (lee la cookie vía `getLocale()`): `id`, `name`, `short_name`, `description` (= `t.home.subtitle1`), `lang`, `dir`, `start_url` `/`, `scope` `/`, `display: "standalone"` + `display_override: ["standalone", "minimal-ui"]`, `orientation: "portrait-primary"`, `background_color: #fafafa`, `theme_color: #2563eb`, `categories`, 3 iconos (`icon-192` any, `icon-512` any, `icon-512-maskable` maskable) y 4 `shortcuts` localizados (Bloques, Glosario, Laboratorio, Cronología)
+- Iconos de aplicación generados por script `scripts/generate-icons.ps1` (System.Drawing): `public/icons/icon-192.png`, `icon-512.png` (esquinas redondeadas), `icon-512-maskable.png` (fondo completo, área segura), `apple-touch-icon.png` (180, fondo completo) + `app/icon.png` (favicon del sitio) + `app/favicon.ico` reemplazado (16/32/48 con formato ICO+PNG). Diseño: gradiente azul `#2563eb→#1d4ed8`, glifo "A" blanca y punto-nodo de acento
+- Meta tags en `app/layout.tsx`: export `viewport` (`width=device-width`, `initialScale: 1`, `viewportFit: "cover"`, `themeColor: "#2563eb"`) + metadata `appleWebApp` (`capable: true`, `statusBarStyle: "default"`, `title`) e `icons.apple: /icons/apple-touch-icon.png`
+- Service worker `public/sw.js`: precache de `offline.html`, manifest e iconos; **navegaciones network-first** con fallback a caché y a `/offline.html`; **estáticos** (`/_next/static`, iconos, png/ico) stale-while-revalidate; **`/api/*` (GET) siempre red** y POST/SSE del chat no interceptados (el SW también los deja pasar por `request.method !== "GET"`); `skipWaiting()` + `clients.claim()`; caches versionados con limpieza de versiones antiguas
+- Página offline `public/offline.html`: estática autocontenida con logo, mensaje "Estás sin conexión" y botón Reintentar (adaptada a claro/oscuro con `prefers-color-scheme`)
+- `components/pwa/ServiceWorkerRegistrar.tsx`: registra `/sw.js` (`scope: "/"`, `updateViaCache: "none"`); **solo en producción** (`process.env.NODE_ENV === "production"`) para no interferir con HMR de `next dev`; registra en `load` o `ready` según haya controlador
+- `components/pwa/PwaThemeColor.tsx`: actualiza el `<meta name="theme-color">` según el tema resuelto (claro `#fafafa` / oscuro `#0f172a`)
+- `components/pwa/InstallPWA.tsx`: banner de instalación que escucha `beforeinstallprompt` (se omite en `display-mode: standalone` / iOS), con botón Instalar (invoca `prompt()`) y "Ahora no"; se oculta al instalar (`appinstalled`); textos localizados vía `t.pwa.*`
+- Sección `pwa` en los tres diccionarios (`installTitle`, `installDesc`, `install`, `notNow`)
+- `next.config.ts`: headers de caché — `/sw.js` (`no-cache, no-store, must-revalidate` + `Service-Worker-Allowed: /`), `/offline.html` (`no-cache, max-age=0`) e `/icons/:path*` (`public, max-age=31536000, immutable`)
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (106 páginas + `/manifest.webmanifest` y `/icon.png`), servidor de producción confirma manifest JSON válido (3 iconos + 4 shortcuts), `Cache-Control` y `Service-Worker-Allowed` en `/sw.js`, cache immutable en iconos, `200` en `/offline.html`, y `<head>` con `<link rel="manifest">`, `theme-color`, `viewport-fit=cover`, `mobile-web-app-capable`, `apple-mobile-web-app-title`, `apple-mobile-web-app-status-bar-style` y `apple-touch-icon`
+
+### Fase 22 ✅ (panel docente: recopilación de datos del alumnado)
+- Campo `role` en `prisma/schema.prisma` (`String @default("student")`) con `prisma db push` + `prisma generate` aplicados
+- `lib/auth.ts`: constantes `ROLE_TEACHER`/`ROLE_STUDENT`, `teacherEmails()` (lee `TEACHER_EMAILS` de env, separado por comas) e `isTeacherEmail()`; el `authorize` de Credentials promueve a rol docente si el correo está en la lista; callbacks `jwt`/`session` propagan `role`
+- `types/next-auth.d.ts`: `role` en `Session.user` y `JWT`, y augmentación de `User` con `role?: string | null`
+- `app/api/register/route.ts`: asigna `role` (docente si el email está en `TEACHER_EMAILS`, si no estudiante)
+- `app/api/docencia/students/route.ts`: GET (solo rol docente, si no `403`) que devuelve JSON `{ students: StudentStats[] }` o CSV (`?format=csv`, BOM UTF-8 + separador `;`); `StudentStats` agrega XP, lecciones completadas, insignias, racha, último acceso, uso de herramientas y progreso por bloque (derivado de los ids `bloque-slug/leccion-slug` de `JSON_PROGRESS`)
+- `app/docencia/page.tsx`: server component con guard `session.user.role === ROLE_TEACHER` (redirect a `/perfil`), `generateMetadata` con canonical `/docencia`
+- `app/docencia/DocenciaDashboard.tsx`: dashboard client — tarjetas resumen (total estudiantes, XP media, lecciones, activos en la última semana), buscador por nombre/correo, exportación CSV, tabla con filas expandibles (`perBlock` por cada uno de los 11 bloques + métricas de uso). Notas de implementación: `Date.now()` calculado en un `useEffect` con `setTimeout` (evita `react-hooks/purity` y `set-state-in-effect`)
+- `proxy.ts`: `PROTECTED_PATHS = ["/perfil", "/docencia"]`
+- `components/layout/Sidebar.tsx` y `components/auth/UserMenu.tsx`: enlace `/docencia` (icono `GraduationCap`) visible solo si `session.user.role === "teacher"`
+- Claves `nav.docencia` y sección `docencia` (`title`, `subtitle`, `totalStudents`, `avgXp`, `totalLessons`, `activeWeek`, `searchPlaceholder`, `exportCsv`, `loading`, `noResults`, `empty`, `error`, `columns.*`, `perBlock`, `usage.*`) en los tres diccionarios (`es.ts` como fuente de verdad)
+- `.env`: variable `TEACHER_EMAILS` para promocionar cuentas docentes (ej.: `"profesor@correo.com"`)
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (108 páginas + `/api/docencia/students` y `/docencia`)
+
+### Fase 23 ✅ (elementos flotantes fuera del área de lectura)
+- El banner de instalación PWA y los controles de lectura por voz se agrupan en la **esquina inferior izquierda** (`components/layout/Shell.tsx`: contenedor `fixed bottom-4 left-4 z-40 flex flex-col items-start gap-3`), donde en escritorio quedan sobre la barra lateral y no sobre el contenido de lectura
+- `InstallPWA.tsx`: ya no ocupa todo el ancho en móvil (era `left-4 right-4`); ahora es una tarjeta compacta de esquina (`w-80 max-w-[calc(100vw-2rem)]`) sin posicionamiento propio
+- `SpeechReader.tsx`: pierde su `fixed bottom-4 right-4 z-50` (chocaba con el banner y con la lectura) y pasa a ser un bloque simple (`flex flex-col items-start gap-2`) dentro del contenedor de esquina; alineación izquierda (`items-start` en vez de `items-end`)
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (108 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `4ca0cad` (Fase 20, SEO: metadataBase, canonical, Content-Language dinámico, sitemap y robots)
-- Árbol de trabajo limpio: la Fase 20 está commiteada (app/layout.tsx con metadataBase+OG, alternates.canonical en 8 páginas server, app/glosario/layout.tsx y app/laboratorio/layout.tsx, Content-Language dinámico en proxy.ts, app/sitemap.ts, app/robots.ts, noindex en auth, AGENTS.md)
-- Recomendado al retomar: `git status` para confirmar el árbol limpio
-- Siguientes pasos posibles: revisar manualmente el popover en dev (`npm run dev`), revisar manualmente el texto de las traducciones en/val, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real
+- Último commit: `e16176d` (Fase 23, elementos flotantes fuera del área de lectura). Árbol limpio. Fases 21 (PWA) y 22 (Docencia) commiteadas en `48ec009` y `f022558`
+- Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)
 
