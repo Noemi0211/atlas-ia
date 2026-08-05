@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-import { User, LogOut, ChevronDown } from "lucide-react";
+import { User, LogOut, ChevronDown, GraduationCap } from "lucide-react";
 import { useProgress } from "@/stores/progress";
 import { useI18n } from "@/lib/i18n/provider";
 
@@ -64,6 +64,16 @@ export function UserMenu() {
               <User className="w-4 h-4" />
               {t.auth.userMenu.profile}
             </Link>
+            {session.user.role === "teacher" && (
+              <Link
+                href="/docencia"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-fg-secondary hover:text-fg hover:bg-bg-secondary transition-colors"
+              >
+                <GraduationCap className="w-4 h-4" />
+                {t.nav.docencia}
+              </Link>
+            )}
           </div>
 
           <div className="border-t border-border py-1">

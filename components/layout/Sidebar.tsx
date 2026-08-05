@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import { useProgress } from "@/stores/progress";
 import { useI18n } from "@/lib/i18n/provider";
@@ -58,6 +59,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
   const pathname = usePathname();
   const [expandedBloque, setExpandedBloque] = useState<string | null>(null);
   const { getLessonProgress, completedLessons } = useProgress();
+  const { data: session } = useSession();
   const { t } = useI18n();
   const bloques = useMemo(() => getBLOQUES(t), [t]);
 
@@ -68,6 +70,9 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
     { href: "/glosario", label: t.nav.glosario, icon: "BookMarked" },
     { href: "/laboratorio", label: t.nav.laboratorio, icon: "FlaskConical" },
     { href: "/perfil", label: t.nav.perfil, icon: "User" },
+    ...(session?.user?.role === "teacher"
+      ? [{ href: "/docencia", label: t.nav.docencia, icon: "GraduationCap" }]
+      : []),
   ];
 
   const totalCompleted = completedLessons.length;

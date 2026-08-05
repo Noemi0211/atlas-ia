@@ -26,6 +26,7 @@ export const valDict = {
     glosario: "Glossari",
     laboratorio: "Laboratori",
     perfil: "El meu perfil",
+    docencia: "Docència",
   },
 
   header: {
@@ -224,6 +225,42 @@ export const valDict = {
   perfil: {
     title: "El meu perfil",
     subtitle: "Estadístiques, insígnies, reptes i projectes",
+  },
+
+  docencia: {
+    title: "Docència",
+    subtitle: "Recopila l'ús i les estadístiques de cada estudiant.",
+    totalStudents: "Estudiants",
+    avgXp: "XP mitjana",
+    totalLessons: "Lliçons completades",
+    activeWeek: "Actius esta setmana",
+    searchPlaceholder: "Busca per nom o correu...",
+    exportCsv: "Exporta CSV",
+    loading: "Carregant dades...",
+    noResults: "No hi ha estudiants amb este filtre",
+    empty: "Encara no hi ha estudiants registrats.",
+    error: "No s'han pogut carregar les dades",
+    columns: {
+      student: "Estudiant",
+      level: "Nivell",
+      xp: "XP",
+      lessons: "Lliçons",
+      progress: "Progrés",
+      badges: "Insígnies",
+      streak: "Ratxa",
+      lastVisit: "Últim accés",
+      joined: "Registre",
+    },
+    perBlock: "Progrés per bloc",
+    usage: {
+      title: "Ús d'eines",
+      comparedTools: "Comparacions",
+      favorites: "Preferits",
+      challenges: "Reptes completats",
+      projects: "Projectes completats",
+      arbol: "Arbre de decisió",
+      calculadora: "Calculadora de prompts",
+    },
   },
 
   auth: {

@@ -35,6 +35,7 @@ export const esDict = {
     glosario: "Glosario",
     laboratorio: "Laboratorio",
     perfil: "Mi perfil",
+    docencia: "Docencia",
   },
 
   header: {
@@ -233,6 +234,42 @@ export const esDict = {
   perfil: {
     title: "Mi perfil",
     subtitle: "Estadísticas, insignias, retos y proyectos",
+  },
+
+  docencia: {
+    title: "Docencia",
+    subtitle: "Recopila el uso y las estadísticas de cada estudiante.",
+    totalStudents: "Estudiantes",
+    avgXp: "XP media",
+    totalLessons: "Lecciones completadas",
+    activeWeek: "Activos esta semana",
+    searchPlaceholder: "Buscar por nombre o correo...",
+    exportCsv: "Exportar CSV",
+    loading: "Cargando datos...",
+    noResults: "No hay estudiantes con ese filtro",
+    empty: "Todavía no hay estudiantes registrados.",
+    error: "No se pudieron cargar los datos",
+    columns: {
+      student: "Estudiante",
+      level: "Nivel",
+      xp: "XP",
+      lessons: "Lecciones",
+      progress: "Progreso",
+      badges: "Insignias",
+      streak: "Racha",
+      lastVisit: "Último acceso",
+      joined: "Registro",
+    },
+    perBlock: "Progreso por bloque",
+    usage: {
+      title: "Uso de herramientas",
+      comparedTools: "Comparaciones",
+      favorites: "Favoritos",
+      challenges: "Retos completados",
+      projects: "Proyectos completados",
+      arbol: "Árbol de decisión",
+      calculadora: "Calculadora de prompts",
+    },
   },
 
   auth: {

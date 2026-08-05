@@ -26,6 +26,7 @@ export const enDict = {
     glosario: "Glossary",
     laboratorio: "Laboratory",
     perfil: "My profile",
+    docencia: "Teaching",
   },
 
   header: {
@@ -224,6 +225,42 @@ export const enDict = {
   perfil: {
     title: "My profile",
     subtitle: "Stats, badges, challenges and projects",
+  },
+
+  docencia: {
+    title: "Teaching",
+    subtitle: "Collect usage and statistics for each student.",
+    totalStudents: "Students",
+    avgXp: "Average XP",
+    totalLessons: "Completed lessons",
+    activeWeek: "Active this week",
+    searchPlaceholder: "Search by name or email...",
+    exportCsv: "Export CSV",
+    loading: "Loading data...",
+    noResults: "No students match that filter",
+    empty: "No students registered yet.",
+    error: "Could not load the data",
+    columns: {
+      student: "Student",
+      level: "Level",
+      xp: "XP",
+      lessons: "Lessons",
+      progress: "Progress",
+      badges: "Badges",
+      streak: "Streak",
+      lastVisit: "Last visit",
+      joined: "Joined",
+    },
+    perBlock: "Progress by block",
+    usage: {
+      title: "Tool usage",
+      comparedTools: "Comparisons",
+      favorites: "Favorites",
+      challenges: "Completed challenges",
+      projects: "Completed projects",
+      arbol: "Decision tree",
+      calculadora: "Prompt calculator",
+    },
   },
 
   auth: {

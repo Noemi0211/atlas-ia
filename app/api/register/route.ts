@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { isTeacherEmail, ROLE_STUDENT } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
@@ -38,6 +39,7 @@ export async function POST(req: Request) {
         name: name || email.split("@")[0],
         email,
         password: hashedPassword,
+        role: isTeacherEmail(email) ? "teacher" : ROLE_STUDENT,
       },
     });
 
