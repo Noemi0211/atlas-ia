@@ -65,6 +65,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/uso-de-ia" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.footer.usoIa}
+                </Link>
+              </li>
+              <li>
                 <span className="text-sm text-fg-muted">{t.footer.terminos}</span>
               </li>
             </ul>

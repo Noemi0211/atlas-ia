@@ -69,6 +69,7 @@ export const esDict = {
     bloques: "Bloques",
     glosario: "Glosario",
     privacidad: "Privacidad",
+    usoIa: "Uso de IA",
     terminos: "Términos",
     copyright: "por Noemí Celaya Mingot",
     licenciaAria: "Licencia Creative Commons CC BY-NC-SA 4.0",
@@ -396,6 +397,51 @@ export const esDict = {
 
     contactTitle: "Contacto",
     contactText: "Para cualquier duda o solicitud sobre privacidad, escríbenos a {email}.",
+  },
+
+  usoIa: {
+    title: "Uso de Inteligencia Artificial",
+    subtitle:
+      "Creemos en la transparencia: aquí explicamos con claridad cómo y para qué utilizamos la Inteligencia Artificial en este proyecto, y cuáles son nuestros principios éticos.",
+    lastUpdated: "Última actualización: agosto de 2026",
+
+    whatTitle: "¿Qué partes del proyecto se han desarrollado con ayuda de IA?",
+    whatIntro: "La Inteligencia Artificial se ha utilizado como herramienta de apoyo en las siguientes áreas:",
+    whatItems: [
+      "Desarrollo del código: páginas, componentes y funcionalidades (progreso, gamificación, chat, panel docente, accesibilidad y otras) redactados con la ayuda de asistentes de programación basados en IA.",
+      "Diseño de la interfaz: estructura visual, sistema de diseño y componentes de interfaz propuestos con apoyo de IA y ajustados por el autor.",
+      "Contenido educativo: los borradores iniciales de parte de las lecciones y ejercicios se redactaron con apoyo de IA; después fueron revisados, corregidos y ampliados por el autor para garantizar su rigor y adecuación pedagógica.",
+      "Traducciones: las versiones en inglés y valenciano se han elaborado con apoyo de IA y han sido revisadas por el autor.",
+      "Generación de imágenes: no se utilizan imágenes generadas por IA en el contenido educativo. Los iconos proceden de librerías de código abierto y los gráficos de la aplicación son diseños propios.",
+      "Chat del laboratorio: el asistente de conversación del laboratorio es una herramienta de IA experimental que puede conectar con un proveedor externo si está configurado.",
+    ],
+
+    reviewTitle: "Revisión humana",
+    reviewText:
+      "Todos los contenidos publicados en Atlas IA han sido revisados y validados por el autor ({autor}). La IA propone y el autor decide: cada lección, cada traducción y cada función se comprueba antes de publicarse. La IA se utiliza como herramienta de apoyo, nunca como autoridad final.",
+
+    ethicsTitle: "Principios de uso ético",
+    ethicsIntro: "Este proyecto se rige por los siguientes principios en el uso de la IA:",
+    ethicsItems: [
+      "La IA es una herramienta de apoyo, no una fuente de verdad: todo lo publicado pasa por revisión humana.",
+      "Honestidad: no se presentan contenidos generados por IA como si fueran creaciones humanas sin indicarlo.",
+      "Verificación: se contrastan datos y fechas para evitar información errónea o alucinaciones.",
+      "Privacidad: el uso de la IA respeta la minimización de datos; los mensajes del chat no se utilizan para perfilar a las personas.",
+      "Accesibilidad e inclusión: el lenguaje de la plataforma es claro, inclusivo y adaptado al público al que se dirige.",
+      "No automatización del aprendizaje: la plataforma acompaña el estudio, pero no sustituye el esfuerzo y el razonamiento de quien aprende.",
+    ],
+
+    transparencyTitle: "Transparencia para el alumnado y el profesorado",
+    transparencyIntro: "Queremos que tanto quienes aprenden como quienes enseñan sepan exactamente con qué se encuentran:",
+    transparencyItems: [
+      "Para el alumnado: el chat del laboratorio está identificado como asistente de IA. Cuando una actividad use IA de forma destacada, se indicará. Recomendamos usar la IA como apoyo al aprendizaje y no para sustituir tu propio trabajo.",
+      "Para el profesorado: el panel docente ofrece estadísticas agregadas del grupo. Esta política de uso de IA y la política de privacidad son públicas y están a tu disposición para planificar el uso de la plataforma en el aula.",
+      "Cita y atribución: si una tarea usa IA, recomendamos indicarlo, tal y como haríamos con cualquier otra fuente.",
+    ],
+
+    doubtsTitle: "¿Tienes dudas?",
+    doubtsText:
+      "Si quieres saber más sobre cómo usamos la IA o detectas un error en un contenido, escríbenos a {email}.",
   },
 
   auth: {

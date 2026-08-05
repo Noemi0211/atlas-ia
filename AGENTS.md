@@ -233,8 +233,16 @@ npm run lint      # ESLint
 - Textos localizados es/en/val en la sección `privacidad` de los tres diccionarios; placeholders `{responsable}` y `{email}` interpolados en el servidor
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (109 páginas)
 
+### Fase 25 ✅ (página de uso de Inteligencia Artificial)
+- Nueva página `/uso-de-ia` (`app/uso-de-ia/page.tsx`): server component con `generateMetadata` (canonical `/uso-de-ia`) y `data-read-aloud`, con la misma estructura visual que `/privacidad` (breadcrumbs, h1, secciones, listas)
+- Contenido: qué partes del proyecto se han desarrollado con ayuda de IA (código, diseño de interfaz, contenido educativo, traducciones, chat del laboratorio; sin imágenes generadas por IA), revisión humana de todos los contenidos por el autor (`SITE_CONFIG.contactName`), principios de uso ético y transparencia para el alumnado y el profesorado
+- Enlace en el footer (`components/layout/Footer.tsx`): nueva entrada "Uso de IA" (clave `footer.usoIa`) enlazando a `/uso-de-ia`
+- Añadida a `app/sitemap.ts` (prioridad 0.5); se indexa en `app/robots.ts`
+- Textos localizados es/en/val en la sección `usoIa` de los tres diccionarios; placeholders `{autor}` y `{email}` interpolados en el servidor
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (110 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `1f5e108` (Fase 24, página de privacidad RGPD). Árbol limpio. Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`; revisión Fase 23 en `2621b86`
+- Último commit: `0b60fcc` (docs tras Fase 24). Árbol limpio. Fase 24 (privacidad) en `1f5e108`; Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`; revisión Fase 23 en `2621b86`
 - Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
 
 ## Bloques de contenido (MDX)
@@ -260,6 +268,7 @@ app/                  → Páginas (App Router)
   cronologia/         → Timeline interactivo
   glosario/           → Búsqueda + filtros (layout.tsx con canonical)
   privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
+  uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register

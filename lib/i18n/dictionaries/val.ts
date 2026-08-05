@@ -60,6 +60,7 @@ export const valDict = {
     bloques: "Blocs",
     glosario: "Glossari",
     privacidad: "Privacitat",
+    usoIa: "Ús d'IA",
     terminos: "Termes",
     copyright: "per Noemí Celaya Mingot",
     licenciaAria: "Llicència Creative Commons CC BY-NC-SA 4.0",
@@ -387,6 +388,51 @@ export const valDict = {
 
     contactTitle: "Contacte",
     contactText: "Per a qualsevol dubte o sol·licitud sobre privacitat, escriu-nos a {email}.",
+  },
+
+  usoIa: {
+    title: "Ús d'Intel·ligència Artificial",
+    subtitle:
+      "Creiem en la transparència: ací expliquem amb claredat com i per a què utilitzem la Intel·ligència Artificial en este projecte, i quins són els nostres principis ètics.",
+    lastUpdated: "Última actualització: agost de 2026",
+
+    whatTitle: "Quines parts del projecte s'han desenvolupat amb ajuda d'IA?",
+    whatIntro: "La Intel·ligència Artificial s'ha utilitzat com a ferramenta de suport en les següents àrees:",
+    whatItems: [
+      "Desenvolupament del codi: pàgines, components i funcionalitats (progrés, gamificació, xat, panell docent, accessibilitat i altres) redactats amb l'ajuda d'assistents de programació basats en IA.",
+      "Disseny de la interfície: estructura visual, sistema de disseny i components d'interfície proposats amb suport d'IA i ajustats per l'autor.",
+      "Contingut educatiu: els esborranys inicials de part de les lliçons i exercicis es van redactar amb suport d'IA; després van ser revisats, corregits i ampliats per l'autor per a garantir el seu rigor i adequació pedagògica.",
+      "Traduccions: les versions en anglés i valencià s'han elaborat amb suport d'IA i han estat revisades per l'autor.",
+      "Generació d'imatges: no s'utilitzen imatges generades per IA en el contingut educatiu. Les icones provenen de biblioteques de codi obert i els gràfics de l'aplicació són dissenys propis.",
+      "Xat del laboratori: l'assistent de conversa del laboratori és una ferramenta d'IA experimental que pot connectar amb un proveïdor extern si està configurat.",
+    ],
+
+    reviewTitle: "Revisió humana",
+    reviewText:
+      "Tots els continguts publicats a Atlas IA han estat revisats i validats per l'autor ({autor}). La IA proposa i l'autor decidix: cada lliçó, cada traducció i cada funció es comprova abans de publicar-se. La IA s'utilitza com a ferramenta de suport, mai com a autoritat final.",
+
+    ethicsTitle: "Principis d'ús ètic",
+    ethicsIntro: "Este projecte es regeix pels següents principis en l'ús de la IA:",
+    ethicsItems: [
+      "La IA és una ferramenta de suport, no una font de veritat: tot el que es publica passa per revisió humana.",
+      "Honestedat: no es presenten continguts generats per IA com si foren creacions humanes sense indicar-ho.",
+      "Verificació: es contrasten dades i dates per a evitar informació errònia o al·lucinacions.",
+      "Privacitat: l'ús de la IA respecta la minimització de dades; els missatges del xat no s'utilitzen per a perfilar les persones.",
+      "Accessibilitat i inclusió: el llenguatge de la plataforma és clar, inclusiu i adaptat al públic al qual es dirigix.",
+      "No automatització de l'aprenentatge: la plataforma acompanya l'estudi, però no substituïx l'esforç i el raonament de qui aprén.",
+    ],
+
+    transparencyTitle: "Transparència per a l'alumnat i el professorat",
+    transparencyIntro: "Volem que tant qui aprén com qui ensenya sàpia exactament amb què es troba:",
+    transparencyItems: [
+      "Per a l'alumnat: el xat del laboratori està identificat com a assistent d'IA. Quan una activitat utilitze IA de manera destacada, s'indicarà. Recomanem usar la IA com a suport a l'aprenentatge i no per a substituir el teu propi treball.",
+      "Per al professorat: el panell docent ofereix estadístiques agregades del grup. Esta política d'ús d'IA i la política de privacitat són públiques i estan a la teua disposició per a planificar l'ús de la plataforma a l'aula.",
+      "Cita i atribució: si una tasca usa IA, recomanem indicar-ho, tal com faríem amb qualsevol altra font.",
+    ],
+
+    doubtsTitle: "Tens dubtes?",
+    doubtsText:
+      "Si vols saber més sobre com utilitzem la IA o detectes un error en un contingut, escriu-nos a {email}.",
   },
 
   auth: {

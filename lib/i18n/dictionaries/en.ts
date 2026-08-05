@@ -60,6 +60,7 @@ export const enDict = {
     bloques: "Blocks",
     glosario: "Glossary",
     privacidad: "Privacy",
+    usoIa: "AI Usage",
     terminos: "Terms",
     copyright: "by Noemí Celaya Mingot",
     licenciaAria: "Creative Commons license CC BY-NC-SA 4.0",
@@ -387,6 +388,51 @@ export const enDict = {
 
     contactTitle: "Contact",
     contactText: "For any question or request about privacy, email {email}.",
+  },
+
+  usoIa: {
+    title: "Use of Artificial Intelligence",
+    subtitle:
+      "We believe in transparency: here we explain clearly how and why we use Artificial Intelligence in this project, and what our ethical principles are.",
+    lastUpdated: "Last updated: August 2026",
+
+    whatTitle: "Which parts of the project were developed with the help of AI?",
+    whatIntro: "Artificial Intelligence has been used as a support tool in the following areas:",
+    whatItems: [
+      "Code development: pages, components and features (progress, gamification, chat, teacher dashboard, accessibility and others) written with the help of AI-based programming assistants.",
+      "Interface design: visual structure, design system and UI components proposed with AI support and adjusted by the author.",
+      "Educational content: the initial drafts of part of the lessons and exercises were written with AI support; they were then reviewed, corrected and expanded by the author to guarantee their rigour and pedagogical suitability.",
+      "Translations: the English and Valencian versions were drafted with AI support and reviewed by the author.",
+      "Image generation: AI-generated images are not used in the educational content. Icons come from open-source libraries and the app graphics are original designs.",
+      "Laboratory chat: the laboratory conversation assistant is an experimental AI tool that can connect to an external provider if configured.",
+    ],
+
+    reviewTitle: "Human review",
+    reviewText:
+      "All content published on Atlas IA has been reviewed and validated by the author ({autor}). AI proposes and the author decides: every lesson, every translation and every feature is checked before publishing. AI is used as a support tool, never as the final authority.",
+
+    ethicsTitle: "Ethical principles",
+    ethicsIntro: "This project is governed by the following principles in its use of AI:",
+    ethicsItems: [
+      "AI is a support tool, not a source of truth: everything published goes through human review.",
+      "Honesty: AI-generated content is not presented as a human creation without saying so.",
+      "Verification: data and dates are cross-checked to avoid misinformation or hallucinations.",
+      "Privacy: the use of AI respects data minimisation; chat messages are not used to profile people.",
+      "Accessibility and inclusion: the platform's language is clear, inclusive and adapted to its audience.",
+      "No learning automation: the platform supports study but does not replace the effort and reasoning of the learner.",
+    ],
+
+    transparencyTitle: "Transparency for students and teachers",
+    transparencyIntro: "We want both learners and teachers to know exactly what to expect:",
+    transparencyItems: [
+      "For students: the laboratory chat is identified as an AI assistant. When an activity makes significant use of AI, this will be indicated. We recommend using AI as a learning aid and not to replace your own work.",
+      "For teachers: the teacher dashboard offers aggregated group statistics. This AI usage policy and the privacy policy are public and available to help you plan the use of the platform in the classroom.",
+      "Citation and attribution: if a task uses AI, we recommend indicating it, as you would with any other source.",
+    ],
+
+    doubtsTitle: "Questions?",
+    doubtsText:
+      "If you want to know more about how we use AI or you find an error in a piece of content, email {email}.",
   },
 
   auth: {
