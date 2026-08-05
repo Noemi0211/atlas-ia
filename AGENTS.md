@@ -225,9 +225,17 @@ npm run lint      # ESLint
 - La variante no compacta de ambos componentes (banner de instalación y lector con botones con texto) se mantiene intacta para otros usos
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0
 
+### Fase 24 ✅ (página de privacidad RGPD)
+- Nueva página `/privacidad` (`app/privacidad/page.tsx`): server component con `generateMetadata` (canonical `/privacidad`) y `data-read-aloud` (lectura por voz + términos interactivos del glosario)
+- Contenido en lenguaje claro y conforme a RGPD: responsable del tratamiento (sección `SITE_CONFIG.contactName`/`contactEmail` en `lib/constants.ts`), resumen en un minuto, datos recopilados (sin cuenta vs con cuenta), chat del laboratorio, uso de localStorage (`atlas-progress`, `atlas-theme`, `atlas-locale`), cookies técnicas (sesión NextAuth + idioma), ausencia de seguimiento de terceros, finalidad y base jurídica, conservación, derechos RGPD, menores, seguridad y cambios
+- Enlace en el footer (`components/layout/Footer.tsx`): "Privacidad" pasa de span deshabilitado a enlace `/privacidad`
+- Añadida a `app/sitemap.ts` (prioridad 0.5); se indexa en `app/robots.ts` (no está en la lista de disallow)
+- Textos localizados es/en/val en la sección `privacidad` de los tres diccionarios; placeholders `{responsable}` y `{email}` interpolados en el servidor
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (109 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `e16176d` (Fase 23, elementos flotantes fuera del área de lectura). Árbol limpio. Fases 21 (PWA) y 22 (Docencia) commiteadas en `48ec009` y `f022558`
-- Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
+- Último commit: `2621b86` (revisión Fase 23: controles en la franja superior del header). Árbol limpio. Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`
+- Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
 
 ## Bloques de contenido (MDX)
 
@@ -251,6 +259,7 @@ app/                  → Páginas (App Router)
   bloques/            → Lista + [slug] + [slug]/[leccion]
   cronologia/         → Timeline interactivo
   glosario/           → Búsqueda + filtros (layout.tsx con canonical)
+  privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register

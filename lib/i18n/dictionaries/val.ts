@@ -264,6 +264,131 @@ export const valDict = {
     },
   },
 
+  privacidad: {
+    title: "Política de Privacitat",
+    subtitle:
+      "Volem que sàpigues exactament quines dades utilitzem i per què. Esta pàgina està escrita en un llenguatge clar i compleix el Reglament General de Protecció de Dades (RGPD) de la Unió Europea.",
+    lastUpdated: "Última actualització: agost de 2026",
+
+    controllerTitle: "Qui és el responsable del tractament?",
+    controllerText:
+      "El responsable del tractament de les dades és {responsable}, en relació amb la plataforma Atlas IA. Pots escriure'ns a {email} per a qualsevol qüestió relacionada amb la privacitat.",
+
+    summaryTitle: "Resum en un minut",
+    summaryItems: [
+      "Si no crees compte, tot el teu progrés es guarda únicament al teu navegador (localStorage) i no ix del teu dispositiu.",
+      "Si crees compte, guardem el teu nom, el teu correu i una contrasenya xifrada per a sincronitzar el teu progrés entre dispositius.",
+      "No utilitzem publicitat ni rastrejadors de tercers, i no venem dades a ningú.",
+      "Pots sol·licitar l'esborrat de les teues dades en qualsevol moment.",
+    ],
+
+    dataTitle: "Quines dades recopilem?",
+    dataIntro:
+      "Recopilem únicament les dades necessàries perquè la plataforma funcione. Açò és el que ocorre amb cada dada:",
+
+    dataWithoutAccountTitle: "Sense crear compte",
+    dataWithoutAccountItems: [
+      "Progrés local: lliçons completades, XP, insígnies, preferits, notes, reptes i projectes. Es guarda només al teu navegador.",
+      "Preferències: idioma i tema (clar o fosc). Es guarden al teu navegador.",
+      "No se sol·licita cap dada personal (ni nom ni correu).",
+    ],
+
+    dataWithAccountTitle: "Si crees un compte",
+    dataWithAccountItems: [
+      "Nom: per a mostrar-te a la plataforma i a la classificació.",
+      "Correu electrònic: per a identificar el teu compte i poder recuperar l'accés.",
+      "Contrasenya: es guarda xifrada (hash) i mai en text pla.",
+      "Progrés sincronitzat: el teu progrés local es guarda també als nostres servidors perquè pugues reprendre'l en un altre dispositiu i perquè el professorat del teu centre puga vore estadístiques d'ús.",
+    ],
+
+    dataChatTitle: "Xat del laboratori",
+    dataChatItems: [
+      "Els missatges que envies s'utilitzen únicament per a generar la resposta.",
+      "No guardem historials de xat associats al teu compte.",
+      "Si el proveïdor extern d'IA està activat, els missatges s'envien a la seua API per a obtindre la resposta; si no, es processen íntegrament al nostre servidor amb respostes preparades.",
+    ],
+
+    localTitle: "Emmagatzematge al teu navegador (localStorage)",
+    localIntro:
+      "Per a conservar el teu progrés i preferències entre visites, Atlas IA guarda informació a l'emmagatzematge local del navegador. Esta informació roman al teu dispositiu i no s'envia als nostres servidors, llevat que inicies sessió i sincronitzes el teu progrés. S'usen estes claus:",
+    localItems: [
+      {
+        key: "atlas-progress",
+        desc: "el teu progrés: lliçons completades, XP, insígnies, preferits, notes, reptes i projectes.",
+      },
+      {
+        key: "atlas-theme",
+        desc: "la teua preferència de tema (clar, fosc o segons el sistema).",
+      },
+      {
+        key: "atlas-locale",
+        desc: "el teu idioma de preferència (espanyol, anglés o valencià).",
+      },
+    ],
+
+    cookiesTitle: "Cookies",
+    cookiesIntro: "Utilitzem únicament cookies tècniques imprescindibles per al funcionament:",
+    cookiesItems: [
+      "Cookies de sessió (NextAuth): per a mantindre la sessió iniciada quan tens compte.",
+      "Cookie d'idioma (atlas-locale): per a recordar l'idioma que has triat.",
+    ],
+    cookiesNoThird: "No utilitzem cookies de tercers ni cookies de seguiment o publicitat.",
+
+    noTrackingTitle: "Sense seguiment de tercers",
+    noTrackingText:
+      "Atlas IA no inclou publicitat, rastrejadors, píxels ni eines d'anàlisi de tercers (com Google Analytics). No compartim ni venem les teues dades. La teua activitat no s'utilitza per a crear perfils publicitaris ni es cedeix a altres empreses.",
+
+    purposeTitle: "Per a què utilitzem les teues dades?",
+    purposeItems: [
+      "Prestar el servei: mostrar el teu progrés, XP, insígnies i estadístiques.",
+      "Sincronitzar el teu progrés entre dispositius si tens compte.",
+      "Permetre al professorat del teu centre consultar estadístiques agregades de l'activitat del grup.",
+      "Generar les respostes del xat del laboratori.",
+    ],
+
+    legalTitle: "Base jurídica del tractament (RGPD)",
+    legalItems: [
+      "Consentiment: en crear un compte acceptes esta política i el tractament de les teues dades.",
+      "Execució del servei: les dades de progrés són necessàries per a oferir-te la funcionalitat que sol·licites.",
+      "Interés legítim: millorar i mantindre la plataforma, sense que açò perjudique els teus drets i llibertats.",
+    ],
+
+    retentionTitle: "Quant de temps conservem les teues dades?",
+    retentionText:
+      "Conservem les dades del teu compte mentre continue actiu. Pots sol·licitar-ne la supressió en qualsevol moment i les eliminarem en un termini màxim de 30 dies. Les dades locals (localStorage) s'esborren si neteges les dades de navegació o si reinicies el teu progrés des de la plataforma.",
+
+    rightsTitle: "Els teus drets",
+    rightsIntro: "D'acord amb el RGPD, tens dret a:",
+    rightsItems: [
+      "Accés: conéixer quines dades teues tractem.",
+      "Rectificació: corregir dades inexactes o incompletes.",
+      "Supressió: demanar que esborrem les teues dades.",
+      "Portabilitat: rebre les teues dades en un format estructurat i llegible.",
+      "Limitació: sol·licitar que restrinjim el tractament en determinats casos.",
+      "Oposició: oposar-te al tractament basat en interés legítim.",
+    ],
+    rightsHow:
+      "Pots exercir estos drets escrivint-nos a {email}. També tens dret a presentar una reclamació davant l'Agència Espanyola de Protecció de Dades (aepd.es).",
+
+    minorsTitle: "Menors d'edat",
+    minorsText:
+      "Si eres menor de 14 anys, necessites el consentiment de la teua mare, pare o tutor legal per a crear un compte a Atlas IA.",
+
+    securityTitle: "Seguretat",
+    securityItems: [
+      "Les contrasenyes es guarden xifrades (hash) i mai en text pla.",
+      "La comunicació amb la plataforma viatja xifrada mitjançant HTTPS.",
+      "Apliquem el principi de minimització: només recollim les dades imprescindibles.",
+    ],
+
+    changesTitle: "Canvis en esta política",
+    changesText:
+      "Si esta política canvia de manera rellevant, ho publicarem en esta pàgina amb la seua nova data d'actualització. Et recomanem revisar-la de tant en tant.",
+
+    contactTitle: "Contacte",
+    contactText: "Per a qualsevol dubte o sol·licitud sobre privacitat, escriu-nos a {email}.",
+  },
+
   auth: {
     login: {
       title: "Iniciar sessió",

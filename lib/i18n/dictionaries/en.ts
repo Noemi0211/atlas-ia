@@ -264,6 +264,131 @@ export const enDict = {
     },
   },
 
+  privacidad: {
+    title: "Privacy Policy",
+    subtitle:
+      "We want you to know exactly what data we use and why. This page is written in plain language and complies with the European Union's General Data Protection Regulation (GDPR).",
+    lastUpdated: "Last updated: August 2026",
+
+    controllerTitle: "Who is the data controller?",
+    controllerText:
+      "The data controller is {responsable}, in relation to the Atlas IA platform. You can contact us at {email} about anything related to privacy.",
+
+    summaryTitle: "A one-minute summary",
+    summaryItems: [
+      "If you do not create an account, all your progress is stored only in your browser (localStorage) and never leaves your device.",
+      "If you create an account, we store your name, email and an encrypted password so your progress can be synced between devices.",
+      "We do not use advertising or third-party trackers, and we never sell data to anyone.",
+      "You can request deletion of your data at any time.",
+    ],
+
+    dataTitle: "What data do we collect?",
+    dataIntro:
+      "We only collect the data needed for the platform to work. Here is what happens to each piece of data:",
+
+    dataWithoutAccountTitle: "Without an account",
+    dataWithoutAccountItems: [
+      "Local progress: completed lessons, XP, badges, favourites, notes, challenges and projects. Stored only in your browser.",
+      "Preferences: language and theme (light or dark). Stored in your browser.",
+      "No personal data is requested (neither name nor email).",
+    ],
+
+    dataWithAccountTitle: "If you create an account",
+    dataWithAccountItems: [
+      "Name: to display it on the platform and in the leaderboard.",
+      "Email address: to identify your account and recover access if needed.",
+      "Password: stored as an encrypted hash, never in plain text.",
+      "Synced progress: your local progress is also stored on our servers so you can resume it on another device, and so your school's teachers can see usage statistics.",
+    ],
+
+    dataChatTitle: "Laboratory chat",
+    dataChatItems: [
+      "The messages you send are used only to generate the reply.",
+      "We do not store chat histories linked to your account.",
+      "If the external AI provider is enabled, messages are sent to its API to get a reply; otherwise they are processed entirely on our server with prepared answers.",
+    ],
+
+    localTitle: "Browser storage (localStorage)",
+    localIntro:
+      "To keep your progress and preferences between visits, Atlas IA stores information in your browser's local storage. This data stays on your device and is not sent to our servers, except when you sign in and sync your progress. The following keys are used:",
+    localItems: [
+      {
+        key: "atlas-progress",
+        desc: "your progress: completed lessons, XP, badges, favourites, notes, challenges and projects.",
+      },
+      {
+        key: "atlas-theme",
+        desc: "your theme preference (light, dark or system).",
+      },
+      {
+        key: "atlas-locale",
+        desc: "your preferred language (Spanish, English or Valencian).",
+      },
+    ],
+
+    cookiesTitle: "Cookies",
+    cookiesIntro: "We only use the essential technical cookies required for the platform to work:",
+    cookiesItems: [
+      "Session cookies (NextAuth): to keep you signed in when you have an account.",
+      "Language cookie (atlas-locale): to remember the language you have chosen.",
+    ],
+    cookiesNoThird: "We do not use third-party cookies or tracking or advertising cookies.",
+
+    noTrackingTitle: "No third-party tracking",
+    noTrackingText:
+      "Atlas IA does not include advertising, trackers, pixels or third-party analytics tools (such as Google Analytics). We do not share or sell your data. Your activity is not used to build advertising profiles and is not given to other companies.",
+
+    purposeTitle: "What do we use your data for?",
+    purposeItems: [
+      "To provide the service: show your progress, XP, badges and statistics.",
+      "To sync your progress between devices if you have an account.",
+      "To let your school's teachers view aggregated statistics about group activity.",
+      "To generate the laboratory chat replies.",
+    ],
+
+    legalTitle: "Legal basis for processing (GDPR)",
+    legalItems: [
+      "Consent: by creating an account you accept this policy and the processing of your data.",
+      "Performance of the service: progress data is needed to provide the functionality you request.",
+      "Legitimate interest: to improve and maintain the platform, without harming your rights and freedoms.",
+    ],
+
+    retentionTitle: "How long do we keep your data?",
+    retentionText:
+      "We keep your account data while your account is active. You can request deletion at any time and we will remove it within 30 days. Local data (localStorage) is deleted if you clear your browsing data or reset your progress from the platform.",
+
+    rightsTitle: "Your rights",
+    rightsIntro: "Under the GDPR, you have the right to:",
+    rightsItems: [
+      "Access: know what data of yours we process.",
+      "Rectification: correct inaccurate or incomplete data.",
+      "Erasure: ask us to delete your data.",
+      "Portability: receive your data in a structured, readable format.",
+      "Restriction: ask us to limit the processing in certain cases.",
+      "Objection: object to processing based on legitimate interest.",
+    ],
+    rightsHow:
+      "You can exercise these rights by emailing {email}. You also have the right to lodge a complaint with the Spanish Data Protection Agency (aepd.es).",
+
+    minorsTitle: "Minors",
+    minorsText:
+      "If you are under 14, you need the consent of your parent or legal guardian to create an Atlas IA account.",
+
+    securityTitle: "Security",
+    securityItems: [
+      "Passwords are stored encrypted (hashed) and never in plain text.",
+      "Communication with the platform is encrypted via HTTPS.",
+      "We apply the principle of data minimisation: we only collect the essential data.",
+    ],
+
+    changesTitle: "Changes to this policy",
+    changesText:
+      "If this policy changes in a relevant way, we will publish it on this page with its new update date. We recommend checking it from time to time.",
+
+    contactTitle: "Contact",
+    contactText: "For any question or request about privacy, email {email}.",
+  },
+
   auth: {
     login: {
       title: "Log in",

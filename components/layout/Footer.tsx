@@ -60,7 +60,9 @@ export function Footer() {
             <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.legal}</h3>
             <ul className="space-y-2">
               <li>
-                <span className="text-sm text-fg-muted">{t.footer.privacidad}</span>
+                <Link href="/privacidad" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.footer.privacidad}
+                </Link>
               </li>
               <li>
                 <span className="text-sm text-fg-muted">{t.footer.terminos}</span>

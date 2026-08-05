@@ -273,6 +273,131 @@ export const esDict = {
     },
   },
 
+  privacidad: {
+    title: "Política de Privacidad",
+    subtitle:
+      "Queremos que sepas exactamente qué datos utilizamos y por qué. Esta página está escrita en un lenguaje claro y cumple el Reglamento General de Protección de Datos (RGPD) de la Unión Europea.",
+    lastUpdated: "Última actualización: agosto de 2026",
+
+    controllerTitle: "¿Quién es el responsable del tratamiento?",
+    controllerText:
+      "El responsable del tratamiento de los datos es {responsable}, en relación con la plataforma Atlas IA. Puedes escribirnos en {email} para cualquier cuestión relacionada con la privacidad.",
+
+    summaryTitle: "Resumen en un minuto",
+    summaryItems: [
+      "Si no creas cuenta, todo tu progreso se guarda únicamente en tu navegador (localStorage) y no sale de tu dispositivo.",
+      "Si creas cuenta, guardamos tu nombre, tu correo y una contraseña cifrada para sincronizar tu progreso entre dispositivos.",
+      "No usamos publicidad ni rastreadores de terceros, y no vendemos datos a nadie.",
+      "Puedes solicitar el borrado de tus datos en cualquier momento.",
+    ],
+
+    dataTitle: "¿Qué datos recopilamos?",
+    dataIntro:
+      "Recopilamos únicamente los datos necesarios para que la plataforma funcione. Esto es lo que ocurre con cada dato:",
+
+    dataWithoutAccountTitle: "Sin crear cuenta",
+    dataWithoutAccountItems: [
+      "Progreso local: lecciones completadas, XP, insignias, favoritos, notas, retos y proyectos. Se guarda solo en tu navegador.",
+      "Preferencias: idioma y tema (claro u oscuro). Se guardan en tu navegador.",
+      "No se solicita ningún dato personal (ni nombre ni correo).",
+    ],
+
+    dataWithAccountTitle: "Si creas una cuenta",
+    dataWithAccountItems: [
+      "Nombre: para mostrarte en la plataforma y en el ranking.",
+      "Correo electrónico: para identificar tu cuenta y poder recuperar el acceso.",
+      "Contraseña: se guarda cifrada (hash) y nunca se almacena en texto plano.",
+      "Progreso sincronizado: tu progreso local se guarda también en nuestros servidores para que puedas retomarlo en otro dispositivo y para que el profesorado de tu centro pueda ver estadísticas de uso.",
+    ],
+
+    dataChatTitle: "Chat del laboratorio",
+    dataChatItems: [
+      "Los mensajes que envías se utilizan únicamente para generar la respuesta.",
+      "No guardamos historiales de chat asociados a tu cuenta.",
+      "Si el proveedor externo de IA está activado, los mensajes se envían a su API para obtener la respuesta; si no, se procesan íntegramente en nuestro servidor con respuestas preparadas.",
+    ],
+
+    localTitle: "Almacenamiento en tu navegador (localStorage)",
+    localIntro:
+      "Para conservar tu progreso y preferencias entre visitas, Atlas IA guarda información en el almacenamiento local del navegador. Esta información permanece en tu dispositivo y no se envía a nuestros servidores, salvo que inicies sesión y sincronices tu progreso. Se usan estas claves:",
+    localItems: [
+      {
+        key: "atlas-progress",
+        desc: "tu progreso: lecciones completadas, XP, insignias, favoritos, notas, retos y proyectos.",
+      },
+      {
+        key: "atlas-theme",
+        desc: "tu preferencia de tema (claro, oscuro o según el sistema).",
+      },
+      {
+        key: "atlas-locale",
+        desc: "tu idioma de preferencia (español, inglés o valenciano).",
+      },
+    ],
+
+    cookiesTitle: "Cookies",
+    cookiesIntro: "Usamos únicamente cookies técnicas imprescindibles para el funcionamiento:",
+    cookiesItems: [
+      "Cookies de sesión (NextAuth): para mantener tu sesión iniciada cuando tienes cuenta.",
+      "Cookie de idioma (atlas-locale): para recordar el idioma que has elegido.",
+    ],
+    cookiesNoThird: "No utilizamos cookies de terceros ni cookies de seguimiento o publicidad.",
+
+    noTrackingTitle: "Sin seguimiento de terceros",
+    noTrackingText:
+      "Atlas IA no incluye publicidad, rastreadores, píxeles ni herramientas de análisis de terceros (como Google Analytics). No compartimos ni vendemos tus datos. Tu actividad no se utiliza para crear perfiles publicitarios ni se cede a otras empresas.",
+
+    purposeTitle: "¿Para qué utilizamos tus datos?",
+    purposeItems: [
+      "Prestar el servicio: mostrar tu progreso, XP, insignias y estadísticas.",
+      "Sincronizar tu progreso entre dispositivos si tienes cuenta.",
+      "Permitir al profesorado de tu centro consultar estadísticas agregadas de la actividad del grupo.",
+      "Generar las respuestas del chat del laboratorio.",
+    ],
+
+    legalTitle: "Base jurídica del tratamiento (RGPD)",
+    legalItems: [
+      "Consentimiento: al crear una cuenta aceptas esta política y el tratamiento de tus datos.",
+      "Ejecución del servicio: los datos de progreso son necesarios para ofrecerte la funcionalidad que solicitas.",
+      "Interés legítimo: mejorar y mantener la plataforma, sin que ello perjudique tus derechos y libertades.",
+    ],
+
+    retentionTitle: "¿Cuánto tiempo conservamos tus datos?",
+    retentionText:
+      "Conservamos los datos de tu cuenta mientras siga activa. Puedes solicitar su supresión en cualquier momento y los eliminaremos en un plazo máximo de 30 días. Los datos locales (localStorage) se borran si limpias los datos de navegación o si reinicias tu progreso desde la plataforma.",
+
+    rightsTitle: "Tus derechos",
+    rightsIntro: "De acuerdo con el RGPD, tienes derecho a:",
+    rightsItems: [
+      "Acceso: conocer qué datos tuyos tratamos.",
+      "Rectificación: corregir datos inexactos o incompletos.",
+      "Supresión: pedir que borremos tus datos.",
+      "Portabilidad: recibir tus datos en un formato estructurado y legible.",
+      "Limitación: solicitar que restrinjamos el tratamiento en determinados casos.",
+      "Oposición: oponerte al tratamiento basado en interés legítimo.",
+    ],
+    rightsHow:
+      "Puedes ejercer estos derechos escribiéndonos a {email}. También tienes derecho a presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).",
+
+    minorsTitle: "Menores de edad",
+    minorsText:
+      "Si eres menor de 14 años, necesitas el consentimiento de tu madre, padre o tutor legal para crear una cuenta en Atlas IA.",
+
+    securityTitle: "Seguridad",
+    securityItems: [
+      "Las contraseñas se guardan cifradas (hash) y nunca en texto plano.",
+      "La comunicación con la plataforma viaja cifrada mediante HTTPS.",
+      "Aplicamos el principio de minimización: solo recogemos los datos imprescindibles.",
+    ],
+
+    changesTitle: "Cambios en esta política",
+    changesText:
+      "Si esta política cambia de forma relevante, lo publicaremos en esta página con su nueva fecha de actualización. Te recomendamos revisarla de vez en cuando.",
+
+    contactTitle: "Contacto",
+    contactText: "Para cualquier duda o solicitud sobre privacidad, escríbenos a {email}.",
+  },
+
   auth: {
     login: {
       title: "Iniciar sesión",

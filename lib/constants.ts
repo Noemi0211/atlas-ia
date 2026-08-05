@@ -5,6 +5,8 @@ export const SITE_CONFIG = {
   description: "La mejor plataforma en español para aprender Inteligencia Artificial",
   url: "https://atlas-ia.dev",
   author: "Atlas IA",
+  contactEmail: "privacidad@atlas-ia.dev",
+  contactName: "Noemí Celaya Mingot",
 } as const;
 
 export const BLOQUES: BloqueMeta[] = [
