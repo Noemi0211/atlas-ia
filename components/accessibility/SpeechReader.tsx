@@ -168,7 +168,7 @@ export function SpeechReader() {
   );
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-2 lg:bottom-6 lg:right-6">
+    <div className="flex flex-col items-start gap-2">
       <span className="sr-only" aria-live="polite">
         {reading ? t.speech.reading : t.speech.finished}
       </span>
