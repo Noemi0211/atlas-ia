@@ -234,7 +234,7 @@ npm run lint      # ESLint
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (109 páginas)
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `2621b86` (revisión Fase 23: controles en la franja superior del header). Árbol limpio. Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`
+- Último commit: `1f5e108` (Fase 24, página de privacidad RGPD). Árbol limpio. Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`; revisión Fase 23 en `2621b86`
 - Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
 
 ## Bloques de contenido (MDX)
