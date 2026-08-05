@@ -218,11 +218,12 @@ npm run lint      # ESLint
 - `.env`: variable `TEACHER_EMAILS` para promocionar cuentas docentes (ej.: `"profesor@correo.com"`)
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (108 páginas + `/api/docencia/students` y `/docencia`)
 
-### Fase 23 ✅ (elementos flotantes fuera del área de lectura)
-- El banner de instalación PWA y los controles de lectura por voz se agrupan en la **esquina inferior izquierda** (`components/layout/Shell.tsx`: contenedor `fixed bottom-4 left-4 z-40 flex flex-col items-start gap-3`), donde en escritorio quedan sobre la barra lateral y no sobre el contenido de lectura
-- `InstallPWA.tsx`: ya no ocupa todo el ancho en móvil (era `left-4 right-4`); ahora es una tarjeta compacta de esquina (`w-80 max-w-[calc(100vw-2rem)]`) sin posicionamiento propio
-- `SpeechReader.tsx`: pierde su `fixed bottom-4 right-4 z-50` (chocaba con el banner y con la lectura) y pasa a ser un bloque simple (`flex flex-col items-start gap-2`) dentro del contenedor de esquina; alineación izquierda (`items-start` en vez de `items-end`)
-- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (108 páginas)
+### Fase 23 ✅ (controles fuera del área de lectura: franja superior)
+- Los controles de **lectura por voz** (`SpeechReader`) y de **instalación PWA** (`InstallPWA`) ya no flotan sobre el contenido (se eliminó el contenedor `fixed bottom-4 left-4` de `components/layout/Shell.tsx`); ahora se montan en la **franja superior**, en el header junto a la barra de búsqueda (`components/layout/Header.tsx`, grupo de controles derecho, antes de `NotificationBell`)
+- Ambos componentes reciben una prop `compact` (por defecto `false`): `SpeechReader compact` renderiza botones de icono h-9 (Escuchar/Detener) + selector de velocidad (oculto en móvil `hidden sm:flex`), con indicador pulsante y avisos/estado de lectura en un popover absoluto bajo el grupo; las opciones del selector usan texto azul oscuro sobre fondo blanco (`style` inline) para legibilidad del desplegable nativo en ambos temas
+- `InstallPWA compact` es un botón de icono (Descargar) **siempre visible** en el header (salvo standalone/instalado); si el navegador emite `beforeinstallprompt` instala directamente y muestra punto pulsante, y si no, abre un popover con la descripción y la pista de instalación (`t.pwa.installHint`); el `title` conserva el texto de instalación
+- La variante no compacta de ambos componentes (banner de instalación y lector con botones con texto) se mantiene intacta para otros usos
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0
 
 ## Estado actual (para retomar la sesión)
 - Último commit: `e16176d` (Fase 23, elementos flotantes fuera del área de lectura). Árbol limpio. Fases 21 (PWA) y 22 (Docencia) commiteadas en `48ec009` y `f022558`

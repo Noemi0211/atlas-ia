@@ -18,7 +18,11 @@ import {
 
 const RATE_OPTIONS = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
-export function SpeechReader() {
+interface SpeechReaderProps {
+  compact?: boolean;
+}
+
+export function SpeechReader({ compact = false }: SpeechReaderProps) {
   const { locale, t } = useI18n();
   const pathname = usePathname();
 
@@ -167,6 +171,98 @@ export function SpeechReader() {
     [reading, stopReading, locale]
   );
 
+  if (compact) {
+    return (
+      <div className="relative flex items-center gap-1">
+        <span className="sr-only" aria-live="polite">
+          {reading ? t.speech.reading : t.speech.finished}
+        </span>
+
+        <button
+          type="button"
+          onClick={startReading}
+          disabled={!supported || reading}
+          className={cn(
+            "inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
+            "bg-primary text-white dark:text-slate-900 hover:bg-primary-hover shadow-sm",
+            "disabled:opacity-50 disabled:cursor-not-allowed"
+          )}
+          aria-label={t.speech.listen}
+          title={t.speech.listen}
+        >
+          <Volume2 className="h-4 w-4" aria-hidden="true" />
+        </button>
+
+        <button
+          type="button"
+          onClick={stopReading}
+          disabled={!reading}
+          className={cn(
+            "inline-flex h-9 w-9 items-center justify-center rounded-lg transition-colors",
+            "border border-border text-fg-secondary hover:text-fg hover:bg-bg-secondary",
+            "disabled:opacity-40 disabled:cursor-not-allowed"
+          )}
+          aria-label={t.speech.stop}
+          title={t.speech.stop}
+        >
+          <Square className="h-4 w-4" aria-hidden="true" />
+        </button>
+
+        <label className="hidden sm:flex h-9 items-center gap-1 rounded-lg border border-border bg-bg-secondary px-1.5">
+          <span className="sr-only">{t.speech.speed}</span>
+          <select
+            value={rate}
+            onChange={(event) => handleRateChange(Number(event.target.value))}
+            className="h-full cursor-pointer bg-transparent text-sm font-medium text-fg outline-none"
+            aria-label={t.speech.speed}
+          >
+            {RATE_OPTIONS.map((option) => (
+              <option
+                key={option}
+                value={option}
+                style={{ color: "#1e3a8a", backgroundColor: "#ffffff" }}
+              >
+                {option}x
+              </option>
+            ))}
+          </select>
+        </label>
+
+        {reading && (
+          <span
+            className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-primary animate-pulse"
+            aria-hidden="true"
+          />
+        )}
+
+        {(notice || reading) && (
+          <div className="absolute right-0 top-full mt-2 z-50">
+            {reading && (
+              <div
+                className="mb-1 flex items-center gap-2 rounded-full border border-primary/30 bg-primary-light px-3 py-1.5 text-xs font-medium text-primary"
+                role="status"
+              >
+                <span
+                  className="h-2 w-2 rounded-full bg-primary animate-pulse"
+                  aria-hidden="true"
+                />
+                {t.speech.reading}
+              </div>
+            )}
+            {notice && (
+              <div
+                role="status"
+                className="max-w-[260px] rounded-lg border border-border bg-bg px-3 py-2 text-xs text-fg-secondary shadow-lg"
+              >
+                {notice}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-start gap-2">
       <span className="sr-only" aria-live="polite">
@@ -235,7 +331,11 @@ export function SpeechReader() {
             aria-label={t.speech.speed}
           >
             {RATE_OPTIONS.map((option) => (
-              <option key={option} value={option}>
+              <option
+                key={option}
+                value={option}
+                style={{ color: "#1e3a8a", backgroundColor: "#ffffff" }}
+              >
                 {option}x
               </option>
             ))}

@@ -11,6 +11,8 @@ import { SearchModal } from "@/components/interactive/SearchModal";
 import { NotificationBell } from "@/components/gamification/NotificationBell";
 import { UserMenu } from "@/components/auth/UserMenu";
 import { LanguageSelector } from "@/components/layout/LanguageSelector";
+import { SpeechReader } from "@/components/accessibility/SpeechReader";
+import { InstallPWA } from "@/components/pwa/InstallPWA";
 
 interface HeaderProps {
   onMenuToggle: () => void;
@@ -104,6 +106,9 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
           </div>
 
           <div className="flex items-center gap-1">
+            <SpeechReader compact />
+            <InstallPWA compact />
+
             <NotificationBell />
 
             <LanguageSelector />

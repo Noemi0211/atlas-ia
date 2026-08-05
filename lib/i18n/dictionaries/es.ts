@@ -181,6 +181,7 @@ export const esDict = {
     installDesc: "Accede más rápido y navega sin conexión desde tu dispositivo.",
     install: "Instalar",
     notNow: "Ahora no",
+    installHint: "Si el botón de instalación no aparece, usa el menú de tu navegador: Instalar aplicación o Añadir a pantalla de inicio.",
   },
 
   glosario: {

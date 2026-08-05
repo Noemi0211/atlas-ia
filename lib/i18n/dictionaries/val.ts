@@ -172,6 +172,7 @@ export const valDict = {
     installDesc: "Accedix més ràpid i navega sense connexió des del teu dispositiu.",
     install: "Instal·la",
     notNow: "Ara no",
+    installHint: "Si el botó d'instal·lació no apareix, usa el menú del teu navegador: Instal·la l'aplicació o Afigix a la pantalla d'inici.",
   },
 
   glosario: {

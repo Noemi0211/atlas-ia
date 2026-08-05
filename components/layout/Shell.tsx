@@ -6,12 +6,10 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
-import { SpeechReader } from "@/components/accessibility/SpeechReader";
 import { GlossaryProvider } from "@/components/accessibility/GlossaryProvider";
 import { GlossaryTermLinks } from "@/components/accessibility/GlossaryTermLinks";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import { PwaThemeColor } from "@/components/pwa/PwaThemeColor";
-import { InstallPWA } from "@/components/pwa/InstallPWA";
 
 interface ShellProps {
   children: React.ReactNode;
@@ -59,11 +57,6 @@ export function Shell({ children }: ShellProps) {
 
       <ServiceWorkerRegistrar />
       <PwaThemeColor />
-
-      <div className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-3 lg:bottom-6 lg:left-6">
-        <InstallPWA />
-        <SpeechReader />
-      </div>
     </>
   );
 }

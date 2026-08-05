@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { Download, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/provider";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -16,18 +17,28 @@ function isStandalone(): boolean {
   );
 }
 
-export function InstallPWA() {
+interface InstallPWAProps {
+  compact?: boolean;
+}
+
+export function InstallPWA({ compact = false }: InstallPWAProps) {
   const { t } = useI18n();
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [dismissed, setDismissed] = useState(false);
   const [installed, setInstalled] = useState(false);
+  const [standalone, setStandalone] = useState(false);
+  const [showHint, setShowHint] = useState(false);
 
   useEffect(() => {
-    if (isStandalone()) return;
+    if (isStandalone()) {
+      const timer = window.setTimeout(() => setStandalone(true), 0);
+      return () => window.clearTimeout(timer);
+    }
 
     const onBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
+      setShowHint(false);
       setDeferredPrompt(event as BeforeInstallPromptEvent);
     };
     const onAppInstalled = () => {
@@ -51,7 +62,59 @@ export function InstallPWA() {
     setDismissed(true);
   }, [deferredPrompt]);
 
-  if (!deferredPrompt || dismissed || installed) return null;
+  const handleHeaderClick = useCallback(() => {
+    if (deferredPrompt) {
+      handleInstall();
+    } else {
+      setShowHint((value) => !value);
+    }
+  }, [deferredPrompt, handleInstall]);
+
+  if (compact) {
+    if (standalone || installed) return null;
+  } else if (!deferredPrompt || dismissed || installed) {
+    return null;
+  }
+
+  if (compact) {
+    return (
+      <div className="relative">
+        <button
+          type="button"
+          onClick={handleHeaderClick}
+          aria-label={t.pwa.install}
+          aria-expanded={showHint}
+          className={cn(
+            "relative inline-flex h-9 w-9 items-center justify-center rounded-lg border transition-colors",
+            deferredPrompt
+              ? "border-primary/40 text-primary hover:text-primary-hover hover:bg-bg-secondary"
+              : "border-border text-fg-secondary hover:text-fg hover:bg-bg-secondary"
+          )}
+          title={`${t.pwa.installTitle} — ${t.pwa.installDesc}`}
+        >
+          <Download className="h-4 w-4" aria-hidden="true" />
+          {deferredPrompt && (
+            <span
+              className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-primary animate-pulse"
+              aria-hidden="true"
+            />
+          )}
+        </button>
+
+        {showHint && (
+          <div
+            role="dialog"
+            aria-label={t.pwa.installTitle}
+            className="absolute right-0 top-full mt-2 z-50 w-64 rounded-xl border border-border-strong bg-bg p-4 shadow-lg"
+          >
+            <p className="font-semibold text-sm text-fg">{t.pwa.installTitle}</p>
+            <p className="text-xs text-fg-secondary mt-0.5">{t.pwa.installDesc}</p>
+            <p className="text-xs text-fg-secondary mt-2">{t.pwa.installHint}</p>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div

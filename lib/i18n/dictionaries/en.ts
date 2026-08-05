@@ -172,6 +172,7 @@ export const enDict = {
     installDesc: "Open it faster and browse offline from your device.",
     install: "Install",
     notNow: "Not now",
+    installHint: "If the install button is not available, use your browser menu: Install app or Add to home screen.",
   },
 
   glosario: {
