@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Shell } from "@/components/layout/Shell";
@@ -20,6 +20,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#2563eb",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -51,6 +58,14 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       title: "Atlas IA — Aprende Inteligencia Artificial",
       description: t.home.subtitle1,
+    },
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: "Atlas IA",
+    },
+    icons: {
+      apple: "/icons/apple-touch-icon.png",
     },
   };
 }

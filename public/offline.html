@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2563eb" />
+  <title>Atlas IA — Sin conexión</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      background: #fafafa;
+      color: #18181b;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f172a; color: #f8fafc; }
+    }
+    .card {
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 420px;
+    }
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #2563eb, #1d4ed8);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 40px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    h1 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    p { font-size: 15px; line-height: 1.6; opacity: 0.75; margin-bottom: 24px; }
+    button {
+      border: 0;
+      cursor: pointer;
+      padding: 12px 28px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s ease;
+    }
+    button:hover { background: #1d4ed8; }
+    button:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">A</div>
+    <h1>Estás sin conexión</h1>
+    <p>No hay acceso a internet en este momento. Comprueba tu conexión y vuelve a intentarlo.</p>
+    <button onclick="location.reload()">Reintentar</button>
+  </div>
+</body>
+</html>

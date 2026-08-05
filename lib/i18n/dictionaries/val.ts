@@ -166,6 +166,13 @@ export const valDict = {
     noContent: "No hi ha contingut per a llegir en esta pàgina",
   },
 
+  pwa: {
+    installTitle: "Instal·la Atlas IA",
+    installDesc: "Accedix més ràpid i navega sense connexió des del teu dispositiu.",
+    install: "Instal·la",
+    notNow: "Ara no",
+  },
+
   glosario: {
     title: "Glossari",
     subtitle: "Termes clau d'Intel·ligència Artificial explicats de manera clara i senzilla.",

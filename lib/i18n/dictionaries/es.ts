@@ -175,6 +175,13 @@ export const esDict = {
     noContent: "No hay contenido que leer en esta página",
   },
 
+  pwa: {
+    installTitle: "Instala Atlas IA",
+    installDesc: "Accede más rápido y navega sin conexión desde tu dispositivo.",
+    install: "Instalar",
+    notNow: "Ahora no",
+  },
+
   glosario: {
     title: "Glosario",
     subtitle: "Términos clave de Inteligencia Artificial explicados de forma clara y sencilla.",

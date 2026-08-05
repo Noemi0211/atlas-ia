@@ -166,6 +166,13 @@ export const enDict = {
     noContent: "There is no content to read on this page",
   },
 
+  pwa: {
+    installTitle: "Install Atlas IA",
+    installDesc: "Open it faster and browse offline from your device.",
+    install: "Install",
+    notNow: "Not now",
+  },
+
   glosario: {
     title: "Glossary",
     subtitle: "Key Artificial Intelligence terms explained clearly and simply.",
