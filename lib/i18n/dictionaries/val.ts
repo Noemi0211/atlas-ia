@@ -62,6 +62,7 @@ export const valDict = {
     privacidad: "Privacitat",
     usoIa: "Ús d'IA",
     terminos: "Termes",
+    appsedu: "Appsedu",
     copyright: "per Noemí Celaya Mingot",
     licenciaAria: "Llicència Creative Commons CC BY-NC-SA 4.0",
     licencia: "Llicència Creative Commons CC BY-NC-SA 4.0",

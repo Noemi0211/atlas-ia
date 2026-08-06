@@ -71,6 +71,7 @@ export const esDict = {
     privacidad: "Privacidad",
     usoIa: "Uso de IA",
     terminos: "Términos",
+    appsedu: "Appsedu",
     copyright: "por Noemí Celaya Mingot",
     licenciaAria: "Licencia Creative Commons CC BY-NC-SA 4.0",
     licencia: "Licencia Creative Commons CC BY-NC-SA 4.0",

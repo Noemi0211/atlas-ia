@@ -62,6 +62,7 @@ export const enDict = {
     privacidad: "Privacy",
     usoIa: "AI Usage",
     terminos: "Terms",
+    appsedu: "Appsedu",
     copyright: "by Noemí Celaya Mingot",
     licenciaAria: "Creative Commons license CC BY-NC-SA 4.0",
     licencia: "Creative Commons license CC BY-NC-SA 4.0",

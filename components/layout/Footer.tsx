@@ -53,6 +53,16 @@ export function Footer() {
                   GitHub
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://portal.edu.gva.es/appsedu/es/inicio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-fg-secondary hover:text-fg transition-colors"
+                >
+                  {t.footer.appsedu}
+                </a>
+              </li>
             </ul>
           </div>
 
