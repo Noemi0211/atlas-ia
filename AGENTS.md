@@ -283,7 +283,7 @@ npm run lint      # ESLint
 - Verificación: tsc correcto, lint 0/0, pruebas SSE en `/api/chat` (modo offline): «¿qué es un LLM?» → `courseSource` + contenido de Atlas; «¿qué es antigravity?/git/html/commitear/API/navegador?» → `generalIntro` + respuesta útil del tema exacto (antigravity = módulo Python/xkcd, no IA genérica); «cuéntame qué son las gafas de realidad aumentada» (sin match) → `noAnswer` honesto sin definición genérica de IA
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `4ac483d` (enlace Appsedu en el footer, árbol limpio). Pendientes de commit: fix de la estrategia de fallback del asistente (`lib/ai.ts`, diccionarios es/en/val, logging en `app/api/chat/route.ts`) y esta actualización de AGENTS.md.
+- Último commit: `53e3a53` (fix de la estrategia de fallback del asistente, árbol limpio). No hay cambios pendientes.
 - Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)
