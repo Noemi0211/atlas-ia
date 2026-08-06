@@ -266,9 +266,18 @@ npm run lint      # ESLint
 - Añadida a `app/sitemap.ts` (prioridad 0.5) → 93 URLs; se indexa en `app/robots.ts` (no está en disallow)
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (111 páginas), `/roadmap` responde 200 en runtime
 
+### Fase 29 ✅ (página de Términos y Condiciones)
+- Nueva página `/terminos` (`app/terminos/page.tsx`): server component con `generateMetadata` (canonical `/terminos`) y `data-read-aloud`, con la misma estructura visual que `/privacidad` y `/uso-de-ia` (breadcrumbs, h1, secciones, listas)
+- Contenido en lenguaje claro: aceptación, descripción del servicio, cuentas de usuario, contenido y licencia CC BY-NC-SA 4.0, uso responsable, chat del laboratorio, panel docente, limitación de responsabilidad, suspensión/cierre de cuenta, modificaciones, legislación aplicable (española) y contacto
+- Placeholders `{responsable}` y `{email}` interpolados en el servidor desde `SITE_CONFIG`
+- Footer (`components/layout/Footer.tsx`): "Términos" pasa de span deshabilitado a enlace `/terminos`; queda completa la sección Legal del footer (Privacidad, Uso de IA, Términos)
+- Añadida a `app/sitemap.ts` (prioridad 0.5) → 94 URLs; se indexa en `app/robots.ts`
+- Textos localizados es/en/val en la sección `terminos` de los tres diccionarios; el contenido del roadmap se actualiza (hito 15 "Roadmap y términos legales (Fases 28-29)", estado actual "fases 1 a 29 completadas") y se elimina "Términos y Condiciones" de los próximos pasos
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `07d6011` (Fases 26-28, árbol limpio). No hay cambios pendientes.
-- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
+- Último commit: pendiente (Fase 29 en curso, árbol con cambios sin commitear).
+- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)
 
@@ -295,6 +304,7 @@ app/                  → Páginas (App Router)
   privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
   uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
   roadmap/            → Roadmap del proyecto: hitos, estado actual y próximos pasos (canonical + data-read-aloud)
+  terminos/           → Términos y Condiciones del servicio (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register

@@ -445,6 +445,76 @@ Behaviour rules:
       "If you want to know more about how we use AI or you find an error in a piece of content, email {email}.",
   },
 
+  terminos: {
+    title: "Terms and Conditions",
+    subtitle:
+      "These terms govern the use of Atlas IA. They are written in clear language so you know what you can do, what we expect of you and how doubts are resolved.",
+    lastUpdated: "Last updated: August 2026",
+
+    acceptanceTitle: "Acceptance of these terms",
+    acceptanceText:
+      "By accessing or using Atlas IA you accept these terms and the privacy policy. If you disagree with any part, please do not use the platform. Continued use of the platform implies acceptance of the current version of these terms.",
+
+    serviceTitle: "Description of the service",
+    serviceItems: [
+      "Atlas IA is a free online educational platform for learning Artificial Intelligence: lesson blocks, glossary, timeline, interactive lab, gamification and teacher dashboard.",
+      "The content is educational and informative and does not replace any professional advice.",
+      "The platform may evolve: content and features may be added, modified or removed without prior notice.",
+    ],
+
+    accountsTitle: "User accounts",
+    accountsItems: [
+      "To create an account you must provide a real name and email address and a password.",
+      "You are responsible for keeping your password confidential and for all activity carried out with your account.",
+      "If you are under 14, you need the consent of your parent or legal guardian to create an account.",
+      "The account is personal and non-transferable; teachers may view aggregated statistics of their group's activity.",
+    ],
+
+    contentTitle: "Content and licence",
+    contentItems: [
+      "The platform content (lessons, glossary, timeline and other materials) is published under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0) licence.",
+      "You may share and adapt the materials citing the source, for non-commercial purposes and under the same licence.",
+      "Trademarks and third-party product names mentioned in the content belong to their respective owners.",
+    ],
+
+    conductTitle: "Responsible use",
+    conductItems: [
+      "You must not use the platform for unlawful purposes, to harass or harm other people, or to impersonate them.",
+      "You must not attempt to access other people's accounts, alter other people's data or interfere with the operation of the service.",
+      "You must not reuse the content for commercial purposes without authorisation.",
+    ],
+
+    chatTitle: "Laboratory chat",
+    chatText:
+      "The laboratory chat is an experimental AI tool for educational purposes. Its answers may contain errors or incomplete information and must not be used as the only source of truth. Your use of the chat is voluntary and at your own risk.",
+
+    teacherTitle: "Teacher dashboard",
+    teacherText:
+      "Teacher accounts (identified by their institutional email) allow access to aggregated group statistics with the aim of guiding learning. Teachers undertake to use this data solely for educational purposes and to comply with data protection regulations.",
+
+    liabilityTitle: "Limitation of liability",
+    liabilityItems: [
+      "We take the utmost care with the quality of the content, but we do not guarantee that it is free of errors or its suitability for a particular use.",
+      "We shall not be liable for damages arising from the use of the platform or the impossibility of using it, except in cases where the law does not allow it.",
+      "Links to external sites are offered as a resource; we are not responsible for their content.",
+    ],
+
+    suspensionTitle: "Suspension or closure of the account",
+    suspensionText:
+      "We may suspend or close an account if these terms or applicable regulations are breached. You may stop using the platform and request the deletion of your account at any time by writing to us.",
+
+    changesTitle: "Changes to these terms",
+    changesText:
+      "These terms may be updated. The current version is always published on this page with its update date. If the changes are significant, we will indicate it on the page itself.",
+
+    lawTitle: "Applicable law",
+    lawText:
+      "These terms are governed by Spanish law. For any dispute, the parties submit to the courts corresponding to the address of {responsable}, unless a mandatory provision provides otherwise.",
+
+    contactTitle: "Contact",
+    contactText: "For any questions about these terms, email {email}.",
+  },
+
   roadmap: {
     title: "Project roadmap",
     subtitle:
@@ -524,17 +594,20 @@ Behaviour rules:
         descripcion:
           "Chat with Markdown rendering, Vibe Coding mentor, labelled smart fallback and an answering strategy that never stops helping.",
       },
+      {
+        titulo: "Roadmap and legal terms (Phases 28-29)",
+        descripcion:
+          "Roadmap page with the project journey and a Terms and Conditions page, completing the legal section of the footer.",
+      },
     ],
     currentTitle: "Current status",
     currentItems: [
-      "All phases 1 to 27 are completed.",
+      "All phases 1 to 29 are completed.",
       "The lab assistant answers offline with course content, glossary, tools and general knowledge, always labelling the source.",
-      "Some Phase 26 and 27 changes are still uncommitted, waiting for final browser tests.",
+      "The footer legal section is complete: privacy, AI usage and terms and conditions.",
     ],
     nextTitle: "Next steps",
     nextItems: [
-      "Create the Terms and Conditions page (pending in the footer).",
-      "Commit Phases 26 and 27 after browser testing.",
       "Test PWA installation and offline mode in an HTTPS deployment (for example Vercel).",
       "Add screenshots to the manifest for the enriched Android install dialog.",
       "Consider /en and /val URL prefixes for real hreflang.",

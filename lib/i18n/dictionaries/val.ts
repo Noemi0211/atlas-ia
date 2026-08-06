@@ -445,6 +445,76 @@ Regles de comportament:
       "Si vols saber més sobre com utilitzem la IA o detectes un error en un contingut, escriu-nos a {email}.",
   },
 
+  terminos: {
+    title: "Termes i Condicions",
+    subtitle:
+      "Aquestes condicions regulen l'ús d'Atlas IA. Estan escrites en un llenguatge clar perquè sàpigues què pots fer, què esperem de tu i com es resolen els dubtes.",
+    lastUpdated: "Última actualització: agost de 2026",
+
+    acceptanceTitle: "Acceptació d'aquests termes",
+    acceptanceText:
+      "En accedir o utilitzar Atlas IA acceptes aquests termes i la política de privacitat. Si no estàs d'acord amb alguna part, et demanem que no utilitzes la plataforma. L'ús continuat de la plataforma implica l'acceptació de la versió vigent d'aquests termes.",
+
+    serviceTitle: "Descripció del servei",
+    serviceItems: [
+      "Atlas IA és una plataforma educativa gratuïta en línia per a aprendre Intel·ligència Artificial: blocs de lliçons, glossari, cronologia, laboratori interactiu, gamificació i panell docent.",
+      "El contingut és de caràcter educatiu i divulgatiu i no substitueix cap assessorament professional.",
+      "La plataforma pot evolucionar: es poden afegir, modificar o retirar continguts i funcionalitats sense avís previ.",
+    ],
+
+    accountsTitle: "Comptes d'usuari",
+    accountsItems: [
+      "Per a crear un compte has de proporcionar un nom i un correu electrònic reals i una contrasenya.",
+      "Ets responsable de mantenir la confidencialitat de la contrasenya i de tota l'activitat que es faça amb el teu compte.",
+      "Si ets menor de 14 anys, necessites el consentiment de la teua mare, pare o tutor legal per a crear un compte.",
+      "El compte és personal i intransferible; el professorat pot consultar estadístiques agregades de l'activitat del seu grup.",
+    ],
+
+    contentTitle: "Contingut i llicència",
+    contentItems: [
+      "El contingut de la plataforma (lliçons, glossari, cronologia i altres materials) es publica sota la llicència Creative Commons Reconeixement-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0).",
+      "Pots compartir i adaptar els materials citant la font, sense finalitats comercials i sota la mateixa llicència.",
+      "Les marques i noms de productes de tercers esmentats en els continguts pertanyen als seus respectius propietaris.",
+    ],
+
+    conductTitle: "Ús responsable",
+    conductItems: [
+      "No has d'utilitzar la plataforma per a finalitats il·lícites, per a assetjar o perjudicar altres persones, ni per a suplantar la seua identitat.",
+      "No has d'intentar accedir a comptes aliens, alterar les dades d'altres persones ni interferir en el funcionament del servei.",
+      "No has de reutilitzar els continguts amb finalitats comercials sense autorització.",
+    ],
+
+    chatTitle: "Xat del laboratori",
+    chatText:
+      "El xat del laboratori és una eina d'IA experimental amb finalitats educatives. Les seues respostes poden contenir errors o informació incompleta i no s'han d'utilitzar com a única font de veritat. El teu ús del xat és voluntari i sota la teua responsabilitat.",
+
+    teacherTitle: "Panell docent",
+    teacherText:
+      "Els comptes de professorat (identificats pel seu correu institucional) permeten consultar estadístiques agregades del grup amb l'objectiu d'orientar l'aprenentatge. El professorat es compromet a utilitzar aquestes dades únicament amb finalitat educativa i a respectar la normativa de protecció de dades.",
+
+    liabilityTitle: "Limitació de responsabilitat",
+    liabilityItems: [
+      "Posem la màxima cura en la qualitat dels continguts, però no garantim que estiguen lliures d'errors ni la seua idoneïtat per a un ús concret.",
+      "No serem responsables dels danys derivats de l'ús de la plataforma o de la impossibilitat d'utilitzar-la, excepte en els casos en què la llei no ho permeta.",
+      "Els enllaços a llocs externs s'ofereixen com a recurs; no ens fem responsables del seu contingut.",
+    ],
+
+    suspensionTitle: "Suspensió o tancament del compte",
+    suspensionText:
+      "Podem suspendre o tancar un compte si s'incompleixen aquests termes o la normativa aplicable. Pots deixar d'utilitzar la plataforma i sol·licitar l'esborrament del teu compte en qualsevol moment escrivint-nos.",
+
+    changesTitle: "Modificacions d'aquests termes",
+    changesText:
+      "Aquests termes poden actualitzar-se. La versió vigent es publica sempre en aquesta pàgina amb la seua data d'actualització. Si els canvis són rellevants, ho indicarem en la mateixa pàgina.",
+
+    lawTitle: "Legislació aplicable",
+    lawText:
+      "Aquests termes es regeixen per la legislació espanyola. Per a qualsevol controvèrsia, les parts se sotmeten als jutjats i tribunals corresponents al domicili de {responsable}, excepte que una norma de caràcter imperatiu dispose una altra cosa.",
+
+    contactTitle: "Contacte",
+    contactText: "Per a qualsevol dubte sobre aquests termes, escriu-nos a {email}.",
+  },
+
   roadmap: {
     title: "Full del projecte",
     subtitle:
@@ -524,17 +594,20 @@ Regles de comportament:
         descripcion:
           "Xat amb renderització Markdown, mentor de Vibe Coding, fallback intel·ligent etiquetat i estratègia de resposta que mai deixa d'ajudar.",
       },
+      {
+        titulo: "Full de ruta i termes legals (Fases 28-29)",
+        descripcion:
+          "Pàgina de Roadmap amb el recorregut del projecte i pàgina de Termes i Condicions, completant la secció legal del footer.",
+      },
     ],
     currentTitle: "Estat actual",
     currentItems: [
-      "Totes les fases 1 a 27 estan completades.",
+      "Totes les fases 1 a 29 estan completades.",
       "L'assistent del laboratori respon offline amb contingut del curs, glossari, eines i coneixement general, etiquetant sempre la procedència.",
-      "Queden canvis de les Fases 26 i 27 sense commitejar a l'espera de les proves finals al navegador.",
+      "La secció legal del footer està completa: privacitat, ús d'IA i termes i condicions.",
     ],
     nextTitle: "Pròxims passos",
     nextItems: [
-      "Crear la pàgina de Termes i Condicions (pendent al footer).",
-      "Commit de les Fases 26 i 27 després de les proves al navegador.",
       "Provar la instal·lació PWA i el mode offline en un desplegament HTTPS (per exemple Vercel).",
       "Afegir captures de pantalla al manifest per al diàleg d'instal·lació enriquit d'Android.",
       "Valorar prefixos d'URL /en i /val per a un hreflang real.",

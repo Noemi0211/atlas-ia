@@ -454,6 +454,76 @@ Reglas de comportamiento:
       "Si quieres saber más sobre cómo usamos la IA o detectas un error en un contenido, escríbenos a {email}.",
   },
 
+  terminos: {
+    title: "Términos y Condiciones",
+    subtitle:
+      "Estas condiciones regulan el uso de Atlas IA. Están escritas en un lenguaje claro para que sepas qué puedes hacer, qué esperamos de ti y cómo se resuelven las dudas.",
+    lastUpdated: "Última actualización: agosto de 2026",
+
+    acceptanceTitle: "Aceptación de estos términos",
+    acceptanceText:
+      "Al acceder o utilizar Atlas IA aceptas estos términos y la política de privacidad. Si no estás de acuerdo con alguna parte, te pedimos que no utilices la plataforma. El uso continuado de la plataforma implica la aceptación de la versión vigente de estos términos.",
+
+    serviceTitle: "Descripción del servicio",
+    serviceItems: [
+      "Atlas IA es una plataforma educativa gratuita en línea para aprender Inteligencia Artificial: bloques de lecciones, glosario, cronología, laboratorio interactivo, gamificación y panel docente.",
+      "El contenido es de carácter educativo y divulgativo y no sustituye ningún asesoramiento profesional.",
+      "La plataforma puede evolucionar: se pueden añadir, modificar o retirar contenidos y funcionalidades sin previo aviso.",
+    ],
+
+    accountsTitle: "Cuentas de usuario",
+    accountsItems: [
+      "Para crear una cuenta debes proporcionar un nombre y un correo electrónico reales y una contraseña.",
+      "Eres responsable de mantener la confidencialidad de tu contraseña y de toda la actividad que se realice con tu cuenta.",
+      "Si eres menor de 14 años, necesitas el consentimiento de tu madre, padre o tutor legal para crear una cuenta.",
+      "La cuenta es personal e intransferible; el profesorado puede consultar estadísticas agregadas de la actividad de su grupo.",
+    ],
+
+    contentTitle: "Contenido y licencia",
+    contentItems: [
+      "El contenido de la plataforma (lecciones, glosario, cronología y demás materiales) se publica bajo la licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0).",
+      "Puedes compartir y adaptar los materiales citando la fuente, sin fines comerciales y bajo la misma licencia.",
+      "Las marcas y nombres de productos de terceros mencionados en los contenidos pertenecen a sus respectivos propietarios.",
+    ],
+
+    conductTitle: "Uso responsable",
+    conductItems: [
+      "No debes utilizar la plataforma para fines ilícitos, para acosar o perjudicar a otras personas, ni para suplantar su identidad.",
+      "No debes intentar acceder a cuentas ajenas, alterar los datos de otras personas ni interferir en el funcionamiento del servicio.",
+      "No debes reutilizar los contenidos con fines comerciales sin autorización.",
+    ],
+
+    chatTitle: "Chat del laboratorio",
+    chatText:
+      "El chat del laboratorio es una herramienta de IA experimental con fines educativos. Sus respuestas pueden contener errores o información incompleta y no deben utilizarse como fuente única de verdad. Tu uso del chat es voluntario y bajo tu responsabilidad.",
+
+    teacherTitle: "Panel docente",
+    teacherText:
+      "Las cuentas de profesorado (identificadas por su correo institucional) permiten consultar estadísticas agregadas del grupo con el objetivo de orientar el aprendizaje. El profesorado se compromete a utilizar estos datos únicamente con finalidad educativa y a respetar la normativa de protección de datos.",
+
+    liabilityTitle: "Limitación de responsabilidad",
+    liabilityItems: [
+      "Ponemos el máximo cuidado en la calidad de los contenidos, pero no garantizamos que estén libres de errores ni su idoneidad para un uso concreto.",
+      "No seremos responsables de los daños derivados del uso de la plataforma o de la imposibilidad de utilizarla, salvo en los casos en que la ley no lo permita.",
+      "Los enlaces a sitios externos se ofrecen como recurso; no nos hacemos responsables de su contenido.",
+    ],
+
+    suspensionTitle: "Suspensión o cierre de la cuenta",
+    suspensionText:
+      "Podemos suspender o cerrar una cuenta si se incumplen estos términos o la normativa aplicable. Puedes dejar de usar la plataforma y solicitar el borrado de tu cuenta en cualquier momento escribiéndonos.",
+
+    changesTitle: "Modificaciones de estos términos",
+    changesText:
+      "Estos términos pueden actualizarse. La versión vigente se publica siempre en esta página con su fecha de actualización. Si los cambios son relevantes, lo indicaremos en la propia página.",
+
+    lawTitle: "Legislación aplicable",
+    lawText:
+      "Estos términos se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales correspondientes al domicilio de {responsable}, salvo que una norma de carácter imperativo disponga otra cosa.",
+
+    contactTitle: "Contacto",
+    contactText: "Para cualquier duda sobre estos términos, escríbenos a {email}.",
+  },
+
   roadmap: {
     title: "Roadmap del proyecto",
     subtitle:
@@ -533,17 +603,20 @@ Reglas de comportamiento:
         descripcion:
           "Chat con renderizado Markdown, mentor de Vibe Coding, fallback inteligente etiquetado y estrategia de respuesta que nunca deja de ayudar.",
       },
+      {
+        titulo: "Roadmap y términos legales (Fases 28-29)",
+        descripcion:
+          "Página de Roadmap con el recorrido del proyecto y página de Términos y Condiciones, completando la sección legal del footer.",
+      },
     ],
     currentTitle: "Estado actual",
     currentItems: [
-      "Todas las fases 1 a 27 están completadas.",
+      "Todas las fases 1 a 29 están completadas.",
       "El asistente del laboratorio responde en modo offline con contenido del curso, glosario, herramientas y conocimiento general, etiquetando siempre la procedencia.",
-      "Quedan cambios de las Fases 26 y 27 sin commitear a la espera de las pruebas finales en navegador.",
+      "La sección legal del footer está completa: privacidad, uso de IA y términos y condiciones.",
     ],
     nextTitle: "Siguientes pasos",
     nextItems: [
-      "Crear la página de Términos y Condiciones (pendiente en el footer).",
-      "Commit de las Fases 26 y 27 tras las pruebas en navegador.",
       "Probar la instalación PWA y el modo offline en un despliegue HTTPS (por ejemplo Vercel).",
       "Añadir capturas de pantalla al manifest para el diálogo de instalación enriquecido de Android.",
       "Valorar prefijos de URL /en y /val para un hreflang real.",

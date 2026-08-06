@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/laboratorio", priority: 0.7 },
     { path: "/privacidad", priority: 0.5 },
     { path: "/uso-de-ia", priority: 0.5 },
+    { path: "/terminos", priority: 0.5 },
     { path: "/roadmap", priority: 0.5 },
   ] as const;
 

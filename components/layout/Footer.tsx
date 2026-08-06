@@ -70,7 +70,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <span className="text-sm text-fg-muted">{t.footer.terminos}</span>
+                <Link href="/terminos" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.footer.terminos}
+                </Link>
               </li>
             </ul>
           </div>
