@@ -275,8 +275,15 @@ npm run lint      # ESLint
 - Textos localizados es/en/val en la sección `terminos` de los tres diccionarios; el contenido del roadmap se actualiza (hito 15 "Roadmap y términos legales (Fases 28-29)", estado actual "fases 1 a 29 completadas") y se elimina "Términos y Condiciones" de los próximos pasos
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
 
+### Fase 29b ✅ (revisión de la estrategia de fallback del asistente: responder al tema exacto, nunca genérico)
+- **Problema detectado**: preguntas sin match con el contenido de Atlas IA (p. ej. «¿Qué es antigravity?») caían en `noAnswer`, que respondía con una definición genérica de IA + lista de capacidades + petición de aclaración, ignorando la pregunta original
+- **`lib/ai.ts`**: 6 entradas nuevas en `GENERAL_KNOWLEDGE` (python/numpy/pandas/flask, antigravity, navegador/servidor/Internet, url/dominio, base-de-datos/sql, framework/librería); textos de `TOPIC_CATEGORIES` (ia/git/web/vscode) reescritos sin pedir aclaraciones; nuevas funciones `extractDefinitionSubject` (regex de «qué es X»/«qué significa X»), `subjectMatchesCategory` y `composeNoAnswer`; `findResponseWithMemory` ahora encadena: match directo → follow-up → sujeto de definición clasificado en su categoría (vía `findTopicFallback` con restricción de sujeto) → respuesta honesta
+- **Diccionarios es/en/val**: `ai.systemPrompt` reescrito (analizar la pregunta primero; contenido de Atlas IA; si no, conocimiento general manteniendo el tema; aclaración solo si ambigüedad real; lista de prohibidos; dominios obligatorios); `ai.noAnswer` pasa a ser solo «No dispongo de información suficiente para responder con precisión.» (sin lista de capacidades ni petición de aclaración)
+- **`app/api/chat/route.ts`**: el `catch` del handler ahora registra la excepción con `console.error` (antes se tragaba el error silenciosamente)
+- Verificación: tsc correcto, lint 0/0, pruebas SSE en `/api/chat` (modo offline): «¿qué es un LLM?» → `courseSource` + contenido de Atlas; «¿qué es antigravity?/git/html/commitear/API/navegador?» → `generalIntro` + respuesta útil del tema exacto (antigravity = módulo Python/xkcd, no IA genérica); «cuéntame qué son las gafas de realidad aumentada» (sin match) → `noAnswer` honesto sin definición genérica de IA
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `c858fac` (enlace Appsedu en el footer, árbol limpio). No hay cambios pendientes.
+- Último commit: `4ac483d` (enlace Appsedu en el footer, árbol limpio). Pendientes de commit: fix de la estrategia de fallback del asistente (`lib/ai.ts`, diccionarios es/en/val, logging en `app/api/chat/route.ts`) y esta actualización de AGENTS.md.
 - Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)

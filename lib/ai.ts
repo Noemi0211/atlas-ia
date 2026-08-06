@@ -308,6 +308,36 @@ const GENERAL_KNOWLEDGE: FallbackEntry[] = [
     fn: () =>
       "Los modelos de IA se ejecutan en **procesadores optimizados para matemáticas masivas**:\n- **GPU** (tarjetas gráficas): el estándar para entrenar y ejecutar modelos (NVIDIA domina el sector)\n- **TPU** de Google: chips diseñados específicamente para redes neuronales\n- **NPU**: unidades de IA integradas en móviles y portátiles modernos\n\nSegún dónde corran:\n1. **En la nube**: la mayoría (ChatGPT, Claude, Gemini). Llamas a una API y el modelo se ejecuta en sus servidores\n2. **En local**: con herramientas como Ollama o Llama.cpp, en tu propio ordenador si tiene GPU\n\nDato: tu portátil puede tener ya una NPU sin que lo sepas.",
   },
+  {
+    keywords: [["python"], ["numpy"], ["pandas"], ["flask"]],
+    fn: () =>
+      "**Python** es un lenguaje de programación de propósito general, legible y muy utilizado en IA, ciencia de datos, desarrollo web y automatización.\n\nPor qué es tan usado:\n- Sintaxis clara y sencilla, ideal para empezar\n- **numpy** y **pandas**: cálculo numérico y análisis de datos\n- **matplotlib**: gráficas\n- **Flask** o **Django**: crear aplicaciones web\n- Es el lenguaje por defecto del Machine Learning (TensorFlow, PyTorch, scikit-learn)\n\nEjemplo mínimo: `print(\"Hola mundo\")` muestra un mensaje por pantalla.\n\nEn Atlas IA el curso se centra en el desarrollo web con HTML, CSS y JavaScript, pero Python es la puerta de entrada natural a la IA por su ecosistema de librerías.",
+  },
+  {
+    keywords: [["antigravity"], ["antigravedad"]],
+    fn: () =>
+      "**Antigravity** es un módulo del lenguaje Python que esconde un \"huevo de pascua\" (easter egg).\n\nSi ejecutas en la terminal:\n```python\nimport antigravity\n```\n\nse abre en tu navegador la tira cómica **xkcd #353**, que explica el origen del nombre de Python. El módulo también incluye funciones reales de geolocalización (como `geohash`), pero su fama viene del guiño a la comunidad de programadoras y programadores de Python.\n\nNo hace nada de \"antigravedad\": es un buen ejemplo de cómo los proyectos de software pueden incluir detalles sorpresa.",
+  },
+  {
+    keywords: [["navegador"], ["servidor"], ["internet"], ["como", "funciona", "internet"]],
+    fn: () =>
+      "Son las piezas básicas de Internet:\n\n- **Navegador**: el programa que usas para ver páginas (Chrome, Firefox, Edge). Pide los recursos y los muestra.\n- **Servidor**: el ordenador conectado de forma permanente que guarda las páginas y las envía cuando se las piden.\n- **Internet**: la red de redes que conecta todos esos ordenadores entre sí.\n\nEl flujo: escribes una dirección (URL) → el navegador pregunta al servidor → el servidor responde con el código de la página (HTML, CSS, JavaScript) → el navegador lo interpreta y lo dibuja en pantalla.",
+  },
+  {
+    keywords: [["url"], ["dominio"], ["direccion", "web"]],
+    fn: () =>
+      "Una **URL** (o dirección web) es la dirección única de un recurso en Internet, por ejemplo `https://atlas-ia.dev/glosario`.\n\nSe compone de:\n- **Protocolo**: `https` (la comunicación cifrada)\n- **Dominio**: `atlas-ia.dev` (el nombre que identifica el sitio)\n- **Ruta**: `/glosario` (la página o sección concreta)\n\nEl **dominio** se registra en una empresa autorizada y apunta a los servidores donde está alojado el sitio.",
+  },
+  {
+    keywords: [["base", "de", "datos"], ["base", "datos"], ["sql"], ["bd"]],
+    fn: () =>
+      "Una **base de datos** es un sistema para guardar, organizar y consultar información de forma estructurada: usuarios, lecciones, puntuaciones...\n\nLo habitual:\n- **SQL** (bases relacionales): los datos se organizan en tablas con filas y columnas, como una hoja de cálculo (MySQL, PostgreSQL, SQLite)\n- **NoSQL** (no relacionales): documentos o pares clave-valor para otros casos (MongoDB)\n\nEn Atlas IA el progreso de quien aprende se guarda con **Prisma + SQLite**, una base de datos relacional ligera.",
+  },
+  {
+    keywords: [["framework"], ["libreria"], ["librerias"], ["biblioteca", "de", "codigo"]],
+    fn: () =>
+      "Un **framework** es un marco de trabajo que te da una base ya hecha y unas reglas para construir aplicaciones sin empezar de cero (por ejemplo React para webs, o Django y Flask para Python).\n\nUna **librería** (o biblioteca) es un conjunto de funciones ya escritas que reutilizas en tu código (por ejemplo moment.js para fechas o numpy para matemáticas).\n\nDiferencia práctica: la librería la llamas tú cuando quieres; el framework te llama a ti (invierte el control).",
+  },
 ];
 
 interface KnowledgeSource {
@@ -324,12 +354,12 @@ const TOPIC_CATEGORIES: { name: string; keywords: string[]; text: string }[] = [
   {
     name: "ia",
     keywords: ["ia", "inteligencia", "artificial", "modelo", "modelos", "gpt", "claude", "gemini", "llm", "ml", "deep", "neurona", "red", "algoritmo", "prediccion"],
-    text: "La **Inteligencia Artificial** es la rama de la informática que crea sistemas capaces de realizar tareas que normalmente requieren inteligencia humana: entender lenguaje, reconocer imágenes, recomendar contenidos o generar código.\n\nEn Atlas IA tienes un bloque completo de **Fundamentos** (qué es la IA, Machine Learning, Deep Learning, LLM), el **Mapa del Ecosistema** con las herramientas y el **Glosario** con las definiciones de cada concepto.\n\nSi me concretas qué aspecto te interesa (un concepto, una herramienta o un ejemplo práctico), te lo explico.",
+    text: "La **Inteligencia Artificial** es la rama de la informática que crea sistemas capaces de realizar tareas que normalmente requieren inteligencia humana: entender lenguaje, reconocer imágenes, recomendar contenidos o generar código.\n\nSe organiza en capas: la **IA** como paraguas, el **Machine Learning** (aprender de los datos) como subcampo y el **Deep Learning** (redes neuronales profundas) como motor de los modelos actuales como GPT o Claude.\n\nEn Atlas IA tienes el bloque de **Fundamentos**, el **Mapa del Ecosistema** con las herramientas y el **Glosario** con la definición de cada concepto.",
   },
   {
     name: "git",
     keywords: ["git", "github", "commit", "branch", "rama", "push", "pull", "repo", "repositorio", "versionado"],
-    text: "**Git y GitHub** forman el sistema de versionado de código más usado: Git guarda el historial de tu proyecto en tu ordenador y GitHub lo aloja en la nube para compartirlo.\n\nSi me preguntas sobre un comando o concepto concreto (commit, rama, push, pull, clone, .gitignore...), dime cuál y te lo explico con un ejemplo práctico. Es una habilidad clave que se practica en el bloque **Programación Asistida** del curso.",
+    text: "**Git** es un sistema de control de versiones que guarda el historial completo de tu proyecto para poder deshacer cambios, comparar versiones y colaborar sin pisarse. **GitHub** es la plataforma en la nube que aloja los repositorios Git y permite compartirlos.\n\nComandos esenciales: `git init` (crear el repositorio), `git add` (preparar cambios), `git commit` (guardar una instantánea), `git push` (subir al remoto) y `git pull` (bajar los cambios de otras personas).\n\nEs una habilidad clave que se practica en el bloque **Programación Asistida** del curso.",
   },
   {
     name: "programacion",
@@ -339,12 +369,12 @@ const TOPIC_CATEGORIES: { name: string; keywords: string[]; text: string }[] = [
   {
     name: "web",
     keywords: ["html", "css", "javascript", "web", "pagina", "sitio", "frontend", "backend", "navegador", "url"],
-    text: "Una **web** está formada por tres tecnologías básicas: **HTML** estructura el contenido, **CSS** le da estilo y **JavaScript** la hace interactiva. El navegador las interpreta y las muestra.\n\nSi quieres profundizar en alguna (p. ej. qué es una etiqueta, un selector, una función), pregúntame y te doy un ejemplo sencillo.",
+    text: "Una **web** está formada por tres tecnologías básicas: **HTML** estructura el contenido, **CSS** le da estilo y **JavaScript** la hace interactiva. El navegador las interpreta y las muestra.\n\nA la web también le corresponden el **frontend** (lo que ve y usa la persona) y el **backend** (el servidor y la base de datos que hacen que todo funcione).",
   },
   {
     name: "vscode",
     keywords: ["vs", "code", "vscode", "visual", "studio", "editor", "ide", "extension", "cline"],
-    text: "**VS Code** es el editor de código más popular para empezar: ligero, gratis y ampliable con extensiones. Con asistentes de IA como **Cline** o **Copilot** se convierte en tu compañero de programación.\n\nPregúntame por su instalación, atajos, extensiones o cómo configurar la IA y te guío paso a paso.",
+    text: "**VS Code** es el editor de código más popular para empezar: ligero, gratis y ampliable con extensiones. Incluye terminal integrada para usar Git y comandos, y con asistentes de IA como **Cline** o **Copilot** se convierte en tu compañero de programación.\n\nSe instala desde su página oficial, y las extensiones (Prettier, ESLint, Cline, Copilot) se añaden desde el panel de extensiones del editor.",
   },
   {
     name: "publicar",
@@ -546,11 +576,16 @@ function composeResult(result: MatchResult, locale: Locale): string {
   return `**[${t.ai.generalIntro}]**\n\n${result.text}`;
 }
 
-function findTopicFallback(query: string, locale: Locale): string | null {
+function findTopicFallback(
+  query: string,
+  locale: Locale,
+  subject: string | null,
+): string | null {
   const tokens = tokenize(query);
   const t = getDictionary(locale);
 
   for (const category of TOPIC_CATEGORIES) {
+    if (subject && !subjectMatchesCategory(subject, category)) continue;
     const hit = category.keywords.some((kw) =>
       tokens.some((tok) => tokenMatches(tok, kw)),
     );
@@ -560,6 +595,36 @@ function findTopicFallback(query: string, locale: Locale): string | null {
   }
 
   return null;
+}
+
+const DEFINITION_PATTERNS = [
+  /(?:que|qué)\s+es\s+(?:un|una|el|la|los|las|lo)?\s*([a-zñü][a-z0-9ñü-]{2,})/i,
+  /(?:que|qué)\s+significa\s+(?:el|la|un|una)?\s*([a-zñü][a-z0-9ñü-]{2,})/i,
+];
+
+function extractDefinitionSubject(query: string): string | null {
+  for (const pattern of DEFINITION_PATTERNS) {
+    const match = query.match(pattern);
+    if (match) {
+      return normalize(match[1]).replace(/[^a-z0-9]/g, "");
+    }
+  }
+  return null;
+}
+
+function subjectMatchesCategory(
+  subject: string,
+  category: (typeof TOPIC_CATEGORIES)[number],
+): boolean {
+  const subjectTokens = tokenize(subject);
+  return category.keywords.some((kw) =>
+    subjectTokens.some((tok) => tokenMatches(tok, kw)),
+  );
+}
+
+function composeNoAnswer(locale: Locale): string {
+  const t = getDictionary(locale);
+  return `**[${t.ai.generalIntro}]**\n\n${t.ai.noAnswer}`;
 }
 
 function isGreeting(query: string): boolean {
@@ -618,10 +683,11 @@ function findResponseWithMemory(
     }
   }
 
-  const topic = findTopicFallback(current, locale);
+  const subject = extractDefinitionSubject(current);
+  const topic = findTopicFallback(current, locale, subject);
   if (topic) return topic;
 
-  return getDictionary(locale).ai.noAnswer;
+  return composeNoAnswer(locale);
 }
 
 export async function streamChatResponse(

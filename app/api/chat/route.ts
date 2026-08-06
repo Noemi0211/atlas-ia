@@ -45,7 +45,8 @@ export async function POST(req: Request) {
         Connection: "keep-alive",
       },
     });
-  } catch {
+  } catch (error) {
+    console.error("POST /api/chat error:", error);
     return NextResponse.json(
       { error: getDictionary(DEFAULT_LOCALE).ai.internalError },
       { status: 500 }
