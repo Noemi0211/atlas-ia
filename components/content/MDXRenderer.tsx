@@ -13,26 +13,6 @@ const components = {
   ArbolDecision,
   CalculadoraPrompts,
 
-  h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h2
-      className="text-2xl font-bold text-fg mt-10 mb-4 pb-2 border-b border-border"
-      id={typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "") : undefined}
-      {...props}
-    >
-      {children}
-    </h2>
-  ),
-
-  h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-      className="text-xl font-semibold text-fg mt-8 mb-3"
-      id={typeof children === "string" ? children.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "") : undefined}
-      {...props}
-    >
-      {children}
-    </h3>
-  ),
-
   h4: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4 className="text-lg font-semibold text-fg mt-6 mb-2" {...props}>
       {children}
@@ -129,12 +109,64 @@ const components = {
 
 interface MDXRendererProps {
   source: string;
+  headingIds?: string[];
 }
 
-export function MDXRenderer({ source }: MDXRendererProps) {
+function fallbackHeadingId(children: React.ReactNode) {
+  return typeof children === "string"
+    ? children
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+    : undefined;
+}
+
+export function MDXRenderer({ source, headingIds }: MDXRendererProps) {
+  let headingIndex = -1;
+
+  const renderComponents = {
+    ...components,
+
+    h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+      headingIndex++;
+      return (
+        <h2
+          className="text-2xl font-bold text-fg mt-10 mb-4 pb-2 border-b border-border"
+          id={
+            headingIds && headingIndex < headingIds.length
+              ? headingIds[headingIndex]
+              : fallbackHeadingId(children)
+          }
+          {...props}
+        >
+          {children}
+        </h2>
+      );
+    },
+
+    h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+      headingIndex++;
+      return (
+        <h3
+          className="text-xl font-semibold text-fg mt-8 mb-3"
+          id={
+            headingIds && headingIndex < headingIds.length
+              ? headingIds[headingIndex]
+              : fallbackHeadingId(children)
+          }
+          {...props}
+        >
+          {children}
+        </h3>
+      );
+    },
+  };
+
   return (
     <article className="prose-atlas">
-      <MDXRemote source={source} components={components} options={{ mdxOptions: { development: false, remarkPlugins: [remarkGfm] } }} />
+      <MDXRemote source={source} components={renderComponents} options={{ mdxOptions: { development: false, remarkPlugins: [remarkGfm] } }} />
     </article>
   );
 }

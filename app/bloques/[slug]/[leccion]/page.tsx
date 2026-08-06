@@ -6,11 +6,12 @@ import { MDXRenderer } from "@/components/content/MDXRenderer";
 import { LessonNav } from "@/components/content/LessonNav";
 import { LessonSidebar } from "@/components/content/LessonSidebar";
 import { TableOfContents } from "@/components/content/TableOfContents";
+import { BlockCompleteCTA } from "@/components/content/BlockCompleteCTA";
 import { LessonCompleteButton } from "@/components/gamification/LessonCompleteButton";
 import { FavoriteButton } from "@/components/gamification/FavoriteButton";
 import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
-import { getBloqueMeta } from "@/lib/i18n/data";
+import { getBLOQUES, getBloqueMeta } from "@/lib/i18n/data";
 
 interface Props {
   params: Promise<{ slug: string; leccion: string }>;
@@ -44,20 +45,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function slugifyHeading(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
 function extractHeadings(mdxContent: string) {
   const headings: { id: string; text: string; level: number }[] = [];
-  const regex = /^(#{2,3})\s+(.+)$/gm;
-  let match;
+  const usedIds = new Set<string>();
+  const lines = mdxContent.split("\n");
+  let inFence = false;
 
-  while ((match = regex.exec(mdxContent)) !== null) {
+  for (const line of lines) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    const match = /^(#{2,3})\s+(.+)$/.exec(line);
+    if (!match || inFence) continue;
+
     const level = match[1].length;
     const text = match[2].trim();
-    const id = text
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^\w\s-]/g, "")
-      .replace(/\s+/g, "-");
+    let id = slugifyHeading(text);
+    if (usedIds.has(id)) {
+      let counter = 2;
+      while (usedIds.has(`${id}-${counter}`)) counter++;
+      id = `${id}-${counter}`;
+    }
+    usedIds.add(id);
     headings.push({ id, text, level });
   }
 
@@ -81,6 +100,17 @@ export default async function LeccionPage({ params }: Props) {
     currentIndex < lecciones.length - 1
       ? lecciones[currentIndex + 1]
       : null;
+
+  const bloques = getBLOQUES(t);
+  const bloqueIdx = bloques.findIndex((b) => b.slug === slug);
+  const siguienteBloque =
+    bloqueIdx >= 0 && bloqueIdx < bloques.length - 1
+      ? bloques[bloqueIdx + 1]
+      : null;
+  const siguientePrimeraLeccion = siguienteBloque
+    ? getLeccionesBloque(siguienteBloque.slug, locale)[0] ?? null
+    : null;
+  const esUltimaLeccion = currentIndex === lecciones.length - 1;
 
   const headings = extractHeadings(data.content);
   const lessonId = `${slug}/${leccion}`;
@@ -129,7 +159,10 @@ export default async function LeccionPage({ params }: Props) {
 
           <div className="flex gap-8">
             <div className="flex-1 min-w-0">
-              <MDXRenderer source={data.content} />
+              <MDXRenderer
+                source={data.content}
+                headingIds={headings.map((h) => h.id)}
+              />
 
               <div className="mt-8 flex items-center justify-between">
                 <LessonCompleteButton lessonId={lessonId} />
@@ -140,6 +173,22 @@ export default async function LeccionPage({ params }: Props) {
                 anterior={anterior}
                 siguiente={siguiente}
               />
+
+              {esUltimaLeccion && (
+                <BlockCompleteCTA
+                  esUltimaLeccion={esUltimaLeccion}
+                  lastLessonId={lessonId}
+                  siguienteBloque={
+                    siguienteBloque && siguientePrimeraLeccion
+                      ? {
+                          slug: siguienteBloque.slug,
+                          numero: siguienteBloque.numero,
+                          primeraLeccionSlug: siguientePrimeraLeccion.slug,
+                        }
+                      : null
+                  }
+                />
+              )}
             </div>
 
             <TableOfContents headings={headings} />

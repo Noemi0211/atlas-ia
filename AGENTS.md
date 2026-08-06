@@ -241,9 +241,34 @@ npm run lint      # ESLint
 - Textos localizados es/en/val en la sección `usoIa` de los tres diccionarios; placeholders `{autor}` y `{email}` interpolados en el servidor
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (110 páginas)
 
+### Fase 26 ✅ (chat de IA: renderizado Markdown, mentor Vibe Coding y fallback inteligente)
+- **Renderizado Markdown en el chat**: nuevo `components/interactive/ChatMarkdown.tsx` que convierte las respuestas a JSX seguro (sin `dangerouslySetInnerHTML`): negrita, cursiva, `código`, enlaces, encabezados h1-h3, listas, tablas, bloques de código y citas, con los mismos estilos que `MDXRenderer`. Se aplica a mensajes y a la burbuja de streaming en `AIChat.tsx`; los mensajes del usuario se muestran como texto plano. Eliminado el `div.prose` inerte (no hay plugin de tipografía instalado)
+- **Alcance ampliado a todo el curso de Vibe Coding Educativo**: `GENERAL_KNOWLEDGE` en `lib/ai.ts` con 23 temas de programación/web (Git, commitear, ramas/branch, GitHub, push/pull/clone, repositorio, VS Code, extensiones, HTML, CSS, JavaScript, frontend/backend, roadmap, Cline, agentes de código, deploy/publicar, buenas prácticas, recursos educativos, terminal, Node/npm, Markdown, .gitignore) + entradas de curso nuevas: programación asistida y Vibe Coding
+- **Matcher mejorado**: `phraseMatches` permite huecos de 1-2 tokens entre palabras ("una rama de Git", "gpt vs gemini", "ética en la ia") manteniendo prioridad por especificidad (mayor número de keywords)
+- **Fallback inteligente**: cadena `findBestResponse` (conocimiento del curso → herramientas → glosario) → memoria de conversación → `findTopicFallback` por categoría (git/programación/web/vs code/publicar) → `noAnswer`. Refactor a `MatchResult { text, score, source }` con `composeResult`
+- **Procedencia clara**: las respuestas de conocimiento general se etiquetan con `**[Conocimiento general de tecnología]**` (clave `ai.generalSource` en es/en/val; sustituida en la Fase 27 por `courseSource`/`generalIntro`); las del curso se reconocen porque citan bloques/glosario/laboratorio
+- **Prompt del sistema reescrito** (es/en/val): mentor del curso completo (IA + programación + Git/GitHub + VS Code + publicación + buenas prácticas + recursos educativos), responder primero, solo pedir aclaración si falta información, marcar procedencia, pregunta/reto opcional al final
+- **`noAnswer` reescrito**: sin frases tipo "no tengo respuesta preparada"/"¿podrías concretar?"; lista capacidades e invita a plantear el objetivo con un ejemplo
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (110 páginas)
+
+### Fase 27 ✅ (estrategia de respuesta del asistente: prioridad Atlas, transparencia y nunca dejar de ayudar)
+- **Estrategia por prioridad documentada en `systemPrompt`** (es/en/val): 1) si hay información relevante en Atlas IA, responder con ella y empezar por «Según Atlas IA:»; 2) si el tema no está en Atlas IA, indicarlo con transparencia («Este tema no aparece todavía en los contenidos de Atlas IA, pero puedo explicártelo.») y responder igualmente con conocimiento general útil; 3) nunca terminar con «No tengo una respuesta preparada para eso», «Ese tema no está desarrollado» o «Cuéntame más» sin haber intentado responder antes
+- **Prefijos estructurados en el fallback offline**: nuevas claves `ai.courseSource` («Según Atlas IA:») y `ai.generalIntro` (frase de transparencia) en los tres diccionarios, sustituyendo a `ai.generalSource` (eliminada). `composeResult` antepone `**[courseSource]**` a las respuestas del curso (glosario, herramientas y conocimiento del curso) y `**[generalIntro]**` a las de conocimiento general; `findTopicFallback` usa `generalIntro`; el saludo (`noPrefix: true`, propagado en `MatchResult.noPrefix`) queda sin prefijo
+- **Cobertura de los 8 dominios obligatorios**: IA, Programación, Git y GitHub, VS Code, Desarrollo web, Publicación de proyectos, Vibe Coding y Herramientas educativas digitales, vía `GENERAL_KNOWLEDGE` + `TOPIC_CATEGORIES` ampliado con categorías nuevas `ia`, `vibecoding` y `educacion` (además de git/programacion/web/vscode/publicar)
+- **Nuevas entradas de conocimiento general**: qué es una **API** (con analogía del restaurante) y **dónde se ejecutan los modelos de IA** (GPU/TPU/NPU, nube vs. local) para garantizar que las preguntas básicas prohibidas siempre obtienen respuesta
+- **`noAnswer` reescrito**: empieza con la frase de transparencia y en lugar de rechazar lista los dominios que cubre e invita a concretar el objetivo; sin frases de callejón sin salida
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (110 páginas); probado en servidor de producción vía `/api/chat` (SSE): «que es una api»/«que es git»/«que es html»/«que es commitear» → prefijo `generalIntro` + respuesta útil, «que es un llm» → prefijo `courseSource` con contenido de Atlas, consultas sin match → `noAnswer` transparencia
+
+### Fase 28 ✅ (página de Roadmap del proyecto)
+- Nueva página `/roadmap` (`app/roadmap/page.tsx`): server component con `generateMetadata` (canonical `/roadmap`), `Breadcrumbs` y `data-read-aloud` (lectura por voz + términos interactivos del glosario)
+- Contenido localizado en la sección `roadmap` de los tres diccionarios: timeline de 14 hitos completados con icono `CheckCircle2` (agrupando las Fases 1-27: fundación, ecosistema y prompting, búsqueda/glosario/cronología, gamificación, cuentas, laboratorio, contenido completo, revisión lingüística, novedades 2026, i18n, accesibilidad, SEO y PWA, docencia y legal, asistente de IA), "Estado actual" (`currentTitle`/`currentItems`) y "Siguientes pasos" (`nextTitle`/`nextItems`), con `lastUpdated`
+- Footer (`components/layout/Footer.tsx`): el enlace "Roadmap.sh" de la sección Recursos ahora apunta a la página interna `/roadmap` con el título localizado (`t.roadmap.title`) en lugar de a `https://roadmap.sh`
+- Añadida a `app/sitemap.ts` (prioridad 0.5) → 93 URLs; se indexa en `app/robots.ts` (no está en disallow)
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (111 páginas), `/roadmap` responde 200 en runtime
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `a377364` (Fase 25, página de uso de IA). Árbol limpio. Fase 24 (privacidad) en `1f5e108`; Fases 21/22/23 en `48ec009`, `f022558`, `e16176d`; revisión Fase 23 en `2621b86`
-- Siguientes pasos posibles: probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
+- Último commit: `890bc0f` (docs Fase 25, árbol limpio). **Cambios SIN commitear**: Fases 26 y 27 (chat: `ChatMarkdown.tsx`, `lib/ai.ts` con conocimiento general y fallback inteligente, estrategia de respuesta con prefijos `courseSource`/`generalIntro`, `AIChat.tsx`, `MDXRenderer.tsx`, `BlockCompleteCTA.tsx`, contenido de las lecciones 01/02/05 del laboratorio en es/en/val) y **Fase 28** (página `/roadmap`: `app/roadmap/`, enlace del footer, `sitemap.ts`, secciones `ai` y `roadmap` de los diccionarios)
+- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, commitear las Fases 26, 27 y 28, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, crear la página de Términos y Condiciones (pendiente en el footer)
 
 ## Bloques de contenido (MDX)
 
@@ -269,10 +294,11 @@ app/                  → Páginas (App Router)
   glosario/           → Búsqueda + filtros (layout.tsx con canonical)
   privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
   uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
+  roadmap/            → Roadmap del proyecto: hitos, estado actual y próximos pasos (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register
-  sitemap.ts          → 92 URLs (estáticas + bloques + lecciones)
+  sitemap.ts          → 93 URLs (estáticas + bloques + lecciones)
   robots.ts           → allow "/", disallow auth, sitemap.xml
 
 app/api/              → API Routes
@@ -285,9 +311,9 @@ app/api/              → API Routes
 components/
   ui/                 → Card, Button, Badge, ProgressBar, Callout, CodeBlock
   layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs, LanguageSelector
-  interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator
+  interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats
-  content/            → MDXRenderer (usa next-mdx-remote/rsc), LessonNav, LessonSidebar, TableOfContents
+  content/            → MDXRenderer (usa next-mdx-remote/rsc), BlockCompleteCTA, LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
 

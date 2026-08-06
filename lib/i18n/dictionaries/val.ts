@@ -85,25 +85,28 @@ export const valDict = {
   },
 
   ai: {
-    systemPrompt: `Ets Atlas, un tutor expert en Intel·ligència Artificial. Les teues característiques:
+    systemPrompt: `Ets Atlas, mentor del curs de Vibe Coding Educatiu de la plataforma Atlas IA. Ajudes a aprendre amb IA i a programar des de zero. Estratègia de resposta per prioritat:
 
-- Expliques conceptes d'IA de manera clara, didàctica i adaptada al nivell de cada persona
-- Utilitzes exemples pràctics del món real
-- Quan et pregunten sobre eines (ChatGPT, Claude, Gemini, etc.), compares les seues fortaleses
-- Parles sempre en valencià, amb un to amable però professional
-- Pots explicar des de conceptes bàsics (què és un LLM) fins a avançats (RAG, ajust fi, MCP)
-- Si no saps alguna cosa, ho admets i suggereixes on buscar a Atlas IA
-- Mantens respostes concises però completes (3-5 paràgrafs com a màxim llevat que es demanen més)
-- Utilitzes markdown bàsic per al format (**negreta**, llistes, \`codi\`)`,
+1. Prioritat 1: contingut d'Atlas IA. Si la pregunta té informació rellevant a la plataforma (blocs, glossari, cronologia, laboratori), respon amb ella i comença amb «Segons Atlas IA:».
+2. Si el tema no està a Atlas IA, indica-ho amb transparència («Aquest concepte encara no apareix en Atlas IA.») i respon igualment amb coneixement general útil del domini. No deixes mai d'ajudar l'estudiant.
+3. No acabes mai una resposta amb «No tinc una resposta preparada per a això», «Aquest tema no està desenvolupat» o «Explica'm més» sense haver intentat respondre abans.
+
+Regles de comportament:
+- Respon SEMPRE primer amb el teu coneixement: definició directa, exemple real i aplicació pràctica. Mai respongues "podries concretar?" ni demanes aclariment si pots respondre.
+- No rebutges preguntes bàsiques com què és commitear, què és Git, què és una API, què és HTML, què és un LLM o on s'executen els models d'IA: respon-les sempre.
+- Domines aquests temes: Intel·ligència Artificial (fonaments, ML, Deep Learning, LLM, prompting, RAG, agents, MCP, ètica, història, eines), programació per a principiants (HTML, CSS, JavaScript, Git i GitHub, VS Code i extensions, agents de codi com Cline, publicació de projectes, bones pràctiques, recursos educatius digitals) i Vibe Coding.
+- Quan pregunten per eines (ChatGPT, Claude, Gemini, Cursor, Cline...), compara fortaleses i debilitats i recomana segons el cas d'ús.
+- Distingeix la procedència: si fas servir contingut del curs, marca-ho amb «Segons Atlas IA:»; si fas servir coneixement general, utilitza la frase de transparència del punt 2.
+- Explica en llenguatge senzill, adaptat al nivell de cada persona i partint del bàsic si el tema és complex. Estructura: 1) definició directa, 2) exemple o comparació, 3) com aplicar-ho. Mantén les respostes breus (2-4 paràgrafs llevat que en demanen més).
+- Si no saps alguna cosa, ho admets i suggereixes on buscar a Atlas IA (blocs, glossari, cronologia, laboratori), però ofereix sempre una explicació general del tema.
+- Al final pots afegir UNA pregunta o repte opcional només si aporta valor.
+- Utilitzes markdown bàsic per al format (**negreta**, llistes, taules, \`codi\`) i respons sempre en valencià.`,
     error: "Error en connectar amb la IA",
     badRequest: "Has d'enviar almenys un missatge",
     internalError: "Error intern",
-    noAnswer: "No tinc una resposta preparada per a això. Pots reformular la pregunta?",
-    generalResponses: [
-      "Excel·lent pregunta! A Atlas IA cobrim molts temes relacionats amb la intel·ligència artificial. Podries concretar una mica més?\n\nPots preguntar-me sobre:\n- **Conceptes**: què és IA, ML, Deep Learning, LLM\n- **Eines**: ChatGPT, Claude, Gemini, Cursor\n- **Tècniques**: prompting, RAG, ajust fi, agents\n- **Història**: fites, evolució, Turing\n- **Recursos**: quin bloc et recomane segons el teu nivell",
-      "Interessant. Com a tutor d'IA, puc ajudar-te amb conceptes, eines i tècniques. Alguns temes populars:\n\n- **Fonaments**: Machine Learning, Deep Learning, Transformers\n- **Prompting**: tècniques avançades, rols, formats\n- **Ecosistema**: comparativa d'eines\n- **Ètica**: biaix, privacitat, impacte social\n\nSobre quin tema t'agradaria aprendre?",
-      "Bona pregunta. Per a donar-te la millor resposta, pots dir-me si t'interessa més la **teoria** (conceptes, fonaments) o la **pràctica** (eines, prompting, projectes)?\n\nAixí puc adaptar la meua explicació al teu nivell i interessos.",
-    ],
+    courseSource: "Segons Atlas IA:",
+    generalIntro: "Aquest concepte encara no apareix en Atlas IA.",
+    noAnswer: "Aquest concepte encara no apareix en Atlas IA, però puc explicar-te'l.\n\nLa **Intel·ligència Artificial** és la branca de la informàtica que crea sistemes capaços de fer tasques que normalment requereixen intel·ligència humana: entendre el llenguatge, reconéixer imatges, recomanar continguts o generar codi. Es recolza en el **Machine Learning** (aprendre de les dades) i en els **models de llenguatge (LLM)** com ChatGPT o Claude.\n\nTambé puc ajudar-te amb programació (HTML, CSS, JavaScript), Git i GitHub, VS Code, desenvolupament web, publicació de projectes, Vibe Coding i eines educatives digitals. Si em contes el tema concret que t'interessa, et done exemples senzills.",
   },
 
   home: {
@@ -151,6 +154,12 @@ export const valDict = {
     quitarFavoritos: "Traure dels favorits",
     anterior: "Anterior",
     siguiente: "Següent",
+    bloqueCompletado: "Bloc completat!",
+    bloqueCompletadoDesc: "Has acabat totes les lliçons d'este bloc. Passem al següent?",
+    continuarBloque: "Continua amb el Bloc {numero}",
+    cursoCompletado: "Has completat tot el curs!",
+    cursoCompletadoDesc: "Has recorregut els 11 blocs d'Atlas IA. Pots repassar qualsevol tema quan vulgues.",
+    verBloques: "Veu tots els blocs",
     enEstaPagina: "En aquesta pàgina",
     indice: "Índex de contingut",
     leccionesBloque: "Lliçons del bloc",
@@ -215,6 +224,7 @@ export const valDict = {
   laboratorio: {
     title: "Laboratori IA",
     subtitle: "Experimenta, prova i aprèn amb eines interactives",
+    openChat: "Obre el Chat IA",
     tabs: {
       chat: "Chat IA",
       prompts: "Entorn de Prompts",
@@ -433,6 +443,103 @@ export const valDict = {
     doubtsTitle: "Tens dubtes?",
     doubtsText:
       "Si vols saber més sobre com utilitzem la IA o detectes un error en un contingut, escriu-nos a {email}.",
+  },
+
+  roadmap: {
+    title: "Full del projecte",
+    subtitle:
+      "La fulla de ruta d'Atlas IA: què hem construït, en quin punt estem i cap a on es dirigeix la plataforma.",
+    lastUpdated: "Última actualització: agost de 2026",
+    intro:
+      "Atlas IA es construïx per fases incrementals. Cada fase afig contingut, funcionalitat o millores de qualitat verificades abans de continuar. Este és el recorregut complet del projecte.",
+    milestonesTitle: "Fites completades",
+    milestones: [
+      {
+        titulo: "Fundació del projecte (Fases 1-2)",
+        descripcion:
+          "Base Next.js amb App Router, sistema de disseny clar/fosc, layout amb barra lateral i buscador, bloc d'inici i Fonaments d'IA amb 16 lliçons, cerca global i gamificació inicial (XP, insígnies, ratxes, favorits).",
+      },
+      {
+        titulo: "Ecosistema i prompting (Fases 3-4)",
+        descripcion:
+          "Bloc 2 amb 8 lliçons, comparador interactiu de 13 eines, arbre de decisió i 7 categories; bloc 3 amb 8 lliçons i calculadora de prompts.",
+      },
+      {
+        titulo: "Cerca, glossari i cronologia (Fase 5)",
+        descripcion:
+          "Cerca avançada en glossari i eines, glossari de 48 termes amb filtres i cronologia interactiva amb 28 fites de la IA.",
+      },
+      {
+        titulo: "Gamificació ampliada (Fase 6)",
+        descripcion:
+          "Rànquing global, reptes diaris i setmanals, projectes pràctics, pàgina de perfil amb estadístiques i notificacions en temps real.",
+      },
+      {
+        titulo: "Comptes i base de dades (Fase 7)",
+        descripcion:
+          "SQLite amb Prisma, autenticació NextAuth amb credencials, registre, inici de sessió i sincronització del progrés.",
+      },
+      {
+        titulo: "Laboratori d'IA (Fases 8-10)",
+        descripcion:
+          "Xat interactiu amb streaming SSE i respostes offline, bloc d'Agents, i laboratori ampliat: entorn de prompts, flux d'agents, comparador de models i simulador de tokens.",
+      },
+      {
+        titulo: "Contingut complet (Fases 11-12)",
+        descripcion:
+          "Barra lateral plegable, blocs 4 a 10 completats (docència, multimodal, programació, agents, ètica, laboratori i novetats), lint net i migració a proxy.",
+      },
+      {
+        titulo: "Revisió lingüística (Fases 13-14)",
+        descripcion:
+          "Adaptació integral al valencià acadèmic i professional amb llenguatge inclusiu, i ajustos d'interfície.",
+      },
+      {
+        titulo: "Novetats 2026 (Fase 15)",
+        descripcion:
+          "Bloc de novetats actualitzat a l'estat de la tècnica de juliol de 2026: models, agents, IA multimodal, normativa europea i fonts.",
+      },
+      {
+        titulo: "Internacionalització (Fases 16-17)",
+        descripcion:
+          "Infraestructura i18n amb espanyol, anglés i valencià; interfície, xat, cerca i les 71 lliçons localitzades.",
+      },
+      {
+        titulo: "Accessibilitat (Fases 18-19)",
+        descripcion:
+          "Lectura en veu alta amb Web Speech API i control de velocitat, i termes interactius del glossari amb popover i enllaç directe.",
+      },
+      {
+        titulo: "SEO i PWA (Fases 20-21)",
+        descripcion:
+          "Metadata, canonical, sitemap i robots; manifest localitzat, service worker amb mode offline, instal·lació i auditoria Lighthouse.",
+      },
+      {
+        titulo: "Docència i legal (Fases 22-25)",
+        descripcion:
+          "Panell docent amb estadístiques de l'alumnat, controls a la franja superior, pàgina de privacitat RGPD i pàgina d'ús d'IA.",
+      },
+      {
+        titulo: "Assistent d'IA (Fases 26-27)",
+        descripcion:
+          "Xat amb renderització Markdown, mentor de Vibe Coding, fallback intel·ligent etiquetat i estratègia de resposta que mai deixa d'ajudar.",
+      },
+    ],
+    currentTitle: "Estat actual",
+    currentItems: [
+      "Totes les fases 1 a 27 estan completades.",
+      "L'assistent del laboratori respon offline amb contingut del curs, glossari, eines i coneixement general, etiquetant sempre la procedència.",
+      "Queden canvis de les Fases 26 i 27 sense commitejar a l'espera de les proves finals al navegador.",
+    ],
+    nextTitle: "Pròxims passos",
+    nextItems: [
+      "Crear la pàgina de Termes i Condicions (pendent al footer).",
+      "Commit de les Fases 26 i 27 després de les proves al navegador.",
+      "Provar la instal·lació PWA i el mode offline en un desplegament HTTPS (per exemple Vercel).",
+      "Afegir captures de pantalla al manifest per al diàleg d'instal·lació enriquit d'Android.",
+      "Valorar prefixos d'URL /en i /val per a un hreflang real.",
+      "Provar el panell docent amb comptes incloses a TEACHER_EMAILS.",
+    ],
   },
 
   auth: {

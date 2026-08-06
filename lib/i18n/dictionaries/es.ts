@@ -94,25 +94,28 @@ export const esDict = {
   },
 
   ai: {
-    systemPrompt: `Eres Atlas, un tutor experto en Inteligencia Artificial. Tus características:
+    systemPrompt: `Eres Atlas, mentor del curso de Vibe Coding Educativo de la plataforma Atlas IA. Ayudas a aprender con IA y a programar desde cero. Estrategia de respuesta por prioridad:
 
-- Explicas conceptos de IA de forma clara, didáctica y adaptada al nivel de cada persona
-- Usas ejemplos prácticos del mundo real
-- Cuando te preguntan sobre herramientas (ChatGPT, Claude, Gemini, etc.), comparas sus fortalezas
-- Hablas siempre en español, con tono amigable pero profesional
-- Puedes explicar desde conceptos básicos (qué es un LLM) hasta avanzados (RAG, ajuste fino, MCP)
-- Si no sabes algo, lo admites y sugieres dónde buscar en Atlas IA
-- Mantienes respuestas concisas pero completas (3-5 párrafos como máximo salvo que se pidan más)
-- Usas markdown básico para formato (**negrita**, listas, \`código\`)`,
+1. Prioridad 1: contenido de Atlas IA. Si la pregunta tiene información relevante en la plataforma (bloques, glosario, cronología, laboratorio), responde con ella y empieza con «Según Atlas IA:».
+2. Si el tema no está en Atlas IA, indícalo con transparencia («Este concepto todavía no aparece en Atlas IA.») y responde igualmente con conocimiento general útil del dominio. Nunca dejes de ayudar al estudiante.
+3. Nunca termines una respuesta con «No tengo una respuesta preparada para eso», «Ese tema no está desarrollado» o «Cuéntame más» sin haber intentado responder antes.
+
+Reglas de comportamiento:
+- Responde SIEMPRE primero con tu conocimiento: definición directa, ejemplo real y aplicación práctica. Nunca respondas "¿podrías concretar?" ni pidas aclaración si puedes responder.
+- No rechaces preguntas básicas como qué es commitear, qué es Git, qué es una API, qué es HTML, qué es un LLM o dónde se ejecutan los modelos de IA: respóndelas siempre.
+- Domina estos temas: Inteligencia Artificial (fundamentos, ML, Deep Learning, LLM, prompting, RAG, agentes, MCP, ética, historia, herramientas), programación para principiantes (HTML, CSS, JavaScript, Git y GitHub, VS Code y extensiones, agentes de código como Cline, publicación de proyectos, buenas prácticas, recursos educativos digitales) y Vibe Coding.
+- Cuando pregunten por herramientas (ChatGPT, Claude, Gemini, Cursor, Cline...), compara fortalezas y debilidades y recomienda según el caso de uso.
+- Distingue la procedencia: si usas contenido del curso, márcalo con «Según Atlas IA:»; si usas conocimiento general, usa la frase de transparencia del punto 2.
+- Explica en lenguaje sencillo, adaptado al nivel de la persona y partiendo de lo básico si el tema es complejo. Estructura: 1) definición directa, 2) ejemplo o comparación, 3) cómo aplicarlo. Mantén las respuestas breves (2-4 párrafos salvo que pidan más).
+- Si no sabes algo, admítelo y sugiere dónde buscar en Atlas IA (bloques, glosario, cronología, laboratorio), pero ofrece siempre una explicación general del tema.
+- Al final puedes añadir UNA pregunta o reto opcional solo si aporta valor.
+- Usa markdown básico (**negrita**, listas, tablas, \`código\`) y responde siempre en español.`,
     error: "Error al conectar con la IA",
     badRequest: "Debes enviar al menos un mensaje",
     internalError: "Error interno",
-    noAnswer: "No tengo una respuesta preparada para eso. ¿Puedes reformular tu pregunta?",
-    generalResponses: [
-      "¡Excelente pregunta! En Atlas IA cubrimos muchos temas relacionados con inteligencia artificial. ¿Podrías concretar un poco más?\n\nPuedes preguntarme sobre:\n- **Conceptos**: qué es IA, ML, Deep Learning, LLM\n- **Herramientas**: ChatGPT, Claude, Gemini, Cursor\n- **Técnicas**: prompting, RAG, ajuste fino, agentes\n- **Historia**: hitos, evolución, Turing\n- **Recursos**: qué bloque te recomiendo según tu nivel",
-      "Interesante. Como tutor de IA, puedo ayudarte con conceptos, herramientas y técnicas. Algunos temas populares:\n\n- **Fundamentos**: Machine Learning, Deep Learning, Transformers\n- **Prompting**: técnicas avanzadas, roles, formatos\n- **Ecosistema**: comparativa de herramientas\n- **Ética**: sesgo, privacidad, impacto social\n\n¿Sobre cuál te gustaría aprender?",
-      "Buena pregunta. Para darte la mejor respuesta, ¿puedes decirme si te interesa más la **teoría** (conceptos, fundamentos) o la **práctica** (herramientas, prompting, proyectos)?\n\nAsí puedo adaptar mi explicación a tu nivel e intereses.",
-    ],
+    courseSource: "Según Atlas IA:",
+    generalIntro: "Este concepto todavía no aparece en Atlas IA.",
+    noAnswer: "Este concepto todavía no aparece en Atlas IA, pero puedo explicártelo.\n\nLa **Inteligencia Artificial** es la rama de la informática que crea sistemas capaces de realizar tareas que normalmente requieren inteligencia humana: entender lenguaje, reconocer imágenes, recomendar contenidos o generar código. Se apoya en el **Machine Learning** (aprender de los datos) y en los **modelos de lenguaje (LLM)** como ChatGPT o Claude.\n\nTambién puedo ayudarte con programación (HTML, CSS, JavaScript), Git y GitHub, VS Code, desarrollo web, publicación de proyectos, Vibe Coding y herramientas educativas digitales. Si me cuentas el tema concreto que te interesa, te doy ejemplos sencillos.",
   },
 
   home: {
@@ -160,6 +163,12 @@ export const esDict = {
     quitarFavoritos: "Quitar de favoritos",
     anterior: "Anterior",
     siguiente: "Siguiente",
+    bloqueCompletado: "¡Bloque completado!",
+    bloqueCompletadoDesc: "Has terminado todas las lecciones de este bloque. ¿Pasamos al siguiente?",
+    continuarBloque: "Continuar con el Bloque {numero}",
+    cursoCompletado: "¡Has completado todo el curso!",
+    cursoCompletadoDesc: "Has recorrido los 11 bloques de Atlas IA. Puedes repasar cualquier tema cuando quieras.",
+    verBloques: "Ver todos los bloques",
     enEstaPagina: "En esta página",
     indice: "Índice de contenido",
     leccionesBloque: "Lecciones del bloque",
@@ -224,6 +233,7 @@ export const esDict = {
   laboratorio: {
     title: "Laboratorio IA",
     subtitle: "Experimenta, prueba y aprende con herramientas interactivas",
+    openChat: "Abrir Chat IA",
     tabs: {
       chat: "Chat IA",
       prompts: "Entorno de Prompts",
@@ -442,6 +452,103 @@ export const esDict = {
     doubtsTitle: "¿Tienes dudas?",
     doubtsText:
       "Si quieres saber más sobre cómo usamos la IA o detectas un error en un contenido, escríbenos a {email}.",
+  },
+
+  roadmap: {
+    title: "Roadmap del proyecto",
+    subtitle:
+      "La hoja de ruta de Atlas IA: qué hemos construido, en qué punto estamos y hacia dónde se dirige la plataforma.",
+    lastUpdated: "Última actualización: agosto de 2026",
+    intro:
+      "Atlas IA se construye por fases incrementales. Cada fase añade contenido, funcionalidad o mejoras de calidad verificadas antes de continuar. Este es el recorrido completo del proyecto.",
+    milestonesTitle: "Hitos completados",
+    milestones: [
+      {
+        titulo: "Fundación del proyecto (Fases 1-2)",
+        descripcion:
+          "Base Next.js con App Router, design system claro/oscuro, layout con sidebar y buscador, bloque de inicio y Fundamentos de IA con 16 lecciones, búsqueda global y gamificación inicial (XP, insignias, rachas, favoritos).",
+      },
+      {
+        titulo: "Ecosistema y prompting (Fases 3-4)",
+        descripcion:
+          "Bloque 2 con 8 lecciones, comparador interactivo de 13 herramientas, árbol de decisión y 7 categorías; bloque 3 con 8 lecciones y calculadora de prompts.",
+      },
+      {
+        titulo: "Búsqueda, glosario y cronología (Fase 5)",
+        descripcion:
+          "Búsqueda avanzada en glosario y herramientas, glosario de 48 términos con filtros y cronología interactiva con 28 hitos de la IA.",
+      },
+      {
+        titulo: "Gamificación extendida (Fase 6)",
+        descripcion:
+          "Ranking global, retos diarios y semanales, proyectos prácticos, página de perfil con estadísticas y notificaciones en tiempo real.",
+      },
+      {
+        titulo: "Cuentas y base de datos (Fase 7)",
+        descripcion:
+          "SQLite con Prisma, autenticación NextAuth con credenciales, registro, inicio de sesión y sincronización del progreso.",
+      },
+      {
+        titulo: "Laboratorio de IA (Fases 8-10)",
+        descripcion:
+          "Chat interactivo con streaming SSE y respuestas offline, bloque de Agentes, y laboratorio expandido: entorno de prompts, flujo de agentes, comparador de modelos y simulador de tokens.",
+      },
+      {
+        titulo: "Contenido completo (Fases 11-12)",
+        descripcion:
+          "Sidebar colapsable, bloques 4 a 10 completados (docencia, multimodal, programación, agentes, ética, laboratorio y novedades), lint limpio y migración a proxy.",
+      },
+      {
+        titulo: "Revisión lingüística (Fases 13-14)",
+        descripcion:
+          "Adaptación integral al español académico y profesional con lenguaje inclusivo, y ajustes de interfaz.",
+      },
+      {
+        titulo: "Novedades 2026 (Fase 15)",
+        descripcion:
+          "Actualización del bloque de novedades al estado de la técnica de julio de 2026: modelos, agentes, IA multimodal, normativa europea y fuentes.",
+      },
+      {
+        titulo: "Internacionalización (Fases 16-17)",
+        descripcion:
+          "Infraestructura i18n con español, inglés y valenciano; interfaz, chat, búsqueda y las 71 lecciones localizadas.",
+      },
+      {
+        titulo: "Accesibilidad (Fases 18-19)",
+        descripcion:
+          "Lectura por voz con Web Speech API y control de velocidad, y términos interactivos del glosario con popover y enlace directo.",
+      },
+      {
+        titulo: "SEO y PWA (Fases 20-21)",
+        descripcion:
+          "Metadata, canonical, sitemap y robots; manifest localizado, service worker con modo offline, instalación y auditoría Lighthouse.",
+      },
+      {
+        titulo: "Docencia y legal (Fases 22-25)",
+        descripcion:
+          "Panel docente con estadísticas del alumnado, controles en la franja superior, página de privacidad RGPD y página de uso de IA.",
+      },
+      {
+        titulo: "Asistente de IA (Fases 26-27)",
+        descripcion:
+          "Chat con renderizado Markdown, mentor de Vibe Coding, fallback inteligente etiquetado y estrategia de respuesta que nunca deja de ayudar.",
+      },
+    ],
+    currentTitle: "Estado actual",
+    currentItems: [
+      "Todas las fases 1 a 27 están completadas.",
+      "El asistente del laboratorio responde en modo offline con contenido del curso, glosario, herramientas y conocimiento general, etiquetando siempre la procedencia.",
+      "Quedan cambios de las Fases 26 y 27 sin commitear a la espera de las pruebas finales en navegador.",
+    ],
+    nextTitle: "Siguientes pasos",
+    nextItems: [
+      "Crear la página de Términos y Condiciones (pendiente en el footer).",
+      "Commit de las Fases 26 y 27 tras las pruebas en navegador.",
+      "Probar la instalación PWA y el modo offline en un despliegue HTTPS (por ejemplo Vercel).",
+      "Añadir capturas de pantalla al manifest para el diálogo de instalación enriquecido de Android.",
+      "Valorar prefijos de URL /en y /val para un hreflang real.",
+      "Probar el panel docente con cuentas incluidas en TEACHER_EMAILS.",
+    ],
   },
 
   auth: {

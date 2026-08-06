@@ -37,17 +37,24 @@ export default function LaboratorioPage() {
       <Breadcrumbs items={[{ label: t.laboratorio.title }]} className="mb-6" />
 
       <div className="mb-8">
-        <div className="flex items-center gap-3 mb-3">
+        <div className="flex items-center gap-3 mb-3 flex-wrap">
           <div className="p-2 rounded-lg bg-primary-light">
             <FlaskConical className="w-6 h-6 text-primary" />
           </div>
-          <div>
+          <div className="flex-1 min-w-0">
             <h1 className="text-3xl font-bold text-fg">{t.laboratorio.title}</h1>
             <p className="text-fg-secondary text-sm flex items-center gap-1.5 mt-0.5">
               <Sparkles className="w-3.5 h-3.5 text-warning" />
               {t.laboratorio.subtitle}
             </p>
           </div>
+          <button
+            onClick={() => setActiveTab("chat")}
+            className="inline-flex items-center gap-2 h-11 px-5 rounded-lg bg-primary text-white dark:text-slate-900 text-sm font-medium hover:bg-primary-hover transition-colors shadow-sm"
+          >
+            <MessageSquare className="w-4 h-4" />
+            {t.laboratorio.openChat}
+          </button>
         </div>
       </div>
 

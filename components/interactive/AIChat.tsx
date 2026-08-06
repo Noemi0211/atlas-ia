@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { Send, Bot, User, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { useProgress } from "@/stores/progress";
 import { useI18n } from "@/lib/i18n/provider";
+import { ChatMarkdown } from "@/components/interactive/ChatMarkdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -19,13 +20,14 @@ export function AIChat() {
   const [error, setError] = useState("");
   const [started, setStarted] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const { addBadge } = useProgress();
   const suggestedQuestions = useMemo(() => t.lab.aiChat.suggestedQuestions, [t]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = scrollRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, streamingContent]);
 
   useEffect(() => {
@@ -122,7 +124,7 @@ export function AIChat() {
   }
 
   return (
-    <div className="flex flex-col h-[600px] rounded-xl border border-border bg-bg overflow-hidden">
+    <div className="flex flex-col h-[600px] max-h-[75vh] rounded-xl border border-border bg-bg overflow-hidden">
       <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-bg-secondary/50">
         <div className="p-1.5 rounded-lg bg-primary/20">
           <Bot className="w-5 h-5 text-primary" />
@@ -138,7 +140,7 @@ export function AIChat() {
         <Sparkles className="w-4 h-4 text-warning" />
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 overscroll-contain">
         {!started && (
           <div className="text-center py-12">
             <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
@@ -189,13 +191,11 @@ export function AIChat() {
                   : "bg-bg-secondary text-fg border border-border"
               }`}
             >
-              <div className="prose prose-sm max-w-none dark:prose-invert">
-                {msg.content.split("\n").map((line, j) => (
-                  <p key={j} className={j > 0 ? "mt-2" : ""}>
-                    {line}
-                  </p>
-                ))}
-              </div>
+              {msg.role === "user" ? (
+                <p className="whitespace-pre-wrap">{msg.content}</p>
+              ) : (
+                <ChatMarkdown>{msg.content}</ChatMarkdown>
+              )}
             </div>
           </div>
         ))}
@@ -206,10 +206,8 @@ export function AIChat() {
               <Bot className="w-4 h-4" />
             </div>
             <div className="max-w-[80%] rounded-lg px-4 py-2.5 text-sm bg-bg-secondary text-fg border border-border">
-              <div className="prose prose-sm max-w-none dark:prose-invert">
-                {streamingContent}
-                <span className="inline-block w-1.5 h-4 bg-primary ml-0.5 animate-pulse" />
-              </div>
+              <ChatMarkdown>{streamingContent}</ChatMarkdown>
+              <span className="inline-block w-1.5 h-4 bg-primary ml-0.5 animate-pulse align-middle" />
             </div>
           </div>
         )}
@@ -246,7 +244,6 @@ export function AIChat() {
           </div>
         )}
 
-        <div ref={messagesEndRef} />
       </div>
 
       <form onSubmit={handleSubmit} className="p-4 border-t border-border">

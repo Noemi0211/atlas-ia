@@ -85,25 +85,28 @@ export const enDict = {
   },
 
   ai: {
-    systemPrompt: `You are Atlas, an expert tutor in Artificial Intelligence. Your characteristics:
+    systemPrompt: `You are Atlas, mentor of the Vibe Coding Educativo course on the Atlas IA platform. You help people learn with AI and code from scratch. Answering strategy, by priority:
 
-- You explain AI concepts clearly, didactically and adapted to each person's level
-- You use practical real-world examples
-- When asked about tools (ChatGPT, Claude, Gemini, etc.), you compare their strengths
-- You always speak English, with a friendly but professional tone
-- You can explain from basic concepts (what an LLM is) to advanced ones (RAG, fine-tuning, MCP)
-- If you don't know something, you admit it and suggest where to look in Atlas IA
-- You keep answers concise but complete (3-5 paragraphs maximum unless asked for more)
-- You use basic markdown for formatting (**bold**, lists, \`code\`)`,
+1. Priority 1: Atlas IA content. If the question has relevant information on the platform (blocks, glossary, timeline, lab), answer with it and start with «According to Atlas IA:».
+2. If the topic is not in Atlas IA, state it transparently («This concept doesn't yet appear in Atlas IA.») and still answer with useful general knowledge of the field. Never stop helping the student.
+3. Never end an answer with «I don't have a prepared answer for that», «That topic is not covered» or «Tell me more» without having tried to answer first.
+
+Behaviour rules:
+- ALWAYS answer first with your knowledge: a direct definition, a real example and a practical application. Never reply "could you be more specific?" or ask for clarification when you can answer.
+- Do not reject basic questions such as what is commitear, what is Git, what is an API, what is HTML, what is an LLM or where AI models run: always answer them.
+- Master these topics: Artificial Intelligence (fundamentals, ML, Deep Learning, LLM, prompting, RAG, agents, MCP, ethics, history, tools), programming for beginners (HTML, CSS, JavaScript, Git and GitHub, VS Code and extensions, coding agents like Cline, deploying projects, good practices, educational digital resources) and Vibe Coding.
+- When asked about tools (ChatGPT, Claude, Gemini, Cursor, Cline...), compare strengths and weaknesses and recommend based on the use case.
+- Distinguish the source: if you use course content, mark it with «According to Atlas IA:»; if you use general knowledge, use the transparency phrase from point 2.
+- Explain in simple language, adapted to each person's level and starting from the basics if the topic is complex. Structure: 1) direct definition, 2) example or comparison, 3) how to apply it. Keep answers brief (2-4 paragraphs unless asked for more).
+- If you don't know something, admit it and suggest where to look in Atlas IA (blocks, glossary, timeline, lab), but always offer a general explanation of the topic.
+- You may end with ONE optional question or challenge only if it adds value.
+- Use basic markdown for formatting (**bold**, lists, tables, \`code\`) and always answer in English.`,
     error: "Error connecting to the AI",
     badRequest: "You must send at least one message",
     internalError: "Internal error",
-    noAnswer: "I don't have a prepared answer for that. Could you rephrase your question?",
-    generalResponses: [
-      "Excellent question! In Atlas IA we cover many topics related to artificial intelligence. Could you be a bit more specific?\n\nYou can ask me about:\n- **Concepts**: what AI, ML, Deep Learning, LLM is\n- **Tools**: ChatGPT, Claude, Gemini, Cursor\n- **Techniques**: prompting, RAG, fine-tuning, agents\n- **History**: milestones, evolution, Turing\n- **Resources**: which block I recommend for your level",
-      "Interesting. As an AI tutor, I can help you with concepts, tools and techniques. Some popular topics:\n\n- **Fundamentals**: Machine Learning, Deep Learning, Transformers\n- **Prompting**: advanced techniques, roles, formats\n- **Ecosystem**: tool comparison\n- **Ethics**: bias, privacy, social impact\n\nWhat would you like to learn about?",
-      "Good question. To give you the best answer, could you tell me if you're more interested in the **theory** (concepts, fundamentals) or the **practice** (tools, prompting, projects)?\n\nThat way I can adapt my explanation to your level and interests.",
-    ],
+    courseSource: "According to Atlas IA:",
+    generalIntro: "This concept doesn't yet appear in Atlas IA.",
+    noAnswer: "This concept doesn't yet appear in Atlas IA, but I can explain it to you.\n\n**Artificial Intelligence** is the branch of computer science that builds systems able to carry out tasks that normally require human intelligence: understanding language, recognizing images, recommending content or generating code. It relies on **Machine Learning** (learning from data) and on **language models (LLMs)** such as ChatGPT or Claude.\n\nI can also help you with programming (HTML, CSS, JavaScript), Git and GitHub, VS Code, web development, deploying projects, Vibe Coding and educational digital tools. If you tell me the specific topic you are interested in, I will give you simple examples.",
   },
 
   home: {
@@ -151,6 +154,12 @@ export const enDict = {
     quitarFavoritos: "Remove from favourites",
     anterior: "Previous",
     siguiente: "Next",
+    bloqueCompletado: "Block completed!",
+    bloqueCompletadoDesc: "You've finished every lesson in this block. Shall we move on to the next one?",
+    continuarBloque: "Continue with Block {numero}",
+    cursoCompletado: "You've completed the whole course!",
+    cursoCompletadoDesc: "You've gone through all 11 blocks of Atlas IA. You can review any topic whenever you want.",
+    verBloques: "See all blocks",
     enEstaPagina: "On this page",
     indice: "Table of contents",
     leccionesBloque: "Lessons in this block",
@@ -215,6 +224,7 @@ export const enDict = {
   laboratorio: {
     title: "AI Laboratory",
     subtitle: "Experiment, try and learn with interactive tools",
+    openChat: "Open AI Chat",
     tabs: {
       chat: "AI Chat",
       prompts: "Prompt Studio",
@@ -433,6 +443,103 @@ export const enDict = {
     doubtsTitle: "Questions?",
     doubtsText:
       "If you want to know more about how we use AI or you find an error in a piece of content, email {email}.",
+  },
+
+  roadmap: {
+    title: "Project roadmap",
+    subtitle:
+      "The Atlas IA roadmap: what we have built, where we are and where the platform is heading.",
+    lastUpdated: "Last updated: August 2026",
+    intro:
+      "Atlas IA is built in incremental phases. Each phase adds content, features or quality improvements verified before moving on. This is the complete journey of the project.",
+    milestonesTitle: "Completed milestones",
+    milestones: [
+      {
+        titulo: "Project foundation (Phases 1-2)",
+        descripcion:
+          "Next.js base with App Router, light/dark design system, sidebar layout with search, starting block and AI Fundamentals with 16 lessons, global search and initial gamification (XP, badges, streaks, favourites).",
+      },
+      {
+        titulo: "Ecosystem and prompting (Phases 3-4)",
+        descripcion:
+          "Block 2 with 8 lessons, interactive comparator of 13 tools, decision tree and 7 categories; block 3 with 8 lessons and a prompt calculator.",
+      },
+      {
+        titulo: "Search, glossary and timeline (Phase 5)",
+        descripcion:
+          "Advanced search in glossary and tools, 48-term glossary with filters and an interactive timeline with 28 AI milestones.",
+      },
+      {
+        titulo: "Extended gamification (Phase 6)",
+        descripcion:
+          "Global ranking, daily and weekly challenges, hands-on projects, profile page with stats and real-time notifications.",
+      },
+      {
+        titulo: "Accounts and database (Phase 7)",
+        descripcion:
+          "SQLite with Prisma, NextAuth authentication with credentials, registration, login and progress sync.",
+      },
+      {
+        titulo: "AI Lab (Phases 8-10)",
+        descripcion:
+          "Interactive chat with SSE streaming and offline answers, Agents block, and an expanded lab: prompt sandbox, agent flow, model comparator and token simulator.",
+      },
+      {
+        titulo: "Complete content (Phases 11-12)",
+        descripcion:
+          "Collapsible sidebar, blocks 4 to 10 completed (teaching, multimodal, programming, agents, ethics, lab and news), clean lint and migration to proxy.",
+      },
+      {
+        titulo: "Language review (Phases 13-14)",
+        descripcion:
+          "Full adaptation to academic and professional Spanish with inclusive language, plus UI tweaks.",
+      },
+      {
+        titulo: "2026 news (Phase 15)",
+        descripcion:
+          "News block updated to the state of the art in July 2026: models, agents, multimodal AI, European regulations and sources.",
+      },
+      {
+        titulo: "Internationalisation (Phases 16-17)",
+        descripcion:
+          "i18n infrastructure with Spanish, English and Valencian; localised UI, chat, search and all 71 lessons.",
+      },
+      {
+        titulo: "Accessibility (Phases 18-19)",
+        descripcion:
+          "Read-aloud with the Web Speech API and speed control, and interactive glossary terms with popover and deep link.",
+      },
+      {
+        titulo: "SEO and PWA (Phases 20-21)",
+        descripcion:
+          "Metadata, canonical, sitemap and robots; localised manifest, service worker with offline mode, installation and Lighthouse audit.",
+      },
+      {
+        titulo: "Teaching and legal (Phases 22-25)",
+        descripcion:
+          "Teacher dashboard with student statistics, controls in the top bar, GDPR privacy page and AI usage page.",
+      },
+      {
+        titulo: "AI assistant (Phases 26-27)",
+        descripcion:
+          "Chat with Markdown rendering, Vibe Coding mentor, labelled smart fallback and an answering strategy that never stops helping.",
+      },
+    ],
+    currentTitle: "Current status",
+    currentItems: [
+      "All phases 1 to 27 are completed.",
+      "The lab assistant answers offline with course content, glossary, tools and general knowledge, always labelling the source.",
+      "Some Phase 26 and 27 changes are still uncommitted, waiting for final browser tests.",
+    ],
+    nextTitle: "Next steps",
+    nextItems: [
+      "Create the Terms and Conditions page (pending in the footer).",
+      "Commit Phases 26 and 27 after browser testing.",
+      "Test PWA installation and offline mode in an HTTPS deployment (for example Vercel).",
+      "Add screenshots to the manifest for the enriched Android install dialog.",
+      "Consider /en and /val URL prefixes for real hreflang.",
+      "Test the teacher dashboard with accounts included in TEACHER_EMAILS.",
+    ],
   },
 
   auth: {

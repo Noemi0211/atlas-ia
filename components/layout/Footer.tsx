@@ -44,9 +44,9 @@ export function Footer() {
             <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.recursos}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="https://roadmap.sh" target="_blank" rel="noopener noreferrer" className="text-sm text-fg-secondary hover:text-fg transition-colors">
-                  Roadmap.sh
-                </a>
+                <Link href="/roadmap" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.roadmap.title}
+                </Link>
               </li>
               <li>
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-sm text-fg-secondary hover:text-fg transition-colors">
