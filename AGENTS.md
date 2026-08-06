@@ -276,7 +276,7 @@ npm run lint      # ESLint
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
 
 ## Estado actual (para retomar la sesión)
-- Último commit: pendiente (Fase 29 en curso, árbol con cambios sin commitear).
+- Último commit: `53eac06` (Fase 29, árbol limpio). No hay cambios pendientes.
 - Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), rellenar `screenshots` del manifest para el diálogo de instalación enriquecido de Android, ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)
