@@ -14,10 +14,16 @@ export function ServiceWorkerRegistrar() {
 
     if (navigator.serviceWorker.controller) {
       navigator.serviceWorker.ready.then(register);
-    } else {
-      window.addEventListener("load", register);
-      return () => window.removeEventListener("load", register);
+      return;
     }
+
+    if (document.readyState === "complete") {
+      register();
+      return;
+    }
+
+    window.addEventListener("load", register);
+    return () => window.removeEventListener("load", register);
   }, []);
 
   return null;
