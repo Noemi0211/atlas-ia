@@ -291,9 +291,16 @@ npm run lint      # ESLint
 - `public/sw.js`: versión subida a `2026-08-11` (el manifest está en el precache y las capturas ya se cachean por la regla SWR de `.png`)
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas), manifest.webmanifest servido con 4 screenshots con `form_factor` y etiquetas localizadas, `/screenshots/home-narrow.png` → 200 con `Cache-Control: public, max-age=31536000, immutable`
 
+### Fase 31 ✅ (términos interactivos en contenido dinámico)
+- **Diagnóstico previo** (medido en navegador real con CDP): los términos interactivos solo se creaban al montar la página; el contenido re-renderizado en cliente perdía los enlaces. Funcionaba el render inicial (lección es=5/en=5/val=3, cronología es=25, glosario es=82) y los términos están localizados en los 3 idiomas
+- **`components/accessibility/GlossaryTermLinks.tsx`**: `MutationObserver` sobre `[data-read-aloud]` (childList+subtree) que procesa los bloques **añadidos** dinámicamente sin volver a escanear todo el documento; idempotente gracias al `WeakSet processedBlocks` (los spans `[data-glossary-term]` que genera quedan excluidos por `SKIP_BLOCK_SELECTOR`, sin riesgo de bucle ni doble envoltura); el observer se desconecta al cambiar de ruta (`return () => observer.disconnect()`)
+- `th` añadido a `BLOCK_SELECTOR` (celdas de cabecera de tablas MDX)
+- `data-read-aloud` añadido al wrapper de `/docencia` (única página de contenido sin él; ahora lectura por voz y términos interactivos disponibles en todas las páginas)
+- Verificación con CDP (build de producción): cronología «todas» 25 → «Modelos» 17 → vuelta 25 → «Investigación» 6 → vuelta 25 (sin duplicar ni perder enlaces al alternar filtros); glosario inicial 82 → búsqueda «neurona» 14 (re-enlazado tras filtrar); laboratorio y categorías sin términos muestran 0 legítimo. tsc correcto, lint 0/0, build OK (112 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `53e3a53` (fix de la estrategia de fallback del asistente). Cambios pendientes sin commitear: Fase 30 (screenshots del manifest) en `scripts/generate-screenshots.mjs`, `public/screenshots/*`, `app/manifest.ts`, `lib/i18n/dictionaries/{es,en,val}.ts`, `next.config.ts` y `public/sw.js`.
-- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), ampliar cobertura de términos interactivos a otros idiomas o páginas sin `data-read-aloud`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
+- Último commit: `b9aa192` (docs Fase 30). Cambios pendientes sin commitear: Fase 31 (términos interactivos en contenido dinámico) en `components/accessibility/GlossaryTermLinks.tsx` y `app/docencia/page.tsx`.
+- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
 
 ## Bloques de contenido (MDX)
 
