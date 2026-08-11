@@ -308,8 +308,8 @@ npm run lint      # ESLint
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `0a67b87` (docs Fase 31). Cambios pendientes sin commitear: Fase 32 (fix registro SW + pruebas) en `components/pwa/ServiceWorkerRegistrar.tsx`.
-- Siguientes pasos posibles: probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades
+- Último commit: `1844a7e` (docs Fase 32). Árbol limpio: Fase 32 (fix registro SW + pruebas en navegador) commiteada en `ae6b2c6` (feat) + `1844a7e` (docs).
+- Siguientes pasos posibles: probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades.
 
 ## Bloques de contenido (MDX)
 
