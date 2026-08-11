@@ -298,9 +298,18 @@ npm run lint      # ESLint
 - `data-read-aloud` añadido al wrapper de `/docencia` (única página de contenido sin él; ahora lectura por voz y términos interactivos disponibles en todas las páginas)
 - Verificación con CDP (build de producción): cronología «todas» 25 → «Modelos» 17 → vuelta 25 → «Investigación» 6 → vuelta 25 (sin duplicar ni perder enlaces al alternar filtros); glosario inicial 82 → búsqueda «neurona» 14 (re-enlazado tras filtrar); laboratorio y categorías sin términos muestran 0 legítimo. tsc correcto, lint 0/0, build OK (112 páginas)
 
+### Fase 32 ✅ (pruebas en navegador real + fix de registro del Service Worker)
+- **Fix real de PWA**: `components/pwa/ServiceWorkerRegistrar.tsx` NO registraba el SW en producción — el registro se hacía escuchando `window load`, pero si la hidratación de React terminaba después de que `load` ya había disparado, el listener llegaba tarde y el SW nunca se registraba (y `beforeinstallprompt` nunca se emitía → sin banner de instalación). Fix: comprobar `document.readyState === "complete"` y registrar directamente si la página ya cargó; si no, escuchar `load`; si ya hay controlador, esperar `ready`. Verificado con CDP: `navigator.serviceWorker.getRegistrations()` = 1 con `/sw.js`, `controller: true`
+- **Pruebas de chat `/api/chat` (SSE) en producción**: «¿qué es un LLM?» (es) → prefijo `**[Según Atlas IA:]**` + contenido del curso; «¿what is a LLM?» (en) → `**[According to Atlas IA:]**`; «què és un token?» (val) → `**[Segons Atlas IA:]**`; «¿qué es git?/antigravity?» → prefijo de transparencia + respuesta útil del tema exacto; pregunta sin match → transparencia + `noAnswer` honesto sin definición genérica de IA. UI en navegador: mensaje enviado desde `/laboratorio` y respuesta renderizada con Markdown y prefijo
+- **Pruebas `/roadmap` en los 3 idiomas**: `html lang` es/en/val correcto, `Content-Language` es/en/val (vía cookie), `data-read-aloud` presente, h1 «Roadmap del proyecto», términos interactivos 3/6/3
+- **Pruebas PWA**: manifest.webmanifest con 4 screenshots (narrow/wide) + 3 iconos + 4 shortcuts; `/sw.js` con `Service-Worker-Allowed: /` y `Cache-Control: no-cache`; `/offline.html` 200
+- **Offline real (apagando el servidor)**: la 1ª visita no queda cacheada como navegación (el SW aún no está activo cuando se hace el fetch); la 2ª visita sí la cachea (network-first); con el servidor apagado, la lección visitada se sirve desde caché (título «Qué es Inteligencia Artificial | Atlas IA», ~5.2k chars) y una página nunca visitada (p. ej. `/privacidad`) cae a `/offline.html` («Estás sin conexión»)
+- **Nota técnica**: `Network.emulateNetworkConditions { offline: true }` de CDP bloquea `fetch()` del renderer pero NO las navegaciones en headless (servían páginas reales); el test offline fiable se hizo deteniendo el servidor
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `b9aa192` (docs Fase 30). Cambios pendientes sin commitear: Fase 31 (términos interactivos en contenido dinámico) en `components/accessibility/GlossaryTermLinks.tsx` y `app/docencia/page.tsx`.
-- Siguientes pasos posibles: probar el chat en navegador (renderizado Markdown, temas de Git/VS Code/roadmap y prefijos «Según Atlas IA»/transparencia en modo offline), probar la página `/roadmap` en los tres idiomas, probar el banner de instalación y el offline en navegador (desplegando en HTTPS, p. ej. vercel), migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`
+- Último commit: `0a67b87` (docs Fase 31). Cambios pendientes sin commitear: Fase 32 (fix registro SW + pruebas) en `components/pwa/ServiceWorkerRegistrar.tsx`.
+- Siguientes pasos posibles: probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades
 
 ## Bloques de contenido (MDX)
 
