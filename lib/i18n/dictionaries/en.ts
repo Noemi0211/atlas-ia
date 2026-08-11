@@ -192,6 +192,10 @@ Behaviour rules:
     install: "Install",
     notNow: "Not now",
     installHint: "If the install button is not available, use your browser menu: Install app or Add to home screen.",
+    screenshots: {
+      home: "Atlas IA home",
+      lesson: "Course lesson",
+    },
   },
 
   glosario: {

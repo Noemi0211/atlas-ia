@@ -201,6 +201,10 @@ Reglas de comportamiento:
     install: "Instalar",
     notNow: "Ahora no",
     installHint: "Si el botón de instalación no aparece, usa el menú de tu navegador: Instalar aplicación o Añadir a pantalla de inicio.",
+    screenshots: {
+      home: "Inicio de Atlas IA",
+      lesson: "Lección del curso",
+    },
   },
 
   glosario: {

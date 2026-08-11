@@ -41,6 +41,36 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         purpose: "maskable",
       },
     ],
+    screenshots: [
+      {
+        src: "/screenshots/home-narrow.png",
+        sizes: "750x1334",
+        type: "image/png",
+        form_factor: "narrow",
+        label: t.pwa.screenshots.home,
+      },
+      {
+        src: "/screenshots/home-wide.png",
+        sizes: "1200x675",
+        type: "image/png",
+        form_factor: "wide",
+        label: t.pwa.screenshots.home,
+      },
+      {
+        src: "/screenshots/leccion-narrow.png",
+        sizes: "750x1334",
+        type: "image/png",
+        form_factor: "narrow",
+        label: t.pwa.screenshots.lesson,
+      },
+      {
+        src: "/screenshots/leccion-wide.png",
+        sizes: "1200x675",
+        type: "image/png",
+        form_factor: "wide",
+        label: t.pwa.screenshots.lesson,
+      },
+    ],
     shortcuts: [
       {
         name: t.nav.bloques,

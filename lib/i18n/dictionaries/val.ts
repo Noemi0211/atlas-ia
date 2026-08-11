@@ -192,6 +192,10 @@ Regles de comportament:
     install: "Instal·la",
     notNow: "Ara no",
     installHint: "Si el botó d'instal·lació no apareix, usa el menú del teu navegador: Instal·la l'aplicació o Afigix a la pantalla d'inici.",
+    screenshots: {
+      home: "Inici d'Atlas IA",
+      lesson: "Lliçó del curs",
+    },
   },
 
   glosario: {

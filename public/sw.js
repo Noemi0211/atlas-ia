@@ -4,7 +4,7 @@
  *  - Estáticos (_next/static, iconos, fuentes): stale-while-revalidate
  *  - API (GET): siempre red (datos frescos); POST/SSE no se interceptan
  */
-const VERSION = "2026-08-04";
+const VERSION = "2026-08-11";
 const CACHE_NAME = `atlas-${VERSION}`;
 const OFFLINE_URL = "/offline.html";
 const PRECACHE_URLS = [
