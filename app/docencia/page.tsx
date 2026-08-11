@@ -28,7 +28,7 @@ export default async function DocenciaPage() {
   }
 
   return (
-    <div className="max-w-content mx-auto px-6 py-10">
+    <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs items={[{ label: t.docencia.title }]} className="mb-6" />
 
       <div className="mb-10">

@@ -12,7 +12,7 @@ import {
 import { useGlossary } from "./GlossaryProvider";
 
 const BLOCK_SELECTOR =
-  "p, li, h1, h2, h3, h4, h5, td, dt, dd, blockquote, figcaption";
+  "p, li, h1, h2, h3, h4, h5, td, th, dt, dd, blockquote, figcaption";
 const SKIP_BLOCK_SELECTOR =
   "code, pre, a, button, select, input, textarea, [data-glossary-term]";
 const SKIP_TEXT_PARENT_SELECTOR =
@@ -108,13 +108,28 @@ export function GlossaryTermLinks() {
     );
     const open = (slug: string, trigger: HTMLElement) => openTerm(slug, trigger);
 
-    scope.querySelectorAll(BLOCK_SELECTOR).forEach((block) => {
+    const processAddedBlock = (block: Element) => {
       if (!(block instanceof HTMLElement)) return;
       if (block.closest(SKIP_BLOCK_SELECTOR)) return;
       if (processedBlocks.has(block)) return;
       processBlock(block, matcher, open);
       processedBlocks.add(block);
+    };
+
+    scope.querySelectorAll(BLOCK_SELECTOR).forEach(processAddedBlock);
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const addedNode of mutation.addedNodes) {
+          if (!(addedNode instanceof HTMLElement)) continue;
+          if (addedNode.matches(BLOCK_SELECTOR)) processAddedBlock(addedNode);
+          addedNode.querySelectorAll(BLOCK_SELECTOR).forEach(processAddedBlock);
+        }
+      }
     });
+    observer.observe(scope, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
   }, [pathname, locale, t, openTerm, closeTerm]);
 
   return null;
