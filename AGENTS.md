@@ -316,8 +316,18 @@ npm run lint      # ESLint
 - **`/perfil`**: 307 a login sin sesión, 200 con sesión (docente y estudiante)
 - Datos de prueba eliminados tras la verificación (BD local limpia). Sin cambios de código en esta fase; verificación: tsc correcto, lint 0/0
 
+### Fase 34 ✅ (generador de PDF con el contenido completo del curso)
+- **Nuevo script reutilizable** `scripts/generate-pdf.mjs`: genera `Atlas-IA-contenido-completo.pdf` (244 páginas A4, ~3.9 MB) con portada, índice navegable, los 11 bloques con sus 76 lecciones (español), el glosario (47 términos por categoría) y la cronología (28 hitos)
+- **Origen de datos**: lee `content/<slug>/` + `content/<slug>/meta.json` para bloques y lecciones; carga glosario (`lib/glosario-data.ts`) y cronología (`lib/cronologia-data.ts`) vía `typescript.transpileModule` a un `.cjs` temporal (el import ESM de `.ts` sin extensión falla en Node 24; `createRequire` para cargarlo)
+- **Conversor MDX→HTML propio** (`mdxToHtml` + `inline`): headings, negritas/cursivas/código inline (con protección de spans de backticks antes del escape HTML), enlaces http, listas anidadas por indentación y listas de tareas (`- [x]`), tablas GFM, bloques de código fenced (pre con fondo oscuro + etiqueta de lenguaje), blockquotes, `Callout` (info/tip/warning/error con colores) y HR; `ComparadorHerramientas`/`ArbolDecision`/`CalculadoraPrompts` → nota «componente interactivo, solo disponible en la versión web»
+- **Render a PDF**: Chrome headless vía CDP (`Page.printToPDF`, A4, `displayHeaderFooter` con `footerTemplate` de numeración «página N / total»), mismo patrón que `generate-screenshots.mjs`; parámetros por env: `ATLAS_CHROME`, `ATLAS_PDF_OUT`, `ATLAS_CDP_PORT`
+- **Verificación**: HTML fuente íntegro (11 bloques, 76 lecciones, 165 callouts, 61 bloques de código, 56 tablas, 3 notas interactivas, 47 términos, 28 hitos — todo 1:1 con el contenido MDX); PDF válido (%PDF, xref/startxref/%%EOF, 244 objetos /Page, viewer Chrome sin errores). El texto PDF usa glifos subseteados (CID), no es extraíble en crudo — normal
+- `Atlas-IA-contenido-completo.pdf` añadido a `.gitignore` (artefacto generado); el script sí está commiteado
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `0a98cc8` (docs Fase 32). Árbol limpio (sin cambios de código desde `0a98cc8`; la Fase 33 fue solo verificación y documentación).
+- Último commit: `4b7d24a` (Fase 34, generador de PDF). Árbol limpio.
+- El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
 - Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
