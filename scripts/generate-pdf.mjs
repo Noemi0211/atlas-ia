@@ -17,6 +17,35 @@ const CONTENT_DIR = join(process.cwd(), "content");
 const SITE_NAME = "Atlas IA";
 const SITE_TAGLINE = "Aprende Inteligencia Artificial";
 const TITLE = "Contenido completo del curso";
+const CC_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
+const CC_LICENSE_TEXT = "Licencia Creative Commons CC BY-NC-SA 4.0";
+
+const SITE_CONFIG = loadTsData(join(process.cwd(), "lib", "constants.ts")).SITE_CONFIG || {};
+const AUTHOR = SITE_CONFIG.contactName || SITE_CONFIG.author || SITE_NAME;
+const SITE_URL = SITE_CONFIG.url || "https://atlas-ia.dev";
+
+function ccIconDataUri() {
+  const p = join(process.cwd(), "public", "icons", "cc_by_nc_sa.png");
+  if (!existsSync(p)) return "";
+  return `data:image/png;base64,${readFileSync(p).toString("base64")}`;
+}
+const CC_ICON_DATA = ccIconDataUri();
+
+function imageDataUri(src) {
+  if (/^https?:\/\//i.test(src)) return src;
+  const rel = src.replace(/^\/+/, "");
+  const candidates = [join(process.cwd(), "public", rel), join(process.cwd(), "content", rel)];
+  for (const c of candidates) {
+    if (existsSync(c)) {
+      const ext = basename(c).split(".").pop().toLowerCase();
+      const mime =
+        { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", gif: "image/gif", webp: "image/webp", svg: "image/svg+xml" }[ext] ||
+        "image/png";
+      return `data:${mime};base64,${readFileSync(c).toString("base64")}`;
+    }
+  }
+  return "";
+}
 
 /* ------------------------------------------------------------------ */
 /* Carga de datos TS (glosario y cronología) vía transpileModule       */
@@ -95,6 +124,10 @@ function inline(text) {
     return `\u0000C${codes.length - 1}\u0000`;
   });
   text = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (_m, alt, src) => {
+    const uri = imageDataUri(src);
+    return uri ? `<img src="${uri}" alt="${escapeHtml(alt)}" class="md-image" />` : escapeHtml(alt || src);
+  });
   text = text.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_m, t, u) => `<a href="${u}">${t}</a>`);
   text = text.replace(/\*\*([^*\n]+)\*\*/g, "<strong>$1</strong>");
   text = text.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, "<em>$1</em>");
@@ -357,6 +390,8 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
 <head>
 <meta charset="utf-8" />
 <title>${SITE_NAME} — ${TITLE}</title>
+<meta name="author" content="${escapeHtml(AUTHOR)}" />
+<meta name="generator" content="${SITE_NAME} · ${SITE_URL}" />
 <style>
   @page { size: A4; }
   * { box-sizing: border-box; }
@@ -370,9 +405,23 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
   .cover .logo { font-size: 42pt; font-weight: 800; color: #2563eb; letter-spacing: -1px; }
   .cover .tagline { font-size: 14pt; color: #475569; margin-top: 8px; }
   .cover .title { font-size: 20pt; font-weight: 700; margin-top: 42px; color: #0f172a; }
-  .cover .meta { margin-top: 24px; font-size: 11pt; color: #64748b; }
+  .cover .meta { margin-top: 24px; font-size: 11pt; color: #64748b; display: flex; flex-direction: column; gap: 4px; }
+  .cover .meta-label { font-weight: 700; color: #334155; }
+  .cover .license { margin-top: 28px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 9.5pt; color: #475569; }
+  .cover .license .cc-icon { height: 26px; width: auto; }
   .cover .chips { margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
   .cover .chip { border: 1px solid #cbd5e1; border-radius: 999px; padding: 4px 14px; font-size: 9.5pt; color: #475569; background: #f8fafc; }
+
+  /* Página de créditos y licencia */
+  .credits { page-break-after: always; }
+  .credits h1 { font-size: 18pt; color: #0f172a; border-bottom: 2px solid #2563eb; padding-bottom: 6px; margin-top: 0; }
+  .credits dl { margin: 20px 0; }
+  .credits dt { font-weight: 700; color: #334155; margin-top: 12px; font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.5px; }
+  .credits dd { margin: 2px 0 0 0; color: #1e293b; }
+  .license-box { border: 1px solid #bfdbfe; background: #eff6ff; border-radius: 8px; padding: 16px 20px; margin-top: 24px; }
+  .license-box h2 { margin: 0 0 8px; font-size: 13pt; color: #1e3a8a; }
+  .license-box p { margin: 6px 0; }
+  .credits-note { margin-top: 24px; font-size: 9.5pt; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 12px; }
 
   /* TOC */
   .toc { page-break-after: always; }
@@ -442,6 +491,21 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
   .hito-year { flex: 0 0 64px; font-weight: 800; color: #2563eb; }
   .hito-title { font-weight: 700; margin: 0; color: #0f172a; }
   .hito-body p { margin: 2px 0; }
+
+  /* Imágenes del contenido */
+  img.md-image { max-width: 100%; height: auto; border-radius: 8px; margin: 10px 0; break-inside: avoid; page-break-inside: avoid; }
+
+  /* Optimización para impresión */
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+  p, li, blockquote p, dd, dt { orphans: 3; widows: 3; }
+  table { break-inside: auto; page-break-inside: auto; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; page-break-inside: avoid; }
+  pre.code-block { break-inside: avoid; page-break-inside: avoid; }
+  .callout, .interactive-note, .glosario-term, .hito { break-inside: avoid; page-break-inside: avoid; }
+  .lesson { break-before: page; page-break-before: always; }
+  .cover, .credits, .toc { break-after: page; page-break-after: always; }
+  @media print { a { text-decoration: none; } }
 </style>
 </head>
 <body>
@@ -449,13 +513,46 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
     <div class="logo">${SITE_NAME}</div>
     <div class="tagline">${SITE_TAGLINE}</div>
     <div class="title">${TITLE}</div>
-    <div class="meta">${fecha}</div>
+    <div class="meta">
+      <div class="meta-line"><span class="meta-label">Autoría:</span> ${escapeHtml(AUTHOR)}</div>
+      <div class="meta-line"><span class="meta-label">Generado el:</span> ${fecha}</div>
+    </div>
+    <div class="license">
+      ${CC_ICON_DATA ? `<img src="${CC_ICON_DATA}" alt="Licencia Creative Commons CC BY-NC-SA 4.0" class="cc-icon" />` : ""}
+      <a href="${CC_LICENSE_URL}">${CC_LICENSE_TEXT}</a>
+    </div>
     <div class="chips">
       <span class="chip">${bloques.length} bloques</span>
       <span class="chip">${totalLecciones} lecciones</span>
       <span class="chip">${glosario.length} términos</span>
       <span class="chip">${cronologia.length} hitos históricos</span>
     </div>
+  </div>
+
+  <div class="credits">
+    <h1>Sobre esta obra</h1>
+    <dl>
+      <dt>Título</dt>
+      <dd>${escapeHtml(TITLE)}</dd>
+      <dt>Proyecto</dt>
+      <dd>${SITE_NAME} — ${escapeHtml(SITE_TAGLINE)}</dd>
+      <dt>Autoría</dt>
+      <dd>${escapeHtml(AUTHOR)}</dd>
+      <dt>Fecha de generación</dt>
+      <dd>${fecha}</dd>
+      <dt>Contenido</dt>
+      <dd>${bloques.length} bloques, ${totalLecciones} lecciones, ${glosario.length} términos de glosario y ${cronologia.length} hitos históricos.</dd>
+    </dl>
+    <div class="license-box">
+      <h2>Licencia</h2>
+      <p>Esta obra se publica bajo la licencia <strong>Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional</strong> (CC BY-NC-SA 4.0).</p>
+      <p>Se permite <strong>compartir</strong> (copiar y redistribuir el material en cualquier medio o formato) y <strong>adaptar</strong> (remezclar, transformar y crear a partir del material), siempre que se reconozca la autoría de forma adecuada, no se utilice la obra con fines comerciales y las obras derivadas se distribuyan bajo la misma licencia.</p>
+      <p><a href="${CC_LICENSE_URL}">${CC_LICENSE_URL}</a></p>
+    </div>
+    <p class="credits-note">
+      Este documento se ha generado automáticamente a partir de los contenidos de la plataforma web ${SITE_NAME}.
+      La versión completa e interactiva del curso está disponible en <a href="${SITE_URL}">${SITE_URL}</a>.
+    </p>
   </div>
 
   <div class="toc">
@@ -560,7 +657,7 @@ async function main() {
         margin: { top: 0.55, bottom: 0.6, left: 0.45, right: 0.45 },
         headerTemplate: "<span></span>",
         footerTemplate:
-          '<div style="font-size:8px; font-family:Segoe UI, Arial, sans-serif; color:#94a3b8; width:100%; text-align:center; padding:0 12mm;">Atlas IA — Contenido completo del curso · <span class="pageNumber"></span> / <span class="totalPages"></span></div>',
+          '<div style="font-size:8px; font-family:Segoe UI, Arial, sans-serif; color:#94a3b8; width:100%; text-align:center; padding:0 12mm;">Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0 · Página <span class="pageNumber"></span> de <span class="totalPages"></span></div>',
       });
 
       mkdirSync(dirname(OUT), { recursive: true });

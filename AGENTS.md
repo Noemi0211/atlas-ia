@@ -325,8 +325,16 @@ npm run lint      # ESLint
 - `Atlas-IA-contenido-completo.pdf` añadido a `.gitignore` (artefacto generado); el script sí está commiteado
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0
 
+### Fase 35 ✅ (PDF actualizado: portada con autoría, licencia CC y diseño de impresión)
+- `scripts/generate-pdf.mjs`: portada con logo, título, **autoría** (`SITE_CONFIG.contactName` = Noemí Celaya Mingot, cargado vía `loadTsData` desde `lib/constants.ts`), **fecha de generación** y **licencia Creative Commons CC BY-NC-SA 4.0** con icono embebido (base64 de `public/icons/cc_by_nc_sa.png`)
+- Nueva página **«Sobre esta obra»** tras la portada: ficha (título, proyecto, autoría, fecha, contenido) y bloque de licencia CC BY-NC-SA 4.0 con enlace a creativecommons.org y nota de que el documento se genera desde la plataforma web (URL de `SITE_CONFIG.url`)
+- `meta name="author"` y `generator` en el `<head>` del HTML; footer del PDF con licencia: «Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0 · Página N de T»
+- **Diseño optimizado para impresión**: `break-after: avoid` en headings, `orphans/widows: 3` en párrafos/listas, `thead { display: table-header-group }` (cabecera de tabla repetida por página), `tr`/`pre`/`callout`/`hito` sin cortes interiores, cada lección empieza en página nueva, tablas sin `break-inside: avoid` global (para tablas largas)
+- **Manejo de imágenes MDX** (`![alt](src)`): nueva utilidad `imageDataUri` que resuelve rutas relativas desde `public/` o `content/` y las embebe como base64 (class `.md-image`); sin imágenes en el contenido actual, es futurible
+- Verificación: sintaxis OK, PDF regenerado (3.9 MB), HTML 1:1 con Fase 34 (165 callouts, 61 bloques de código, 56 tablas, 76 lecciones, 47 términos, 28 hitos), autoría/licencia/fecha presentes en portada y créditos
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `4b7d24a` (Fase 34, generador de PDF). Árbol limpio.
+- Último commit: `4b7d24a` (Fase 34, generador de PDF). Árbol limpio (el script actualizado de la Fase 35 está sin commitear).
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
 - Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
