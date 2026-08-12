@@ -343,8 +343,16 @@ npm run lint      # ESLint
 - Textos localizados es/en/val en la sección `acercaDe` de los tres diccionarios (con `techItems: {name, desc}[]` y fechas de respaldo)
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas), `/acerca-de` 200 en producción con título/canonical/data-read-aloud, fechas 31 de julio de 2026 (creación) y 12 de agosto de 2026 (última actualización automática), enlace en footer y `/acerca-de` en sitemap
 
+### Fase 37 ✅ (página de "Términos de uso" reescrita)
+- `/terminos` reescrita (sustituye la Fase 29 "Términos y Condiciones"): `app/terminos/page.tsx` ahora usa iconografía lucide discreta por sección (FileCheck, GraduationCap, BadgeCheck, Ban, Copyright, Bot, ShieldAlert, Lock, RefreshCcw, Mail, CalendarDays) manteniendo `generateMetadata` (canonical `/terminos`), `Breadcrumbs` y `data-read-aloud`
+- Nueva estructura de 11 apartados en lenguaje claro y no excesivamente jurídico: 1) Aceptación de los términos, 2) Finalidad de la plataforma (educativa: IA + Vibe Coding, formativa y divulgativa), 3) Uso permitido (consultar, actividades, herramientas educativas, compartir respetando la licencia), 4) Uso no permitido (actividades ilícitas, comprometer la seguridad, contenido malicioso, fines contrarios a la normativa), 5) Propiedad intelectual (contenidos de sus autores salvo indicación; CC BY-NC-SA 4.0 con `ipCopyright` «© 2026 Atlas IA por {autor}» interpolado desde `SITE_CONFIG.contactName` y qué permite la licencia con enlace a creativecommons.org), 6) Uso del asistente de IA (errores/imprecisiones, responsabilidad de verificar, apoyo que no sustituye el criterio humano, principio Human-in-the-loop), 7) Limitación de responsabilidad (esfuerzos razonables, sin disponibilidad permanente garantizada, sin responsabilidad por decisiones basadas solo en respuestas de IA), 8) Privacidad y protección de datos (referencia + enlace a `/privacidad`), 9) Modificaciones (vigor desde su publicación), 10) Contacto ({email}) y 11) Fecha de última actualización
+- Footer: `footer.terminos` pasa a "Términos de uso" (en: "Terms of Use", val: "Termes d'ús") en los tres diccionarios
+- Coherencia: roadmap actualizado en es/en/val («página de Términos de uso», «la sección legal del footer está completa: privacidad, uso de IA y términos de uso»); placeholders `{autor}` y `{email}` interpolados en el servidor desde `SITE_CONFIG`
+- La ruta sigue siendo `/terminos` (canonical y sitemap sin cambios, prioridad 0.5); se indexa en `app/robots.ts`
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas), `/terminos` 200 en producción con H1 «Términos de uso», canonical absoluto, sección de fecha, © 2026 Atlas IA por Noemí Celaya Mingot, enlaces a la licencia CC y a `/privacidad`, y `data-read-aloud`
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `abf9410` (Fase 35, PDF actualizado). La página Acerca de Atlas IA (Fase 36) está sin commitear.
+- Último commit: `9112c07` (Fase 36, página Acerca de Atlas IA). La reescritura de Términos de uso (Fase 37) está sin commitear.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
 - Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
@@ -373,7 +381,7 @@ app/                  → Páginas (App Router)
   privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
   uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
   roadmap/            → Roadmap del proyecto: hitos, estado actual y próximos pasos (canonical + data-read-aloud)
-  terminos/           → Términos y Condiciones del servicio (canonical + data-read-aloud)
+  terminos/           → Términos de uso del servicio (canonical + data-read-aloud)
   acerca-de/          → Página institucional: qué es, objetivo, filosofía, autoría, tecnologías, licencia y estado (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)

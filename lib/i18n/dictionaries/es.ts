@@ -71,7 +71,7 @@ export const esDict = {
     glosario: "Glosario",
     privacidad: "Privacidad",
     usoIa: "Uso de IA",
-    terminos: "Términos",
+    terminos: "Términos de uso",
     appsedu: "Appsedu",
     copyright: "por Noemí Celaya Mingot",
     licenciaAria: "Licencia Creative Commons CC BY-NC-SA 4.0",
@@ -469,73 +469,81 @@ Reglas de comportamiento:
   },
 
   terminos: {
-    title: "Términos y Condiciones",
+    title: "Términos de uso",
     subtitle:
-      "Estas condiciones regulan el uso de Atlas IA. Están escritas en un lenguaje claro para que sepas qué puedes hacer, qué esperamos de ti y cómo se resuelven las dudas.",
+      "Las condiciones generales de uso de Atlas IA, escritas de forma clara y comprensible: qué puedes hacer, qué no puedes hacer y cómo nos relacionamos con la plataforma.",
     lastUpdated: "Última actualización: agosto de 2026",
 
-    acceptanceTitle: "Aceptación de estos términos",
+    acceptanceTitle: "Aceptación de los términos",
     acceptanceText:
-      "Al acceder o utilizar Atlas IA aceptas estos términos y la política de privacidad. Si no estás de acuerdo con alguna parte, te pedimos que no utilices la plataforma. El uso continuado de la plataforma implica la aceptación de la versión vigente de estos términos.",
+      "El acceso y uso de Atlas IA implica la aceptación de estos términos y de la Política de Privacidad. Al utilizar la plataforma te comprometes a hacerlo de forma responsable y conforme a la normativa vigente. Si no estás de acuerdo con alguna parte, te pedimos que no utilices la plataforma.",
 
-    serviceTitle: "Descripción del servicio",
-    serviceItems: [
-      "Atlas IA es una plataforma educativa gratuita en línea para aprender Inteligencia Artificial: bloques de lecciones, glosario, cronología, laboratorio interactivo, gamificación y panel docente.",
-      "El contenido es de carácter educativo y divulgativo y no sustituye ningún asesoramiento profesional.",
-      "La plataforma puede evolucionar: se pueden añadir, modificar o retirar contenidos y funcionalidades sin previo aviso.",
+    purposeTitle: "Finalidad de la plataforma",
+    purposeText:
+      "Atlas IA es una plataforma educativa destinada al aprendizaje de la Inteligencia Artificial y del Vibe Coding. Sus contenidos, herramientas y actividades tienen una finalidad formativa y divulgativa, y no sustituyen ningún asesoramiento profesional.",
+
+    allowedTitle: "Uso permitido",
+    allowedIntro: "Puedes utilizar Atlas IA libremente para:",
+    allowedItems: [
+      "Consultar los contenidos y lecciones publicados.",
+      "Realizar las actividades y proyectos de aprendizaje.",
+      "Utilizar las herramientas disponibles (laboratorio, chat, simuladores y otras) con fines educativos.",
+      "Compartir y reutilizar los recursos, siempre respetando la licencia indicada (CC BY-NC-SA 4.0).",
     ],
 
-    accountsTitle: "Cuentas de usuario",
-    accountsItems: [
-      "Para crear una cuenta debes proporcionar un nombre y un correo electrónico reales y una contraseña.",
-      "Eres responsable de mantener la confidencialidad de tu contraseña y de toda la actividad que se realice con tu cuenta.",
-      "Si eres menor de 14 años, necesitas el consentimiento de tu madre, padre o tutor legal para crear una cuenta.",
-      "La cuenta es personal e intransferible; el profesorado puede consultar estadísticas agregadas de la actividad de su grupo.",
+    prohibitedTitle: "Uso no permitido",
+    prohibitedIntro: "No está permitido:",
+    prohibitedItems: [
+      "Utilizar la plataforma para actividades ilícitas o que vulneren los derechos de terceras personas.",
+      "Intentar alterar, dañar o comprometer la seguridad del sistema o el acceso a cuentas ajenas.",
+      "Distribuir contenido malicioso (virus, programas dañinos o engaños) a través de la plataforma.",
+      "Utilizar los recursos para fines contrarios a la normativa vigente.",
     ],
 
-    contentTitle: "Contenido y licencia",
-    contentItems: [
-      "El contenido de la plataforma (lecciones, glosario, cronología y demás materiales) se publica bajo la licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0).",
-      "Puedes compartir y adaptar los materiales citando la fuente, sin fines comerciales y bajo la misma licencia.",
-      "Las marcas y nombres de productos de terceros mencionados en los contenidos pertenecen a sus respectivos propietarios.",
+    ipTitle: "Propiedad intelectual",
+    ipText:
+      "Los contenidos de Atlas IA pertenecen a sus autores salvo indicación expresa en contrario. Los materiales publicados (lecciones, glosario, cronología y demás) se distribuyen bajo la licencia Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0).",
+    ipCopyright: "© 2026 Atlas IA por {autor}",
+    ipLicenseTitle: "¿Qué permite esta licencia?",
+    ipLicenseItems: [
+      "Compartir: copiar y redistribuir los materiales citando la fuente.",
+      "Adaptar: remezclar y crear a partir de los materiales, sin fines comerciales y distribuyendo las obras derivadas bajo la misma licencia.",
     ],
+    ipLinkLabel: "Consultar la licencia completa",
 
-    conductTitle: "Uso responsable",
-    conductItems: [
-      "No debes utilizar la plataforma para fines ilícitos, para acosar o perjudicar a otras personas, ni para suplantar su identidad.",
-      "No debes intentar acceder a cuentas ajenas, alterar los datos de otras personas ni interferir en el funcionamiento del servicio.",
-      "No debes reutilizar los contenidos con fines comerciales sin autorización.",
+    aiTitle: "Uso del asistente de IA",
+    aiItems: [
+      "Las respuestas generadas por el asistente de IA pueden contener errores, imprecisiones o información desactualizada.",
+      "Eres responsable de verificar la información antes de utilizarla, especialmente en contextos académicos o profesionales.",
+      "La IA actúa como herramienta de apoyo al aprendizaje y no sustituye el criterio humano.",
+      "Aplicamos el principio Human-in-the-loop: las personas toman las decisiones y validan los resultados. La decisión final siempre es tuya.",
     ],
-
-    chatTitle: "Chat del laboratorio",
-    chatText:
-      "El chat del laboratorio es una herramienta de IA experimental con fines educativos. Sus respuestas pueden contener errores o información incompleta y no deben utilizarse como fuente única de verdad. Tu uso del chat es voluntario y bajo tu responsabilidad.",
-
-    teacherTitle: "Panel docente",
-    teacherText:
-      "Las cuentas de profesorado (identificadas por su correo institucional) permiten consultar estadísticas agregadas del grupo con el objetivo de orientar el aprendizaje. El profesorado se compromete a utilizar estos datos únicamente con finalidad educativa y a respetar la normativa de protección de datos.",
 
     liabilityTitle: "Limitación de responsabilidad",
     liabilityItems: [
-      "Ponemos el máximo cuidado en la calidad de los contenidos, pero no garantizamos que estén libres de errores ni su idoneidad para un uso concreto.",
-      "No seremos responsables de los daños derivados del uso de la plataforma o de la imposibilidad de utilizarla, salvo en los casos en que la ley no lo permita.",
-      "Los enlaces a sitios externos se ofrecen como recurso; no nos hacemos responsables de su contenido.",
+      "Atlas IA realiza esfuerzos razonables para mantener los contenidos actualizados y correctos, pero no garantiza que estén libres de errores.",
+      "No se garantiza la disponibilidad permanente del servicio: puede haber interrupciones por mantenimiento, mejoras o incidencias técnicas.",
+      "La plataforma no asume responsabilidad por las decisiones tomadas exclusivamente a partir de respuestas generadas por IA.",
     ],
 
-    suspensionTitle: "Suspensión o cierre de la cuenta",
-    suspensionText:
-      "Podemos suspender o cerrar una cuenta si se incumplen estos términos o la normativa aplicable. Puedes dejar de usar la plataforma y solicitar el borrado de tu cuenta en cualquier momento escribiéndonos.",
+    privacyTitle: "Privacidad y protección de datos",
+    privacyText:
+      "El tratamiento de tus datos personales se rige por la Política de Privacidad, que puedes consultar en esta misma web.",
+    privacyLinkLabel: "Ver la Política de Privacidad",
+    privacyNote:
+      "Atlas IA se compromete con un uso responsable y minimizado de los datos: solo recogemos los imprescindibles, los tratamos de forma segura y nunca los utilizamos para fines ajenos a la plataforma.",
 
-    changesTitle: "Modificaciones de estos términos",
+    changesTitle: "Modificaciones",
     changesText:
-      "Estos términos pueden actualizarse. La versión vigente se publica siempre en esta página con su fecha de actualización. Si los cambios son relevantes, lo indicaremos en la propia página.",
-
-    lawTitle: "Legislación aplicable",
-    lawText:
-      "Estos términos se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales correspondientes al domicilio de {responsable}, salvo que una norma de carácter imperativo disponga otra cosa.",
+      "Atlas IA puede actualizar sus contenidos, herramientas o estos términos cuando sea necesario. Las modificaciones entrarán en vigor desde su publicación en esta página. Si los cambios son relevantes, lo indicaremos de forma visible.",
 
     contactTitle: "Contacto",
-    contactText: "Para cualquier duda sobre estos términos, escríbenos a {email}.",
+    contactText:
+      "Para cualquier duda sobre estos términos, sobre la plataforma o sobre el uso de la Inteligencia Artificial, puedes escribirnos a {email}. Te responderemos lo antes posible.",
+
+    dateTitle: "Fecha de última actualización",
+    dateText:
+      "Este documento se actualizó por última vez en agosto de 2026. La versión vigente se publica siempre en esta página.",
   },
 
   roadmap: {
@@ -620,14 +628,14 @@ Reglas de comportamiento:
       {
         titulo: "Roadmap y términos legales (Fases 28-29)",
         descripcion:
-          "Página de Roadmap con el recorrido del proyecto y página de Términos y Condiciones, completando la sección legal del footer.",
+          "Página de Roadmap con el recorrido del proyecto y página de Términos de uso, completando la sección legal del footer.",
       },
     ],
     currentTitle: "Estado actual",
     currentItems: [
       "Todas las fases 1 a 29 están completadas.",
       "El asistente del laboratorio responde en modo offline con contenido del curso, glosario, herramientas y conocimiento general, etiquetando siempre la procedencia.",
-      "La sección legal del footer está completa: privacidad, uso de IA y términos y condiciones.",
+      "La sección legal del footer está completa: privacidad, uso de IA y términos de uso.",
     ],
     nextTitle: "Siguientes pasos",
     nextItems: [

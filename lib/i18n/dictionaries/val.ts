@@ -62,7 +62,7 @@ export const valDict = {
     glosario: "Glossari",
     privacidad: "Privacitat",
     usoIa: "Ús d'IA",
-    terminos: "Termes",
+    terminos: "Termes d'ús",
     appsedu: "Appsedu",
     copyright: "per Noemí Celaya Mingot",
     licenciaAria: "Llicència Creative Commons CC BY-NC-SA 4.0",
@@ -460,73 +460,81 @@ Regles de comportament:
   },
 
   terminos: {
-    title: "Termes i Condicions",
+    title: "Termes d'ús",
     subtitle:
-      "Aquestes condicions regulen l'ús d'Atlas IA. Estan escrites en un llenguatge clar perquè sàpigues què pots fer, què esperem de tu i com es resolen els dubtes.",
+      "Les condicions generals d'ús d'Atlas IA, escrites de manera clara i comprensible: què pots fer, què no pots fer i com ens relacionem amb la plataforma.",
     lastUpdated: "Última actualització: agost de 2026",
 
-    acceptanceTitle: "Acceptació d'aquests termes",
+    acceptanceTitle: "Acceptació dels termes",
     acceptanceText:
-      "En accedir o utilitzar Atlas IA acceptes aquests termes i la política de privacitat. Si no estàs d'acord amb alguna part, et demanem que no utilitzes la plataforma. L'ús continuat de la plataforma implica l'acceptació de la versió vigent d'aquests termes.",
+      "L'accés i l'ús d'Atlas IA implica l'acceptació d'aquests termes i de la Política de Privacitat. En utilitzar la plataforma et compromets a fer-ho de manera responsable i conforme a la normativa vigent. Si no estàs d'acord amb alguna part, et demanem que no utilitzes la plataforma.",
 
-    serviceTitle: "Descripció del servei",
-    serviceItems: [
-      "Atlas IA és una plataforma educativa gratuïta en línia per a aprendre Intel·ligència Artificial: blocs de lliçons, glossari, cronologia, laboratori interactiu, gamificació i panell docent.",
-      "El contingut és de caràcter educatiu i divulgatiu i no substitueix cap assessorament professional.",
-      "La plataforma pot evolucionar: es poden afegir, modificar o retirar continguts i funcionalitats sense avís previ.",
+    purposeTitle: "Finalitat de la plataforma",
+    purposeText:
+      "Atlas IA és una plataforma educativa destinada a l'aprenentatge de la Intel·ligència Artificial i del Vibe Coding. Els seus continguts, eines i activitats tenen una finalitat formativa i divulgativa, i no substitueixen cap assessorament professional.",
+
+    allowedTitle: "Ús permés",
+    allowedIntro: "Pots utilitzar Atlas IA lliurement per a:",
+    allowedItems: [
+      "Consultar els continguts i lliçons publicats.",
+      "Realitzar les activitats i projectes d'aprenentatge.",
+      "Utilitzar les eines disponibles (laboratori, xat, simuladors i altres) amb finalitats educatives.",
+      "Compartir i reutilitzar els recursos, sempre respectant la llicència indicada (CC BY-NC-SA 4.0).",
     ],
 
-    accountsTitle: "Comptes d'usuari",
-    accountsItems: [
-      "Per a crear un compte has de proporcionar un nom i un correu electrònic reals i una contrasenya.",
-      "Ets responsable de mantenir la confidencialitat de la contrasenya i de tota l'activitat que es faça amb el teu compte.",
-      "Si ets menor de 14 anys, necessites el consentiment de la teua mare, pare o tutor legal per a crear un compte.",
-      "El compte és personal i intransferible; el professorat pot consultar estadístiques agregades de l'activitat del seu grup.",
+    prohibitedTitle: "Ús no permés",
+    prohibitedIntro: "No està permés:",
+    prohibitedItems: [
+      "Utilitzar la plataforma per a activitats il·lícites o que vulneren els drets de terceres persones.",
+      "Intentar alterar, danyar o comprometre la seguretat del sistema o l'accés a comptes aliens.",
+      "Distribuir contingut maliciós (virus, programes danyosos o enganyosos) a través de la plataforma.",
+      "Utilitzar els recursos per a finalitats contràries a la normativa vigent.",
     ],
 
-    contentTitle: "Contingut i llicència",
-    contentItems: [
-      "El contingut de la plataforma (lliçons, glossari, cronologia i altres materials) es publica sota la llicència Creative Commons Reconeixement-NoComercial-CompartirIgual 4.0 (CC BY-NC-SA 4.0).",
-      "Pots compartir i adaptar els materials citant la font, sense finalitats comercials i sota la mateixa llicència.",
-      "Les marques i noms de productes de tercers esmentats en els continguts pertanyen als seus respectius propietaris.",
+    ipTitle: "Propietat intel·lectual",
+    ipText:
+      "Els continguts d'Atlas IA pertanyen als seus autors llevat d'indicació expressa en contra. Els materials publicats (lliçons, glossari, cronologia i altres) es distribueixen sota la llicència Creative Commons Reconeixement-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0).",
+    ipCopyright: "© 2026 Atlas IA per {autor}",
+    ipLicenseTitle: "Què permet esta llicència?",
+    ipLicenseItems: [
+      "Compartir: copiar i redistribuir els materials citant la font.",
+      "Adaptar: remesclar i crear a partir dels materials, sense finalitats comercials i distribuint les obres derivades sota la mateixa llicència.",
     ],
+    ipLinkLabel: "Consultar la llicència completa",
 
-    conductTitle: "Ús responsable",
-    conductItems: [
-      "No has d'utilitzar la plataforma per a finalitats il·lícites, per a assetjar o perjudicar altres persones, ni per a suplantar la seua identitat.",
-      "No has d'intentar accedir a comptes aliens, alterar les dades d'altres persones ni interferir en el funcionament del servei.",
-      "No has de reutilitzar els continguts amb finalitats comercials sense autorització.",
+    aiTitle: "Ús de l'assistent d'IA",
+    aiItems: [
+      "Les respostes generades per l'assistent d'IA poden contindre errors, imprecisions o informació desactualitzada.",
+      "Ets responsable de verificar la informació abans d'utilitzar-la, especialment en contextos acadèmics o professionals.",
+      "La IA actua com a eina de suport a l'aprenentatge i no substitueix el criteri humà.",
+      "Apliquem el principi Human-in-the-loop: les persones prenen les decisions i validen els resultats. La decisió final sempre és teua.",
     ],
-
-    chatTitle: "Xat del laboratori",
-    chatText:
-      "El xat del laboratori és una eina d'IA experimental amb finalitats educatives. Les seues respostes poden contenir errors o informació incompleta i no s'han d'utilitzar com a única font de veritat. El teu ús del xat és voluntari i sota la teua responsabilitat.",
-
-    teacherTitle: "Panell docent",
-    teacherText:
-      "Els comptes de professorat (identificats pel seu correu institucional) permeten consultar estadístiques agregades del grup amb l'objectiu d'orientar l'aprenentatge. El professorat es compromet a utilitzar aquestes dades únicament amb finalitat educativa i a respectar la normativa de protecció de dades.",
 
     liabilityTitle: "Limitació de responsabilitat",
     liabilityItems: [
-      "Posem la màxima cura en la qualitat dels continguts, però no garantim que estiguen lliures d'errors ni la seua idoneïtat per a un ús concret.",
-      "No serem responsables dels danys derivats de l'ús de la plataforma o de la impossibilitat d'utilitzar-la, excepte en els casos en què la llei no ho permeta.",
-      "Els enllaços a llocs externs s'ofereixen com a recurs; no ens fem responsables del seu contingut.",
+      "Atlas IA realitza esforços raonables per a mantindre els continguts actualitzats i correctes, però no garanteix que estiguen lliures d'errors.",
+      "No es garanteix la disponibilitat permanent del servei: pot haver-hi interrupcions per manteniment, millores o incidències tècniques.",
+      "La plataforma no assumix responsabilitat per les decisions preses exclusivament a partir de respostes generades per IA.",
     ],
 
-    suspensionTitle: "Suspensió o tancament del compte",
-    suspensionText:
-      "Podem suspendre o tancar un compte si s'incompleixen aquests termes o la normativa aplicable. Pots deixar d'utilitzar la plataforma i sol·licitar l'esborrament del teu compte en qualsevol moment escrivint-nos.",
+    privacyTitle: "Privacitat i protecció de dades",
+    privacyText:
+      "El tractament de les teues dades personals es regix per la Política de Privacitat, que pots consultar en aquesta mateixa web.",
+    privacyLinkLabel: "Veure la Política de Privacitat",
+    privacyNote:
+      "Atlas IA es compromet amb un ús responsable i minimitzat de les dades: només recollim els imprescindibles, els tractem de manera segura i mai no els utilitzem per a finalitats alienes a la plataforma.",
 
-    changesTitle: "Modificacions d'aquests termes",
+    changesTitle: "Modificacions",
     changesText:
-      "Aquests termes poden actualitzar-se. La versió vigent es publica sempre en aquesta pàgina amb la seua data d'actualització. Si els canvis són rellevants, ho indicarem en la mateixa pàgina.",
-
-    lawTitle: "Legislació aplicable",
-    lawText:
-      "Aquests termes es regeixen per la legislació espanyola. Per a qualsevol controvèrsia, les parts se sotmeten als jutjats i tribunals corresponents al domicili de {responsable}, excepte que una norma de caràcter imperatiu dispose una altra cosa.",
+      "Atlas IA pot actualitzar els seus continguts, eines o aquests termes quan siga necessari. Les modificacions entraran en vigor des de la seua publicació en aquesta pàgina. Si els canvis són rellevants, ho indicarem de manera visible.",
 
     contactTitle: "Contacte",
-    contactText: "Per a qualsevol dubte sobre aquests termes, escriu-nos a {email}.",
+    contactText:
+      "Per a qualsevol dubte sobre aquests termes, sobre la plataforma o sobre l'ús de la Intel·ligència Artificial, pots escriure'ns a {email}. Et respondrem el més prompte possible.",
+
+    dateTitle: "Data de l'última actualització",
+    dateText:
+      "Aquest document es va actualitzar per última vegada a l'agost de 2026. La versió vigent es publica sempre en aquesta pàgina.",
   },
 
   roadmap: {
@@ -611,14 +619,14 @@ Regles de comportament:
       {
         titulo: "Full de ruta i termes legals (Fases 28-29)",
         descripcion:
-          "Pàgina de Roadmap amb el recorregut del projecte i pàgina de Termes i Condicions, completant la secció legal del footer.",
+          "Pàgina de Roadmap amb el recorregut del projecte i pàgina de Termes d'ús, completant la secció legal del footer.",
       },
     ],
     currentTitle: "Estat actual",
     currentItems: [
       "Totes les fases 1 a 29 estan completades.",
       "L'assistent del laboratori respon offline amb contingut del curs, glossari, eines i coneixement general, etiquetant sempre la procedència.",
-      "La secció legal del footer està completa: privacitat, ús d'IA i termes i condicions.",
+      "La secció legal del footer està completa: privacitat, ús d'IA i termes d'ús.",
     ],
     nextTitle: "Pròxims passos",
     nextItems: [

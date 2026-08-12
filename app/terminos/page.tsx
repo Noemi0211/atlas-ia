@@ -1,8 +1,24 @@
 import { Metadata } from "next";
+import {
+  BadgeCheck,
+  Ban,
+  Bot,
+  CalendarDays,
+  Copyright,
+  FileCheck,
+  GraduationCap,
+  Lock,
+  Mail,
+  RefreshCcw,
+  ShieldAlert,
+  type LucideIcon,
+} from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { SITE_CONFIG } from "@/lib/constants";
+
+const CC_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -15,10 +31,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ icon: Icon, title, children }: { icon: LucideIcon; title: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="text-xl font-semibold text-fg mb-3">{title}</h2>
+      <h2 className="flex items-center gap-2 text-xl font-semibold text-fg mb-3">
+        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary" aria-hidden="true">
+          <Icon className="h-4.5 w-4.5" />
+        </span>
+        {title}
+      </h2>
       {children}
     </section>
   );
@@ -38,11 +59,10 @@ export default async function TerminosPage() {
   const locale = await getLocale();
   const t = getDictionary(locale);
   const p = t.terminos;
+  const author = SITE_CONFIG.contactName;
   const email = SITE_CONFIG.contactEmail;
-  const responsible = SITE_CONFIG.contactName;
 
-  const fill = (text: string) =>
-    text.replace("{responsable}", responsible).replace("{email}", email);
+  const fill = (text: string) => text.replace("{autor}", author).replace("{email}", email);
 
   return (
     <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
@@ -55,52 +75,70 @@ export default async function TerminosPage() {
       </div>
 
       <div className="space-y-10 max-w-3xl">
-        <Section title={p.acceptanceTitle}>
+        <Section icon={FileCheck} title={p.acceptanceTitle}>
           <p className="text-fg-secondary leading-relaxed">{p.acceptanceText}</p>
         </Section>
 
-        <Section title={p.serviceTitle}>
-          <List items={p.serviceItems} />
+        <Section icon={GraduationCap} title={p.purposeTitle}>
+          <p className="text-fg-secondary leading-relaxed">{p.purposeText}</p>
         </Section>
 
-        <Section title={p.accountsTitle}>
-          <List items={p.accountsItems} />
+        <Section icon={BadgeCheck} title={p.allowedTitle}>
+          <p className="text-fg-secondary mb-4">{p.allowedIntro}</p>
+          <List items={p.allowedItems} />
         </Section>
 
-        <Section title={p.contentTitle}>
-          <List items={p.contentItems} />
+        <Section icon={Ban} title={p.prohibitedTitle}>
+          <p className="text-fg-secondary mb-4">{p.prohibitedIntro}</p>
+          <List items={p.prohibitedItems} />
         </Section>
 
-        <Section title={p.conductTitle}>
-          <List items={p.conductItems} />
+        <Section icon={Copyright} title={p.ipTitle}>
+          <p className="text-fg-secondary leading-relaxed mb-3">{p.ipText}</p>
+          <p className="text-sm font-semibold text-fg mb-3">{fill(p.ipCopyright)}</p>
+          <p className="font-semibold text-fg mb-2">{p.ipLicenseTitle}</p>
+          <List items={p.ipLicenseItems} />
+          <a
+            href={CC_LICENSE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white dark:text-slate-900 transition-opacity hover:opacity-90"
+          >
+            {p.ipLinkLabel}
+            <span aria-hidden="true">→</span>
+          </a>
         </Section>
 
-        <Section title={p.chatTitle}>
-          <p className="text-fg-secondary leading-relaxed">{p.chatText}</p>
+        <Section icon={Bot} title={p.aiTitle}>
+          <List items={p.aiItems} />
         </Section>
 
-        <Section title={p.teacherTitle}>
-          <p className="text-fg-secondary leading-relaxed">{p.teacherText}</p>
-        </Section>
-
-        <Section title={p.liabilityTitle}>
+        <Section icon={ShieldAlert} title={p.liabilityTitle}>
           <List items={p.liabilityItems} />
         </Section>
 
-        <Section title={p.suspensionTitle}>
-          <p className="text-fg-secondary leading-relaxed">{p.suspensionText}</p>
+        <Section icon={Lock} title={p.privacyTitle}>
+          <p className="text-fg-secondary leading-relaxed mb-4">{p.privacyText}</p>
+          <a
+            href="/privacidad"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white dark:text-slate-900 transition-opacity hover:opacity-90"
+          >
+            {p.privacyLinkLabel}
+            <span aria-hidden="true">→</span>
+          </a>
+          <p className="text-fg-secondary leading-relaxed mt-4">{p.privacyNote}</p>
         </Section>
 
-        <Section title={p.changesTitle}>
+        <Section icon={RefreshCcw} title={p.changesTitle}>
           <p className="text-fg-secondary leading-relaxed">{p.changesText}</p>
         </Section>
 
-        <Section title={p.lawTitle}>
-          <p className="text-fg-secondary leading-relaxed">{fill(p.lawText)}</p>
+        <Section icon={Mail} title={p.contactTitle}>
+          <p className="text-fg-secondary leading-relaxed">{fill(p.contactText)}</p>
         </Section>
 
-        <Section title={p.contactTitle}>
-          <p className="text-fg-secondary leading-relaxed">{fill(p.contactText)}</p>
+        <Section icon={CalendarDays} title={p.dateTitle}>
+          <p className="text-fg-secondary leading-relaxed">{p.dateText}</p>
         </Section>
       </div>
     </div>
