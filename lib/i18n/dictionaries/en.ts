@@ -57,6 +57,7 @@ export const enDict = {
     plataforma: "Platform",
     recursos: "Resources",
     legal: "Legal",
+    acercaDe: "About Atlas IA",
     bloques: "Blocks",
     glosario: "Glossary",
     privacidad: "Privacy",
@@ -626,6 +627,93 @@ Behaviour rules:
       "Consider /en and /val URL prefixes for real hreflang.",
       "Test the teacher dashboard with accounts included in TEACHER_EMAILS.",
     ],
+  },
+
+  acercaDe: {
+    title: "About Atlas IA",
+    subtitle:
+      "The institutional page of the project: what Atlas IA is, what we want to achieve, how we do it and the principles behind this content.",
+    lastUpdated: "Last updated: August 2026",
+
+    whatTitle: "What is Atlas IA?",
+    whatText:
+      "Atlas IA is an educational project in Spanish for learning Artificial Intelligence in a practical, progressive and accessible way. It brings together more than 70 lessons organised into 11 blocks, a glossary of terms, an AI timeline, an interactive lab with chat, a prompt environment and simulators, as well as progress tracking tools and a teacher dashboard. No previous experience is required: each block starts from scratch and builds on what you have learned.",
+
+    objectiveTitle: "Educational objective",
+    objectiveIntro: "The purpose of Atlas IA is:",
+    objectiveItems: [
+      "To help teachers, students and professionals understand and use AI critically, ethically and usefully, both in the classroom and in their daily work.",
+      "To promote hands-on learning through real projects: learners do not only read about AI, but also experiment with prompts, compare tools, design agent flows and apply what they have learned to concrete cases.",
+    ],
+
+    philosophyTitle: "Project philosophy",
+    philosophyIntro:
+      "Atlas IA is built under the Educational Vibe Coding approach, which combines AI-assisted learning with a progressive, guided methodology. Its principles are:",
+    philosophyItems: [
+      "AI as a support tool: programming assistants and language models are used to speed up and ease learning, never to replace the learner's own reasoning.",
+      "Human-in-the-loop: people make the decisions and validate the results. AI proposes, reviews and speeds things up; the final decision is always human. This principle applies both to the course content and to the development of the platform itself.",
+      "Autonomy, creativity and critical thinking: the goal is not to memorise, but to learn to ask good questions, cross-check answers, spot mistakes and build your own solutions.",
+    ],
+
+    authorshipTitle: "Authorship",
+    authorshipIntro: "A personal project, transparent and made with dedication.",
+    authorshipName: "Noemí Celaya Mingot",
+    authorshipRole: "Author and developer of Atlas IA",
+    authorshipText:
+      "Atlas IA has been developed by Noemí Celaya Mingot, a Vocational Education teacher. The project combines design, programming and educational content produced and reviewed by the author with the support of AI tools such as programming assistants, always under the Human-in-the-loop principle: AI proposes and the author decides, checks and validates every result.",
+
+    techTitle: "Technologies used",
+    techIntro: "The platform is built with a modern, open and free stack:",
+    techItems: [
+      { name: "Next.js 16", desc: "React framework with App Router, hybrid rendering and API Routes." },
+      { name: "TypeScript", desc: "Static typing for robust, maintainable code." },
+      { name: "Tailwind CSS v4", desc: "Fast, consistent interface design with dark mode." },
+      { name: "MDX", desc: "Educational content written in Markdown enriched with components." },
+      { name: "Zustand", desc: "Gamification state management with local persistence." },
+      { name: "Prisma + SQLite", desc: "Local database for accounts, sessions and learner progress." },
+      { name: "NextAuth", desc: "Authentication with credentials and role-based access control." },
+      { name: "PWA + Service Worker", desc: "Installation on your device and offline mode." },
+      { name: "Web Speech API", desc: "Text read aloud for a more accessible experience." },
+    ],
+
+    responsibleTitle: "Responsible use of Artificial Intelligence",
+    responsibleIntro: "AI is a powerful tool, but it is not infallible. At Atlas IA we want it to be used wisely:",
+    responsibleItems: [
+      "AI can make mistakes (hallucinations, outdated data, bias) and should be used as support, not as a source of truth.",
+      "We promote verifying information: cross-check, check the sources and do not take anything for granted without reviewing it.",
+      "Ethics, privacy and data protection are non-negotiable: do not share personal data with AI assistants and always respect current regulations.",
+      "The lab chat is an experimental tool: its answers may contain errors and should be reviewed before use.",
+    ],
+
+    accessibilityTitle: "Accessibility",
+    accessibilityIntro: "Learning must be for everyone. That is why accessibility is a priority for the project:",
+    accessibilityItems: [
+      "Commitment to inclusive learning, with clear language adapted to its audience.",
+      "Clear and accessible design: sufficient contrast, keyboard navigation, ARIA labels and interactive glossary terms.",
+      "Text read aloud with adjustable speed to ease comprehension.",
+      "Continuous improvement of the user experience: we regularly review the platform to fix and expand it.",
+    ],
+
+    licenseTitle: "License",
+    licenseIntro:
+      "The Atlas IA content (lessons, glossary, timeline and other materials) is published under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International license (CC BY-NC-SA 4.0).",
+    licenseWhatTitle: "What does this license allow?",
+    licenseAllowedItems: [
+      "Share: copy and redistribute the materials in any medium or format.",
+      "Adapt: remix, transform and build upon the materials.",
+    ],
+    licenseConditions:
+      "Under the following conditions: attribution (you must credit the source), non-commercial (you may not use them for commercial purposes) and share alike (derivative works must be distributed under the same license).",
+    licenseLink: "View the full license",
+
+    statusTitle: "Project status",
+    statusIntro: "Atlas IA is an actively built project, published in incremental, verified phases.",
+    statusCreated: "Creation date",
+    statusCreatedValue: "July 31, 2026",
+    statusUpdated: "Last update",
+    statusUpdatedValue: "August 12, 2026",
+    statusUpdatedAuto: "Obtained automatically from the latest code revision.",
+    statusNote: "Each phase adds content, features or quality improvements before moving on to the next.",
   },
 
   auth: {

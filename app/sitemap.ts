@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/glosario", priority: 0.8 },
     { path: "/cronologia", priority: 0.7 },
     { path: "/laboratorio", priority: 0.7 },
+    { path: "/acerca-de", priority: 0.5 },
     { path: "/privacidad", priority: 0.5 },
     { path: "/uso-de-ia", priority: 0.5 },
     { path: "/terminos", priority: 0.5 },

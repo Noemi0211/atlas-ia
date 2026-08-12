@@ -37,6 +37,11 @@ export function Footer() {
                   {t.footer.glosario}
                 </Link>
               </li>
+              <li>
+                <Link href="/acerca-de" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.footer.acercaDe}
+                </Link>
+              </li>
             </ul>
           </div>
 

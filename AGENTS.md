@@ -333,8 +333,18 @@ npm run lint      # ESLint
 - **Manejo de imágenes MDX** (`![alt](src)`): nueva utilidad `imageDataUri` que resuelve rutas relativas desde `public/` o `content/` y las embebe como base64 (class `.md-image`); sin imágenes en el contenido actual, es futurible
 - Verificación: sintaxis OK, PDF regenerado (3.9 MB), HTML 1:1 con Fase 34 (165 callouts, 61 bloques de código, 56 tablas, 76 lecciones, 47 términos, 28 hitos), autoría/licencia/fecha presentes en portada y créditos
 
+### Fase 36 ✅ (página institucional "Acerca de Atlas IA")
+- Nueva página `/acerca-de` (`app/acerca-de/page.tsx`): server component con `generateMetadata` (canonical `/acerca-de`) y `data-read-aloud` (lectura por voz + términos interactivos del glosario)
+- Secciones: qué es Atlas IA (proyecto educativo en español, práctico, progresivo y accesible), objetivo educativo (docentes/estudiantes/profesionales, aprendizaje práctico con proyectos reales), filosofía del proyecto (Vibe Coding Educativo, IA como herramienta de apoyo, Human-in-the-loop, autonomía/creatividad/pensamiento crítico), autoría (tarjeta elegante con avatar NC, nombre y rol de Noemí Celaya Mingot desde `SITE_CONFIG.contactName`), tecnologías utilizadas (grid de 9 tarjetas: Next.js 16, TypeScript, Tailwind CSS v4, MDX, Zustand, Prisma+SQLite, NextAuth, PWA+Service Worker, Web Speech API), uso responsable de la IA (errores/alucinaciones, verificación, ética/privacidad/datos), accesibilidad, licencia (CC BY-NC-SA 4.0 con enlace y qué permite) y estado del proyecto
+- **Fechas automáticas desde git**: `gitFirstCommitDate()` (`git rev-list --max-parents=0 HEAD` + `git show -s`) para fecha de creación y `gitDate("")` (`git log -1 --format=%cI`) para última actualización, formateadas con `formatDate(localeToIntl(locale))`; fallback a `statusCreatedValue`/`statusUpdatedValue` de los diccionarios si git no está disponible (deploy sin `.git`); nota `statusUpdatedAuto` cuando la fecha es automática. Nota técnica: `git log -1 --reverse` NO devuelve el primer commit (la selección `-n1` ocurre antes de invertir), por eso se usa `rev-list --max-parents=0`
+- Iconos lucide para cada sección (Sparkles, Target, HeartHandshake, PenLine, Layers, ShieldCheck, Accessibility, CreativeCommons, CalendarDays/RefreshCcw)
+- Footer (`components/layout/Footer.tsx`): nuevo enlace "Acerca de Atlas IA" (`footer.acercaDe` es/en/val) en la columna Plataforma
+- `app/sitemap.ts`: `/acerca-de` (prioridad 0.5) → 97 URLs; se indexa en `app/robots.ts` (no está en disallow)
+- Textos localizados es/en/val en la sección `acercaDe` de los tres diccionarios (con `techItems: {name, desc}[]` y fechas de respaldo)
+- Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas), `/acerca-de` 200 en producción con título/canonical/data-read-aloud, fechas 31 de julio de 2026 (creación) y 12 de agosto de 2026 (última actualización automática), enlace en footer y `/acerca-de` en sitemap
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `4b7d24a` (Fase 34, generador de PDF). Árbol limpio (el script actualizado de la Fase 35 está sin commitear).
+- Último commit: `abf9410` (Fase 35, PDF actualizado). La página Acerca de Atlas IA (Fase 36) está sin commitear.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
 - Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
@@ -364,6 +374,7 @@ app/                  → Páginas (App Router)
   uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
   roadmap/            → Roadmap del proyecto: hitos, estado actual y próximos pasos (canonical + data-read-aloud)
   terminos/           → Términos y Condiciones del servicio (canonical + data-read-aloud)
+  acerca-de/          → Página institucional: qué es, objetivo, filosofía, autoría, tecnologías, licencia y estado (canonical + data-read-aloud)
   perfil/             → Estadísticas, ranking, retos, proyectos, badges
   laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
   auth/               → login + register
