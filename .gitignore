@@ -37,6 +37,9 @@ yarn-error.log*
 prisma/dev.db
 prisma/dev.db-journal
 
+# artefactos generados
+/Atlas-IA-contenido-completo.pdf
+
 # vercel
 .vercel
 
