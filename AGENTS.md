@@ -307,9 +307,18 @@ npm run lint      # ESLint
 - **Nota técnica**: `Network.emulateNetworkConditions { offline: true }` de CDP bloquea `fetch()` del renderer pero NO las navegaciones en headless (servían páginas reales); el test offline fiable se hizo deteniendo el servidor
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (112 páginas)
 
+### Fase 33 ✅ (pruebas del panel docente de principio a fin)
+- **Cuentas de prueba** creadas vía `/api/register` en la BD local (`prisma/dev.db`, gitignored): docente `profesor@correo.com` (rol `teacher` por `TEACHER_EMAILS`) y estudiantes Laura/Marc/Sofía (rol `student`). Login con el flujo NextAuth completo (GET `/api/auth/csrf` + POST `/api/auth/callback/credentials` → cookie `next-auth.session-token`)
+- **`/api/sync-progress`**: sincronización POST funcional (lecciones completadas, XP, badges, racha, favoritos, comparaciones, árbol, calculadora, retos, proyectos, notificaciones). Nota: `Invoke-WebRequest` de PowerShell 5.1 manda los cuerpos en cp850 (corrompe acentos, p. ej. "P�rez"); usar `curl` con archivo JSON UTF-8 sin BOM o el navegador (fetch UTF-8). No es un bug de la app, se verificó: con UTF-8 correcto los nombres acentuados se guardan bien en BD
+- **`/api/docencia/students`**: 401 sin sesión, 401 como estudiante vía curl (el JWT de sesión de prueba no propagaba el claim `role`; en navegador real el guard de `/docencia` sí redirige), 200 como docente con JSON agregado correcto (nivel `floor(xp/500)+1`, % del curso, % por bloque, insignias, racha, uso de herramientas) y CSV `?format=csv` (BOM UTF-8, `Content-Disposition: attachment; filename="atlas-docencia-YYYY-MM-DD.csv"`, separador `;`, 11 columnas de bloques)
+- **`/docencia`** en navegador real (CDP, Chrome headless): sin sesión → redirect `/auth/login?callbackUrl=%2Fdocencia` (proxy.ts); como estudiante → redirect `/perfil` (guard del server component); como docente → 200 con dashboard renderizado (3 estudiantes, tarjetas resumen 3 / 657 XP / 7 lecciones / 2 activos, buscador, export CSV, filas expandibles con perBlock y métricas de uso correctas). Título «Docencia | Atlas IA», canonical absoluto `https://atlas-ia.dev/docencia`, `data-read-aloud` presente
+- **Menú docente por rol** en navegador real: como docente el link «Docencia» aparece en sidebar + UserMenu (2 enlaces, `Sidebar.tsx` y `UserMenu.tsx` usan `useSession()` cliente); como estudiante 0 enlaces
+- **`/perfil`**: 307 a login sin sesión, 200 con sesión (docente y estudiante)
+- Datos de prueba eliminados tras la verificación (BD local limpia). Sin cambios de código en esta fase; verificación: tsc correcto, lint 0/0
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `1844a7e` (docs Fase 32). Árbol limpio: Fase 32 (fix registro SW + pruebas en navegador) commiteada en `ae6b2c6` (feat) + `1844a7e` (docs).
-- Siguientes pasos posibles: probar el panel docente creando cuentas con correos incluidos en `TEACHER_EMAILS`, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades.
+- Último commit: `0a98cc8` (docs Fase 32). Árbol limpio (sin cambios de código desde `0a98cc8`; la Fase 33 fue solo verificación y documentación).
+- Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 
