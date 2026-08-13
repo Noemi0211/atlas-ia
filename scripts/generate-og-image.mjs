@@ -79,17 +79,7 @@ const HTML = `<!doctype html>
     color: rgba(255, 255, 255, 0.92);
     letter-spacing: 0.2px;
   }
-  .rule { width: 560px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.35); margin: 18px 0 26px; }
-  .url {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 30px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.85);
-    letter-spacing: 0.3px;
-  }
-  .url .dot { width: 13px; height: 13px; border-radius: 50%; background: #7dd3fc; }
+  .rule { width: 560px; height: 3px; border-radius: 2px; background: rgba(255, 255, 255, 0.35); margin: 18px 0 0; }
 </style>
 </head>
 <body>
@@ -130,7 +120,6 @@ const HTML = `<!doctype html>
       </div>
     </div>
     <div class="rule"></div>
-    <div class="url"><span class="dot"></span>atlas-ia.dev</div>
   </div>
 </body>
 </html>`;
