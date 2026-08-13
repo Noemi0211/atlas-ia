@@ -397,7 +397,7 @@ npm run test:watch # Vitest (watch)
 
 ## Estado actual (para retomar la sesión)
 - Último commit: `bfcdcf8` (Fase 38, tests automatizados, rate limiting y a11y). Working tree limpio.
-- Verificación Fase 38: `npm test` 73/73, tsc correcto, lint 0/0, build OK (113 páginas). Runtime verificado: 429 en register/login tras el umbral, chat SSE intacto, skip-link + `<main>` en HTML.
+- Verificación Fase 38: `npm test` 83/83, tsc correcto, lint 0/0, build OK (113 páginas). Runtime verificado: 429 en register/login tras el umbral, chat SSE intacto, skip-link + `<main>` en HTML.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
 - Siguientes pasos posibles: smoke de API routes y componentes críticos en los tests, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
