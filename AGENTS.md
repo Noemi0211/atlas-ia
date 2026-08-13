@@ -377,7 +377,7 @@ npm run test:watch # Vitest (watch)
 - Verificación: `npx vitest run` 83/83, `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas)
 
 ### Fase 39 ✅ (imagen Open Graph para compartir en redes)
-- Nuevo script reutilizable `scripts/generate-og-image.mjs`: genera `public/og.png` (1200×630, ~229 KB) con la marca Atlas IA usando Chrome headless vía CDP (mismo patrón que `generate-screenshots.mjs`): renderiza un HTML autocontenido (gradiente `#2563eb→#1d4ed8`, logotipo cuadrado redondeado con glifo "A" y punto-nodo, título "Atlas IA", subtítulo "Aprende Inteligencia Artificial", URL `atlas-ia.dev` y decoración de nodos de red IA al fondo), `Emulation.setDeviceMetricsOverride` 1200×630 y `Page.captureScreenshot`. Parámetros por env: `ATLAS_CHROME`, `ATLAS_OUT`, `ATLAS_CDP_PORT`; no requiere el servidor en marcha (navega a `file://`); mata el Chrome lanzado con `taskkill /T /F`
+- Nuevo script reutilizable `scripts/generate-og-image.mjs`: genera `public/og.png` (1200×630, ~220 KB) con la marca Atlas IA usando Chrome headless vía CDP (mismo patrón que `generate-screenshots.mjs`): renderiza un HTML autocontenido (gradiente `#2563eb→#1d4ed8`, logotipo cuadrado redondeado con glifo "A" y punto-nodo, título "Atlas IA", subtítulo "Aprende Inteligencia Artificial" y una regla decorativa bajo el bloque de título — sin texto de URL, se eliminó por petición del autor; solo queda la decoración de nodos de red IA al fondo), `Emulation.setDeviceMetricsOverride` 1200×630 y `Page.captureScreenshot`. Parámetros por env: `ATLAS_CHROME`, `ATLAS_OUT`, `ATLAS_CDP_PORT`; no requiere el servidor en marcha (navega a `file://`); mata el Chrome lanzado con `taskkill /T /F`
 - `app/layout.tsx`: `openGraph.images` añadido (`/og.png`, 1200×630, alt localizado por defecto) y `twitter.card: "summary_large_image"` + `twitter.images`; con `metadataBase` las URLs se sirven absolutas (`https://atlas-ia.dev/og.png`)
 - `next.config.ts`: cabecera `Cache-Control: public, max-age=31536000, immutable` para `/og.png`
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas); runtime: `<meta property="og:image" content="https://atlas-ia.dev/og.png">` + width/height/alt y `twitter:card` en el HTML de `/`, y `/og.png` → 200 `image/png` con caché inmutable
@@ -402,9 +402,9 @@ npm run test:watch # Vitest (watch)
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: Fase 39 (imagen Open Graph para compartir en redes). Working tree limpio.
+- Último commit: `bdcdd47` (fix: quitar el texto "atlas-ia.dev" del banner Open Graph). Working tree limpio. La Fase 39 (OG image) está completa.
 - Verificación Fase 39: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas). Runtime: `og:image` absoluta `https://atlas-ia.dev/og.png` + `twitter:card` en el HTML, `/og.png` → 200 `image/png` con caché inmutable. Suite de tests: `npm test` 83/83.
-- El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`. La OG image se regenera con `node scripts/generate-og-image.mjs`.
+- El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
 - Siguientes pasos posibles: README.md real, fechas automáticas en páginas legales, PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
