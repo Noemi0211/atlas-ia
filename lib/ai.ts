@@ -553,7 +553,7 @@ function findToolResponse(query: string, locale: Locale): MatchResult | null {
   return { text, score: bestScore || 1, source: "course" };
 }
 
-function findBestResponse(query: string, locale: Locale): MatchResult | null {
+export function findBestResponse(query: string, locale: Locale): MatchResult | null {
   const candidates = [
     findKnowledgeResponse(query),
     findToolResponse(query, locale),
@@ -567,7 +567,7 @@ function findBestResponse(query: string, locale: Locale): MatchResult | null {
   return best;
 }
 
-function composeResult(result: MatchResult, locale: Locale): string {
+export function composeResult(result: MatchResult, locale: Locale): string {
   if (result.noPrefix) return result.text;
   const t = getDictionary(locale);
   if (result.source === "course") {
@@ -576,7 +576,7 @@ function composeResult(result: MatchResult, locale: Locale): string {
   return `**[${t.ai.generalIntro}]**\n\n${result.text}`;
 }
 
-function findTopicFallback(
+export function findTopicFallback(
   query: string,
   locale: Locale,
   subject: string | null,
@@ -602,7 +602,7 @@ const DEFINITION_PATTERNS = [
   /(?:que|qué)\s+significa\s+(?:el|la|un|una)?\s*([a-zñü][a-z0-9ñü-]{2,})/i,
 ];
 
-function extractDefinitionSubject(query: string): string | null {
+export function extractDefinitionSubject(query: string): string | null {
   for (const pattern of DEFINITION_PATTERNS) {
     const match = query.match(pattern);
     if (match) {
@@ -662,7 +662,7 @@ function looksLikeFollowUp(query: string): boolean {
   return tokens.length <= 4 && tokens.some((t) => followUpWords.has(t));
 }
 
-function findResponseWithMemory(
+export function findResponseWithMemory(
   messages: { role: string; content: string }[],
   locale: Locale,
 ): string {

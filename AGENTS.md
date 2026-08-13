@@ -10,6 +10,8 @@ npm run dev       # Desarrollo
 npm run build     # Build producción
 npx tsc --noEmit  # TypeScript check
 npm run lint      # ESLint
+npm test          # Vitest (run)
+npm run test:watch # Vitest (watch)
 ```
 
 ## Fases completadas
@@ -351,10 +353,49 @@ npm run lint      # ESLint
 - La ruta sigue siendo `/terminos` (canonical y sitemap sin cambios, prioridad 0.5); se indexa en `app/robots.ts`
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas), `/terminos` 200 en producción con H1 «Términos de uso», canonical absoluto, sección de fecha, © 2026 Atlas IA por Noemí Celaya Mingot, enlaces a la licencia CC y a `/privacidad`, y `data-read-aloud`
 
+### Fase 38 ✅ (tests automatizados, rate limiting y accesibilidad — mejoras de alta prioridad)
+- **Vitest + React Testing Library**: `vitest`, `@vitejs/plugin-react`, `jsdom`, `@testing-library/react|jest-dom|user-event` instalados como devDependencies. `vitest.config.mts` (alias `@` → raíz, entorno jsdom, setup `vitest.setup.ts` con jest-dom); scripts `test` (`vitest run`) y `test:watch`. Sin `globals` conflictivos: los tests importan `describe/it/expect` explícitamente.
+- **73 tests en 7 archivos**:
+  - `lib/utils.test.ts` — `cn`, `slugify` (tildes, caracteres no alfanuméricos, guiones), `capitalize`, `formatDate` (es/en)
+  - `lib/glossary-match.test.ts` — trie: coincidencia más larga, límites de palabra (`token` no matchea `tokenizar`/`tokens`), normalización de tildes, múltiples términos
+  - `lib/i18n/dictionaries.test.ts` — paridad exacta de claves es/en/val (recorrido recursivo de hojas), longitudes consistentes de builders (`getGlosario` 47, `getCronologia` 28, `getHerramientas` 13, nav/bloques), `isLocale`/`resolveLocale`/`localeToIntl`
+  - `lib/content.test.ts` — 11 bloques, meta de bloque, 10 lecciones de fundamentos, `getLeccion` (frontmatter + contenido localizado en/val), `getAllLecciones`, `searchContent` (glosario y sin coincidencias)
+  - `stores/progress.test.ts` — XP/insignias al completar lecciones, sin duplicados, badge de bloque ecosistema, `getLessonProgress`, favoritos, umbrales de XP, racha con `vi.useFakeTimers` (consecutiva y con salto de día), comparador, retos diarios sin duplicar, proyectos, ranking
+  - `lib/ai.test.ts` — fallback offline: `findBestResponse` (LLM, saludo sin prefijo, frases con huecos "gpt vs gemini", herramientas), `composeResult` (courseSource/generalIntro/prefijo saludo), `findTopicFallback` (categoría git, restricción por sujeto de definición), `extractDefinitionSubject`, `findResponseWithMemory` (directa, tema exacto, noAnswer honesto, memoria de conversación)
+  - `lib/rate-limit.test.ts` — `getClientIp` (x-forwarded-for/x-real-ip/unknown), umbral `max`, bloqueo con `retryAfterMs`, IPs separadas, prefijos independientes, `clearRateLimits`
+- **Exportadas funciones puras de `lib/ai.ts`** para testabilidad: `findBestResponse`, `composeResult`, `findTopicFallback`, `extractDefinitionSubject`, `findResponseWithMemory` (sin cambio de comportamiento)
+- **Rate limiting in-memory** (`lib/rate-limit.ts`): ventana deslizante por IP (`Map`), limpieza perezosa cada 60s, `getClientIp` (x-forwarded-for → x-real-ip → cf-connecting-ip → unknown), `clearRateLimits` para tests. Aplicado a:
+  - `/api/register` — 10 por 15 min (429 con `Retry-After`)
+  - `/api/chat` — 30 por minuto (429 con `Retry-After`, mensaje `t.ai.rateLimited` añadido a es/en/val)
+  - Login NextAuth — `app/api/auth/[...nextauth]/route.ts` envuelve GET/POST con 10 por minuto por IP; contexto tipado `params: Promise<{ nextauth: string[] }>` (Next.js 16 params asíncronos). En instancia única basta in-memory; para escalado horizontal migrar a `@upstash/ratelimit`
+- **A11y skip-link**: enlace "Saltar al contenido" (localizado `t.a11y.skipToContent` es/en/val) como primer elemento del DOM en `Shell.tsx`, con `sr-only focus:not-sr-only`; `<main>` con `id="contenido"` y `tabIndex={-1}` (landmark + destino de foco)
+- **Verificación en runtime** (servidor de producción): `/api/register` 10 OK + 429 a la 11ª (misma IP); login NextAuth 10 + 429 a la 11ª; `/api/chat` SSE 200 intacto; HTML de `/` con skip-link y `<main>`. Datos de prueba eliminados de la BD tras la verificación
+- Verificación: `npx vitest run` 73/73, `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas)
+
+## Mejoras pendientes (propuestas, ordenadas por impacto)
+
+### Alta prioridad (Fase 38 ✅)
+1. ~~**Tests automatizados**~~ — Vitest + React Testing Library instalados; 73 tests de lógica pura (`stores/progress.ts`, `lib/ai.ts`, `lib/content.ts`, builders i18n, `glossary-match.ts`, `lib/rate-limit.ts`, `lib/utils.ts`). Pendiente como siguiente paso: smoke de API routes (`/api/search`, `/api/chat` offline) y componentes críticos (LoginForm, comparador).
+2. ~~**Rate limiting en endpoints**~~ — in-memory (Map) por IP aplicado a `/api/register` (10/15 min), `/api/chat` (30/min) y login NextAuth (10/min) con 429 + `Retry-After`. Si se escala a varias instancias, migrar a `@upstash/ratelimit`.
+3. ~~**A11y: enlace "Saltar al contenido"**~~ — skip-link al inicio del DOM en `Shell.tsx` (localizado es/en/val) + `<main id="contenido" tabIndex={-1}>`.
+
+### Media
+4. **OG image** — `openGraph` en `app/layout.tsx` no incluye `images`; sin vista previa al compartir en redes. Reutilizar el diseño del icono/manifest como `public/og.png` (1200×630).
+5. **README.md** — sigue siendo el boilerplate de create-next-app; describir el proyecto real (qué es Atlas IA, comandos, estructura, licencia CC).
+6. **Prefijos `/en` `/val` + hreflang** — paso lógico para SEO multilingüe real y compartir enlaces por idioma (pendiente señalado en AGENTS.md).
+7. **Bloque 10 Novedades** — el contenido data de julio 2026; revisarlo periódicamente.
+
+### Mantenimiento
+8. **Fechas estáticas en legal** — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`.
+9. **Sincronización es/en/val** — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script.
+10. **PDF por bloque** — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula.
+11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
+
 ## Estado actual (para retomar la sesión)
-- Último commit: `9112c07` (Fase 36, página Acerca de Atlas IA). La reescritura de Términos de uso (Fase 37) está sin commitear.
+- Último commit: `aad77af` (Fase 37, página de Términos de uso reescrita). Working tree con Fase 38 (tests, rate limiting, a11y) sin commitear.
+- Verificación Fase 38: `npm test` 73/73, tsc correcto, lint 0/0, build OK (113 páginas). Runtime verificado: 429 en register/login tras el umbral, chat SSE intacto, skip-link + `<main>` en HTML.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`.
-- Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
+- Siguientes pasos posibles: smoke de API routes y componentes críticos en los tests, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 

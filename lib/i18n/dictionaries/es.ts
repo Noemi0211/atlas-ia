@@ -123,6 +123,7 @@ Reglas de comportamiento:
     error: "Error al conectar con la IA",
     badRequest: "Debes enviar al menos un mensaje",
     internalError: "Error interno",
+    rateLimited: "Has alcanzado el límite de mensajes. Espera un momento e inténtalo de nuevo.",
     courseSource: "Según Atlas IA:",
     generalIntro: "Este concepto todavía no aparece en Atlas IA.",
     noAnswer: "No dispongo de información suficiente para responder con precisión a esa pregunta.",
@@ -194,6 +195,10 @@ Reglas de comportamiento:
     finished: "Lectura finalizada",
     notSupported: "Tu navegador no es compatible con la lectura por voz",
     noContent: "No hay contenido que leer en esta página",
+  },
+
+  a11y: {
+    skipToContent: "Saltar al contenido",
   },
 
   pwa: {

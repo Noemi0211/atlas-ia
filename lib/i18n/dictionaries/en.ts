@@ -114,6 +114,7 @@ Behaviour rules:
     error: "Error connecting to the AI",
     badRequest: "You must send at least one message",
     internalError: "Internal error",
+    rateLimited: "You have reached the message limit. Please wait a moment and try again.",
     courseSource: "According to Atlas IA:",
     generalIntro: "This concept doesn't yet appear in Atlas IA.",
     noAnswer: "I don't have enough information to answer that question accurately.",
@@ -185,6 +186,10 @@ Behaviour rules:
     finished: "Reading finished",
     notSupported: "Your browser does not support text-to-speech",
     noContent: "There is no content to read on this page",
+  },
+
+  a11y: {
+    skipToContent: "Skip to content",
   },
 
   pwa: {

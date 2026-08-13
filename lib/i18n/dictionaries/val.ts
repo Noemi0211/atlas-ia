@@ -114,6 +114,7 @@ Regles de comportament:
     error: "Error en connectar amb la IA",
     badRequest: "Has d'enviar almenys un missatge",
     internalError: "Error intern",
+    rateLimited: "Has arribat al límit de missatges. Espera un moment i torna-ho a provar.",
     courseSource: "Segons Atlas IA:",
     generalIntro: "Aquest concepte encara no apareix en Atlas IA.",
     noAnswer: "No dispose de prou informació per a respondre amb precisió a eixa pregunta.",
@@ -185,6 +186,10 @@ Regles de comportament:
     finished: "Lectura finalitzada",
     notSupported: "El teu navegador no és compatible amb la lectura en veu alta",
     noContent: "No hi ha contingut per a llegir en esta pàgina",
+  },
+
+  a11y: {
+    skipToContent: "Saltar al contingut",
   },
 
   pwa: {

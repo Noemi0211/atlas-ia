@@ -3,10 +3,27 @@ import { cookies } from "next/headers";
 import { streamChatResponse } from "@/lib/ai";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { DEFAULT_LOCALE, resolveLocale } from "@/lib/i18n/config";
+import { rateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 
 export async function POST(req: Request) {
+  const limit = rateLimit(req, {
+    windowMs: 60_000,
+    max: 30,
+    keyPrefix: "chat",
+  });
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: getDictionary(DEFAULT_LOCALE).ai.rateLimited },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(limit.retryAfterMs / 1000)) },
+      }
+    );
+  }
+
   try {
     const { messages } = await req.json();
     const cookieStore = await cookies();

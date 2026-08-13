@@ -2,8 +2,25 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { isTeacherEmail, ROLE_STUDENT } from "@/lib/auth";
+import { rateLimit } from "@/lib/rate-limit";
 
 export async function POST(req: Request) {
+  const limit = rateLimit(req, {
+    windowMs: 15 * 60 * 1000,
+    max: 10,
+    keyPrefix: "register",
+  });
+
+  if (!limit.success) {
+    return NextResponse.json(
+      { error: "Demasiados intentos de registro. Inténtalo de nuevo más tarde." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(Math.ceil(limit.retryAfterMs / 1000)) },
+      }
+    );
+  }
+
   try {
     const { name, email, password } = await req.json();
 
