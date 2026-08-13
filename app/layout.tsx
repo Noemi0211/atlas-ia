@@ -58,6 +58,20 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       title: "Atlas IA — Aprende Inteligencia Artificial",
       description: t.home.subtitle1,
+      images: [
+        {
+          url: "/og.png",
+          width: 1200,
+          height: 630,
+          alt: "Atlas IA — Aprende Inteligencia Artificial",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Atlas IA — Aprende Inteligencia Artificial",
+      description: t.home.subtitle1,
+      images: ["/og.png"],
     },
     appleWebApp: {
       capable: true,
