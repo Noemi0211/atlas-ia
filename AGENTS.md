@@ -422,7 +422,7 @@ npm run test:watch # Vitest (watch)
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `0456299` (feat(legal): fechas de última actualización automáticas desde git). Working tree limpio. La Fase 42 (PDF por bloque) está completa.
+- Último commit: `15b9c31` (feat(pdf): generación por bloque con --bloque y ayuda --help). Working tree limpio. La Fase 42 (PDF por bloque) está completa.
 - Verificación Fase 42: `node --check` correcto; `--bloque laboratorio` → PDF 0.2 MB con 5 lecciones y sin referencias; bloque inexistente → lista de slugs y exit 1; regresión completa sin `--bloque` → PDF 3.9 MB con 11 bloques, 76 lecciones, glosario y cronología intactos.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
 - Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, validación de sincronización es/en/val, Sentry + `.env.example`, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
