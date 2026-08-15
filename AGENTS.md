@@ -382,6 +382,11 @@ npm run test:watch # Vitest (watch)
 - `next.config.ts`: cabecera `Cache-Control: public, max-age=31536000, immutable` para `/og.png`
 - Verificación: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas); runtime: `<meta property="og:image" content="https://atlas-ia.dev/og.png">` + width/height/alt y `twitter:card` en el HTML de `/`, y `/og.png` → 200 `image/png` con caché inmutable
 
+### Fase 40 ✅ (README.md real)
+- `README.md` reescrito desde el boilerplate de create-next-app: qué es Atlas IA, características, stack tecnológico, tabla de los 11 bloques, puesta en marcha (requisitos, instalación, `.env`), tabla de variables de entorno (obligatorias y opcionales), comandos (`dev`/`build`/`start`/`lint`/`test`/`tsc`), scripts de generación (PDF, OG image, screenshots, iconos), estructura del proyecto, tests y licencia CC BY-NC-SA 4.0 con autoría
+- Sin cambios de código; solo documentación. Sin verificación de tsc/lint necesaria (archivo Markdown)
+- Verificación: `git status` limpio salvo `README.md` y `AGENTS.md`
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -391,7 +396,7 @@ npm run test:watch # Vitest (watch)
 
 ### Media
 4. ~~**OG image**~~ — `public/og.png` (1200×630) con la marca Atlas IA generado por `scripts/generate-og-image.mjs`; `openGraph.images` + `twitter:card` en `app/layout.tsx` (URLs absolutas vía `metadataBase`) y caché inmutable en `/og.png`.
-5. **README.md** — sigue siendo el boilerplate de create-next-app; describir el proyecto real (qué es Atlas IA, comandos, estructura, licencia CC).
+5. ~~**README.md**~~ — reescrito desde el boilerplate de create-next-app: descripción del proyecto, características, stack, tabla de bloques, puesta en marcha con variables de entorno, comandos, scripts de generación, estructura, tests y licencia CC BY-NC-SA 4.0.
 6. **Prefijos `/en` `/val` + hreflang** — paso lógico para SEO multilingüe real y compartir enlaces por idioma (pendiente señalado en AGENTS.md).
 7. **Bloque 10 Novedades** — el contenido data de julio 2026; revisarlo periódicamente.
 
@@ -402,10 +407,10 @@ npm run test:watch # Vitest (watch)
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `bdcdd47` (fix: quitar el texto "atlas-ia.dev" del banner Open Graph). Working tree limpio. La Fase 39 (OG image) está completa.
-- Verificación Fase 39: `npx tsc --noEmit` correcto, lint 0/0, build OK (113 páginas). Runtime: `og:image` absoluta `https://atlas-ia.dev/og.png` + `twitter:card` en el HTML, `/og.png` → 200 `image/png` con caché inmutable. Suite de tests: `npm test` 83/83.
+- Último commit: `7af2996` (docs: AGENTS.md al día tras la revisión de la OG image). Working tree limpio. La Fase 40 (README.md real) está completa.
+- Verificación Fase 40: solo documentación (`README.md` y `AGENTS.md`); sin cambios de código ni verificación tsc/lint necesaria.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: README.md real, fechas automáticas en páginas legales, PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
+- Siguientes pasos posibles: fechas automáticas en páginas legales, PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 
