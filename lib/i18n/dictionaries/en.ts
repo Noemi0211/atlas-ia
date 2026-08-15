@@ -298,7 +298,8 @@ Behaviour rules:
     title: "Privacy Policy",
     subtitle:
       "We want you to know exactly what data we use and why. This page is written in plain language and complies with the European Union's General Data Protection Regulation (GDPR).",
-    lastUpdated: "Last updated: August 2026",
+    lastUpdated: "Last updated: {fecha}",
+    lastUpdatedValue: "August 12, 2026",
 
     controllerTitle: "Who is the data controller?",
     controllerText:
@@ -423,7 +424,8 @@ Behaviour rules:
     title: "Use of Artificial Intelligence",
     subtitle:
       "We believe in transparency: here we explain clearly how and why we use Artificial Intelligence in this project, and what our ethical principles are.",
-    lastUpdated: "Last updated: August 2026",
+    lastUpdated: "Last updated: {fecha}",
+    lastUpdatedValue: "August 12, 2026",
 
     whatTitle: "Which parts of the project were developed with the help of AI?",
     whatIntro: "Artificial Intelligence has been used as a support tool in the following areas:",
@@ -468,7 +470,8 @@ Behaviour rules:
     title: "Terms of Use",
     subtitle:
       "The general conditions of use of Atlas IA, written in a clear and understandable way: what you can do, what you cannot do and how we relate to the platform.",
-    lastUpdated: "Last updated: August 2026",
+    lastUpdated: "Last updated: {fecha}",
+    lastUpdatedValue: "August 12, 2026",
 
     acceptanceTitle: "Acceptance of the terms",
     acceptanceText:
@@ -539,14 +542,15 @@ Behaviour rules:
 
     dateTitle: "Date of last update",
     dateText:
-      "This document was last updated in August 2026. The current version is always published on this page.",
+      "This document was last updated on {fecha}. The current version is always published on this page.",
   },
 
   roadmap: {
     title: "Project roadmap",
     subtitle:
       "The Atlas IA roadmap: what we have built, where we are and where the platform is heading.",
-    lastUpdated: "Last updated: August 2026",
+    lastUpdated: "Last updated: {fecha}",
+    lastUpdatedValue: "August 12, 2026",
     intro:
       "Atlas IA is built in incremental phases. Each phase adds content, features or quality improvements verified before moving on. This is the complete journey of the project.",
     milestonesTitle: "Completed milestones",
@@ -646,7 +650,8 @@ Behaviour rules:
     title: "About Atlas IA",
     subtitle:
       "The institutional page of the project: what Atlas IA is, what we want to achieve, how we do it and the principles behind this content.",
-    lastUpdated: "Last updated: August 2026",
+    lastUpdated: "Last updated: {fecha}",
+    lastUpdatedValue: "August 12, 2026",
 
     whatTitle: "What is Atlas IA?",
     whatText:

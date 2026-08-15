@@ -307,7 +307,8 @@ Reglas de comportamiento:
     title: "Política de Privacidad",
     subtitle:
       "Queremos que sepas exactamente qué datos utilizamos y por qué. Esta página está escrita en un lenguaje claro y cumple el Reglamento General de Protección de Datos (RGPD) de la Unión Europea.",
-    lastUpdated: "Última actualización: agosto de 2026",
+    lastUpdated: "Última actualización: {fecha}",
+    lastUpdatedValue: "12 de agosto de 2026",
 
     controllerTitle: "¿Quién es el responsable del tratamiento?",
     controllerText:
@@ -432,7 +433,8 @@ Reglas de comportamiento:
     title: "Uso de Inteligencia Artificial",
     subtitle:
       "Creemos en la transparencia: aquí explicamos con claridad cómo y para qué utilizamos la Inteligencia Artificial en este proyecto, y cuáles son nuestros principios éticos.",
-    lastUpdated: "Última actualización: agosto de 2026",
+    lastUpdated: "Última actualización: {fecha}",
+    lastUpdatedValue: "12 de agosto de 2026",
 
     whatTitle: "¿Qué partes del proyecto se han desarrollado con ayuda de IA?",
     whatIntro: "La Inteligencia Artificial se ha utilizado como herramienta de apoyo en las siguientes áreas:",
@@ -477,7 +479,8 @@ Reglas de comportamiento:
     title: "Términos de uso",
     subtitle:
       "Las condiciones generales de uso de Atlas IA, escritas de forma clara y comprensible: qué puedes hacer, qué no puedes hacer y cómo nos relacionamos con la plataforma.",
-    lastUpdated: "Última actualización: agosto de 2026",
+    lastUpdated: "Última actualización: {fecha}",
+    lastUpdatedValue: "12 de agosto de 2026",
 
     acceptanceTitle: "Aceptación de los términos",
     acceptanceText:
@@ -548,14 +551,15 @@ Reglas de comportamiento:
 
     dateTitle: "Fecha de última actualización",
     dateText:
-      "Este documento se actualizó por última vez en agosto de 2026. La versión vigente se publica siempre en esta página.",
+      "Este documento se actualizó por última vez el {fecha}. La versión vigente se publica siempre en esta página.",
   },
 
   roadmap: {
     title: "Roadmap del proyecto",
     subtitle:
       "La hoja de ruta de Atlas IA: qué hemos construido, en qué punto estamos y hacia dónde se dirige la plataforma.",
-    lastUpdated: "Última actualización: agosto de 2026",
+    lastUpdated: "Última actualización: {fecha}",
+    lastUpdatedValue: "12 de agosto de 2026",
     intro:
       "Atlas IA se construye por fases incrementales. Cada fase añade contenido, funcionalidad o mejoras de calidad verificadas antes de continuar. Este es el recorrido completo del proyecto.",
     milestonesTitle: "Hitos completados",
@@ -655,7 +659,8 @@ Reglas de comportamiento:
     title: "Acerca de Atlas IA",
     subtitle:
       "La página institucional del proyecto: qué es Atlas IA, qué pretendemos conseguir, cómo lo hacemos y bajo qué principios se publican estos contenidos.",
-    lastUpdated: "Última actualización: agosto de 2026",
+    lastUpdated: "Última actualización: {fecha}",
+    lastUpdatedValue: "12 de agosto de 2026",
 
     whatTitle: "¿Qué es Atlas IA?",
     whatText:

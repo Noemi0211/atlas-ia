@@ -2,7 +2,10 @@ import { Metadata } from "next";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { localeToIntl } from "@/lib/i18n/config";
 import { SITE_CONFIG } from "@/lib/constants";
+import { gitLastCommitDate } from "@/lib/git";
+import { formatDate } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -41,8 +44,16 @@ export default async function PrivacidadPage() {
   const email = SITE_CONFIG.contactEmail;
   const responsible = SITE_CONFIG.contactName;
 
+  const updatedIso = gitLastCommitDate();
+  const fecha = updatedIso
+    ? formatDate(new Date(updatedIso), localeToIntl(locale))
+    : p.lastUpdatedValue;
+
   const fill = (text: string) =>
-    text.replace("{responsable}", responsible).replace("{email}", email);
+    text
+      .replace("{responsable}", responsible)
+      .replace("{email}", email)
+      .replace("{fecha}", fecha);
 
   return (
     <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
@@ -51,7 +62,7 @@ export default async function PrivacidadPage() {
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-fg mb-3">{p.title}</h1>
         <p className="text-fg-secondary text-lg max-w-3xl">{p.subtitle}</p>
-        <p className="text-xs text-fg-muted mt-2">{p.lastUpdated}</p>
+        <p className="text-xs text-fg-muted mt-2">{fill(p.lastUpdated)}</p>
       </div>
 
       <div className="space-y-10 max-w-3xl">

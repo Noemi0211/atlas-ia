@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import { execSync } from "node:child_process";
 import {
   Accessibility,
   CalendarDays,
@@ -18,6 +17,7 @@ import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { localeToIntl } from "@/lib/i18n/config";
 import { formatDate } from "@/lib/utils";
+import { gitFirstCommitDate, gitLastCommitDate } from "@/lib/git";
 
 const CC_LICENSE_URL = "https://creativecommons.org/licenses/by-nc-sa/4.0/";
 
@@ -30,34 +30,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: t.acercaDe.subtitle,
     alternates: { canonical: "/acerca-de" },
   };
-}
-
-function gitDate(args: string): string | null {
-  try {
-    const iso = execSync(`git log -1 --format=%cI ${args}`, {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    }).trim();
-    const d = new Date(iso);
-    return Number.isNaN(d.getTime()) ? null : iso;
-  } catch {
-    return null;
-  }
-}
-
-function gitFirstCommitDate(): string | null {
-  try {
-    const root = execSync("git rev-list --max-parents=0 HEAD", {
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"],
-    })
-      .trim()
-      .split("\n")[0];
-    if (!root) return null;
-    return gitDate(root);
-  } catch {
-    return null;
-  }
 }
 
 function Section({ icon: Icon, title, children }: { icon: LucideIcon; title: string; children: React.ReactNode }) {
@@ -91,7 +63,7 @@ export default async function AcercaDePage() {
   const intl = localeToIntl(locale);
 
   const createdIso = gitFirstCommitDate();
-  const updatedIso = gitDate("");
+  const updatedIso = gitLastCommitDate();
   const created = createdIso
     ? formatDate(new Date(createdIso), intl)
     : p.statusCreatedValue;
@@ -107,7 +79,7 @@ export default async function AcercaDePage() {
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-fg mb-3">{p.title}</h1>
         <p className="text-fg-secondary text-lg max-w-3xl">{p.subtitle}</p>
-        <p className="text-xs text-fg-muted mt-2">{p.lastUpdated}</p>
+        <p className="text-xs text-fg-muted mt-2">{p.lastUpdated.replace("{fecha}", updated)}</p>
       </div>
 
       <div className="space-y-12 max-w-3xl">

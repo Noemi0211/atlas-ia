@@ -3,6 +3,9 @@ import { CheckCircle2, Flag, ListChecks } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { localeToIntl } from "@/lib/i18n/config";
+import { gitLastCommitDate } from "@/lib/git";
+import { formatDate } from "@/lib/utils";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -59,6 +62,12 @@ export default async function RoadmapPage() {
   const t = getDictionary(locale);
   const p = t.roadmap;
 
+  const updatedIso = gitLastCommitDate();
+  const lastUpdated = p.lastUpdated.replace(
+    "{fecha}",
+    updatedIso ? formatDate(new Date(updatedIso), localeToIntl(locale)) : p.lastUpdatedValue,
+  );
+
   return (
     <div className="max-w-content mx-auto px-6 py-10" data-read-aloud>
       <Breadcrumbs items={[{ label: p.title }]} className="mb-6" />
@@ -66,7 +75,7 @@ export default async function RoadmapPage() {
       <div className="mb-10">
         <h1 className="text-3xl font-bold text-fg mb-3">{p.title}</h1>
         <p className="text-fg-secondary text-lg max-w-3xl">{p.subtitle}</p>
-        <p className="text-xs text-fg-muted mt-2">{p.lastUpdated}</p>
+        <p className="text-xs text-fg-muted mt-2">{lastUpdated}</p>
       </div>
 
       <div className="space-y-10 max-w-3xl">

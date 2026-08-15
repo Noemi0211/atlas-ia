@@ -387,6 +387,13 @@ npm run test:watch # Vitest (watch)
 - Sin cambios de código; solo documentación. Sin verificación de tsc/lint necesaria (archivo Markdown)
 - Verificación: `git status` limpio salvo `README.md` y `AGENTS.md`
 
+### Fase 41 ✅ (fechas automáticas en páginas legales)
+- Nuevo módulo compartido `lib/git.ts`: `gitLastCommitDate()` y `gitFirstCommitDate()` (extraídas de `app/acerca-de/page.tsx`, que ahora las importa de ahí; comportamiento idéntico, fallback a `null` si git no está disponible)
+- Diccionarios es/en/val: `lastUpdated` de las 5 secciones (privacidad, usoIa, terminos, roadmap, acercaDe) pasa de texto fijo "agosto de 2026" a plantilla con `{fecha}`; nueva clave `lastUpdatedValue` (fecha completa de respaldo, ejs. "12 de agosto de 2026" / "August 12, 2026" / "12 d'agost de 2026"); `terminos.dateText` reescrito con gramática correcta en los 3 idiomas ("...por última vez el {fecha}." / "on {fecha}." / "el {fecha}.")
+- Páginas server: `/privacidad`, `/uso-de-ia` y `/terminos` extienden su helper `fill` para interpolar `{fecha}`; `/roadmap` calcula `lastUpdated` interpolado; `/acerca-de` interpola `{fecha}` en el header (el pie de estado ya era dinámico)
+- Patrón común: `const updatedIso = gitLastCommitDate(); const fecha = updatedIso ? formatDate(new Date(updatedIso), localeToIntl(locale)) : p.lastUpdatedValue;`
+- Verificación: tsc correcto, lint 0/0, tests 83/83, build OK (113 páginas). Runtime (producción): los 5 endpoints muestran la fecha del último commit en es/en/val ("Última actualización: 15 de agosto de 2026" / "Last updated: August 15, 2026" / "Última actualització: 15 d'agost del 2026") y el `dateText` de `/terminos` lee "...por última vez el 15 de agosto de 2026." / "on August 15, 2026."
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -401,16 +408,16 @@ npm run test:watch # Vitest (watch)
 7. **Bloque 10 Novedades** — el contenido data de julio 2026; revisarlo periódicamente.
 
 ### Mantenimiento
-8. **Fechas estáticas en legal** — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`.
+8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
 9. **Sincronización es/en/val** — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script.
 10. **PDF por bloque** — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula.
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `7af2996` (docs: AGENTS.md al día tras la revisión de la OG image). Working tree limpio. La Fase 40 (README.md real) está completa.
-- Verificación Fase 40: solo documentación (`README.md` y `AGENTS.md`); sin cambios de código ni verificación tsc/lint necesaria.
+- Último commit: `d7bab7e` (docs: README.md real y AGENTS.md con la Fase 40). Working tree limpio. La Fase 41 (fechas automáticas en legal) está completa.
+- Verificación Fase 41: tsc correcto, lint 0/0, tests 83/83, build OK (113 páginas); runtime con servidor de producción: los 5 endpoints muestran la fecha del último commit en es/en/val.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: fechas automáticas en páginas legales, PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
+- Siguientes pasos posibles: PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, validación de sincronización es/en/val, Sentry + `.env.example`, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 

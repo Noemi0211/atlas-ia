@@ -298,7 +298,8 @@ Regles de comportament:
     title: "Política de Privacitat",
     subtitle:
       "Volem que sàpigues exactament quines dades utilitzem i per què. Esta pàgina està escrita en un llenguatge clar i compleix el Reglament General de Protecció de Dades (RGPD) de la Unió Europea.",
-    lastUpdated: "Última actualització: agost de 2026",
+    lastUpdated: "Última actualització: {fecha}",
+    lastUpdatedValue: "12 d'agost de 2026",
 
     controllerTitle: "Qui és el responsable del tractament?",
     controllerText:
@@ -423,7 +424,8 @@ Regles de comportament:
     title: "Ús d'Intel·ligència Artificial",
     subtitle:
       "Creiem en la transparència: ací expliquem amb claredat com i per a què utilitzem la Intel·ligència Artificial en este projecte, i quins són els nostres principis ètics.",
-    lastUpdated: "Última actualització: agost de 2026",
+    lastUpdated: "Última actualització: {fecha}",
+    lastUpdatedValue: "12 d'agost de 2026",
 
     whatTitle: "Quines parts del projecte s'han desenvolupat amb ajuda d'IA?",
     whatIntro: "La Intel·ligència Artificial s'ha utilitzat com a ferramenta de suport en les següents àrees:",
@@ -468,7 +470,8 @@ Regles de comportament:
     title: "Termes d'ús",
     subtitle:
       "Les condicions generals d'ús d'Atlas IA, escrites de manera clara i comprensible: què pots fer, què no pots fer i com ens relacionem amb la plataforma.",
-    lastUpdated: "Última actualització: agost de 2026",
+    lastUpdated: "Última actualització: {fecha}",
+    lastUpdatedValue: "12 d'agost de 2026",
 
     acceptanceTitle: "Acceptació dels termes",
     acceptanceText:
@@ -539,14 +542,15 @@ Regles de comportament:
 
     dateTitle: "Data de l'última actualització",
     dateText:
-      "Aquest document es va actualitzar per última vegada a l'agost de 2026. La versió vigent es publica sempre en aquesta pàgina.",
+      "Aquest document es va actualitzar per última vegada el {fecha}. La versió vigent es publica sempre en aquesta pàgina.",
   },
 
   roadmap: {
     title: "Full del projecte",
     subtitle:
       "La fulla de ruta d'Atlas IA: què hem construït, en quin punt estem i cap a on es dirigeix la plataforma.",
-    lastUpdated: "Última actualització: agost de 2026",
+    lastUpdated: "Última actualització: {fecha}",
+    lastUpdatedValue: "12 d'agost de 2026",
     intro:
       "Atlas IA es construïx per fases incrementals. Cada fase afig contingut, funcionalitat o millores de qualitat verificades abans de continuar. Este és el recorregut complet del projecte.",
     milestonesTitle: "Fites completades",
@@ -646,7 +650,8 @@ Regles de comportament:
     title: "Quant a Atlas IA",
     subtitle:
       "La pàgina institucional del projecte: què és Atlas IA, què volem aconseguir, com ho fem i sota quins principis es publiquen aquests continguts.",
-    lastUpdated: "Última actualització: agost de 2026",
+    lastUpdated: "Última actualització: {fecha}",
+    lastUpdatedValue: "12 d'agost de 2026",
 
     whatTitle: "Què és Atlas IA?",
     whatText:
