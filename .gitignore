@@ -39,6 +39,7 @@ prisma/dev.db-journal
 
 # artefactos generados
 /Atlas-IA-contenido-completo.pdf
+/Atlas-IA-bloque-*.pdf
 
 # vercel
 .vercel

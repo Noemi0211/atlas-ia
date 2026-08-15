@@ -8,9 +8,34 @@ import ts from "typescript";
 
 const require = createRequire(import.meta.url);
 
+const args = process.argv.slice(2);
+
+if (args.includes("--help") || args.includes("-h")) {
+  console.log(`Uso: node scripts/generate-pdf.mjs [--bloque <slug|numero>]
+
+Genera un PDF con el contenido del curso Atlas IA.
+
+Opciones:
+  --bloque <slug|numero>   Genera solo un bloque (p. ej. fundamentos, 1 o agentes)
+  --help, -h               Muestra esta ayuda
+
+Variables de entorno:
+  ATLAS_CHROME    Ruta del Chrome (por defecto: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe)
+  ATLAS_PDF_OUT   Ruta de salida del PDF
+  ATLAS_CDP_PORT  Puerto de depuración de Chrome (por defecto: 9336)
+
+Slugs de bloque: antes-de-empezar, fundamentos, ecosistema, prompting, ia-docencia,
+ia-multimodal, programacion, agentes, etica, laboratorio, novedades`);
+  process.exit(0);
+}
+
+const BLOQUE_ARG = (() => {
+  const i = args.indexOf("--bloque");
+  return i !== -1 ? (args[i + 1] ?? "").trim() || null : null;
+})();
+
 const CHROME = process.env.ATLAS_CHROME || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 const PORT = process.env.ATLAS_CDP_PORT || 9336;
-const OUT = process.env.ATLAS_PDF_OUT || join(process.cwd(), "Atlas-IA-contenido-completo.pdf");
 const USER_DATA = join(tmpdir(), "atlas-chrome-pdf");
 const CONTENT_DIR = join(process.cwd(), "content");
 
@@ -331,7 +356,12 @@ function mdxToHtml(mdx) {
 /* Construcción del documento HTML                                     */
 /* ------------------------------------------------------------------ */
 
-function buildHtml(bloques, glosario, categorias, cronologia) {
+function buildHtml(bloques, glosario, categorias, cronologia, opts = {}) {
+  const {
+    titulo = TITLE,
+    footer = "Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0",
+    incluirReferencias = true,
+  } = opts;
   const totalLecciones = bloques.reduce((acc, b) => acc + b.lecciones.length, 0);
   const fecha = new Date().toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
 
@@ -343,8 +373,10 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
     }
     toc += "</ul></div>";
   }
-  toc += `<div class="toc-block"><a href="#glosario"><strong>Glosario</strong></a></div>`;
-  toc += `<div class="toc-block"><a href="#cronologia"><strong>Cronología de la IA</strong></a></div>`;
+  if (incluirReferencias) {
+    toc += `<div class="toc-block"><a href="#glosario"><strong>Glosario</strong></a></div>`;
+    toc += `<div class="toc-block"><a href="#cronologia"><strong>Cronología de la IA</strong></a></div>`;
+  }
 
   let body = "";
   for (const b of bloques) {
@@ -385,11 +417,15 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
     cronologiaHtml += `<div class="hito"><span class="hito-year">${h.año}${h.mes ? `-${h.mes}` : ""}</span><div class="hito-body"><p class="hito-title">${escapeHtml(h.titulo)}</p><p>${escapeHtml(h.descripcion)}</p></div></div>`;
   }
 
+  const chips = incluirReferencias
+    ? [`${bloques.length} bloques`, `${totalLecciones} lecciones`, `${glosario.length} términos`, `${cronologia.length} hitos históricos`]
+    : [`Bloque ${bloques[0].numero}`, `${totalLecciones} lecciones`];
+
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<title>${SITE_NAME} — ${TITLE}</title>
+<title>${SITE_NAME} — ${titulo}</title>
 <meta name="author" content="${escapeHtml(AUTHOR)}" />
 <meta name="generator" content="${SITE_NAME} · ${SITE_URL}" />
 <style>
@@ -512,7 +548,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
   <div class="cover">
     <div class="logo">${SITE_NAME}</div>
     <div class="tagline">${SITE_TAGLINE}</div>
-    <div class="title">${TITLE}</div>
+    <div class="title">${titulo}</div>
     <div class="meta">
       <div class="meta-line"><span class="meta-label">Autoría:</span> ${escapeHtml(AUTHOR)}</div>
       <div class="meta-line"><span class="meta-label">Generado el:</span> ${fecha}</div>
@@ -522,10 +558,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
       <a href="${CC_LICENSE_URL}">${CC_LICENSE_TEXT}</a>
     </div>
     <div class="chips">
-      <span class="chip">${bloques.length} bloques</span>
-      <span class="chip">${totalLecciones} lecciones</span>
-      <span class="chip">${glosario.length} términos</span>
-      <span class="chip">${cronologia.length} hitos históricos</span>
+      ${chips.map((c) => `<span class="chip">${c}</span>`).join("\n      ")}
     </div>
   </div>
 
@@ -533,7 +566,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
     <h1>Sobre esta obra</h1>
     <dl>
       <dt>Título</dt>
-      <dd>${escapeHtml(TITLE)}</dd>
+      <dd>${escapeHtml(titulo)}</dd>
       <dt>Proyecto</dt>
       <dd>${SITE_NAME} — ${escapeHtml(SITE_TAGLINE)}</dd>
       <dt>Autoría</dt>
@@ -541,7 +574,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
       <dt>Fecha de generación</dt>
       <dd>${fecha}</dd>
       <dt>Contenido</dt>
-      <dd>${bloques.length} bloques, ${totalLecciones} lecciones, ${glosario.length} términos de glosario y ${cronologia.length} hitos históricos.</dd>
+      <dd>${incluirReferencias ? `${bloques.length} bloques, ${totalLecciones} lecciones, ${glosario.length} términos de glosario y ${cronologia.length} hitos históricos.` : `Bloque ${bloques[0].numero} · ${escapeHtml(bloques[0].titulo)}: ${totalLecciones} lecciones.`}</dd>
     </dl>
     <div class="license-box">
       <h2>Licencia</h2>
@@ -562,6 +595,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
 
   ${body}
 
+  ${incluirReferencias ? `
   <section class="page-break" id="glosario">
     <div class="block-head"><span class="block-num">Referencia</span><h1>Glosario de IA</h1><p class="block-desc">${glosario.length} términos esenciales para entender la Inteligencia Artificial.</p></div>
     ${glosarioHtml}
@@ -570,7 +604,7 @@ function buildHtml(bloques, glosario, categorias, cronologia) {
   <section class="page-break" id="cronologia">
     <div class="block-head"><span class="block-num">Referencia</span><h1>Cronología de la IA</h1><p class="block-desc">Los ${cronologia.length} hitos históricos que han marcado la evolución de la Inteligencia Artificial.</p></div>
     ${cronologiaHtml}
-  </section>
+  </section>` : ""}
 </body>
 </html>`;
 }
@@ -622,14 +656,49 @@ async function connect() {
 
 async function main() {
   const bloques = getBloques();
+  const esParcial = BLOQUE_ARG !== null;
+  let seleccion = null;
+  if (esParcial) {
+    const sel = BLOQUE_ARG.toLowerCase();
+    seleccion = bloques.find((b) => String(b.slug).toLowerCase() === sel || String(b.numero) === sel);
+    if (!seleccion) {
+      console.error(`Bloque no encontrado: "${BLOQUE_ARG}".`);
+      console.error("Bloques disponibles:");
+      for (const b of bloques) console.error(`  ${b.numero}. ${b.slug} — ${b.titulo}`);
+      process.exit(1);
+    }
+  }
+  const bloquesPdf = esParcial ? [seleccion] : bloques;
+  const titulo = esParcial
+    ? `Bloque ${seleccion.numero} · ${seleccion.titulo}`
+    : TITLE;
+  const footer = esParcial
+    ? `Atlas IA · Bloque ${seleccion.numero} · CC BY-NC-SA 4.0`
+    : "Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0";
+
   const glosarioMod = loadTsData(join(process.cwd(), "lib", "glosario-data.ts"));
   const cronoMod = loadTsData(join(process.cwd(), "lib", "cronologia-data.ts"));
-  const html = buildHtml(bloques, glosarioMod.GLOSARIO, glosarioMod.CATEGORIAS_GLOSARIO, cronoMod.CRONOLOGIA);
+  const html = buildHtml(bloquesPdf, glosarioMod.GLOSARIO, glosarioMod.CATEGORIAS_GLOSARIO, cronoMod.CRONOLOGIA, {
+    titulo,
+    footer,
+    incluirReferencias: !esParcial,
+  });
 
-  const htmlPath = join(tmpdir(), "atlas-contenido.html");
+  const htmlPath = join(tmpdir(), esParcial ? `atlas-bloque-${seleccion.slug}.html` : "atlas-contenido.html");
   writeFileSync(htmlPath, html);
   console.log(`HTML generado: ${htmlPath} (${(html.length / 1024).toFixed(0)} KB)`);
-  console.log(`Contenido: ${bloques.length} bloques, ${bloques.reduce((a, b) => a + b.lecciones.length, 0)} lecciones, ${glosarioMod.GLOSARIO.length} términos, ${cronoMod.CRONOLOGIA.length} hitos`);
+  const totalLecciones = bloquesPdf.reduce((a, b) => a + b.lecciones.length, 0);
+  console.log(
+    esParcial
+      ? `Contenido: bloque ${seleccion.numero} · ${seleccion.titulo} (${totalLecciones} lecciones)`
+      : `Contenido: ${bloques.length} bloques, ${totalLecciones} lecciones, ${glosarioMod.GLOSARIO.length} términos, ${cronoMod.CRONOLOGIA.length} hitos`,
+  );
+
+  const OUT =
+    process.env.ATLAS_PDF_OUT ||
+    (esParcial
+      ? join(process.cwd(), `Atlas-IA-bloque-${seleccion.slug}.pdf`)
+      : join(process.cwd(), "Atlas-IA-contenido-completo.pdf"));
 
   const chrome = spawn(CHROME, [
     "--headless=new",
@@ -657,7 +726,7 @@ async function main() {
         margin: { top: 0.55, bottom: 0.6, left: 0.45, right: 0.45 },
         headerTemplate: "<span></span>",
         footerTemplate:
-          '<div style="font-size:8px; font-family:Segoe UI, Arial, sans-serif; color:#94a3b8; width:100%; text-align:center; padding:0 12mm;">Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0 · Página <span class="pageNumber"></span> de <span class="totalPages"></span></div>',
+          `<div style="font-size:8px; font-family:Segoe UI, Arial, sans-serif; color:#94a3b8; width:100%; text-align:center; padding:0 12mm;">${footer} · Página <span class="pageNumber"></span> de <span class="totalPages"></span></div>`,
       });
 
       mkdirSync(dirname(OUT), { recursive: true });

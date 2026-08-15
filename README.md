@@ -103,6 +103,11 @@ npx tsc --noEmit     # TypeScript check
 # PDF con el contenido completo del curso (requiere el servidor en marcha)
 node scripts/generate-pdf.mjs
 
+# PDF de un solo bloque, p. ej. Fundamentos de IA (por slug o número)
+node scripts/generate-pdf.mjs --bloque fundamentos
+node scripts/generate-pdf.mjs --bloque 1
+node scripts/generate-pdf.mjs --help   # lista los bloques disponibles
+
 # Imagen Open Graph public/og.png (no requiere servidor)
 node scripts/generate-og-image.mjs
 

@@ -394,6 +394,14 @@ npm run test:watch # Vitest (watch)
 - Patrón común: `const updatedIso = gitLastCommitDate(); const fecha = updatedIso ? formatDate(new Date(updatedIso), localeToIntl(locale)) : p.lastUpdatedValue;`
 - Verificación: tsc correcto, lint 0/0, tests 83/83, build OK (113 páginas). Runtime (producción): los 5 endpoints muestran la fecha del último commit en es/en/val ("Última actualización: 15 de agosto de 2026" / "Last updated: August 15, 2026" / "Última actualització: 15 d'agost del 2026") y el `dateText` de `/terminos` lee "...por última vez el 15 de agosto de 2026." / "on August 15, 2026."
 
+### Fase 42 ✅ (PDF por bloque)
+- `scripts/generate-pdf.mjs` acepta `--bloque <slug|numero>` (p. ej. `--bloque fundamentos` o `--bloque 1`) y `--help`/`-h` con la lista de los 11 slugs; si el bloque no existe, imprime los disponibles y sale con error
+- Con `--bloque`: solo ese bloque (portada con título "Bloque N · Título", chips "Bloque N" y "N lecciones", índice solo con sus lecciones, **sin** las secciones de glosario y cronología, contenido de créditos adaptado, footer "Atlas IA · Bloque N · CC BY-NC-SA 4.0", salida `Atlas-IA-bloque-<slug>.pdf` salvo `ATLAS_PDF_OUT`; HTML temporal distinto `atlas-bloque-<slug>.html`)
+- `buildHtml` ahora acepta `opts = { titulo, footer, incluirReferencias }`; `TITLE` queda como constante por defecto
+- `.gitignore`: añadido `/Atlas-IA-bloque-*.pdf`
+- README: variante `--bloque` documentada en "Scripts de generación"
+- Verificación: `node --check` correcto; `--bloque laboratorio` → PDF 0.2 MB con 5 lecciones, sin glosario/cronología, título y chips correctos; bloque inexistente → lista de slugs y exit 1; regresión sin `--bloque` → PDF 3.9 MB con 11 bloques, 76 lecciones, glosario y cronología intactos
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -410,14 +418,14 @@ npm run test:watch # Vitest (watch)
 ### Mantenimiento
 8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
 9. **Sincronización es/en/val** — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script.
-10. **PDF por bloque** — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula.
+10. ~~**PDF por bloque**~~ — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula. Completado en la Fase 42 (portada/footer/chips/índice adaptados, sin glosario ni cronología, salida `Atlas-IA-bloque-<slug>.pdf`).
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `d7bab7e` (docs: README.md real y AGENTS.md con la Fase 40). Working tree limpio. La Fase 41 (fechas automáticas en legal) está completa.
-- Verificación Fase 41: tsc correcto, lint 0/0, tests 83/83, build OK (113 páginas); runtime con servidor de producción: los 5 endpoints muestran la fecha del último commit en es/en/val.
-- El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: PDF por bloque, migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, validación de sincronización es/en/val, Sentry + `.env.example`, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
+- Último commit: `0456299` (feat(legal): fechas de última actualización automáticas desde git). Working tree limpio. La Fase 42 (PDF por bloque) está completa.
+- Verificación Fase 42: `node --check` correcto; `--bloque laboratorio` → PDF 0.2 MB con 5 lecciones y sin referencias; bloque inexistente → lista de slugs y exit 1; regresión completa sin `--bloque` → PDF 3.9 MB con 11 bloques, 76 lecciones, glosario y cronología intactos.
+- El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
+- Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, validación de sincronización es/en/val, Sentry + `.env.example`, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 
