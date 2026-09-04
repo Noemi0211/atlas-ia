@@ -359,7 +359,6 @@ function mdxToHtml(mdx) {
 function buildHtml(bloques, glosario, categorias, cronologia, opts = {}) {
   const {
     titulo = TITLE,
-    footer = "Atlas IA · Contenido completo del curso · CC BY-NC-SA 4.0",
     incluirReferencias = true,
   } = opts;
   const totalLecciones = bloques.reduce((acc, b) => acc + b.lecciones.length, 0);
@@ -680,7 +679,6 @@ async function main() {
   const cronoMod = loadTsData(join(process.cwd(), "lib", "cronologia-data.ts"));
   const html = buildHtml(bloquesPdf, glosarioMod.GLOSARIO, glosarioMod.CATEGORIAS_GLOSARIO, cronoMod.CRONOLOGIA, {
     titulo,
-    footer,
     incluirReferencias: !esParcial,
   });
 

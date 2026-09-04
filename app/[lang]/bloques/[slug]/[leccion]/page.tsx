@@ -1,0 +1,206 @@
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getLeccionesBloque, getLeccion } from "@/lib/content";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
+import { MDXRenderer } from "@/components/content/MDXRenderer";
+import { LessonNav } from "@/components/content/LessonNav";
+import { LessonSidebar } from "@/components/content/LessonSidebar";
+import { TableOfContents } from "@/components/content/TableOfContents";
+import { BlockCompleteCTA } from "@/components/content/BlockCompleteCTA";
+import { LessonCompleteButton } from "@/components/gamification/LessonCompleteButton";
+import { FavoriteButton } from "@/components/gamification/FavoriteButton";
+import { getLocaleFromParams } from "@/lib/i18n/server";
+import { getDictionary } from "@/lib/i18n/dictionaries";
+import { getBLOQUES, getBloqueMeta } from "@/lib/i18n/data";
+import { buildLanguagesAlternates, prefixPath } from "@/lib/i18n/config";
+
+interface Props {
+  params: Promise<{ lang: string; slug: string; leccion: string }>;
+}
+
+export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const { BLOQUES } = await import("@/lib/constants");
+  const params: { slug: string; leccion: string }[] = [];
+
+  for (const bloque of BLOQUES) {
+    const lecciones = getLeccionesBloque(bloque.slug);
+    for (const leccion of lecciones) {
+      params.push({ slug: bloque.slug, leccion: leccion.slug });
+    }
+  }
+
+  return params;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang, slug, leccion } = await params;
+  const locale = getLocaleFromParams(lang);
+  const t = getDictionary(locale);
+  const data = getLeccion(slug, leccion, locale);
+  if (!data) return { title: t.leccion.notFound };
+
+  return {
+    title: data.meta.titulo,
+    description: data.meta.descripcion,
+    alternates: {
+      canonical: prefixPath(`/bloques/${slug}/${leccion}`, locale),
+      languages: buildLanguagesAlternates(`/bloques/${slug}/${leccion}`),
+    },
+  };
+}
+
+function slugifyHeading(text: string) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-");
+}
+
+function extractHeadings(mdxContent: string) {
+  const headings: { id: string; text: string; level: number }[] = [];
+  const usedIds = new Set<string>();
+  const lines = mdxContent.split("\n");
+  let inFence = false;
+
+  for (const line of lines) {
+    if (/^\s*```/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    const match = /^(#{2,3})\s+(.+)$/.exec(line);
+    if (!match || inFence) continue;
+
+    const level = match[1].length;
+    const text = match[2].trim();
+    let id = slugifyHeading(text);
+    if (usedIds.has(id)) {
+      let counter = 2;
+      while (usedIds.has(`${id}-${counter}`)) counter++;
+      id = `${id}-${counter}`;
+    }
+    usedIds.add(id);
+    headings.push({ id, text, level });
+  }
+
+  return headings;
+}
+
+export default async function LeccionPage({ params }: Props) {
+  const { lang, slug, leccion } = await params;
+  const locale = getLocaleFromParams(lang);
+  const t = getDictionary(locale);
+  const data = getLeccion(slug, leccion, locale);
+  if (!data) notFound();
+
+  const bloque = getBloqueMeta(t, slug);
+  if (!bloque) notFound();
+
+  const lecciones = getLeccionesBloque(slug, locale);
+  const currentIndex = lecciones.findIndex((l) => l.slug === leccion);
+  const anterior = currentIndex > 0 ? lecciones[currentIndex - 1] : null;
+  const siguiente =
+    currentIndex < lecciones.length - 1
+      ? lecciones[currentIndex + 1]
+      : null;
+
+  const bloques = getBLOQUES(t);
+  const bloqueIdx = bloques.findIndex((b) => b.slug === slug);
+  const siguienteBloque =
+    bloqueIdx >= 0 && bloqueIdx < bloques.length - 1
+      ? bloques[bloqueIdx + 1]
+      : null;
+  const siguientePrimeraLeccion = siguienteBloque
+    ? getLeccionesBloque(siguienteBloque.slug, locale)[0] ?? null
+    : null;
+  const esUltimaLeccion = currentIndex === lecciones.length - 1;
+
+  const headings = extractHeadings(data.content);
+  const lessonId = `${slug}/${leccion}`;
+
+  return (
+    <div className="max-w-wide mx-auto px-6 py-10">
+      <Breadcrumbs
+        items={[
+          { label: t.bloques.title, href: prefixPath("/bloques", locale) },
+          { label: bloque.titulo, href: prefixPath(`/bloques/${slug}`, locale) },
+          { label: data.meta.titulo },
+        ]}
+        className="mb-8"
+      />
+
+      <div className="flex gap-12">
+        <LessonSidebar
+          bloqueSlug={slug}
+          bloqueTitle={bloque.titulo}
+          lecciones={lecciones}
+        />
+
+        <div className="flex-1 min-w-0 max-w-content" data-read-aloud>
+          <header className="mb-8 pb-6 border-b border-border">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2 text-xs text-fg-muted">
+                <span>{t.bloques.label} {bloque.numero}</span>
+                <span>·</span>
+                <span>{t.bloques.leccion} {currentIndex + 1} {t.bloques.de} {lecciones.length}</span>
+                {data.meta.duracion && (
+                  <>
+                    <span>·</span>
+                    <span>{data.meta.duracion}</span>
+                  </>
+                )}
+              </div>
+              <FavoriteButton lessonId={lessonId} />
+            </div>
+            <h1 className="text-3xl lg:text-4xl font-bold text-fg leading-tight">
+              {data.meta.titulo}
+            </h1>
+            <p className="text-fg-secondary text-lg mt-3">
+              {data.meta.descripcion}
+            </p>
+          </header>
+
+          <div className="flex gap-8">
+            <div className="flex-1 min-w-0">
+              <MDXRenderer
+                source={data.content}
+                headingIds={headings.map((h) => h.id)}
+              />
+
+              <div className="mt-8 flex items-center justify-between">
+                <LessonCompleteButton lessonId={lessonId} />
+              </div>
+
+              <LessonNav
+                bloqueSlug={slug}
+                anterior={anterior}
+                siguiente={siguiente}
+              />
+
+              {esUltimaLeccion && (
+                <BlockCompleteCTA
+                  esUltimaLeccion={esUltimaLeccion}
+                  lastLessonId={lessonId}
+                  siguienteBloque={
+                    siguienteBloque && siguientePrimeraLeccion
+                      ? {
+                          slug: siguienteBloque.slug,
+                          numero: siguienteBloque.numero,
+                          primeraLeccionSlug: siguientePrimeraLeccion.slug,
+                        }
+                      : null
+                  }
+                />
+              )}
+            </div>
+
+            <TableOfContents headings={headings} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

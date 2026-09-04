@@ -24,7 +24,7 @@ interface HeaderProps {
 export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = false, onSidebarToggle }: HeaderProps) {
   const { resolved, toggleTheme } = useTheme();
   const { data: session } = useSession();
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const [searchOpen, setSearchOpen] = useState(false);
   const mounted = useSyncExternalStore(
     () => () => {},
@@ -127,7 +127,7 @@ export function Header({ onMenuToggle, isMobileMenuOpen, sidebarCollapsed = fals
 
             {session ? <UserMenu /> : (
               <Link
-                href="/auth/login"
+                href={localize("/auth/login")}
                 className="flex items-center gap-1.5 h-9 px-3 rounded-lg bg-primary text-white dark:text-slate-900 text-sm font-medium hover:bg-primary-hover transition-colors shadow-sm"
               >
                 <LogIn className="w-4 h-4" />

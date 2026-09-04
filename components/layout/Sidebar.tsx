@@ -60,18 +60,18 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
   const [expandedBloque, setExpandedBloque] = useState<string | null>(null);
   const { getLessonProgress, completedLessons } = useProgress();
   const { data: session } = useSession();
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const bloques = useMemo(() => getBLOQUES(t), [t]);
 
   const navItems = [
-    { href: "/", label: t.nav.inicio, icon: "Home" },
-    { href: "/bloques", label: t.nav.todosLosBloques, icon: "BookOpen" },
-    { href: "/cronologia", label: t.nav.cronologia, icon: "Calendar" },
-    { href: "/glosario", label: t.nav.glosario, icon: "BookMarked" },
-    { href: "/laboratorio", label: t.nav.laboratorio, icon: "FlaskConical" },
-    { href: "/perfil", label: t.nav.perfil, icon: "User" },
+    { href: localize("/"), label: t.nav.inicio, icon: "Home" },
+    { href: localize("/bloques"), label: t.nav.todosLosBloques, icon: "BookOpen" },
+    { href: localize("/cronologia"), label: t.nav.cronologia, icon: "Calendar" },
+    { href: localize("/glosario"), label: t.nav.glosario, icon: "BookMarked" },
+    { href: localize("/laboratorio"), label: t.nav.laboratorio, icon: "FlaskConical" },
+    { href: localize("/perfil"), label: t.nav.perfil, icon: "User" },
     ...(session?.user?.role === "teacher"
-      ? [{ href: "/docencia", label: t.nav.docencia, icon: "GraduationCap" }]
+      ? [{ href: localize("/docencia"), label: t.nav.docencia, icon: "GraduationCap" }]
       : []),
   ];
 
@@ -184,7 +184,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
                           className="mb-2"
                         />
                         <Link
-                          href={`/bloques/${bloque.slug}`}
+                          href={localize(`/bloques/${bloque.slug}`)}
                           onClick={onClose}
                           className="block text-xs text-primary hover:text-primary-hover py-1 transition-colors"
                         >

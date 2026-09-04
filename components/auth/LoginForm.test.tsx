@@ -16,6 +16,7 @@ vi.mock("next-auth/react", () => ({
 }));
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: mockPush, refresh: mockRefresh }),
+  usePathname: () => "/es",
 }));
 vi.mock("next/link", () => ({
   default: ({ href, children }: { href: string; children: ReactNode }) => (
@@ -61,7 +62,7 @@ describe("LoginForm", () => {
       password: "123456",
       redirect: false,
     });
-    expect(mockPush).toHaveBeenCalledWith("/");
+    expect(mockPush).toHaveBeenCalledWith("/es");
   });
 
   it("muestra error de credenciales si el inicio de sesión falla", async () => {

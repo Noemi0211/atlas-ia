@@ -14,7 +14,7 @@ interface LessonSidebarProps {
 }
 
 export function LessonSidebar({ bloqueSlug, bloqueTitle, lecciones }: LessonSidebarProps) {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const pathname = usePathname();
 
   return (
@@ -23,7 +23,7 @@ export function LessonSidebar({ bloqueSlug, bloqueTitle, lecciones }: LessonSide
       aria-label={t.leccion.leccionesBloque}
     >
       <Link
-        href={`/bloques/${bloqueSlug}`}
+        href={localize(`/bloques/${bloqueSlug}`)}
         className="text-sm font-semibold text-fg hover:text-primary transition-colors mb-4 block"
       >
         &larr; {bloqueTitle}
@@ -31,7 +31,7 @@ export function LessonSidebar({ bloqueSlug, bloqueTitle, lecciones }: LessonSide
 
       <ul className="space-y-0.5 mt-3">
         {lecciones.map((leccion, index) => {
-          const href = `/bloques/${bloqueSlug}/${leccion.slug}`;
+          const href = localize(`/bloques/${bloqueSlug}/${leccion.slug}`);
           const isActive = pathname === href;
 
           return (

@@ -13,13 +13,13 @@ interface LessonNavProps {
 }
 
 export function LessonNav({ bloqueSlug, anterior, siguiente }: LessonNavProps) {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
 
   return (
     <nav className="flex items-center justify-between gap-4 mt-12 pt-8 border-t border-border">
       {anterior ? (
         <Link
-          href={`/bloques/${bloqueSlug}/${anterior.slug}`}
+          href={localize(`/bloques/${bloqueSlug}/${anterior.slug}`)}
           className={cn(
             "flex items-center gap-3 p-4 rounded-xl border border-border",
             "hover:border-primary hover:bg-primary-light transition-all group flex-1"
@@ -39,7 +39,7 @@ export function LessonNav({ bloqueSlug, anterior, siguiente }: LessonNavProps) {
 
       {siguiente ? (
         <Link
-          href={`/bloques/${bloqueSlug}/${siguiente.slug}`}
+          href={localize(`/bloques/${bloqueSlug}/${siguiente.slug}`)}
           className={cn(
             "flex items-center gap-3 p-4 rounded-xl border border-border",
             "hover:border-primary hover:bg-primary-light transition-all group flex-1 text-right"

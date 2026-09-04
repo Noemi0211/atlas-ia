@@ -142,7 +142,7 @@ npm run test:watch # Vitest (watch)
 
 ### Fase 16 ✅ (i18n: español, inglés y valenciano)
 - Infraestructura i18n nueva en `lib/i18n/`: `config.ts` (locales `es`/`en`/`val`, cookie `atlas-locale`, `localeToIntl`), `server.ts` (`getLocale` lee la cookie), `runtime.ts`, `provider.tsx` (`I18nProvider` + hook `useI18n` → `{ locale, t, setLocale }`), `dictionaries/` (`es.ts` fuente de verdad con `type Dictionary`, `en.ts` y `val.ts` con `satisfies Dictionary`), `data.ts` (builders localizados: `getBLOQUES`, `getBloqueMeta`, `getNavItems`, `getGlosario`, `getCategoriasGlosario`, `getCronologia`, `getHerramientas`, `getHerramientaPorId`, `getCategoriasHerramientas`, `getCriteriosComparacion`, `getNodoDecision`, roles/formatos/tonos/audiencias/extensiones, `generarPromptLocalizado`, `getBadgeText`, `getRetoText`, `getProyectoText`)
-- Selector de idioma `components/layout/LanguageSelector.tsx` en el header (es/en/val); `setLocale` escribe localStorage + cookie `atlas-locale` y recarga la página (sin prefijo de URL)
+- Selector de idioma `components/layout/LanguageSelector.tsx` en el header (es/en/val); `setLocale` escribe localStorage + cookie `atlas-locale` y recarga la página (sin prefijo de URL). *(Nota: desde la Fase 43 el idioma se refleja en el prefijo de URL `/es` `/en` `/val`; `setLocale` navega cambiando ese prefijo. Ver la sección i18n de "Notas técnicas".)*
 - Patrón servidor: `getLocale()` + `getDictionary(locale)` en server components y `generateMetadata`; `app/layout.tsx` async con `html lang` dinámico y `<I18nProvider locale>`; patrón cliente: `useI18n()`
 - `getBadgeText`, `getRetoText`, `getProyectoText` devuelven objetos `{ nombre, descripcion }`
 - UI completa localizada: Header, Sidebar, Footer, Breadcrumbs, home, bloques (lista/bloque/lección), glosario (client), cronología, laboratorio, perfil, auth, not-found y todos los componentes client (auth, content, gamification, interactive incl. `TokenSimulator` y `ComparadorHerramientas`)
@@ -402,6 +402,24 @@ npm run test:watch # Vitest (watch)
 - README: variante `--bloque` documentada en "Scripts de generación"
 - Verificación: `node --check` correcto; `--bloque laboratorio` → PDF 0.2 MB con 5 lecciones, sin glosario/cronología, título y chips correctos; bloque inexistente → lista de slugs y exit 1; regresión sin `--bloque` → PDF 3.9 MB con 11 bloques, 76 lecciones, glosario y cronología intactos
 
+### Fase 43 ✅ (prefijos de idioma `/es` `/en` `/val` + hreflang real)
+- **Restructura de rutas**: todas las páginas movidas (`git mv`, historial preservado) de `app/` a `app/[lang]/`. NO existe `app/layout.tsx` ni `app/page.tsx` en la raíz (raíz solo: `favicon.ico`, `globals.css`, `icon.png`, `manifest.ts`, `robots.ts`, `sitemap.ts`, `api/`, `[lang]/`).
+- **Nuevo root layout `app/[lang]/layout.tsx`**: `generateStaticParams` (3 locales), `generateMetadata` con canonical `prefixPath("/", locale)` + `alternates.languages` (buildLanguagesAlternates) + openGraph/twitter, `<html lang>`, font vars, providers (I18nProvider, AuthProvider, Shell)
+- **Helpers en `lib/i18n/config.ts`**: `LOCALE_PATHNAMES` (es/en/val sin puntos → "es"/"en"/"val"), `localePathname`, `getLocaleFromPathname`, `stripLocalePrefix`, `prefixPath(pathname, locale)`, `buildLanguagesAlternates(pathname)` (es/en/val + `x-default` → es)
+- **`lib/i18n/server.ts`**: nuevo `getLocaleFromParams(lang)` (usa `resolveLocale`, síncrono y sin cookies); `getLocale()` de cookie se mantiene solo para manifest y fallbacks
+- **`lib/i18n/provider.tsx`**: `setLocale` navega vía `usePathname` (lee locale actual → `stripLocalePrefix` → construye nueva ruta con `localePathname` y `window.location.assign`); añadido `localize(path)` (prefija con locale actual del contexto) a `useI18n()`
+- **Todas las páginas server** bajo `[lang]` reciben `{ params: Promise<{ lang }> }`, leen `getLocaleFromParams(lang)` y producen canonical/hreflang con `prefixPath`/`buildLanguagesAlternates`; enlaces internos prefijados
+- **Componentes client localizados con `localize()`**: `Sidebar` (navItems + `localize("/bloques/${slug}")`), `Footer`, `Header` (login), `Breadcrumbs` (home + item hrefs), `UserMenu` (perfil/docencia/signOut), `LoginForm`, `RegisterForm`, `GlossaryPopover` (deep-link `/glosario`), `BlockCompleteCTA`, `LessonSidebar` (incl. `isActive` con href localizado), `LessonNav`
+- **`proxy.ts`**: `negotiateLocale` (cookie `atlas-locale` → Accept-Language → es); redirige 307 rutas sin prefijo (`/`, `/bloques`, etc.) a `/{locale}{path}`; pasa por alto `/api/*`; `PROTECTED_PATHS` `/perfil` y `/docencia` con prefijo y `callbackUrl` localizado; header `Content-Language` en todas las respuestas; matcher `/((?!_next|.*\\..*).*)`
+- **SSG restaurado con `export const dynamic = "force-static"`** en las páginas server estáticas (home, bloques, cronologia, privacidad, uso-de-ia, roadmap, terminos, acerca-de) y en los `layout.tsx` server de `/glosario` y `/laboratorio` (sus páginas son client). NOTA: en Next 16 + Turbopack `generateStaticParams` SOLO no genera estático; hace falta `force-static`. Las únicas páginas dinámicas (`ƒ`) son auth/login, auth/register, perfil y docencia (sesión) + las API
+- **`app/sitemap.ts`**: 291 URLs = 3 locales × (10 estáticas + 11 bloques + 76 lecciones) con prefijos `/es` `/en` `/val`
+- **`app/robots.ts`**: disallow de `/auth/login` y `/auth/register` para los 3 prefijos (`/es/auth/login`, etc.); `allow: "/"`, sitemap
+- **`app/manifest.ts`**: `start_url: prefixPath("/", locale)`, shortcuts prefijados, `lang`/`scope`/`id` coherentes (sigue leyendo la cookie)
+- **`lib/content.ts`**: `searchContent(query, locale)` devuelve hrefs **prefijados** (`prefixPath`) para bloques/lecciones, `/glosario` y `/bloques/ecosistema`
+- **Test actualizado**: `lib/content.test.ts` espera `"/es/glosario"`; `LoginForm.test.tsx` mock de `next/navigation` añade `usePathname: () => "/es"` y `mockPush` espera `"/es"`
+- **Fix lint preexistente**: `scripts/generate-pdf.mjs` — eliminado el parámetro `footer` muerto de `buildHtml` (warning `no-unused-vars` que la Fase 42 no detectó porque solo corrió `node --check`); `DocenciaDashboard.tsx` — el `<a>` de descarga CSV `/api/docencia/students?format=csv` lleva `eslint-disable-next-line @next/next/no-html-link-for-pages` (es descarga, no navegación, y `/api` no se prefija)
+- **Verificación**: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (SSG ● en todo el contenido por los 3 idiomas, dinámico solo donde hay sesión). Runtime (servidor prod): `/`→307 `/es`, `/bloques`→`/es/bloques`, `/glosario` (cookie en)→`/en/glosario`, hreflang es/en/val + `x-default` con URLs absolutas, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil`→`/es/auth/login?callbackUrl=%2Fes%2Fperfil`, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -412,7 +430,7 @@ npm run test:watch # Vitest (watch)
 ### Media
 4. ~~**OG image**~~ — `public/og.png` (1200×630) con la marca Atlas IA generado por `scripts/generate-og-image.mjs`; `openGraph.images` + `twitter:card` en `app/layout.tsx` (URLs absolutas vía `metadataBase`) y caché inmutable en `/og.png`.
 5. ~~**README.md**~~ — reescrito desde el boilerplate de create-next-app: descripción del proyecto, características, stack, tabla de bloques, puesta en marcha con variables de entorno, comandos, scripts de generación, estructura, tests y licencia CC BY-NC-SA 4.0.
-6. **Prefijos `/en` `/val` + hreflang** — paso lógico para SEO multilingüe real y compartir enlaces por idioma (pendiente señalado en AGENTS.md).
+6. ~~**Prefijos `/en` `/val` + hreflang**~~ — SEO multilingüe real con rutas `/es` `/en` `/val` y hreflang (es/en/val/x-default). Completado en la Fase 43 (restructura a `app/[lang]/`, `proxy.ts` negocia y redirige el prefijo, `generateStaticParams` + `force-static` para SSG por idioma, sitemap 291 URLs, robots/manifest/canonical prefijados).
 7. **Bloque 10 Novedades** — el contenido data de julio 2026; revisarlo periódicamente.
 
 ### Mantenimiento
@@ -422,10 +440,11 @@ npm run test:watch # Vitest (watch)
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- Último commit: `15b9c31` (feat(pdf): generación por bloque con --bloque y ayuda --help). Working tree limpio. La Fase 42 (PDF por bloque) está completa.
-- Verificación Fase 42: `node --check` correcto; `--bloque laboratorio` → PDF 0.2 MB con 5 lecciones y sin referencias; bloque inexistente → lista de slugs y exit 1; regresión completa sin `--bloque` → PDF 3.9 MB con 11 bloques, 76 lecciones, glosario y cronología intactos.
+- La Fase 43 (prefijos de idioma `/es` `/en` `/val` + hreflang) está **implementada y verificada**, pero los cambios están **SIN COMMITEAR** (working tree con los movimientos `RM` de `app/` → `app/[lang]/` y las modificaciones de `lib/i18n/*`, `proxy.ts`, `app/{manifest,robots,sitemap}.ts`, `lib/content.ts`, componentes client localizados y tests). Último commit: `e13cfaa` (docs: AGENTS.md al día para retomar (Fase 42)).
+- Verificación Fase 43: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK. Runtime (servidor prod) confirmado: redirects de prefijo (`/`→`/es`, `/glosario` cookie en→`/en/glosario`), hreflang es/en/val + `x-default` absolutos, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil` protegido con `callbackUrl` localizado, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`. SSG ● en todo el contenido (3 idiomas), dinámico solo donde hay sesión.
+- IMPORTANTE: **commitear la Fase 43** (revisar `git status`/`git diff`, stage de los movimientos y cambios intencionados) antes de continuar. Verificar que el número de páginas sea coherente y que `npm run dev` sigue sirviendo las rutas con prefijo.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: migrar a prefijos de URL `/en` `/val` si se quiere hreflang real, actualizar el Bloque 10 Novedades, validación de sincronización es/en/val, Sentry + `.env.example`, probar el panel docente con datos reales del curso una vez haya alumnado registrado.
+- Siguientes pasos posibles: actualizar el Bloque 10 Novedades (julio 2026), validación de sincronización es/en/val por script, Sentry + `.env.example`, probar el panel docente con datos reales una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 
@@ -445,20 +464,24 @@ npm run test:watch # Vitest (watch)
 
 ## Rutas del proyecto
 ```
-app/                  → Páginas (App Router)
-  bloques/            → Lista + [slug] + [slug]/[leccion]
-  cronologia/         → Timeline interactivo
-  glosario/           → Búsqueda + filtros (layout.tsx con canonical)
-  privacidad/         → Política de privacidad RGPD (canonical + data-read-aloud)
-  uso-de-ia/          → Uso de Inteligencia Artificial: transparencia y ética (canonical + data-read-aloud)
-  roadmap/            → Roadmap del proyecto: hitos, estado actual y próximos pasos (canonical + data-read-aloud)
-  terminos/           → Términos de uso del servicio (canonical + data-read-aloud)
-  acerca-de/          → Página institucional: qué es, objetivo, filosofía, autoría, tecnologías, licencia y estado (canonical + data-read-aloud)
-  perfil/             → Estadísticas, ranking, retos, proyectos, badges
-  laboratorio/        → Laboratorio interactivo (chat, prompts, agent flow, comparador, tokens; layout.tsx con canonical)
-  auth/               → login + register
-  sitemap.ts          → 93 URLs (estáticas + bloques + lecciones)
-  robots.ts           → allow "/", disallow auth, sitemap.xml
+app/                  → Páginas (App Router) bajo segmento dinámico de idioma app/[lang]/
+  [lang]/             → Root layout (html lang, canonical, hreflang, providers) + todas las páginas
+    page.tsx          → Home (SSG es/en/val)
+    bloques/          → Lista + [slug] + [slug]/[leccion]
+    cronologia/       → Timeline interactivo
+    glosario/         → Búsqueda + filtros (layout.tsx con canonical + fuerza static)
+    privacidad/       → Política de privacidad RGPD (canonical + data-read-aloud)
+    uso-de-ia/        → Uso de IA: transparencia y ética (canonical + data-read-aloud)
+    roadmap/          → Roadmap del proyecto (canonical + data-read-aloud)
+    terminos/         → Términos de uso (canonical + data-read-aloud)
+    acerca-de/        → Página institucional (canonical + data-read-aloud)
+    perfil/           → Estadísticas, ranking, retos, proyectos, badges (dinámica, sesión)
+    laboratorio/      → Laboratorio interactivo (layout.tsx con canonical + fuerza static; página client)
+    docencia/         → Panel docente (dinámica, rol teacher) + DocenciaDashboard
+    auth/             → login + register (noindex)
+  manifest.ts         → Manifest localizado (start_url /es, shortcuts prefijados)
+  robots.ts           → allow "/", disallow auth prefijado (3 idiomas), sitemap.xml
+  sitemap.ts          → 291 URLs (3 idiomas × 10 estáticas + 11 bloques + 76 lecciones)
 
 app/api/              → API Routes
   auth/[...nextauth]  → NextAuth
@@ -476,7 +499,7 @@ components/
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
 
-proxy.ts              → Protección de rutas + cabecera Content-Language dinámica (Next.js 16, reemplaza middleware.ts)
+proxy.ts              → Negocia prefijo de idioma (cookie/Accept-Language), redirige rutas sin prefijo, protege /perfil y /docencia, fija Content-Language (Next.js 16, reemplaza middleware.ts)
 
 lib/
   types.ts            → Interfaces (BloqueMeta, LeccionMeta, HerramientaIA, etc.)
@@ -494,10 +517,10 @@ lib/
   prisma.ts           → PrismaClient singleton
   getServerSession.ts → Helper servidor
   i18n/
-    config.ts         → Locale ("es"|"en"|"val"), cookie atlas-locale, localeToIntl
-    server.ts         → getLocale() (lee la cookie, async)
+    config.ts         → Locale ("es"|"en"|"val"), cookie atlas-locale, localeToIntl, prefixPath, buildLanguagesAlternates, LOCALE_PATHNAMES
+    server.ts         → getLocaleFromParams(lang) (del segmento URL); getLocale() (lee la cookie, solo manifest/fallbacks)
     runtime.ts        → helpers de idioma en cliente
-    provider.tsx      → I18nProvider + hook useI18n() → { locale, t, setLocale }
+    provider.tsx      → I18nProvider + hook useI18n() → { locale, t, setLocale, localize }
     data.ts           → Builders localizados (getBLOQUES, getGlosario, getHerramientas, getBadgeText, ...)
     dictionaries/     → es.ts (fuente de verdad, exporta Dictionary), en.ts, val.ts, index.ts
 
@@ -545,11 +568,14 @@ Los estilos globales en `app/globals.css` (html, body, a, h1-h6, etc.) están en
 Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlace a https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ### i18n
-- Idiomas: `es`, `en`, `val` (valenciano). Idioma persistido en cookie `atlas-locale` + localStorage (sin prefijo de URL). Cambio de idioma recarga la página.
+- Idiomas: `es`, `en`, `val` (valenciano). **Rutas con prefijo de URL** (`/es`, `/en`, `/val`): las páginas viven bajo `app/[lang]/` y leen el idioma del segmento URL con `getLocaleFromParams(lang)`. `proxy.ts` negocia el prefijo (cookie `atlas-locale` → Accept-Language → es) y redirige 307 las rutas sin prefijo. La cookie `atlas-locale` sigue existiendo (para manifest, fallbacks y para recordar la preferencia). Cambio de idioma navega cambiando solo el prefijo (recarga la página).
 - `es.ts` es la fuente de verdad de la estructura `Dictionary`; `en.ts` y `val.ts` usan `satisfies Dictionary` para que TypeScript avise si falta una clave.
 - En `data` los arrays de glosario (47) y cronología (28) se emparejan por **índice** con las fuentes en español; los demás datos se casan por clave/slug/id. No añadir/quitar entradas de glosario o cronología sin sincronizar los tres diccionarios.
 - `getBadgeText`, `getRetoText` y `getProyectoText` devuelven objetos `{ nombre, descripcion }`.
 - Las lecciones MDX están localizadas (es/en/val, 71×3 en `content/`, `content/en/`, `content/val/`); si un bloque no está traducido, `lib/content.ts` hace fallback al español.
+- **Prefijado de rutas**: en páginas server usar `prefixPath(path, locale)` para URLs internas y `buildLanguagesAlternates(path)` para hreflang; en componentes client usar `localize(path)` de `useI18n()`. NO prefijar rutas `/api/*` (no tienen idioma). `searchContent(query, locale)` ya devuelve hrefs prefijados.
+- **SEO**: canonical y hreflang (es/en/val + x-default) con URLs absolutas vía `metadataBase`; `Content-Language` en todas las respuestas; `noindex` en auth; sitemap con 291 URLs prefijadas.
+- **SSG con Next 16 + Turbopack**: bajo `app/[lang]/`, `generateStaticParams` en el layout NO basta para generar estático; cada página server estática necesita `export const dynamic = "force-static"` (las páginas client bajo `[lang]` lo llevan en su `layout.tsx` server). Las únicas rutas dinámicas (`ƒ`) son las que usan sesión/cookies (perfil, docencia, auth) y las API.
 
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión

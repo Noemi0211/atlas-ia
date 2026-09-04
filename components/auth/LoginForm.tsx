@@ -10,7 +10,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Ca
 import { useI18n } from "@/lib/i18n/provider";
 
 export function LoginForm() {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ export function LoginForm() {
         return;
       }
 
-      router.push("/");
+      router.push(localize("/"));
       router.refresh();
     } catch {
       setError(t.auth.login.errorGeneric);
@@ -121,7 +121,7 @@ export function LoginForm() {
       <div className="mt-6 text-center">
         <p className="text-sm text-fg-muted">
           {t.auth.login.noAccount}{" "}
-          <Link href="/auth/register" className="text-primary hover:text-primary-hover font-medium">
+          <Link href={localize("/auth/register")} className="text-primary hover:text-primary-hover font-medium">
             {t.auth.login.registerLink}
           </Link>
         </p>

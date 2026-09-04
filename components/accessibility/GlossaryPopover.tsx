@@ -41,7 +41,7 @@ export function GlossaryPopover({
   trigger,
   onClose,
 }: GlossaryPopoverProps) {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -130,7 +130,7 @@ export function GlossaryPopover({
     window.dispatchEvent(
       new CustomEvent("atlas:glossary-deeplink", { detail: term.slug })
     );
-    router.push(`/glosario?termino=${encodeURIComponent(term.slug)}`);
+    router.push(`${localize("/glosario")}?termino=${encodeURIComponent(term.slug)}`);
   };
 
   return (

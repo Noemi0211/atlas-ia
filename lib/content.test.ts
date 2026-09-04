@@ -66,7 +66,7 @@ describe("searchContent", () => {
   it("encuentra términos del glosario", () => {
     const results = searchContent("neurona", "es");
     expect(results.length).toBeGreaterThan(0);
-    expect(results.some((r) => r.href === "/glosario")).toBe(true);
+    expect(results.some((r) => r.href === "/es/glosario")).toBe(true);
   });
 
   it("devuelve resultados vacíos sin coincidencias", () => {

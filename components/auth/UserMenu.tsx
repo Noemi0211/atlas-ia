@@ -8,7 +8,7 @@ import { useProgress } from "@/stores/progress";
 import { useI18n } from "@/lib/i18n/provider";
 
 export function UserMenu() {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const { data: session } = useSession();
   const { xp } = useProgress();
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +57,7 @@ export function UserMenu() {
 
           <div className="py-1">
             <Link
-              href="/perfil"
+              href={localize("/perfil")}
               onClick={() => setIsOpen(false)}
               className="flex items-center gap-2 px-4 py-2 text-sm text-fg-secondary hover:text-fg hover:bg-bg-secondary transition-colors"
             >
@@ -66,7 +66,7 @@ export function UserMenu() {
             </Link>
             {session.user.role === "teacher" && (
               <Link
-                href="/docencia"
+                href={localize("/docencia")}
                 onClick={() => setIsOpen(false)}
                 className="flex items-center gap-2 px-4 py-2 text-sm text-fg-secondary hover:text-fg hover:bg-bg-secondary transition-colors"
               >
@@ -78,7 +78,7 @@ export function UserMenu() {
 
           <div className="border-t border-border py-1">
             <button
-              onClick={() => signOut({ callbackUrl: "/" })}
+              onClick={() => signOut({ callbackUrl: localize("/") })}
               className="flex items-center gap-2 px-4 py-2 text-sm text-error hover:bg-error-light/50 w-full text-left transition-colors"
             >
               <LogOut className="w-4 h-4" />

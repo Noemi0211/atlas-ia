@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getLocale } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
+import { prefixPath } from "@/lib/i18n/config";
 
 export default async function manifest(): Promise<MetadataRoute.Manifest> {
   const locale = await getLocale();
@@ -13,7 +14,7 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
     description: t.home.subtitle1,
     lang: locale,
     dir: "ltr",
-    start_url: "/",
+    start_url: prefixPath("/", locale),
     scope: "/",
     display: "standalone",
     display_override: ["standalone", "minimal-ui"],
@@ -76,25 +77,25 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
         name: t.nav.bloques,
         short_name: t.nav.bloques,
         description: t.bloques.subtitle,
-        url: "/bloques",
+        url: prefixPath("/bloques", locale),
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }],
       },
       {
         name: t.nav.glosario,
         short_name: t.nav.glosario,
-        url: "/glosario",
+        url: prefixPath("/glosario", locale),
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }],
       },
       {
         name: t.nav.laboratorio,
         short_name: t.nav.laboratorio,
-        url: "/laboratorio",
+        url: prefixPath("/laboratorio", locale),
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }],
       },
       {
         name: t.nav.cronologia,
         short_name: t.nav.cronologia,
-        url: "/cronologia",
+        url: prefixPath("/cronologia", locale),
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192" }],
       },
     ],

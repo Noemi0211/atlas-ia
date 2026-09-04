@@ -6,7 +6,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { useI18n } from "@/lib/i18n/provider";
 
 export function Footer() {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
 
   return (
     <footer className="border-t border-border bg-bg-secondary/50" role="contentinfo">
@@ -28,17 +28,17 @@ export function Footer() {
             <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.plataforma}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/bloques" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/bloques")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.bloques}
                 </Link>
               </li>
               <li>
-                <Link href="/glosario" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/glosario")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.glosario}
                 </Link>
               </li>
               <li>
-                <Link href="/acerca-de" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/acerca-de")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.acercaDe}
                 </Link>
               </li>
@@ -49,7 +49,7 @@ export function Footer() {
             <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.recursos}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/roadmap" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/roadmap")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.roadmap.title}
                 </Link>
               </li>
@@ -75,17 +75,17 @@ export function Footer() {
             <h3 className="font-semibold text-sm text-fg mb-3">{t.footer.legal}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/privacidad" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/privacidad")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.privacidad}
                 </Link>
               </li>
               <li>
-                <Link href="/uso-de-ia" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/uso-de-ia")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.usoIa}
                 </Link>
               </li>
               <li>
-                <Link href="/terminos" className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                <Link href={localize("/terminos")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
                   {t.footer.terminos}
                 </Link>
               </li>

@@ -16,7 +16,7 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
 
   return (
     <nav
@@ -24,7 +24,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
       className={cn("flex items-center gap-1.5 text-sm", className)}
     >
       <Link
-        href="/"
+        href={localize("/")}
         className="text-fg-muted hover:text-fg transition-colors p-0.5"
         aria-label={t.breadcrumbs.home}
       >
@@ -36,7 +36,7 @@ export function Breadcrumbs({ items, className }: BreadcrumbsProps) {
           <ChevronRight className="w-3.5 h-3.5 text-fg-muted" />
           {item.href ? (
             <Link
-              href={item.href}
+              href={localize(item.href)}
               className="text-fg-muted hover:text-fg transition-colors"
             >
               {item.label}

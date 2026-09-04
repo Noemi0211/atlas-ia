@@ -9,7 +9,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Ca
 import { useI18n } from "@/lib/i18n/provider";
 
 export function RegisterForm() {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,7 +38,7 @@ export function RegisterForm() {
         return;
       }
 
-      router.push("/auth/login?registered=true");
+      router.push(`${localize("/auth/login")}?registered=true`);
     } catch {
       setError(t.auth.register.errorCreate);
       setLoading(false);
@@ -140,7 +140,7 @@ export function RegisterForm() {
       <div className="mt-6 text-center">
         <p className="text-sm text-fg-muted">
           {t.auth.register.hasAccount}{" "}
-          <Link href="/auth/login" className="text-primary hover:text-primary-hover font-medium">
+          <Link href={localize("/auth/login")} className="text-primary hover:text-primary-hover font-medium">
             {t.auth.register.loginLink}
           </Link>
         </p>

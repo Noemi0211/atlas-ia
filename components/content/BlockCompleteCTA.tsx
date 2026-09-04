@@ -20,7 +20,7 @@ export function BlockCompleteCTA({
   lastLessonId,
   siguienteBloque,
 }: BlockCompleteCTAProps) {
-  const { t } = useI18n();
+  const { t, localize } = useI18n();
   const { completedLessons } = useProgress();
 
   if (!esUltimaLeccion) return null;
@@ -40,7 +40,7 @@ export function BlockCompleteCTA({
       </p>
       {siguienteBloque ? (
         <Link
-          href={`/bloques/${siguienteBloque.slug}/${siguienteBloque.primeraLeccionSlug}`}
+          href={localize(`/bloques/${siguienteBloque.slug}/${siguienteBloque.primeraLeccionSlug}`)}
           className="inline-flex items-center gap-2 h-12 px-8 rounded-lg bg-primary text-white dark:text-slate-900 font-medium hover:bg-primary-hover transition-colors shadow-sm"
         >
           {t.leccion.continuarBloque.replace(
@@ -51,7 +51,7 @@ export function BlockCompleteCTA({
         </Link>
       ) : (
         <Link
-          href="/bloques"
+          href={localize("/bloques")}
           className="inline-flex items-center gap-2 h-12 px-8 rounded-lg bg-primary text-white dark:text-slate-900 font-medium hover:bg-primary-hover transition-colors shadow-sm"
         >
           {t.leccion.verBloques}

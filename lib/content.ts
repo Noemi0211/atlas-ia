@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { BloqueMeta, LeccionMeta } from "./types";
 import { BLOQUES } from "./constants";
 import { getDictionary } from "./i18n/dictionaries";
-import { DEFAULT_LOCALE, type Locale } from "./i18n/config";
+import { DEFAULT_LOCALE, prefixPath, type Locale } from "./i18n/config";
 import { getBloqueMeta as getBloqueMetaLocalizada, getGlosario, getHerramientas } from "./i18n/data";
 
 const CONTENT_DIR = path.join(process.cwd(), "content");
@@ -110,7 +110,7 @@ export function searchContent(query: string, locale: Locale = DEFAULT_LOCALE) {
         results.push({
           titulo: leccion.titulo,
           excerpt: plainText + "...",
-          href: `/bloques/${bloque.slug}/${leccion.slug}`,
+          href: prefixPath(`/bloques/${bloque.slug}/${leccion.slug}`, locale),
           bloque: bloqueLocalizado?.titulo ?? bloque.titulo,
         });
       }
@@ -124,7 +124,7 @@ export function searchContent(query: string, locale: Locale = DEFAULT_LOCALE) {
       results.push({
         titulo: termino.termino,
         excerpt: termino.definicion.substring(0, 200) + "...",
-        href: "/glosario",
+        href: prefixPath("/glosario", locale),
         bloque: t.nav.glosario,
       });
     }
@@ -137,7 +137,7 @@ export function searchContent(query: string, locale: Locale = DEFAULT_LOCALE) {
       results.push({
         titulo: herramienta.nombre,
         excerpt: herramienta.descripcion.substring(0, 200) + "...",
-        href: "/bloques/ecosistema",
+        href: prefixPath("/bloques/ecosistema", locale),
         bloque: getBloqueMetaLocalizada(t, "ecosistema")?.titulo ?? "Ecosistema IA",
       });
     }

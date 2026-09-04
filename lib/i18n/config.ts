@@ -13,6 +13,50 @@ export const LOCALE_NAMES: Record<Locale, string> = {
 export const LOCALE_COOKIE = "atlas-locale";
 export const LOCALE_STORAGE_KEY = "atlas-locale";
 
+export const LOCALE_PATHNAMES: Record<Locale, string> = {
+  es: "es",
+  en: "en",
+  val: "val",
+};
+
+export function localePathname(locale: Locale): string {
+  return `/${LOCALE_PATHNAMES[locale]}`;
+}
+
+export function getLocaleFromPathname(pathname: string): Locale | null {
+  const first = pathname.split("/")[1];
+  if (first && isLocale(first)) return first;
+  return null;
+}
+
+export function stripLocalePrefix(
+  pathname: string,
+  locale: Locale | null
+): string {
+  const prefix = locale ? `/${LOCALE_PATHNAMES[locale]}` : "";
+  if (locale && (pathname === prefix || pathname.startsWith(`${prefix}/`))) {
+    return pathname.slice(prefix.length) || "/";
+  }
+  return pathname;
+}
+
+export function prefixPath(pathname: string, locale: Locale): string {
+  if (pathname === "/") return `/${LOCALE_PATHNAMES[locale]}`;
+  return `/${LOCALE_PATHNAMES[locale]}${pathname}`;
+}
+
+export function buildLanguagesAlternates(
+  pathname: string
+): Record<string, string> {
+  const languages: Record<string, string> = {
+    es: prefixPath(pathname, "es"),
+    en: prefixPath(pathname, "en"),
+    val: prefixPath(pathname, "val"),
+  };
+  languages["x-default"] = prefixPath(pathname, DEFAULT_LOCALE);
+  return languages;
+}
+
 export function isLocale(value: unknown): value is Locale {
   return (
     typeof value === "string" &&
