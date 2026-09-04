@@ -12,6 +12,7 @@ npx tsc --noEmit  # TypeScript check
 npm run lint      # ESLint
 npm test          # Vitest (run)
 npm run test:watch # Vitest (watch)
+npm run validate:translations  # Validar sincronización es/en/val del contenido
 ```
 
 ## Fases completadas
@@ -420,6 +421,21 @@ npm run test:watch # Vitest (watch)
 - **Fix lint preexistente**: `scripts/generate-pdf.mjs` — eliminado el parámetro `footer` muerto de `buildHtml` (warning `no-unused-vars` que la Fase 42 no detectó porque solo corrió `node --check`); `DocenciaDashboard.tsx` — el `<a>` de descarga CSV `/api/docencia/students?format=csv` lleva `eslint-disable-next-line @next/next/no-html-link-for-pages` (es descarga, no navegación, y `/api` no se prefija)
 - **Verificación**: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (SSG ● en todo el contenido por los 3 idiomas, dinámico solo donde hay sesión). Runtime (servidor prod): `/`→307 `/es`, `/bloques`→`/es/bloques`, `/glosario` (cookie en)→`/en/glosario`, hreflang es/en/val + `x-default` con URLs absolutas, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil`→`/es/auth/login?callbackUrl=%2Fes%2Fperfil`, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`
 
+### Fase 44 ✅ (validación de sincronización es/en/val del contenido)
+- **Nuevo script** `scripts/validate-translations.mjs` (Node puro, sin dependencias nuevas; usa `gray-matter` ya instalado) + comando `npm run validate:translations`. Sustituye/augmenta el control frágil de "líneas 1:1" con una validación estructural robusta.
+- **Qué valida** (solo muestra errores y devuelve exit 0/1, pensado para CI):
+  - **Paridad de existencia**: cada `.mdx` de es tiene su homólogo en en/val y viceversa (sin faltantes ni sobrantes por bloque).
+  - **`meta.json`**: JSON válido, existe en los 3 idiomas, mismo `bloque`, misma lista de slugs en el mismo orden, mismo conteo de lecciones, y por lección campos estructurales idénticos (`orden`, `duracion`, `dificultad`); solo `titulo`/`descripcion` pueden diferir (por traducción).
+  - **Fingerprint estructural por lección** (debe ser idéntico entre es/en/val, traducción no afecta a la estructura): nº de líneas, secuencia de headings por nivel (`h2,h3,...`), lista de `<Callout type="...">` y sus tipos, lenguajes de los bloques de código fenced, nº de tablas y filas por tabla, nº de enlaces, nº de imágenes, nº de ítems de lista (bullets) y nº de ítems ordenados.
+  - **Frontmatter**: `title`/`description` presentes en cada `.mdx` de los 3 idiomas; además `frontmatter.title === meta.json.titulo` por idioma (coherencia interna es/en/val).
+- **Errores reales detectados y corregidos** (el script destapó 4 inconsistencias previas invisibles con el control de líneas):
+  - `ia-multimodal/meta.json` (es): "Video y animación…" → "**Vídeo** y animación…" (falta la tilde).
+  - `programacion/meta.json` (es): residual de la Fase 13 "…y **debugging** con IA" → "…y **depuración** con IA" (política lingüística ya aplicada en el MDX pero no en el meta).
+  - `en/programacion/meta.json`: "Best practices and AI-assisted debugging" → "Best practices and **debugging with AI**" (alineado con su frontmatter y la estructura es).
+  - `en/ia-docencia/meta.json`: "Ethics and challenges of AI in teaching" → "**AI ethics and challenges in teaching**" (alineado con su frontmatter). El H1 visible usa `meta.titulo`, así que corregir el meta alinea también lo que se ve.
+- Actualizado `package.json` (script `validate:translations`) y `AGENTS.md`.
+- Verificación: `npm run validate:translations` → "0 errores" eta los 76 lecciones cotejadas; `npx tsc --noEmit` 0 errores; lint 0/0.
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -435,16 +451,17 @@ npm run test:watch # Vitest (watch)
 
 ### Mantenimiento
 8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
-9. **Sincronización es/en/val** — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script.
+9. ~~**Sincronización es/en/val**~~ — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script. Completado en la Fase 44 (`scripts/validate-translations.mjs` + `npm run validate:translations`); ya detectó y corrigió 4 inconsistencias en `meta.json` (Vídeo, depuración, en/programacion, en/ia-docencia).
 10. ~~**PDF por bloque**~~ — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula. Completado en la Fase 42 (portada/footer/chips/índice adaptados, sin glosario ni cronología, salida `Atlas-IA-bloque-<slug>.pdf`).
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- La Fase 43 (prefijos de idioma `/es` `/en` `/val` + hreflang) está **implementada y verificada**, pero los cambios están **SIN COMMITEAR** (working tree con los movimientos `RM` de `app/` → `app/[lang]/` y las modificaciones de `lib/i18n/*`, `proxy.ts`, `app/{manifest,robots,sitemap}.ts`, `lib/content.ts`, componentes client localizados y tests). Último commit: `e13cfaa` (docs: AGENTS.md al día para retomar (Fase 42)).
+- **Fases 43 (prefijos `/es` `/en` `/val` + hreflang) y 44 (validación de sincronización es/en/val) commiteadas.** Último commit: `006e13a` (Fase 43) y el de la Fase 44 (script `validate-translations.mjs` + 4 correcciones en `meta.json`).
+- Working tree: el script de validación, sus 4 correcciones de `meta.json`, el `npm run validate:translations` en `package.json` y el `AGENTS.md` actualizado están por commitear (revisar `git status`/`git diff` antes de continuar).
 - Verificación Fase 43: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK. Runtime (servidor prod) confirmado: redirects de prefijo (`/`→`/es`, `/glosario` cookie en→`/en/glosario`), hreflang es/en/val + `x-default` absolutos, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil` protegido con `callbackUrl` localizado, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`. SSG ● en todo el contenido (3 idiomas), dinámico solo donde hay sesión.
-- IMPORTANTE: **commitear la Fase 43** (revisar `git status`/`git diff`, stage de los movimientos y cambios intencionados) antes de continuar. Verificar que el número de páginas sea coherente y que `npm run dev` sigue sirviendo las rutas con prefijo.
+- Verificación Fase 44: `npm run validate:translations` → 0 errores en 76 lecciones; `npx tsc --noEmit` 0 errores; lint 0/0.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: actualizar el Bloque 10 Novedades (julio 2026), validación de sincronización es/en/val por script, Sentry + `.env.example`, probar el panel docente con datos reales una vez haya alumnado registrado.
+- Siguientes pasos posibles: actualizar el Bloque 10 Novedades (julio 2026), Sentry + `.env.example`, probar el panel docente con datos reales una vez haya alumnado registrado.
 
 ## Bloques de contenido (MDX)
 

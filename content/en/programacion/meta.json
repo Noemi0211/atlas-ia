@@ -37,7 +37,7 @@
     },
     {
       "slug": "05-buenas-practicas",
-      "titulo": "Best practices and AI-assisted debugging",
+      "titulo": "Best practices and debugging with AI",
       "descripcion": "Code review, testing and assisted debugging",
       "orden": 5,
       "duracion": "10 min",
