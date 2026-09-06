@@ -6,7 +6,7 @@
     {
       "slug": "01-modelos-recientes",
       "titulo": "Models de llenguatge recents",
-      "descripcion": "GPT-5.6, Claude 5, Gemini 3, Grok 4.5 i DeepSeek V4",
+      "descripcion": "GPT-6 Astra, Claude Fable 5.1, Gemini 3.8 Flash i Muse Spark 1.3",
       "orden": 1,
       "duracion": "12 min",
       "dificultad": "intermedio"
@@ -38,7 +38,7 @@
     {
       "slug": "05-regulacion-actualidad",
       "titulo": "Regulació i ètica: estat actual",
-      "descripcion": "AI Act en aplicació plena, tractats internacionals i debats ètics",
+      "descripcion": "AI Act en aplicació plena, Digital Omnibus i debats ètics",
       "orden": 5,
       "duracion": "10 min",
       "dificultad": "avanzado"

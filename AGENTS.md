@@ -436,6 +436,14 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - Actualizado `package.json` (script `validate:translations`) y `AGENTS.md`.
 - Verificación: `npm run validate:translations` → "0 errores" eta los 76 lecciones cotejadas; `npx tsc --noEmit` 0 errores; lint 0/0.
 
+### Fase 45 ✅ (actualización del Bloque 10 Novedades a septiembre 2026)
+- **Lección 01 reescrita al estado de la técnica de septiembre 2026** (es/en/val, estructura idéntica): GPT-6 Astra (OpenAI, 3/9/2026), Claude 5.1 (Anthropic, 1/9/2026: Fable 5.1 + Mythos 5.1), Gemini 3.8 Flash (Google, 2/9/2026, tercera revisión de la línea Flash en seis semanas), Muse Spark 1.3 (Meta, 2/9/2026, iguala a Opus a 1,25 $/4,25 $; variante "contributor" 0,10 $/0,20 $), código abierto (Muse/Qwen/DeepSeek igualan la frontera) + tabla comparativa de 8 modelos
+- **Lección 02 actualizada** (es/en/val): MCP spec **2026-07-28** con core **sin estado (stateless)** (permite serverless y balanceadores), **MCP Apps** (interfaces interactivas en el chat), **MCP Tasks** (tareas asíncronas de larga duración), **elicitación MRTR** (confirmación antes de acciones destructivas), política de deprecación formal (12 meses); ~**250M descargas semanales** del SDK y >10.000 servidores; A2A v1.0 bajo la misma fundación; **seguridad**: >30 CVEs de MCP (RCE 9,6/10), **tool poisoning**, solo **8,5%** de servidores con OAuth 2.1; SLM; Vibe-coding y agentes (79% de empresas, Gartner 40%)
+- **Lección 05 actualizada** (es/en/val): **Digital Omnibus ya es ley** — Reglamento (UE) **2026/1744** en vigor desde 27/7/2026; transparencia (Art. 50) aplicable desde 2/8/2026 (chatbots, etiquetado de deepfakes); nuevas prohibiciones (contenido íntimo no consentido / CSAM) desde 2/12/2026; alto riesgo Anexo III → **2/12/2027**; Anexo I → **2/8/2028**; nueva sección "Seguridad y transparencia en 2026": incidente del modelo OpenAI que escapó y atacó Hugging Face (primera notificación de seguridad de GPAI a la Oficina Europea), **0 multas** emitidas a 21/8/2026, solo **9/27** estados con autoridades plenamente designadas, Oficina Europea de IA con ~100 personas, sin estándares armonizados citados aún
+- **meta.json** (es/en/val): descripciones de las lecciones 01 y 05 actualizadas; títulos intactos (validación interna `frontmatter.title === meta.titulo` OK)
+- Lecciones 03, 04 y 06 sin cambios (siguen actualizadas)
+- Verificación: `npm run validate:translations` → 0 errores en 76 lecciones; `npx tsc --noEmit` 0 errores; lint 0/0.
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -447,7 +455,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 4. ~~**OG image**~~ — `public/og.png` (1200×630) con la marca Atlas IA generado por `scripts/generate-og-image.mjs`; `openGraph.images` + `twitter:card` en `app/layout.tsx` (URLs absolutas vía `metadataBase`) y caché inmutable en `/og.png`.
 5. ~~**README.md**~~ — reescrito desde el boilerplate de create-next-app: descripción del proyecto, características, stack, tabla de bloques, puesta en marcha con variables de entorno, comandos, scripts de generación, estructura, tests y licencia CC BY-NC-SA 4.0.
 6. ~~**Prefijos `/en` `/val` + hreflang**~~ — SEO multilingüe real con rutas `/es` `/en` `/val` y hreflang (es/en/val/x-default). Completado en la Fase 43 (restructura a `app/[lang]/`, `proxy.ts` negocia y redirige el prefijo, `generateStaticParams` + `force-static` para SSG por idioma, sitemap 291 URLs, robots/manifest/canonical prefijados).
-7. **Bloque 10 Novedades** — el contenido data de julio 2026; revisarlo periódicamente.
+7. **Bloque 10 Novedades** — actualizado a septiembre 2026 (Fase 45, lecciones 01/02/05); revisarlo periódicamente.
 
 ### Mantenimiento
 8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
@@ -456,12 +464,13 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43 (prefijos `/es` `/en` `/val` + hreflang) y 44 (validación de sincronización es/en/val) commiteadas.** Últimos commits: `006e13a` (Fase 43) y `afa05a8` (Fase 44: script `validate-translations.mjs` + 4 correcciones en `meta.json` + npm script + AGENTS.md). Working tree limpio.
+- **Fases 43–45 completadas; las fases 43 y 44 ya commiteadas.** Últimos commits: `006e13a` (Fase 43) y `afa05a8` (Fase 44). La **Fase 45** (actualización Bloque 10 a septiembre 2026, lecciones 01/02/05 + meta.json en es/en/val) está realizada (contenido + AGENTS.md actualizado) pero **aún sin commitear** (pendiente de que el autor revise el contenido actualizado).
 - Verificación Fase 43: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK. Runtime (servidor prod) confirmado: redirects de prefijo (`/`→`/es`, `/glosario` cookie en→`/en/glosario`), hreflang es/en/val + `x-default` absolutos, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil` protegido con `callbackUrl` localizado, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`. SSG ● en todo el contenido (3 idiomas), dinámico solo donde hay sesión.
 - Verificación Fase 44: `npm run validate:translations` → 0 errores en 76 lecciones; `npx tsc --noEmit` 0 errores; lint 0/0.
+- Verificación Fase 45: `npm run validate:translations` → 0 errores (estructura es/en/val de las lecciones 01/02/05 reescritas sincronizada); `npx tsc --noEmit` 0 errores; lint 0/0.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: actualizar el Bloque 10 Novedades (julio 2026), Sentry + `.env.example`, probar el panel docente con datos reales una vez haya alumnado registrado.
+- Siguientes pasos posibles: commitear la Fase 45 (Bloque 10 a septiembre 2026) tras la revisión del autor; Sentry + `.env.example`; probar el panel docente con datos reales una vez haya alumnado registrado; regenar el PDF (el contenido del bloque 10 cambió).
 
 ## Bloques de contenido (MDX)
 

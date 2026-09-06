@@ -1,6 +1,6 @@
 ---
 title: "Tendències de l'ecosistema IA"
-description: "Agents autònoms, MCP, IA al navegador i codi obert"
+description: "Agents autònoms, protocols MCP/A2A, IA al navegador i codi obert"
 ---
 
 ## Més enllà dels models
@@ -28,7 +28,7 @@ La IA agèntica ha passat de la demostració a la producció:
 
 - El 79% de les empreses declara que ja utilitza agents d'IA en escenaris reals de negoci
 - Gartner projecta que el 40% de les aplicacions empresarials inclourà agents a finals de 2026 (davant de menys del 5% el 2025)
-- Algunes estimacions assenyalen que el 80% de les noves aplicacions empresarials es desenvolupen ja amb agents integrats
+- Les crides a eines MCP des de ChatGPT es van multiplicar per 98 durant 2026
 
 ### Plataformes destacades
 
@@ -41,18 +41,26 @@ La IA agèntica ha passat de la demostració a la producció:
 
 ### MCP (Model Context Protocol)
 
-Anthropic va introduir MCP el 2024 com a estàndard obert per a connectar models amb eines. El 2026 s'ha convertit en l'estàndard de facto:
+Anthropic va introduir MCP el 2024 com a estàndard obert per a connectar models amb eines. L'especificació de juliol de 2026 va marcar la seua major revisió des del llançament:
 
 - **"L'USB-C de la IA":** un únic protocol per a connectar qualsevol eina o font de dades
-- **Adopció massiva:** més de 97 milions de descàrregues mensuals del SDK i suport de totes les grans empreses (OpenAI, Google, Microsoft, Anthropic i AWS)
-- **Governança oberta:** des de desembre de 2025 el protocol es gestiona a la Linux Foundation, dins de la Agentic AI Foundation, amb més de 140 organitzacions membres
+- **Adopció massiva:** al voltant de 250 milions de descàrregues setmanals del SDK, i més de 10.000 servidors públics
+- **Governança oberta:** des de desembre de 2025 el protocol es gestiona a la Linux Foundation, dins de la Agentic AI Foundation
+- **Nucli sense estat (stateless):** la revisió 2026-07-28 va eliminar les connexions persistents, la qual cosa permet desplegar servidors darrere de balancejadors de càrrega estàndard, serverless i a escala
+
+### Novetats de l'especificació 2026-07-28
+
+- **MCP Apps:** extensió oficial que permet a les eines retornar interfícies interactives dins del xat
+- **MCP Tasks:** extensió per a tasques de llarga durada de manera asíncrona, sense mantindre la connexió oberta
+- **Elicitació (MRTR):** els servidors poden demanar confirmació a la persona usuària abans d'executar una acció destructiva o costosa
+- **Política de deprecació formal:** els canvis s'anuncien amb almenys 12 mesos d'antelació
 
 ### A2A (Agent-to-Agent)
 
 Google impulsa A2A, el protocol per a la comunicació entre agents:
 
 - Permet que agents de fabricants diferents es descobrisquen, deleguen tasques i col·laboren
-- Va assolir la versió 1.0 el 2026
+- Va assolir la versió 1.0 el 2026 i va quedar sota la mateixa fundació que MCP
 
 ### Com es relacionen
 
@@ -65,7 +73,11 @@ MCP està cridat a ser el que HTTP va ser per a la web: un estàndard que permet
 
 ### El repte de la seguretat
 
-Amb l'adopció massiva arriben els riscos. Estudis recents assenyalen que molts servidors MCP tenen vulnerabilitats conegudes (accés a rutes o injecció de codi), i que les organitzacions sovint no veuen com es connecten els seus agents a les dades. **La governança i la monitorització són ara tan importants com la integració.**
+Amb l'adopció massiva arriben els riscos. En els primers mesos de 2026 es van registrar més de 30 CVEs relacionats amb MCP, inclosa una vulnerabilitat d'execució remota de codi amb una puntuació de 9,6 sobre 10:
+
+- **Enverinament d'eines (tool poisoning):** una descripció d'eina maliciosa pot induir el model a filtrar dades, sense que la persona usuària la veja
+- **OAuth poc desplegat:** el 2026 només el 8,5% dels servidors remots implementen l'estàndard d'autenticació obligatori OAuth 2.1
+- La governança i la monitorització són ara tan importants com la integració
 
 ## IA al navegador i al dispositiu
 
@@ -73,7 +85,6 @@ L'execució de models al navegador i en dispositius locals està democratitzant 
 
 - **WebLLM:** executa models com Llama i Gemma al navegador
 - **Transformers.js:** inferència de transformers directament en JavaScript
-- **ONNX Runtime Web:** execució optimitzada al navegador
 - **Chrome Built-in AI:** APIs d'IA natives a Chrome
 
 ### Els models petits (SLM)
@@ -89,13 +100,13 @@ Els models de llenguatge petits, optimitzats per a executar-se en local, han ret
 
 L'ecosistema de codi obert d'IA ha madurat enormement:
 
-- **Models:** DeepSeek V4, Qwen 3.7, Llama 4, GLM-5.2, Mistral
+- **Models:** Muse, Qwen 3.8, DeepSeek V4, GLM-5, Mistral, Llama
 - **Marcs de treball:** LangChain, Haystack, DSPy, LlamaIndex
 - **Infraestructura:** vLLM, Ollama, TGI, llama.cpp
 - **Conjunts de dades:** Hugging Face lidera amb milions de conjunts de dades
 
 <Callout type="info">
-El 2026 es va complir la predicció que els models oberts igualarien els propietaris en la majoria de tasques. DeepSeek V4 i Qwen ofereixen qualitat de frontera a una fracció del cost.
+El 2026 es va complir la predicció que els models oberts igualarien els propietaris en la majoria de tasques. Muse, Qwen i DeepSeek ofereixen qualitat de frontera a una fracció del cost.
 </Callout>
 
 ## Altres tendències rellevants
@@ -104,19 +115,19 @@ El 2026 es va complir la predicció que els models oberts igualarien els propiet
 Veo 3.1, Sora 2, Kling 3.0 i Runway Gen-4.5 generen vídeo amb àudio sincronitzat, personatges consistents i qualitat gairebé cinematogràfica.
 
 **Raonament i cadenes de pensament**
-Models que expliciten el seu procés de raonament, com la família GPT-5.x o Claude 5, amb modes de raonament profund.
+Models que expliciten el seu procés de raonament, com la família GPT-6 o Claude 5, amb modes de raonament profund.
 
 **Personalització massiva**
 L'ajust fi i RAG fan possible crear assistents especialitzats per a cada persona usuària o organització.
 
-**Veu a veu**
-Models que processen àudio directament sense transcripció intermèdia, la qual cosa permet converses naturals en temps real.
+**Seguretat i governança d'agents**
+La maduració de MCP i la seua adopció a gran escala van posar la seguretat i la governança al centre de l'ecosistema agèntic.
 
 ## Autoavaluació
 
 1. Què és MCP i per què se'n diu "l'USB-C de la IA"?
-2. Quina diferència hi ha entre MCP i A2A?
-3. Quins avantatges té executar models d'IA al navegador o al dispositiu?
+2. Què aporta l'especificació MCP 2026-07-28 (nucli sense estat, MCP Apps, MCP Tasks)?
+3. Què és l'enverinament d'eines (tool poisoning) i com es mitiga?
 4. Quina d'aquestes tendències creus que tindrà un major impacte en el teu àmbit professional?
 
 En la següent lliçó aprofundirem en els **avenços en IA multimodal**.

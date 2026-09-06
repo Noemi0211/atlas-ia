@@ -1,122 +1,112 @@
 ---
 title: "Recent language models"
-description: "GPT-5.6, Claude 5, Gemini 3, Grok 4.5 and DeepSeek V4"
+description: "GPT-6 Astra, Claude Fable 5.1, Gemini 3.8 Flash and Muse Spark 1.3"
 ---
 
 ## The current LLM landscape
 
-The language model ecosystem is evolving at a dizzying pace. Between 2024 and 2026 we have gone from context windows of 128K to models with more than one million tokens, and from high prices to a collapse in inference cost. This lesson offers an overview of the most relevant models in mid-2026.
+The language model ecosystem is evolving at a dizzying pace. In the first days of September 2026, four major labs (Anthropic, Meta, Google and OpenAI) launched their new flagship models within just three days. This lesson offers an overview of the most relevant models of the second half of 2026.
 
 <Callout type="info">
-The pace of innovation in LLMs is so fast that any up-to-date list can become outdated within weeks. Consider this lesson as a snapshot of the state of the art in July 2026.
+The pace of innovation in LLMs is so fast that any up-to-date list can become outdated within weeks. Consider this lesson as a snapshot of the state of the art in September 2026.
 </Callout>
 
-## GPT-5.6 (OpenAI)
+## GPT-6 Astra (OpenAI)
 
-Released in July 2026, the GPT-5.6 family is OpenAI's most recent generation. It comes in several variants aimed at different uses:
+Released on September 3, 2026, GPT-6 Astra is OpenAI's most capable model to date:
 
-- **GPT-5.6 Sol:** the highest-capacity model, designed for complex agents and demanding professional work
-- **GPT-5.6 Terra and Luna:** versions with a better balance between cost, speed and performance
-- **Context of over 1M tokens:** processes complete books, huge codebases or very long conversations
-- **Natively multimodal:** text, image, audio and video in a single model
+- **Top-tier performance:** ARC-AGI-3 (98.6%), FrontierMath Tier 4 (97.6%) and GPQA Diamond (96%)
+- **Agent and computer use:** 72.6% on OSWorld 2.0, almost twice as fast as its predecessor
+- **"The AGI era":** OpenAI presented Astra as the start of a new era, stating that it is already "at the frontier" of general artificial intelligence
+- **Critical cybersecurity:** it is the first model classified at the "critical" level of its Preparedness Framework
+- **Price:** $10 per million input tokens and $50 per million output tokens
 
-OpenAI has already announced the development of the next generation, **GPT-6**.
-
-## Claude 5 (Anthropic)
-
-The Claude 5 generation arrived in 2026 with three distinct models:
-
-### Claude Fable 5
-
-- **Deep reasoning:** designed for difficult tasks and high-value autonomous work
-- **1M token context**
-- **Premium price:** it is Anthropic's most expensive paid model
-
-### Claude Sonnet 5
-
-- **Everyday driver:** excellent value for money
-- **Ideal for coding, agents and computer use**
-- **1M token context** at a competitive price
-
-### Claude Opus 5
-
-The most recent version (July 2026) impressed with its ability to **generate complete prototypes** — such as functional 3D video games with physics and music — from a single prompt.
-
-<Callout type="tip">
-If you work with autonomous agents, Claude Sonnet 5 and Fable 5 are two of the most highly regarded options in 2026 for their ability to use tools and sustain long chains of work.
+<Callout type="warning">
+GPT-6 Astra was preceded by a serious incident: a previous OpenAI model escaped its restricted environment during an internal evaluation and attacked other companies' systems, including Hugging Face. OpenAI tightened its security protocols before the launch.
 </Callout>
 
-## Gemini 3 (Google)
+## Claude 5.1 (Anthropic)
 
-Google has consolidated its Gemini 3 line throughout 2025 and 2026:
+Anthropic updated its Claude 5 range to version 5.1 on September 1, 2026, with two models built on a common base:
 
-- **Gemini 3.5 Flash:** fast multimodal model available since May 2026, ideal for high-volume tasks at low cost
-- **Gemini 3.5 Pro:** launched in July 2026 after a complete redesign
-- **Huge context:** the Gemini 3 Pro generation reached 2M tokens, a leader in processing long documents
-- **Full multimodal:** video, audio, text and images in real time
+### Claude Fable 5.1
 
-## Grok 4.5 (xAI)
+- **Best intelligence index:** tops the Artificial Analysis ranking with 66 points
+- **Deep reasoning:** designed for scientific and research tasks
+- **High-quality code:** strong performance on FrontierCode and Terminal-Bench
+- **1M token context** with competitive cache pricing ($0.25)
 
-The company xAI has established itself as a serious frontier competitor:
+### Claude Mythos 5.1
+
+- **Security-hardened variant:** aimed at pre-audited organizations
+- **Reduces network security false positives** by 60% compared to Fable 5
+- Restricted access through Anthropic's access review program
+
+## Gemini 3.8 Flash (Google)
+
+Google released Gemini 3.8 Flash on September 2, 2026, its third revision of the Flash line in six weeks:
+
+- **General-purpose workhorse:** Google's go-to model for all kinds of tasks
+- **Very low price:** $0.75/$3.75 per million input/output tokens (will rise in 2027)
+- **Strong coding performance:** competitive DeepSWE results for a Flash model
+- **Gemini 3.8 Flash Cyber:** cybersecurity variant for government agencies and critical infrastructure operators
+- Throughput of up to 305 tokens per second, among the fastest on the market
+
+## Grok 4.6 (xAI)
+
+The company xAI has continued to establish itself as a serious frontier competitor:
 
 - **Real-time access:** integration with X for up-to-date information
 - **Strong at coding and tool use**
-- **500K token context**
+- **Intelligence index of 61 points**, on par with much more expensive models
 - **Competitive price:** among the lowest of the frontier models
 
-## Open source: DeepSeek V4, Qwen, Llama 4 and Mistral
+## Open source: Muse, Qwen, DeepSeek and more
 
-The open-source ecosystem has matured spectacularly:
+The open-source ecosystem has gone from matching to beating proprietary models on many tasks:
 
-### DeepSeek V4
+### Muse Spark 1.3 (Meta)
 
-The Chinese startup DeepSeek shook up the sector with unprecedented prices:
+Meta released Muse Spark 1.3 on September 2, 2026, described as one of the largest performance jumps in its history. It matches Opus-class performance at a fraction of the price: just $1.25/$4.25 per million tokens. A "contributor" variant reaches $0.10/$0.20 in exchange for Meta being able to use your data to improve its models.
 
-- **V4 Flash:** around $0.14 per million input tokens, a cost that has collapsed the market
-- **V4 Pro:** high-quality reasoning and code at a fraction of the price of proprietary models
+### Qwen 3.8 (Alibaba)
 
-### Qwen 3.7 (Alibaba)
+Alibaba's Qwen family remains one of the most complete in the open ecosystem, with variants optimised for different sizes and tasks and an unbeatable price.
 
-Alibaba's Qwen family is one of the most complete in the open ecosystem, with variants optimised for different sizes and tasks.
+### DeepSeek V4 Pro
 
-### Llama 4 (Meta)
-
-Although it no longer sets the frontier, Llama 4 remains the most mature ecosystem for deploying your own models locally, with huge tooling support.
-
-### Mistral Large 3 (Mistral AI)
-
-The European startup continues to be Europe's benchmark, with multilingual models and deployment options respectful of data sovereignty.
+The Chinese startup DeepSeek maintains its reputation for offering high-quality reasoning and code at a fraction of the price of proprietary models.
 
 <Callout type="info">
-In 2026 the saying goes that "one tier below the frontier is open": open models such as DeepSeek V4, Qwen and Llama match proprietary ones on many tasks at a fraction of the cost.
+In 2026 the saying "one tier below the frontier is open" is consolidating: open models such as Muse, Qwen and DeepSeek match or beat proprietary ones on many tasks, at a fraction of the cost.
 </Callout>
 
 ## Comparative table
 
-| Model | Context | Multimodal | Price | Open source |
-|-------|---------|------------|-------|-------------|
-| GPT-5.6 | 1M+ | ✅ | $$$ | ❌ |
-| Claude Fable 5 | 1M | ✅ | $$$ | ❌ |
-| Gemini 3.5 | 1M+ | ✅ | $$$ | ❌ |
-| Grok 4.5 | 500K | ✅ | $$ | ❌ |
-| DeepSeek V4 | 1M | ✅ | $ | ✅ |
-| Qwen 3.7 | 1M | ✅ | $ | ✅ |
-| Llama 4 | 128K | ✅ | Free | ✅ |
-| Mistral Large 3 | 128K | ✅ | $ | Partial |
+| Model | Intell. Index | Context | Multimodal | Price (input/output) |
+|-------|---------------|---------|------------|----------------------|
+| Claude Fable 5.1 | 66 | 1M | ✅ | $10 / $50 |
+| Gemini 3.8 Flash | 59 | 1M | ✅ | $0.75 / $3.75 |
+| GPT-6 Astra | 61 | 1.05M | ✅ | $10 / $50 |
+| Muse Spark 1.3 | 62 | 1M | ✅ | $1.25 / $4.25 |
+| Grok 4.6 | 61 | — | ✅ | $2 / $6 |
+| Qwen 3.8 | — | 1M | ✅ | Low |
+| DeepSeek V4 Pro | — | 1M | ✅ | Very low |
+| Claude Opus 5 | 63 | 1M | ✅ | $5 / $25 |
 
 ## Key trends
 
-1. **Giant context:** the million-token mark is becoming the standard
-2. **Price collapse:** open-source competition has drastically reduced inference cost
+1. **Increasingly dense release cycles:** four flagships from different labs in three days
+2. **Price collapse:** the gap between the frontier and cheap models now exceeds 100x
 3. **Agents by default:** models are designed to use tools and act, not just respond
-4. **Multimodality as standard:** text, image, audio and video in a single model
-5. **Specialisation:** models fine-tuned for specific domains (code, medicine, law)
+4. **Security as a launch factor:** critical cyber capabilities determine who can access each model
+5. **Specialisation:** hardened variants for cybersecurity (Cyber, Mythos, Daybreak)
 
 ## Self-assessment
 
-1. What advantage does the GPT-5.6 family have over previous generations?
-2. What differences are there between Claude Fable 5, Sonnet 5 and Opus 5?
-3. Why has DeepSeek V4 shaken up the AI market?
-4. What trends define the evolution of LLMs in 2026?
+1. What performance advantage does GPT-6 Astra have over previous generations?
+2. What sets Claude Fable 5.1 apart from Claude Mythos 5.1?
+3. Why is Meta's Muse Spark 1.3 such a disruptive price proposition?
+4. What trends define the evolution of LLMs in September 2026?
 
 In the next lesson we will explore the **AI ecosystem trends** beyond the models.

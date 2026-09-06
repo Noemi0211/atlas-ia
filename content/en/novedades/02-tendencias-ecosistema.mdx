@@ -1,6 +1,6 @@
 ---
 title: "AI ecosystem trends"
-description: "Autonomous agents, MCP, AI in the browser and open source"
+description: "Autonomous agents, MCP/A2A protocols, AI in the browser and open source"
 ---
 
 ## Beyond the models
@@ -28,7 +28,7 @@ Agentic AI has moved from demonstration to production:
 
 - 79% of companies state that they already use AI agents in real business scenarios
 - Gartner projects that 40% of enterprise applications will include agents by the end of 2026 (up from less than 5% in 2025)
-- Some estimates point out that 80% of new enterprise applications are already being developed with built-in agents
+- MCP tool calls from ChatGPT grew 98x during 2026
 
 ### Featured platforms
 
@@ -41,18 +41,26 @@ Agentic AI has moved from demonstration to production:
 
 ### MCP (Model Context Protocol)
 
-Anthropic introduced MCP in 2024 as an open standard for connecting models with tools. In 2026 it has become the de facto standard:
+Anthropic introduced MCP in 2024 as an open standard for connecting models with tools. The July 2026 specification marked its largest revision since launch:
 
 - **"The USB-C of AI":** a single protocol to connect any tool or data source
-- **Mass adoption:** more than 97 million monthly downloads of the SDK and support from all major companies (OpenAI, Google, Microsoft, Anthropic and AWS)
-- **Open governance:** since December 2025 the protocol is managed by the Linux Foundation, within the Agentic AI Foundation, with more than 140 member organisations
+- **Mass adoption:** around 250 million weekly SDK downloads, and more than 10,000 public servers
+- **Open governance:** since December 2025 the protocol is managed by the Linux Foundation, within the Agentic AI Foundation
+- **Stateless core:** the 2026-07-28 revision removed persistent connections, allowing servers to be deployed behind standard load balancers, serverless and at scale
+
+### News in the 2026-07-28 specification
+
+- **MCP Apps:** official extension that lets tools return interactive interfaces inside the chat
+- **MCP Tasks:** extension for long-running tasks asynchronously, without keeping the connection open
+- **Elicitation (MRTR):** servers can ask the user for confirmation before executing a destructive or costly action
+- **Formal deprecation policy:** changes are announced at least 12 months in advance
 
 ### A2A (Agent-to-Agent)
 
 Google promotes A2A, the protocol for communication between agents:
 
 - It allows agents from different vendors to discover each other, delegate tasks and collaborate
-- It reached version 1.0 in 2026
+- It reached version 1.0 in 2026 and moved under the same foundation as MCP
 
 ### How they relate
 
@@ -65,7 +73,11 @@ MCP is set to be what HTTP was for the web: a standard that enables interoperabi
 
 ### The security challenge
 
-With mass adoption come risks. Recent studies point out that many MCP servers have known vulnerabilities (path access or code injection), and that organisations often do not see how their agents connect to data. **Governance and monitoring are now as important as integration.**
+With mass adoption come risks. In the early months of 2026 more than 30 MCP-related CVEs were filed, including a remote code execution vulnerability with a score of 9.6 out of 10:
+
+- **Tool poisoning:** a malicious tool description can trick the model into leaking data, without the user ever seeing it
+- **Scarcely deployed OAuth:** in 2026 only 8.5% of remote servers implement the mandatory OAuth 2.1 authentication standard
+- Governance and monitoring are now as important as integration
 
 ## AI in the browser and on-device
 
@@ -73,7 +85,6 @@ Running models in the browser and on local devices is democratising access:
 
 - **WebLLM:** runs models such as Llama and Gemma in the browser
 - **Transformers.js:** transformer inference directly in JavaScript
-- **ONNX Runtime Web:** optimised execution in the browser
 - **Chrome Built-in AI:** native AI APIs in Chrome
 
 ### Small language models (SLM)
@@ -89,13 +100,13 @@ Small language models, optimised to run locally, have drastically cut inference 
 
 The open-source AI ecosystem has matured enormously:
 
-- **Models:** DeepSeek V4, Qwen 3.7, Llama 4, GLM-5.2, Mistral
+- **Models:** Muse, Qwen 3.8, DeepSeek V4, GLM-5, Mistral, Llama
 - **Frameworks:** LangChain, Haystack, DSPy, LlamaIndex
 - **Infrastructure:** vLLM, Ollama, TGI, llama.cpp
 - **Datasets:** Hugging Face leads with millions of datasets
 
 <Callout type="info">
-In 2026 the prediction that open models would match proprietary ones on most tasks came true. DeepSeek V4 and Qwen offer frontier quality at a fraction of the cost.
+In 2026 the prediction that open models would match proprietary ones on most tasks came true. Muse, Qwen and DeepSeek offer frontier quality at a fraction of the cost.
 </Callout>
 
 ## Other relevant trends
@@ -104,19 +115,19 @@ In 2026 the prediction that open models would match proprietary ones on most tas
 Veo 3.1, Sora 2, Kling 3.0 and Runway Gen-4.5 generate video with synchronised audio, consistent characters and near-cinematic quality.
 
 **Reasoning and chains of thought**
-Models that make their reasoning process explicit, such as the GPT-5.x family or Claude 5, with deep reasoning modes.
+Models that make their reasoning process explicit, such as the GPT-6 family or Claude 5, with deep reasoning modes.
 
 **Mass personalisation**
 Fine-tuning and RAG make it possible to create specialised assistants for each user or organisation.
 
-**Voice-to-voice**
-Models that process audio directly without intermediate transcription, enabling natural conversations in real time.
+**Agent security and governance**
+The maturation of MCP and its large-scale adoption put security and governance at the centre of the agentic ecosystem.
 
 ## Self-assessment
 
 1. What is MCP and why is it called "the USB-C of AI"?
-2. What is the difference between MCP and A2A?
-3. What advantages does running AI models in the browser or on-device have?
+2. What does the 2026-07-28 MCP specification bring (stateless core, MCP Apps, MCP Tasks)?
+3. What is tool poisoning and how is it mitigated?
 4. Which of these trends do you think will have the greatest impact on your professional field?
 
 In the next lesson we will take a deeper look at **advances in multimodal AI**.
