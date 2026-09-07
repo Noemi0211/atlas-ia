@@ -502,7 +502,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–48 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido), `ceecdf2` (Fase 48 tests). Working tree limpio.
+- **Fases 43–49 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido), `ceecdf2` (Fase 48 tests), `d340087` (Fase 49 cuestionarios). Working tree limpio.
 - Verificación Fase 49: `npm test` 110/110 (16 archivos), `npx tsc --noEmit` 0 errores, lint 0/0, `npm run validate:translations` → 0 errores (76 lecciones + 76 cuestionarios/304 preguntas), build OK (315 páginas).
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
