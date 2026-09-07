@@ -481,7 +481,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 4. ~~**OG image**~~ — `public/og.png` (1200×630) con la marca Atlas IA generado por `scripts/generate-og-image.mjs`; `openGraph.images` + `twitter:card` en `app/layout.tsx` (URLs absolutas vía `metadataBase`) y caché inmutable en `/og.png`.
 5. ~~**README.md**~~ — reescrito desde el boilerplate de create-next-app: descripción del proyecto, características, stack, tabla de bloques, puesta en marcha con variables de entorno, comandos, scripts de generación, estructura, tests y licencia CC BY-NC-SA 4.0.
 6. ~~**Prefijos `/en` `/val` + hreflang**~~ — SEO multilingüe real con rutas `/es` `/en` `/val` y hreflang (es/en/val/x-default). Completado en la Fase 43 (restructura a `app/[lang]/`, `proxy.ts` negocia y redirige el prefijo, `generateStaticParams` + `force-static` para SSG por idioma, sitemap 291 URLs, robots/manifest/canonical prefijados).
-7. **Bloque 10 Novedades** — actualizado a septiembre 2026 (Fase 45, lecciones 01/02/05); revisarlo periódicamente.
+7. **Bloque 10 Novedades** — actualizado a septiembre 2026 (Fase 45, lecciones 01/02/05) y **revisado al completo el 7/9/2026**: las lecciones 03 (multimodal: Veo 3.1/Sora 2/Kling 3.0/Runway Gen-4.5/Seedance 2.0/Wan 2.6), 04 (IA aplicada) y 06 (recursos) se verificaron y siguen vigentes; no quedan referencias a modelos obsoletos excepto "Mistral/Llama" como familias de código abierto (correcto) y años históricos (2023/2024/2025). Solo requiere revisión periódica.
 
 ### Mantenimiento
 8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
@@ -490,13 +490,14 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–48 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido). Fase 48 (tests de componentes interactivos) commiteada.
+- **Fases 43–48 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido), `ceecdf2` (Fase 48 tests). Working tree limpio.
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
 - Verificación Fase 48: `npm test` 96/96 (14 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
+- **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; revisar periódicamente el Bloque 10 Novedades.
+- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; ampliar cobertura de tests (AgentFlow, AIChat/ChatMarkdown, GlossaryPopover, cronología, retos/proyectos); implementar una funcionalidad nueva (quiz interactivo por lección, import/export de progreso, diploma de finalización).
 
 ## Bloques de contenido (MDX)
 
