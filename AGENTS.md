@@ -444,6 +444,24 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - Lecciones 03, 04 y 06 sin cambios (siguen actualizadas)
 - Verificación: `npm run validate:translations` → 0 errores en 76 lecciones; `npx tsc --noEmit` 0 errores; lint 0/0.
 
+### Fase 46 ✅ (Sentry + .env.example)
+- **@sentry/nextjs v10.73.0** instalado y configurado
+- 3 archivos de configuración: `sentry.client.config.ts` (browserTracing, cookies sanitizados), `sentry.server.config.ts` (cookies sanitizados), `sentry.edge.config.ts` (para proxy.ts)
+- `next.config.ts` envuelto con `withSentryConfig` (importado de `@sentry/nextjs/config`); opciones: `widenClientFileUpload`, `webpack.treeshake.removeDebugLogging`, `webpack.automaticVercelMonitors`
+- **Sentry desactivado en dev**: `enabled: NODE_ENV === "production" && !!SENTRY_DSN` (sin DSN, Sentry no hace nada)
+- **`captureException`** añadido en los `catch` de 5 API routes: `/api/chat`, `/api/register`, `/api/sync-progress` (POST y GET), `/api/docencia/students`
+- **`.env.example`** creado con todas las variables documentadas: `DATABASE_URL`, `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `TEACHER_EMAILS`, `OPENAI_API_KEY` (opcional), `SENTRY_DSN`, `SENTRY_ORG`, `SENTRY_PROJECT`, `SENTRY_AUTH_TOKEN`
+- `.gitignore` actualizado: `!.env.example` para que se pueda commitear
+- **Mock de Sentry en tests**: `vitest.setup.ts` mockea `@sentry/nextjs` y `@sentry/nextjs/config` (init, captureException, withSentryConfig como identity)
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación)
+
+### Fase 47 ✅ (contenido actualizado a septiembre 2026 en fundamentos e ia-multimodal)
+- **Actualización de modelos a septiembre 2026** en bloques fundamentos (05, 06, 07, 09, 10) e ia-multimodal (01, 05, 06) + prompting (04) y laboratorio (02) — en 3 idiomas (es/en/val)
+- Sustituidas todas las descripciones "actuales" obsoletas (GPT-4o/Claude 3.5/Gemini 1.5/Llama 3/Mistral) por los modelos de 2026 (GPT-6 Astra/Claude Fable 5.1/Gemini 3.8/Muse Spark 1.3/Qwen 3.8/DeepSeek V4), coherentes con el Bloque 10
+- **No se tocaron**: referencias históricas correctas (GPT-3 en 2020, GPT-4 en 2023, copyright/training, bloque 0 "Antes de Empezar")
+- Archivos modificados: `fundamentos/05-llm.mdx`, `06-transformers.mdx`, `07-tokens-contexto.mdx`, `09-modelos-principales.mdx`, `10-resumen-fundamentos.mdx`, `ia-multimodal/01-introduccion-multimodal.mdx`, `05-aplicaciones-multimodales.mdx`, `06-resumen-recursos.mdx`, `prompting/04-tecnicas-avanzadas.mdx`, `laboratorio/02-chat-ia-practico.mdx`, `novedades/03-multimodal-avances.mdx` (es/en/val = 33 archivos MDX)
+- Verificación: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
@@ -461,17 +479,15 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 8. ~~**Fechas estáticas en legal**~~ — `/privacidad`, `/uso-de-ia` y `/terminos` usan "agosto de 2026" fijo; reutilizar el patrón git automático de `/acerca-de`. Completado en la Fase 41 (módulo `lib/git.ts`, plantillas `{fecha}` en los diccionarios; también `/roadmap` y el header de `/acerca-de`).
 9. ~~**Sincronización es/en/val**~~ — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script. Completado en la Fase 44 (`scripts/validate-translations.mjs` + `npm run validate:translations`); ya detectó y corrigió 4 inconsistencias en `meta.json` (Vídeo, depuración, en/programacion, en/ia-docencia).
 10. ~~**PDF por bloque**~~ — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula. Completado en la Fase 42 (portada/footer/chips/índice adaptados, sin glosario ni cronología, salida `Atlas-IA-bloque-<slug>.pdf`).
-11. **Sentry / monitorización de errores** para producción, y `.env.example` documentado (hoy `TEACHER_EMAILS` y las API keys solo están en `.env`).
+11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–45 completadas y commiteadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44) y `d2dc445` (Fase 45: Bloque 10 Novedades actualizado a septiembre 2026, lecciones 01/02/05 + meta.json en es/en/val). Working tree limpio.
-- **PDF regenerado** tras los cambios del bloque 10: `Atlas-IA-contenido-completo.pdf` (3.95 MB, 11 bloques, 76 lecciones, 47 términos, 28 hitos) — verificado `%PDF-` válido.
-- Verificación Fase 43: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK. Runtime (servidor prod) confirmado: redirects de prefijo (`/`→`/es`, `/glosario` cookie en→`/en/glosario`), hreflang es/en/val + `x-default` absolutos, canonical prefijado, `Content-Language` es/en/val, `noindex` en auth, `/perfil` protegido con `callbackUrl` localizado, sitemap 291 URLs, robots con auth prefijado, manifest `start_url: /es`. SSG ● en todo el contenido (3 idiomas), dinámico solo donde hay sesión.
-- Verificación Fase 44: `npm run validate:translations` → 0 errores en 76 lecciones; `npx tsc --noEmit` 0 errores; lint 0/0.
-- Verificación Fase 45: `npm run validate:translations` → 0 errores (estructura es/en/val de las lecciones 01/02/05 reescritas sincronizada); `npx tsc --noEmit` 0 errores; lint 0/0.
+- **Fases 43–47 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45). Fases 46-47 pendientes de commit. Working tree: archivos de Sentry + .env.example + contenido actualizado sin commitear.
+- Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
+- Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: Sentry + `.env.example` (monitorización y variables de entorno documentadas); probar el panel docente con datos reales una vez haya alumnado registrado; revisar periódicamente el Bloque 10 Novedades.
+- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; revisar periódicamente el Bloque 10 Novedades.
 
 ## Bloques de contenido (MDX)
 
