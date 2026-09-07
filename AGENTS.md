@@ -470,10 +470,22 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **Lección de la Fase 38**: los labels sin `htmlFor`/`id` no son accesibles por `getByLabelText` → usar `getByPlaceholderText`, `getByRole` o `getByText` (especialmente cuando un texto se duplica en botones y cabeceras de tabla).
 - Verificación: `npm run test` 96/96 (14 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
 
+### Fase 49 ✅ (cuestionarios interactivos por lección)
+- `lib/quiz-data.ts` (~10.200 líneas): **76 lecciones × 4 preguntas = 304 preguntas** con variantes es/en/val (`QuizQuestionVariants`); opciones traducidas por idioma con índice `correct` (0-3) común, explicación `explain` por idioma. API: `getLeccionQuiz(lessonId, locale)` (fallback a es) y `QUIZ_COUNT` (76). Contenido fiel a los MDX (datos 2026: Muse Spark 1.3 1,25/4,25 $, ~250M descargas semanales SDK MCP, >10.000 servidores, >30 CVEs, RCE 9,6/10, OAuth 2.1 8,5 %, 79 % empresas con agentes, Reglamento (UE) 2026/1744). Autoría en `.tmp-quizzes/*.json` + generador `.tmp-quizzes/build-quiz-data.mjs` (borrados tras el merge).
+- `stores/progress.ts`: estado `quizBest: Record<string, number>` y `quizPerfect: string[]`; acción `recordQuizResult(lessonId, correct, total)` — XP = correct×5 **solo la primera vez**, mejor puntuación con `Math.max`, badge `quiz-perfecto` con acierto perfecto y `quiz-maestro` al completar 10 cuestionarios.
+- **3 badges nuevos (total 39)**: `primer-quiz` 📝 (primera vez), `quiz-perfecto` 🎯 (puntuación perfecta), `quiz-maestro` 📜 (10 cuestionarios) — añadidos a `BADGES` y a `data.badges` de es/en/val; el perfil los muestra automáticamente (`Object.entries(BADGES)` + `getBadgeText`).
+- `components/interactive/LessonQuiz.tsx`: componente cliente — 1 pregunta a la vez con barra de progreso, retroalimentación inmediata con explicación (`role="status"` + `aria-live="polite"`), botones "Siguiente pregunta"/"Ver resultado", pantalla final (aciertos, XP ganada, mejor resultado, reintentar); textos localizados `t.leccion.quiz.*`.
+- Integrado en la página de lección: `app/[lang]/bloques/[slug]/[leccion]/page.tsx` renderiza `<LessonQuiz>` tras el `LessonCompleteButton` cuando `getLeccionQuiz(lessonId, locale)` devuelve cuestionario para la lección.
+- `scripts/validate-translations.mjs`: validación ampliada a los cuestionarios (76 lecciones · 304 preguntas) — parseo balanceado del literal `QUIZZES` (robusto a saltos de línea embebidos en textos), lección real en `content/`, exactamente 4 preguntas, `correct` 0-3, y `q`/`options`(4)/`explain` presentes en los 3 idiomas.
+- Fix de patrón: los botones de opción llevaban `role="listitem"` (anulaba el role implícito de botón, rompía `getByRole("button", { name })` en tests y la navegación accesible); se eliminó.
+- Nota Windows para scripts Node: usar `fileURLToPath(import.meta.url)` (NO `new URL(import.meta.url).pathname`, que con `%20` y espacios en la ruta falla).
+- Tests nuevos: `lib/quiz-data.test.ts` (6 — ids reales vía `getAllLecciones`, 4 preguntas válidas en 3 idiomas, mismo índice correct entre idiomas, fallback a es, null para lecciones inexistentes) y `components/interactive/LessonQuiz.test.tsx` (4 — flujo completo con fixture propio, retroalimentación, resultado, XP/insignias, sin doble XP en reintento). `stores/progress.test.ts` ampliado con 4 tests de `recordQuizResult`.
+- Verificación: `npm test` 110/110 (16 archivos), `npx tsc --noEmit` 0 errores, lint 0/0, `npm run validate:translations` → 0 errores (76 lecciones + 76 cuestionarios/304 preguntas), build OK (315 páginas).
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
-1. ~~**Tests automatizados**~~ — Vitest + React Testing Library instalados; 96 tests en 14 archivos (lógica pura, smoke de API routes `/api/search` y `/api/chat` offline, componentes críticos LoginForm y ComparadorHerramientas, y los componentes interactivos del laboratorio PromptSandbox/ModelComparator/TokenSimulator).
+1. ~~**Tests automatizados**~~ — Vitest + React Testing Library instalados; 110 tests en 16 archivos (lógica pura, smoke de API routes `/api/search` y `/api/chat` offline, componentes críticos LoginForm y ComparadorHerramientas, los componentes interactivos del laboratorio PromptSandbox/ModelComparator/TokenSimulator y los cuestionarios LessonQuiz/quiz-data).
 2. ~~**Rate limiting en endpoints**~~ — in-memory (Map) por IP aplicado a `/api/register` (10/15 min), `/api/chat` (30/min) y login NextAuth (10/min) con 429 + `Retry-After`. Si se escala a varias instancias, migrar a `@upstash/ratelimit`.
 3. ~~**A11y: enlace "Saltar al contenido"**~~ — skip-link al inicio del DOM en `Shell.tsx` (localizado es/en/val) + `<main id="contenido" tabIndex={-1}>`.
 
@@ -491,13 +503,14 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 
 ## Estado actual (para retomar la sesión)
 - **Fases 43–48 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido), `ceecdf2` (Fase 48 tests). Working tree limpio.
+- Verificación Fase 49: `npm test` 110/110 (16 archivos), `npx tsc --noEmit` 0 errores, lint 0/0, `npm run validate:translations` → 0 errores (76 lecciones + 76 cuestionarios/304 preguntas), build OK (315 páginas).
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
 - Verificación Fase 48: `npm test` 96/96 (14 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; ampliar cobertura de tests (AgentFlow, AIChat/ChatMarkdown, GlossaryPopover, cronología, retos/proyectos); implementar una funcionalidad nueva (quiz interactivo por lección, import/export de progreso, diploma de finalización).
+- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; ampliar cobertura de tests (AgentFlow, AIChat/ChatMarkdown, GlossaryPopover, cronología, retos/proyectos); implementar una funcionalidad nueva (import/export de progreso, diploma de finalización).
 
 ## Bloques de contenido (MDX)
 
@@ -546,7 +559,7 @@ app/api/              → API Routes
 components/
   ui/                 → Card, Button, Badge, ProgressBar, Callout, CodeBlock
   layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs, LanguageSelector
-  interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator
+  interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator, LessonQuiz
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats
   content/            → MDXRenderer (usa next-mdx-remote/rsc), BlockCompleteCTA, LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
@@ -564,6 +577,7 @@ lib/
   glosario-data.ts    → 47 términos con definiciones
   glossary-match.ts   → Matcher trie para términos interactivos del glosario
   cronologia-data.ts  → 28 hitos históricos
+  quiz-data.ts        → 304 preguntas de cuestionario (76 lecciones × 4) con variantes es/en/val
   speech.ts           → Síntesis de voz (Web Speech API), extracción de texto legible
   ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
   auth.ts             → NextAuth config (Credentials)

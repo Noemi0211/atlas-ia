@@ -9,6 +9,8 @@ import { TableOfContents } from "@/components/content/TableOfContents";
 import { BlockCompleteCTA } from "@/components/content/BlockCompleteCTA";
 import { LessonCompleteButton } from "@/components/gamification/LessonCompleteButton";
 import { FavoriteButton } from "@/components/gamification/FavoriteButton";
+import { LessonQuiz } from "@/components/interactive/LessonQuiz";
+import { getLeccionQuiz } from "@/lib/quiz-data";
 import { getLocaleFromParams } from "@/lib/i18n/server";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { getBLOQUES, getBloqueMeta } from "@/lib/i18n/data";
@@ -120,6 +122,7 @@ export default async function LeccionPage({ params }: Props) {
 
   const headings = extractHeadings(data.content);
   const lessonId = `${slug}/${leccion}`;
+  const quiz = getLeccionQuiz(lessonId, locale);
 
   return (
     <div className="max-w-wide mx-auto px-6 py-10">
@@ -173,6 +176,12 @@ export default async function LeccionPage({ params }: Props) {
               <div className="mt-8 flex items-center justify-between">
                 <LessonCompleteButton lessonId={lessonId} />
               </div>
+
+              {quiz && (
+                <div className="mt-8">
+                  <LessonQuiz quiz={quiz} />
+                </div>
+              )}
 
               <LessonNav
                 bloqueSlug={slug}

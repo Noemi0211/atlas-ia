@@ -175,6 +175,22 @@ Behaviour rules:
     indice: "Table of contents",
     leccionesBloque: "Lessons in this block",
     notFound: "Lesson not found",
+    quiz: {
+      title: "Test what you've learned",
+      subtitle: "Answer the questions about this lesson.",
+      questionOf: "Question {current} of {total}",
+      correct: "Correct!",
+      incorrect: "Incorrect",
+      next: "Next question",
+      finish: "See results",
+      result: "Result",
+      score: "You got {correct} out of {total}",
+      perfect: "Perfect score!",
+      xpEarned: "You earned {xp} XP",
+      best: "Your best result: {best}/{total}",
+      retry: "Try again",
+      optionsLabel: "Options",
+    },
   },
 
   speech: {
@@ -1452,6 +1468,9 @@ Behaviour rules:
       "ingeniero-prompts": { nombre: "Prompt engineer", descripcion: "You used the interactive prompt studio" },
       "arquitecto-flujos": { nombre: "Flow architect", descripcion: "You created an agent flow in AgentFlow" },
       "evaluador-modelos": { nombre: "Model evaluator", descripcion: "You used the model comparator" },
+      "primer-quiz": { nombre: "First quiz", descripcion: "You completed your first quiz" },
+      "quiz-perfecto": { nombre: "Perfect score", descripcion: "You completed a quiz with a perfect score" },
+      "quiz-maestro": { nombre: "Quiz master", descripcion: "You completed 10 quizzes" },
     },
 
     retos: {

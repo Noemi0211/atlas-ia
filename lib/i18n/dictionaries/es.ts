@@ -184,6 +184,22 @@ Reglas de comportamiento:
     indice: "Índice de contenido",
     leccionesBloque: "Lecciones del bloque",
     notFound: "Lección no encontrada",
+    quiz: {
+      title: "Pon a prueba lo aprendido",
+      subtitle: "Responde a las preguntas sobre esta lección.",
+      questionOf: "Pregunta {current} de {total}",
+      correct: "¡Correcto!",
+      incorrect: "Incorrecto",
+      next: "Siguiente pregunta",
+      finish: "Ver resultado",
+      result: "Resultado",
+      score: "Has acertado {correct} de {total}",
+      perfect: "¡Puntuación perfecta!",
+      xpEarned: "Has ganado {xp} XP",
+      best: "Tu mejor resultado: {best}/{total}",
+      retry: "Volver a intentarlo",
+      optionsLabel: "Opciones",
+    },
   },
 
   speech: {
@@ -1461,6 +1477,9 @@ Reglas de comportamiento:
       "ingeniero-prompts": { nombre: "Ingeniero de prompts", descripcion: "Usaste el entorno de prompts interactivo" },
       "arquitecto-flujos": { nombre: "Arquitecto de flujos", descripcion: "Creaste un flujo de agentes en AgentFlow" },
       "evaluador-modelos": { nombre: "Evaluador de modelos", descripcion: "Usaste el comparador de modelos" },
+      "primer-quiz": { nombre: "Primer cuestionario", descripcion: "Completaste tu primer cuestionario" },
+      "quiz-perfecto": { nombre: "Puntuación perfecta", descripcion: "Completaste un cuestionario con puntuación perfecta" },
+      "quiz-maestro": { nombre: "Maestro del cuestionario", descripcion: "Completaste 10 cuestionarios" },
     },
 
     retos: {

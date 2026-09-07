@@ -222,9 +222,97 @@ for (const bloque of BLOQUE_SLUGS) {
 
 const esLessonCount = BLOQUE_SLUGS.reduce((n, b) => n + listMdx(blockDir("es", b)).length, 0);
 
+// --- Validación de cuestionarios (lib/quiz-data.ts) ---
+const QUIZ_PATH = join(process.cwd(), "lib", "quiz-data.ts");
+let quizCount = 0;
+let quizQuestionCount = 0;
+if (!existsSync(QUIZ_PATH)) {
+  fail("cuestionarios", "no existe lib/quiz-data.ts");
+} else {
+  try {
+    const src = readFileSync(QUIZ_PATH, "utf-8");
+    const marker = "const QUIZZES: Record<string, QuizQuestionVariants[]> = ";
+    const start = src.indexOf(marker) + marker.length;
+    if (start < 40) throw new Error("no pudo localizar el objeto QUIZZES");
+
+    const depth = { brace: 0, bracket: 0, quote: false, escape: false };
+    let end = -1;
+    for (let i = start; i < src.length; i++) {
+      const ch = src[i];
+      if (depth.quote) {
+        if (depth.escape) depth.escape = false;
+        else if (ch === "\\") depth.escape = true;
+        else if (ch === '"') depth.quote = false;
+        continue;
+      }
+      if (ch === '"') depth.quote = true;
+      else if (ch === "{") depth.brace++;
+      else if (ch === "}") {
+        depth.brace--;
+        if (depth.brace === 0 && depth.bracket === 0) {
+          end = i + 1;
+          break;
+        }
+      } else if (ch === "[") depth.bracket++;
+      else if (ch === "]") depth.bracket--;
+    }
+    if (end < 0) throw new Error("no pudo localizar el cierre del objeto QUIZZES");
+
+    const QUIZZES = JSON.parse(src.slice(start, end));
+
+    for (const lessonId of Object.keys(QUIZZES).sort()) {
+      quizCount++;
+      const slash = lessonId.indexOf("/");
+      const bloque = lessonId.slice(0, slash);
+      const leccionSlug = lessonId.slice(slash + 1);
+      if (!BLOQUE_SLUGS.includes(bloque)) {
+        fail("cuestionarios", `lección "${lessonId}": bloque desconocido`);
+        continue;
+      }
+      const esFile = join(blockDir("es", bloque), `${leccionSlug}.mdx`);
+      if (!existsSync(esFile)) {
+        fail("cuestionarios", `lección "${lessonId}": no existe la lección en es`);
+      }
+
+      if (!Array.isArray(QUIZZES[lessonId]) || QUIZZES[lessonId].length !== 4) {
+        fail("cuestionarios", `lección "${lessonId}": se esperaban exactamente 4 preguntas`);
+        continue;
+      }
+
+      QUIZZES[lessonId].forEach((q, i) => {
+        quizQuestionCount++;
+        const label = `lección "${lessonId}" pregunta ${i + 1}`;
+        if (typeof q.correct !== "number" || q.correct < 0 || q.correct > 3) {
+          fail("cuestionarios", `${label}: correct fuera de 0-3`);
+        }
+        for (const key of ["q", "options", "explain"]) {
+          if (!q[key]) fail("cuestionarios", `${label}: falta campo "${key}"`);
+        }
+        const texts = q.q || {};
+        for (const loc of LOCALES) {
+          if (typeof texts[loc] !== "string" || texts[loc].trim().length === 0) {
+            fail("cuestionarios", `${label}: falta q.${loc}`);
+          }
+          const opts = (q.options && q.options[loc]) || [];
+          if (opts.length !== 4) {
+            fail("cuestionarios", `${label}: options.${loc} debe tener 4 opciones`);
+          }
+          const ex = q.explain && q.explain[loc];
+          if (typeof ex !== "string" || ex.trim().length === 0) {
+            fail("cuestionarios", `${label}: falta explain.${loc}`);
+          }
+        }
+      });
+    }
+  } catch (e) {
+    fail("cuestionarios", `no se pudieron parsear: ${e.message}`);
+  }
+}
+
 console.log(`Validación de traducciones es/en/val`);
 console.log(`------------------------------------`);
 console.log(`Bloques: ${BLOQUE_SLUGS.length} · Lecciones (es): ${esLessonCount} · Lecciones cotejadas: ${checkedLessons}`);
+console.log(`Cuestionarios: ${quizCount} lecciones · ${quizQuestionCount} preguntas`);
 console.log(`Errores: ${errors.length}`);
 console.log("");
 

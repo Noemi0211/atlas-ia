@@ -15,6 +15,8 @@ function resetState() {
     comparedTools: 0,
     arbolCompletado: false,
     calculadoraUsada: false,
+    quizBest: {},
+    quizPerfect: [],
   });
 }
 
@@ -134,5 +136,40 @@ describe("useProgress", () => {
     const ranking = useProgress.getState().getRankingData();
     expect(ranking.length).toBeGreaterThan(0);
     expect(ranking.some((r) => r.name === "Tú")).toBe(true);
+  });
+
+  it("recordQuizResult suma XP la primera vez y guarda la mejor puntuación", () => {
+    const s = useProgress.getState();
+    s.recordQuizResult("fundamentos/01-que-es-ia", 3, 4);
+    expect(useProgress.getState().xp).toBe(15);
+    expect(useProgress.getState().quizBest["fundamentos/01-que-es-ia"]).toBe(3);
+    expect(useProgress.getState().badges).toContain("primer-quiz");
+
+    s.recordQuizResult("fundamentos/01-que-es-ia", 4, 4);
+    expect(useProgress.getState().xp).toBe(15);
+    expect(useProgress.getState().quizBest["fundamentos/01-que-es-ia"]).toBe(4);
+  });
+
+  it("recordQuizResult no repite XP al reintentar un cuestionario", () => {
+    const s = useProgress.getState();
+    s.recordQuizResult("fundamentos/01-que-es-ia", 2, 4);
+    s.recordQuizResult("fundamentos/01-que-es-ia", 4, 4);
+    expect(useProgress.getState().xp).toBe(10);
+  });
+
+  it("recordQuizResult otorga la insignia de puntuación perfecta", () => {
+    const s = useProgress.getState();
+    s.recordQuizResult("fundamentos/02-historia-ia", 4, 4);
+    const { quizPerfect, badges } = useProgress.getState();
+    expect(quizPerfect).toContain("fundamentos/02-historia-ia");
+    expect(badges).toContain("quiz-perfecto");
+  });
+
+  it("recordQuizResult desbloquea quiz-maestro al completar 10 cuestionarios", () => {
+    const s = useProgress.getState();
+    for (let i = 1; i <= 10; i++) {
+      s.recordQuizResult(`bloque/leccion-${String(i).padStart(2, "0")}`, i % 4, 4);
+    }
+    expect(useProgress.getState().badges).toContain("quiz-maestro");
   });
 });

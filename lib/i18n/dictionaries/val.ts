@@ -175,6 +175,22 @@ Regles de comportament:
     indice: "Índex de contingut",
     leccionesBloque: "Lliçons del bloc",
     notFound: "Lliçó no trobada",
+    quiz: {
+      title: "Posa a prova allò après",
+      subtitle: "Respon les preguntes sobre aquesta lliçó.",
+      questionOf: "Pregunta {current} de {total}",
+      correct: "Correcte!",
+      incorrect: "Incorrecte",
+      next: "Següent pregunta",
+      finish: "Veure resultat",
+      result: "Resultat",
+      score: "Has encertat {correct} de {total}",
+      perfect: "Puntuació perfecta!",
+      xpEarned: "Has guanyat {xp} XP",
+      best: "El teu millor resultat: {best}/{total}",
+      retry: "Tornar a intentar-ho",
+      optionsLabel: "Opcions",
+    },
   },
 
   speech: {
@@ -1452,6 +1468,9 @@ Regles de comportament:
       "ingeniero-prompts": { nombre: "Enginyer de prompts", descripcion: "Has usat l'entorn de prompts interactiu" },
       "arquitecto-flujos": { nombre: "Arquitecte de fluxos", descripcion: "Has creat un flux d'agents a AgentFlow" },
       "evaluador-modelos": { nombre: "Avaluador de models", descripcion: "Has usat el comparador de models" },
+      "primer-quiz": { nombre: "Primer qüestionari", descripcion: "Has completat el teu primer qüestionari" },
+      "quiz-perfecto": { nombre: "Puntuació perfecta", descripcion: "Has completat un qüestionari amb puntuació perfecta" },
+      "quiz-maestro": { nombre: "Mestre del qüestionari", descripcion: "Has completat 10 qüestionaris" },
     },
 
     retos: {

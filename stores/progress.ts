@@ -54,6 +54,8 @@ interface ProgressState {
   comparedTools: number;
   arbolCompletado: boolean;
   calculadoraUsada: boolean;
+  quizBest: Record<string, number>;
+  quizPerfect: string[];
 
   completeLesson: (lessonId: string) => void;
   addXP: (amount: number) => void;
@@ -66,6 +68,7 @@ interface ProgressState {
   unlockComparadorBadge: () => void;
   unlockArbolDecisionBadge: () => void;
   unlockCalculadoraBadge: () => void;
+  recordQuizResult: (lessonId: string, correct: number, total: number) => void;
 
   completeChallenge: (challengeId: string) => void;
   completeProject: (projectId: string) => void;
@@ -146,6 +149,8 @@ export const useProgress = create<ProgressState>()(
       comparedTools: 0,
       arbolCompletado: false,
       calculadoraUsada: false,
+      quizBest: {},
+      quizPerfect: [],
 
       completeLesson: (lessonId: string) => {
         const { completedLessons, xp, challenges } = get();
@@ -405,6 +410,33 @@ export const useProgress = create<ProgressState>()(
         if (!get().calculadoraUsada) {
           set({ calculadoraUsada: true });
           get().addBadge("calculadora-prompts");
+        }
+      },
+
+      recordQuizResult: (lessonId: string, correct: number, total: number) => {
+        const { quizBest, quizPerfect, xp } = get();
+        const firstTime = !(lessonId in quizBest);
+        const isPerfect = correct === total;
+
+        const newQuizBest = {
+          ...quizBest,
+          [lessonId]: Math.max(quizBest[lessonId] ?? 0, correct),
+        };
+        const newPerfect =
+          isPerfect && !quizPerfect.includes(lessonId)
+            ? [...quizPerfect, lessonId]
+            : quizPerfect;
+
+        set({
+          quizBest: newQuizBest,
+          quizPerfect: newPerfect,
+          ...(firstTime ? { xp: xp + correct * 5 } : {}),
+        });
+
+        if (firstTime) get().addBadge("primer-quiz");
+        if (isPerfect) get().addBadge("quiz-perfecto");
+        if (Object.keys(newQuizBest).length === 10) {
+          get().addBadge("quiz-maestro");
         }
       },
 
@@ -716,5 +748,20 @@ export const BADGES: Record<string, { nombre: string; descripcion: string; icono
     nombre: "Evaluador de modelos",
     descripcion: "Usaste el comparador de modelos",
     icono: "📊",
+  },
+  "primer-quiz": {
+    nombre: "Primer cuestionario",
+    descripcion: "Completaste tu primer cuestionario",
+    icono: "📝",
+  },
+  "quiz-perfecto": {
+    nombre: "Puntuación perfecta",
+    descripcion: "Completaste un cuestionario con puntuación perfecta",
+    icono: "🎯",
+  },
+  "quiz-maestro": {
+    nombre: "Maestro del cuestionario",
+    descripcion: "Completaste 10 cuestionarios",
+    icono: "📜",
   },
 };
