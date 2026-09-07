@@ -462,10 +462,18 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - Archivos modificados: `fundamentos/05-llm.mdx`, `06-transformers.mdx`, `07-tokens-contexto.mdx`, `09-modelos-principales.mdx`, `10-resumen-fundamentos.mdx`, `ia-multimodal/01-introduccion-multimodal.mdx`, `05-aplicaciones-multimodales.mdx`, `06-resumen-recursos.mdx`, `prompting/04-tecnicas-avanzadas.mdx`, `laboratorio/02-chat-ia-practico.mdx`, `novedades/03-multimodal-avances.mdx` (es/en/val = 33 archivos MDX)
 - Verificación: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83
 
+### Fase 48 ✅ (tests de los componentes interactivos del laboratorio)
+- **13 tests nuevos en 3 archivos** en `components/interactive/` (patrón `I18nProvider locale="es"` + reset de `useProgress.setState` en `beforeEach`):
+  - `PromptSandbox.test.tsx` (5 tests): pista vacía hasta escribir una tarea, generación de prompt al escribir, copiar → insignia `calculadora-prompts` + 25 XP (mock de `navigator.clipboard` con `vi.fn()`), sin XP duplicada al copiar dos veces, clic en sugerencia rellena la tarea.
+  - `ModelComparator.test.tsx` (4 tests): título + categoría Asistentes con 3 modelos (aserciones por `getByRole("button")` porque los nombres de modelo se duplican como botones y cabeceras de tabla), cambio a categoría Código (GitHub Copilot/Cursor), selección de modelo no duplica la insignia `evaluador-modelos` (30 XP), recomendación visible con ≥2 modelos.
+  - `TokenSimulator.test.tsx` (4 tests): título + estado inicial (aserciones con `getAllByText("0")` porque "0" aparece en la barra y en los tokens estimados), estimación "hola mundo" → 4 tokens (`getAllByText("4")`), clic en Ejemplo 1 → +5 XP, cambio de modelo a gemini-2.0 muestra el contexto (`getAllByText("1.000.000")` — en jsdom `toLocaleString()` produce separadores con punto).
+- **Lección de la Fase 38**: los labels sin `htmlFor`/`id` no son accesibles por `getByLabelText` → usar `getByPlaceholderText`, `getByRole` o `getByText` (especialmente cuando un texto se duplica en botones y cabeceras de tabla).
+- Verificación: `npm run test` 96/96 (14 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
+
 ## Mejoras pendientes (propuestas, ordenadas por impacto)
 
 ### Alta prioridad (Fase 38 ✅)
-1. ~~**Tests automatizados**~~ — Vitest + React Testing Library instalados; 83 tests en 11 archivos (lógica pura, smoke de API routes `/api/search` y `/api/chat` offline, y componentes críticos LoginForm y ComparadorHerramientas).
+1. ~~**Tests automatizados**~~ — Vitest + React Testing Library instalados; 96 tests en 14 archivos (lógica pura, smoke de API routes `/api/search` y `/api/chat` offline, componentes críticos LoginForm y ComparadorHerramientas, y los componentes interactivos del laboratorio PromptSandbox/ModelComparator/TokenSimulator).
 2. ~~**Rate limiting en endpoints**~~ — in-memory (Map) por IP aplicado a `/api/register` (10/15 min), `/api/chat` (30/min) y login NextAuth (10/min) con 429 + `Retry-After`. Si se escala a varias instancias, migrar a `@upstash/ratelimit`.
 3. ~~**A11y: enlace "Saltar al contenido"**~~ — skip-link al inicio del DOM en `Shell.tsx` (localizado es/en/val) + `<main id="contenido" tabIndex={-1}>`.
 
@@ -482,9 +490,10 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–47 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45). Fases 46-47 pendientes de commit. Working tree: archivos de Sentry + .env.example + contenido actualizado sin commitear.
+- **Fases 43–48 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido). Fase 48 (tests de componentes interactivos) commiteada.
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
+- Verificación Fase 48: `npm test` 96/96 (14 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
 - Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; revisar periódicamente el Bloque 10 Novedades.
