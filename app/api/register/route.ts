@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { captureException } from "@sentry/nextjs";
 import { prisma } from "@/lib/prisma";
 import { isTeacherEmail, ROLE_STUDENT } from "@/lib/auth";
 import { rateLimit } from "@/lib/rate-limit";
@@ -68,7 +69,8 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
-  } catch {
+  } catch (error) {
+    captureException(error);
     return NextResponse.json(
       { error: "Error al crear el usuario" },
       { status: 500 }

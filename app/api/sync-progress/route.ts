@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { captureException } from "@sentry/nextjs";
 import { getServerSession } from "@/lib/getServerSession";
 import { prisma } from "@/lib/prisma";
 
@@ -30,7 +31,8 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true, user: { id: user.id, xp: user.xp } });
-  } catch {
+  } catch (error) {
+    captureException(error);
     return NextResponse.json({ error: "Error al sincronizar" }, { status: 500 });
   }
 }
@@ -78,7 +80,8 @@ export async function GET() {
       projects: JSON.parse(user.projects),
       notifications: JSON.parse(user.notifications),
     });
-  } catch {
+  } catch (error) {
+    captureException(error);
     return NextResponse.json({ error: "Error al obtener datos" }, { status: 500 });
   }
 }

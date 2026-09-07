@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { captureException } from "@sentry/nextjs";
 import { streamChatResponse } from "@/lib/ai";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { DEFAULT_LOCALE, resolveLocale } from "@/lib/i18n/config";
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error("POST /api/chat error:", error);
+    captureException(error);
     return NextResponse.json(
       { error: getDictionary(DEFAULT_LOCALE).ai.internalError },
       { status: 500 }

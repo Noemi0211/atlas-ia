@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { captureException } from "@sentry/nextjs";
 import { getServerSession } from "@/lib/getServerSession";
 import { prisma } from "@/lib/prisma";
 import { ROLE_TEACHER } from "@/lib/auth";
@@ -157,7 +158,8 @@ export async function GET(req: Request) {
     }
 
     return NextResponse.json({ students: stats });
-  } catch {
+  } catch (error) {
+    captureException(error);
     return NextResponse.json(
       { error: "Error al obtener los datos docentes" },
       { status: 500 }
