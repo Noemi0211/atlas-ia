@@ -173,6 +173,7 @@ export function AgentFlow() {
                     <button
                       onClick={() => moveNode(index, "up")}
                       disabled={index === 0}
+                      aria-label={t.lab.agentFlow.moveUp}
                       className="text-fg-muted hover:text-fg disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <GripVertical className="w-3.5 h-3.5" />
@@ -181,6 +182,7 @@ export function AgentFlow() {
                     <span className="text-xs font-semibold text-fg">{node.label}</span>
                     <button
                       onClick={() => removeNode(node.id)}
+                      aria-label={t.lab.agentFlow.removeNode}
                       className="ml-auto text-fg-muted hover:text-error transition-colors"
                     >
                       <X className="w-3.5 h-3.5" />

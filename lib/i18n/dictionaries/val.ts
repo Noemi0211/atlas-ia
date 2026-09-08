@@ -911,6 +911,8 @@ Regles de comportament:
       ragDetected: "Flux RAG detectat: les dades recuperades es passaran al context del LLM",
       toolDetected: "Flux d'eina+LLM: el LLM podrà usar l'eina per a obtindre informació",
       basicDetected: "Flux bàsic: el flux de dades segueix l'ordre dels nodes",
+      moveUp: "Moure el node cap amunt",
+      removeNode: "Eliminar el node",
     },
     modelComparator: {
       title: "Comparador de models",

@@ -911,6 +911,8 @@ Behaviour rules:
       ragDetected: "RAG pipeline detected: the retrieved data will be passed to the LLM context",
       toolDetected: "Tool+LLM pipeline: the LLM will be able to use the tool to fetch information",
       basicDetected: "Basic pipeline: the data flows through the nodes in order",
+      moveUp: "Move node up",
+      removeNode: "Remove node",
     },
     modelComparator: {
       title: "Model comparator",

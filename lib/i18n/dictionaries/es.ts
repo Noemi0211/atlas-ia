@@ -920,6 +920,8 @@ Reglas de comportamiento:
       ragDetected: "Pipeline RAG detectado: los datos recuperados se pasarán al contexto del LLM",
       toolDetected: "Pipeline herramienta+LLM: el LLM podrá usar la herramienta para obtener información",
       basicDetected: "Pipeline básico: el flujo de datos sigue el orden de los nodos",
+      moveUp: "Mover nodo arriba",
+      removeNode: "Eliminar nodo",
     },
     modelComparator: {
       title: "Comparador de modelos",

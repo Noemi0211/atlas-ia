@@ -22,7 +22,7 @@ const processedBlocks = new WeakSet<Element>();
 
 function wrapMatches(
   node: Text,
-  matches: GlossaryMatch[],
+  matches: { slug: string; start: number; end: number }[],
   open: (slug: string, trigger: HTMLElement) => void
 ) {
   const fragment = document.createDocumentFragment();
@@ -82,11 +82,15 @@ function processBlock(
   }
 
   for (const node of textNodes) {
-    const matches = matcher
-      .find(node.data)
-      .filter((match) => !seen.has(match.slug));
+    const matches: GlossaryMatch[] = [];
+    const nodeSeen = new Set<string>();
+    for (const match of matcher.find(node.data)) {
+      if (seen.has(match.slug) || nodeSeen.has(match.slug)) continue;
+      nodeSeen.add(match.slug);
+      seen.add(match.slug);
+      matches.push(match);
+    }
     if (matches.length === 0) continue;
-    for (const match of matches) seen.add(match.slug);
     wrapMatches(node, matches, open);
   }
 }

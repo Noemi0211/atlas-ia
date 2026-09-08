@@ -233,7 +233,9 @@ function splitBlocks(text: string): React.ReactNode[] {
       if (!t) break;
       if (
         t.startsWith("```") ||
-        t.startsWith("|") ||
+        (t.startsWith("|") &&
+          i + 1 < lines.length &&
+          isTableSeparator(lines[i + 1])) ||
         t.startsWith("> ") ||
         isListLine(t) ||
         /^(#{1,3})\s/.test(t) ||
