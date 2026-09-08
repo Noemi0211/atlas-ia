@@ -519,7 +519,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–49 completadas.** Últimos commits: `006e13a` (Fase 43), `afa05a8` (Fase 44), `d2dc445` (Fase 45), `4ce2fe8` (Fase 46 Sentry), `4cfaf23` (Fase 47 contenido), `ceecdf2` (Fase 48 tests), `d340087` (Fase 49 cuestionarios). **Working tree con cambios sin commitear de la Fase 50**: fixes en `ChatMarkdown.tsx` (OOM por línea `|` suelta) y `GlossaryTermLinks.tsx` (dedupe 1ª aparición por término dentro de un nodo), claves `agentFlow` en es/en/val + aria-labelledby/aria-description en `AgentFlow.tsx`, y 15 archivos de test nuevos. Committear cuando se confirme.
+- **Fases 43–50 completadas.** Últimos commits: `d340087` (Fase 49 cuestionarios), `5c7e62c` (docs Fase 49), `2fb6607` (Fase 50: ampliación de cobertura de tests + fixes `ChatMarkdown` y `GlossaryTermLinks`). **Working tree limpio** (commit `2fb6607` incluye AGENTS.md actualizado con la Fase 50).
 - Verificación Fase 50: `npm test` 197/197 (31 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
