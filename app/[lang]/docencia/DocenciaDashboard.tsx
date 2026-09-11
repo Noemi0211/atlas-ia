@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
+import { DocenciaFeedback } from "./DocenciaFeedback";
 import { useI18n } from "@/lib/i18n/provider";
 import { getBLOQUES } from "@/lib/i18n/data";
 import { formatDate } from "@/lib/utils";
@@ -253,6 +254,8 @@ export function DocenciaDashboard() {
           </div>
         )}
       </Card>
+
+      <DocenciaFeedback />
     </div>
   );
 }

@@ -17,6 +17,7 @@ function resetState() {
     calculadoraUsada: false,
     quizBest: {},
     quizPerfect: [],
+    colaboradorBadge: false,
   });
 }
 
@@ -113,6 +114,18 @@ describe("useProgress", () => {
     const { comparedTools, badges } = useProgress.getState();
     expect(comparedTools).toBe(1);
     expect(badges).toContain("comparador-user");
+  });
+
+  it("unlockColaboradorBadge otorga insignia y XP solo la primera vez", () => {
+    useProgress.getState().unlockColaboradorBadge();
+    expect(useProgress.getState().badges).toContain("colaborador");
+    expect(useProgress.getState().xp).toBe(50);
+
+    useProgress.getState().unlockColaboradorBadge();
+    expect(useProgress.getState().xp).toBe(50);
+    expect(
+      useProgress.getState().badges.filter((b) => b === "colaborador")
+    ).toHaveLength(1);
   });
 
   it("generateDailyChallenges crea 3 retos diarios sin duplicar", () => {

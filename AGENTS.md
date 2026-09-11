@@ -519,7 +519,9 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–50 completadas.** Últimos commits: `d340087` (Fase 49 cuestionarios), `5c7e62c` (docs Fase 49), `2fb6607` (Fase 50: ampliación de cobertura de tests + fixes `ChatMarkdown` y `GlossaryTermLinks`). **Working tree limpio** (commit `2fb6607` incluye AGENTS.md actualizado con la Fase 50).
+- **Fases 43–51 completadas.** Último commit previo: `6b1dffb` (docs Fase 50). La Fase 51 (valoración + propuestas de mejora) está implementada pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`). Plan aprobado por el autor el 10/9/2026 e implementado el 11/9/2026.
+- Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
+- Nota: para probar `/valoracion` y el panel docente hay que crear una cuenta y (para ver la gestión) una cuenta docente vía `TEACHER_EMAILS` en `.env`.
 - Verificación Fase 50: `npm test` 197/197 (31 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
 - Verificación Fase 46: `npx tsc --noEmit` 0 errores, lint 0/0, tests 83/83, build OK (315 páginas, sin avisos de deprecación Sentry).
 - Verificación Fase 47: `npm run validate:translations` → 0 errores (76 lecciones); `npx tsc --noEmit` 0 errores; lint 0/0; tests 83/83. 33 archivos MDX actualizados en es/en/val.
@@ -527,7 +529,58 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente con datos reales una vez haya alumnado registrado; implementar una funcionalidad nueva (import/export de progreso, diploma de finalización).
+- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; implementar una funcionalidad nueva (import/export de progreso, diploma de finalización).
+
+## Fase 51 ✅ (valoración de la app + propuestas de mejora)
+> Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
+
+### Alcance
+Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la aplicación (estrellas 1–5 + categoría + comentario opcional) y envía propuestas de mejora. El docente consulta valoraciones y gestiona los estados de las propuestas desde el panel `/docencia`.
+
+### 1. Base de datos (`prisma/schema.prisma`)
+- Modelo **`UserFeedback`** — una valoración por usuario (`userId @unique`, se actualiza en el mismo registro): `score Int` (1–5), `category String?` (clave estable: contenido/dificultad/diseno/usabilidad/tecnico/otros), `comment String?`, `createdAt`/`updatedAt`, relación `User` (`onDelete: Cascade`).
+- Modelo **`Suggestion`** — múltiples por usuario: `title`, `description`, `category String?`, `status String @default("pending")` (`pending` | `revisada` | `implementada`), `createdAt`/`updatedAt`, relación `User` (`onDelete: Cascade`).
+- Aplicado con `npx prisma db push` + `prisma generate`.
+
+### 2. API routes
+- `app/api/feedback/route.ts` — `GET`: valoración propia + media global + conteo; si el rol es docente devuelve además `ratings[]` con la persona usuaria (nombre/correo). `POST`: crear/actualizar la valoración propia (validación score 1–5 entero, categoría vía `isFeedbackCategory`, comentario máx. 300; `upsert` por `userId`). Rate limit 5/15 min.
+- `app/api/suggestions/route.ts` — `GET`: las del usuario (o todas con persona usuaria si docente). `POST`: crear propuesta (validación título obligatorio máx. 120 y descripción obligatoria máx. 600, categoría opcional). Rate limit 5/15 min.
+- `app/api/suggestions/[id]/route.ts` — `PATCH`: docente cambia estado (`isSuggestionStatus`, 400/403/404 correctos). `DELETE`: docente elimina (403 para estudiantado). Guard `role === ROLE_TEACHER`.
+- Categorías y estados guardados como claves estables en `lib/feedback.ts` (`FEEDBACK_CATEGORIES`, `SUGGESTION_STATUSES`, guards `isFeedbackCategory`/`isSuggestionStatus`), traducidas en la UI.
+
+### 3. Página `/valoracion` (patrón `/perfil`: proxy + page server fino + client)
+- `proxy.ts`: `PROTECTED_PATHS = ["/perfil", "/docencia", "/valoracion"]`.
+- `app/[lang]/valoracion/page.tsx` — server fino: `generateMetadata` (canonical `/valoracion` + `buildLanguagesAlternates`), `Breadcrumbs`, título/subtítulo de `t.feedback`, `data-read-aloud`, renderiza `ValoracionContent`.
+- `app/[lang]/valoracion/ValoracionContent.tsx` (client):
+  - **Valoración**: selector de estrellas (5, `aria-label` con `t.feedback.starAria`, hover + `aria-pressed`), select de categoría, comentario opcional (máx. 300 con contador), botón "Enviar/Actualizar valoración". Muestra "Ya valoraste" y media + total + tu valoración.
+  - **Propuestas**: título (obligatorio, máx. 120), categoría, descripción (obligatoria, máx. 600), botón enviar. Lista "Mis propuestas" con `Badge` de estado (warning/accent/primary) y categoría.
+  - Feedback éxito/error con `role="status"` + `aria-live="polite"`.
+  - Al enviar la primera propuesta llama `unlockColaboradorBadge()` y muestra el aviso de insignia +50 XP.
+  - Carga inicial con `useCallback` + `setTimeout(0)` en el effect (patrón lint `react-hooks/set-state-in-effect`, igual que SpeechReader/AgentFlow).
+
+### 4. Gestión docente en `DocenciaDashboard.tsx`
+- Nuevo componente `app/[lang]/docencia/DocenciaFeedback.tsx` (renderizado bajo la tabla de estudiantes): resumen (total, media, pendientes), tabla de valoraciones (persona usuaria, estrellas, categoría, comentario, fecha) y lista de propuestas con botones de estado "Revisada" (PATCH `revisada`), "Implementada" (PATCH `implementada`) y eliminar (DELETE), con `role="status"` para los avisos.
+- Fetch a `/api/feedback` (incluye `ratings[]` solo para docentes) y `/api/suggestions`.
+
+### 5. i18n (`es.ts` fuente de verdad → `en`/`val` con `satisfies Dictionary`)
+- Nueva sección **`feedback`**: `title`, `subtitle`, formulario valoración (`ratingTitle`, `ratingIntro`, `ratingExisting`, `ratingSubmitted`, `categoryLabel`, `commentLabel`, `submitRating`, `updateRating`, `ratingSuccess`, `ratingUpdated`, `yourRating`, `globalAverage`, `totalRatings`), `categories` `{contenido, dificultad, diseno, usabilidad, tecnico, otros}`, formulario propuestas (`suggestionsTitle`, `suggestionsIntro`, `suggestionTitleLabel`, `suggestionCategoryLabel`, `suggestionDescLabel`, `submitSuggestion`, `suggestionSuccess`, `suggestionXp`, `mySuggestions`, `noSuggestions`), `statuses` `{pending, revisada, implementada}`, `errors` (generic/ratingInvalid/titleRequired/descRequired), `starAria`, `loading` y subsección `docente` (admin: title, summaryMedia/Total/Pending, noRatings/noSuggestions, ratingsList/suggestionsList, user/stars/category/comment/date/status, markReviewed/markImplemented/delete, updated/deleted).
+- `nav.valoracion`, `breadcrumbs.valoracion` y `footer.valoracion` ("Valoración" / "Rating" / "Valoració").
+
+### 6. Navegación y footer
+- Footer columna Plataforma: enlace `localize("/valoracion")`.
+- Sidebar `navItems`: entrada "Valoración" (icono `Star` de lucide, añadido a `iconMap`), visible siempre (la protección la hace el proxy).
+
+### 7. Sitemap/robots
+- `/valoracion` NO se añade al sitemap ni cambia robots (página con sesión, igual que `/perfil`).
+
+### 8. Badge de gamificación
+- Nuevo badge `colaborador` (💬 "Colaborador" / "Collaborator" / "Col·laborador") + 50 XP al enviar la primera propuesta (guard `colaboradorBadge` en el store, idempotente). Añadido a `BADGES`, `data.badges` es/en/val (total 40), estado `colaboradorBadge` en `ProgressState`/inicial y acción `unlockColaboradorBadge`.
+
+### 9. Tests y verificación
+- Smoke de API: `app/api/feedback/route.test.ts` (6: 401 sin sesión, GET estudiante con media sin `ratings`, GET docente con `ratings`, POST 401, POST 400 score fuera de rango, POST 400 categoría inválida, POST upsert correcto — mock de `getServerSession` + `prisma` con `vi.hoisted`), `app/api/suggestions/route.test.ts` (7) y `app/api/suggestions/[id]/route.test.ts` (7).
+- Componente: `ValoracionContent.test.tsx` (6: carga del resumen, error sin puntuación, envío de valoración con POST correcto, insignia `colaborador` + 50 XP al enviar propuesta, error sin descripción, lista con estado "Pendiente" — mocks de fetch que distinguen GET/POST).
+- Store: test nuevo `unlockColaboradorBadge otorga insignia y XP solo la primera vez` + `colaboradorBadge: false` en `resetState`.
+- Verificación final: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas).
 
 ## Bloques de contenido (MDX)
 
@@ -560,7 +613,8 @@ app/                  → Páginas (App Router) bajo segmento dinámico de idiom
     acerca-de/        → Página institucional (canonical + data-read-aloud)
     perfil/           → Estadísticas, ranking, retos, proyectos, badges (dinámica, sesión)
     laboratorio/      → Laboratorio interactivo (layout.tsx con canonical + fuerza static; página client)
-    docencia/         → Panel docente (dinámica, rol teacher) + DocenciaDashboard
+    docencia/         → Panel docente (dinámica, rol teacher) + DocenciaDashboard + DocenciaFeedback
+    valoracion/       → Valoración + propuestas de mejora (dinámica, sesión) + ValoracionContent
     auth/             → login + register (noindex)
   manifest.ts         → Manifest localizado (start_url /es, shortcuts prefijados)
   robots.ts           → allow "/", disallow auth prefijado (3 idiomas), sitemap.xml
@@ -572,6 +626,9 @@ app/api/              → API Routes
   search/             → Búsqueda full-text
   sync-progress/      → Sincronizar localStorage → DB
   chat/               → Chat IA streaming (SSE)
+  feedback/           → GET/POST valoración (docente ve ratings[], 5/15 min)
+  suggestions/        → GET/POST propuestas (docente ve todas, 5/15 min)
+  suggestions/[id]    → PATCH/DELETE propuesta (solo docente)
 
 components/
   ui/                 → Card, Button, Badge, ProgressBar, Callout, CodeBlock
@@ -582,7 +639,7 @@ components/
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
 
-proxy.ts              → Negocia prefijo de idioma (cookie/Accept-Language), redirige rutas sin prefijo, protege /perfil y /docencia, fija Content-Language (Next.js 16, reemplaza middleware.ts)
+proxy.ts              → Negocia prefijo de idioma (cookie/Accept-Language), redirige rutas sin prefijo, protege /perfil, /docencia y /valoracion, fija Content-Language (Next.js 16, reemplaza middleware.ts)
 
 lib/
   types.ts            → Interfaces (BloqueMeta, LeccionMeta, HerramientaIA, etc.)
@@ -595,6 +652,7 @@ lib/
   glossary-match.ts   → Matcher trie para términos interactivos del glosario
   cronologia-data.ts  → 28 hitos históricos
   quiz-data.ts        → 304 preguntas de cuestionario (76 lecciones × 4) con variantes es/en/val
+  feedback.ts         → Categorías y estados de valoración/propuestas (claves estables + guards)
   speech.ts           → Síntesis de voz (Web Speech API), extracción de texto legible
   ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
   auth.ts             → NextAuth config (Credentials)
@@ -612,7 +670,7 @@ stores/
   progress.ts         → Zustand + persist localStorage (XP, badges, retos, proyectos, notificaciones)
 
 prisma/
-  schema.prisma       → User, Account, Session, VerificationToken
+  schema.prisma       → User, Account, Session, VerificationToken, UserFeedback, Suggestion
   dev.db              → SQLite (gitignored)
 ```
 

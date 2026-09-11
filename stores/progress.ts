@@ -56,6 +56,7 @@ interface ProgressState {
   calculadoraUsada: boolean;
   quizBest: Record<string, number>;
   quizPerfect: string[];
+  colaboradorBadge: boolean;
 
   completeLesson: (lessonId: string) => void;
   addXP: (amount: number) => void;
@@ -68,6 +69,7 @@ interface ProgressState {
   unlockComparadorBadge: () => void;
   unlockArbolDecisionBadge: () => void;
   unlockCalculadoraBadge: () => void;
+  unlockColaboradorBadge: () => void;
   recordQuizResult: (lessonId: string, correct: number, total: number) => void;
 
   completeChallenge: (challengeId: string) => void;
@@ -151,6 +153,7 @@ export const useProgress = create<ProgressState>()(
       calculadoraUsada: false,
       quizBest: {},
       quizPerfect: [],
+      colaboradorBadge: false,
 
       completeLesson: (lessonId: string) => {
         const { completedLessons, xp, challenges } = get();
@@ -410,6 +413,14 @@ export const useProgress = create<ProgressState>()(
         if (!get().calculadoraUsada) {
           set({ calculadoraUsada: true });
           get().addBadge("calculadora-prompts");
+        }
+      },
+
+      unlockColaboradorBadge: () => {
+        if (!get().colaboradorBadge) {
+          set({ colaboradorBadge: true });
+          get().addBadge("colaborador");
+          get().addXP(50);
         }
       },
 
@@ -763,5 +774,10 @@ export const BADGES: Record<string, { nombre: string; descripcion: string; icono
     nombre: "Maestro del cuestionario",
     descripcion: "Completaste 10 cuestionarios",
     icono: "📜",
+  },
+  "colaborador": {
+    nombre: "Colaborador",
+    descripcion: "Enviaste tu primera propuesta de mejora",
+    icono: "💬",
   },
 };
