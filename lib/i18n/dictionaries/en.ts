@@ -277,6 +277,24 @@ Behaviour rules:
     subtitle: "Stats, badges, challenges and projects",
   },
 
+  perfilExport: {
+    title: "Save and restore progress",
+    description:
+      "Export your progress to a file and restore it on another device or browser. Importing replaces all your local progress.",
+    exportLabel: "Export progress",
+    importLabel: "Import progress",
+    exportSuccess: "Progress exported successfully.",
+    importSuccess: "Progress imported successfully.",
+    errors: {
+      generic: "The file could not be read.",
+      notJson: "The file is not valid JSON.",
+      invalidSchema: "The file is not an Atlas IA export.",
+      invalidData: "The file does not have a valid progress format.",
+      futureVersion:
+        "The file comes from a newer version of Atlas IA. Update the app and try again.",
+    },
+  },
+
   docencia: {
     title: "Teaching",
     subtitle: "Collect usage and statistics for each student.",

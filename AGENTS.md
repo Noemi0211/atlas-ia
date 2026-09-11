@@ -517,9 +517,11 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 9. ~~**Sincronización es/en/val**~~ — el control de líneas 1:1 es frágil; añadir una validación de frontmatter/estructura MDX en un script. Completado en la Fase 44 (`scripts/validate-translations.mjs` + `npm run validate:translations`); ya detectó y corrigió 4 inconsistencias en `meta.json` (Vídeo, depuración, en/programacion, en/ia-docencia).
 10. ~~**PDF por bloque**~~ — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula. Completado en la Fase 42 (portada/footer/chips/índice adaptados, sin glosario ni cronología, salida `Atlas-IA-bloque-<slug>.pdf`).
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
+12. ~~**Import/export de progreso**~~ — snapshot portable `lib/progress-export.ts` (schema `atlas-progress` v1, validación estricta, rechazo de versiones futuras) + card `ProgressExport` en el perfil. Completado en la Fase 52.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–51 completadas.** Último commit previo: `6b1dffb` (docs Fase 50). La Fase 51 (valoración + propuestas de mejora) está implementada pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`). Plan aprobado por el autor el 10/9/2026 e implementado el 11/9/2026.
+- **Fases 43–52 completadas.** Último commit: `d6ac1f8` (Fase 51 valoración). La Fase 52 (import/export de progreso) está implementada pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`).
+- Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 - Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
 - Nota: para probar `/valoracion` y el panel docente hay que crear una cuenta y (para ver la gestión) una cuenta docente vía `TEACHER_EMAILS` en `.env`.
 - Verificación Fase 50: `npm test` 197/197 (31 archivos), `npx tsc --noEmit` 0 errores, lint 0/0.
@@ -529,7 +531,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; implementar una funcionalidad nueva (import/export de progreso, diploma de finalización).
+- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; implementar una funcionalidad nueva (diploma de finalización).
 
 ## Fase 51 ✅ (valoración de la app + propuestas de mejora)
 > Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
@@ -581,6 +583,15 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - Componente: `ValoracionContent.test.tsx` (6: carga del resumen, error sin puntuación, envío de valoración con POST correcto, insignia `colaborador` + 50 XP al enviar propuesta, error sin descripción, lista con estado "Pendiente" — mocks de fetch que distinguen GET/POST).
 - Store: test nuevo `unlockColaboradorBadge otorga insignia y XP solo la primera vez` + `colaboradorBadge: false` en `resetState`.
 - Verificación final: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas).
+
+## Fase 52 ✅ (import/export de progreso)
+- **`lib/progress-export.ts`**: snapshot portable del progreso — `EXPORT_SCHEMA = "atlas-progress"`, `SCHEMA_VERSION = 1`, interfaz `ProgressData` (los 16 campos serializables del store Zustand: completedLessons, xp, badges, favorites, notes, currentStreak, lastVisit, challenges, projects, notifications, comparedTools, arbolCompletado, calculadoraUsada, quizBest, quizPerfect, colaboradorBadge). `createSnapshot(data)` → `{ schema, version, exportedAt, data }`. `isValidProgressData` valida tipos de forma estricta (arrays de strings, records string→string / string→number, enums de challenge/project/notification) y `parseSnapshot(json)` devuelve `ParseResult` con razones: `not-json` | `invalid-schema` | `invalid-data` | `future-version`. El import rechaza versiones futuras (`version > SCHEMA_VERSION`).
+- **`components/gamification/ProgressExport.tsx`**: card en el perfil con dos botones — **Exportar** (descarga `atlas-progreso-YYYY-MM-DD.json` con Blob + `<a download>`, feedback de éxito) y **Importar** (input de archivo oculto `accept=".json"`, lee con FileReader, `parseSnapshot`, y si es válido hace `useProgress.setState(snapshot.data)` para reemplazar todo el progreso). Errores localizados según la razón (`t.perfilExport.errors.*`). Feedback con `role="status"` + `aria-live="polite"` (verde `text-accent` / rojo `text-error`; no existe `text-success` como token de color).
+- **`app/[lang]/perfil/PerfilContent.tsx`**: `<ProgressExport />` renderizado bajo `<AllBadges />` (ambos `lg:col-span-3`).
+- **i18n**: nueva sección `perfilExport` en es/en/val (`title`, `description` con aviso de que importar reemplaza el progreso local, `exportLabel`, `importLabel`, `exportSuccess`, `importSuccess`, `errors.{generic,notJson,invalidSchema,invalidData,futureVersion}`).
+- Nota de diseño: no hay confirmación previa al importar; el aviso está en la descripción de la card. Las funciones del store no se serializan (solo datos), y `setState` hace merge parcial sobre las acciones.
+- **Tests**: `lib/progress-export.test.ts` (14: round-trip createSnapshot→JSON, validaciones de tipos, rechazo de JSON no válido, schema ajeno, versión futura, datos internos inválidos, campos opcionales `badgeReward`/`completedAt` ausentes) y `components/gamification/ProgressExport.test.tsx` (8: render, export con mock de `URL.createObjectURL` + `HTMLAnchorElement.prototype.click`, import válido reemplaza el estado, errores not-json/invalid-schema/invalid-data/future-version, estado intacto ante archivo inválido).
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 
 ## Bloques de contenido (MDX)
 
@@ -634,7 +645,7 @@ components/
   ui/                 → Card, Button, Badge, ProgressBar, Callout, CodeBlock
   layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs, LanguageSelector
   interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator, LessonQuiz
-  gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats
+  gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats, ProgressExport (import/export)
   content/            → MDXRenderer (usa next-mdx-remote/rsc), BlockCompleteCTA, LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)
@@ -654,6 +665,7 @@ lib/
   quiz-data.ts        → 304 preguntas de cuestionario (76 lecciones × 4) con variantes es/en/val
   feedback.ts         → Categorías y estados de valoración/propuestas (claves estables + guards)
   speech.ts           → Síntesis de voz (Web Speech API), extracción de texto legible
+  progress-export.ts  → Snapshot de progreso (schema atlas-progress, validación + parseSnapshot)
   ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
   auth.ts             → NextAuth config (Credentials)
   prisma.ts           → PrismaClient singleton

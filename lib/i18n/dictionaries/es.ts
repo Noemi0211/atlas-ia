@@ -286,6 +286,24 @@ Reglas de comportamiento:
     subtitle: "Estadísticas, insignias, retos y proyectos",
   },
 
+  perfilExport: {
+    title: "Guardar y restaurar progreso",
+    description:
+      "Exporta tu progreso a un archivo y restáuralo en otro dispositivo o navegador. Importar reemplaza todo tu progreso local.",
+    exportLabel: "Exportar progreso",
+    importLabel: "Importar progreso",
+    exportSuccess: "Progreso exportado correctamente.",
+    importSuccess: "Progreso importado correctamente.",
+    errors: {
+      generic: "No se pudo leer el archivo.",
+      notJson: "El archivo no es un JSON válido.",
+      invalidSchema: "El archivo no es un progreso de Atlas IA.",
+      invalidData: "El archivo no tiene un formato de progreso válido.",
+      futureVersion:
+        "El archivo proviene de una versión más reciente de Atlas IA. Actualiza la aplicación e inténtalo de nuevo.",
+    },
+  },
+
   docencia: {
     title: "Docencia",
     subtitle: "Recopila el uso y las estadísticas de cada estudiante.",

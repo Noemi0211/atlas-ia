@@ -5,6 +5,7 @@ import { ProfileStats } from "@/components/gamification/ProfileStats";
 import { RankingTable } from "@/components/gamification/RankingTable";
 import { RetosCard } from "@/components/gamification/RetosCard";
 import { ProjectList } from "@/components/gamification/ProjectCard";
+import { ProgressExport } from "@/components/gamification/ProgressExport";
 import { useProgress, BADGES } from "@/stores/progress";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Award } from "lucide-react";
@@ -69,6 +70,9 @@ export function PerfilContent() {
       </div>
       <div className="lg:col-span-3">
         <AllBadges />
+      </div>
+      <div className="lg:col-span-3">
+        <ProgressExport />
       </div>
     </div>
   );

@@ -277,6 +277,24 @@ Regles de comportament:
     subtitle: "Estadístiques, insígnies, reptes i projectes",
   },
 
+  perfilExport: {
+    title: "Guardar i restaurar el progrés",
+    description:
+      "Exporta el teu progrés a un fitxer i restaural en un altre dispositiu o navegador. Importar reemplaça tot el teu progrés local.",
+    exportLabel: "Exportar progrés",
+    importLabel: "Importar progrés",
+    exportSuccess: "Progrés exportat correctament.",
+    importSuccess: "Progrés importat correctament.",
+    errors: {
+      generic: "No es va poder llegir el fitxer.",
+      notJson: "El fitxer no és un JSON vàlid.",
+      invalidSchema: "El fitxer no és un progrés d'Atlas IA.",
+      invalidData: "El fitxer no té un format de progrés vàlid.",
+      futureVersion:
+        "El fitxer prové d'una versió més recent d'Atlas IA. Actualitza l'aplicació i torna-ho a provar.",
+    },
+  },
+
   docencia: {
     title: "Docència",
     subtitle: "Recopila l'ús i les estadístiques de cada estudiant.",
