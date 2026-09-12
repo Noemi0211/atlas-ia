@@ -3,45 +3,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { BLOQUES } from "@/lib/constants";
+import { BADGES, type BadgeInfo } from "./badges";
+import {
+  DAILY_CHALLENGES,
+  WEEKLY_CHALLENGES,
+  DEFAULT_PROJECTS,
+  generateRankingData,
+  type Challenge,
+  type Notification,
+  type Project,
+  type RankingEntry,
+} from "./progress-data";
+
+export { BADGES, type BadgeInfo };
+export type { Challenge, Notification, Project, RankingEntry };
 
 export const TOTAL_LESSONS = BLOQUES.reduce((acc, b) => acc + b.lecciones, 0);
-
-export interface Challenge {
-  id: string;
-  type: "daily" | "weekly";
-  title: string;
-  description: string;
-  xpReward: number;
-  badgeReward?: string;
-  completed: boolean;
-  expiresAt: string;
-}
-
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  difficulty: "basico" | "intermedio" | "avanzado";
-  completed: boolean;
-  completedAt?: string;
-}
-
-export interface Notification {
-  id: string;
-  type: "badge" | "challenge" | "streak" | "level";
-  title: string;
-  message: string;
-  read: boolean;
-  createdAt: string;
-}
-
-export interface RankingEntry {
-  name: string;
-  xp: number;
-  badges: number;
-  streak: number;
-  avatar: string;
-}
 
 interface ProgressState {
   completedLessons: string[];
@@ -91,52 +68,6 @@ interface ProgressState {
 
 function generateId(): string {
   return Math.random().toString(36).substring(2, 11);
-}
-
-const DAILY_CHALLENGES: Omit<Challenge, "id" | "completed" | "expiresAt">[] = [
-  { type: "daily", title: "Una lección hoy", description: "Completa al menos 1 lección", xpReward: 30, badgeReward: "reto-diario" },
-  { type: "daily", title: "Racha activa", description: "Visita la plataforma y completa una lección", xpReward: 20 },
-  { type: "daily", title: "Explora una herramienta", description: "Usa el comparador de herramientas", xpReward: 25 },
-];
-
-const WEEKLY_CHALLENGES: Omit<Challenge, "id" | "completed" | "expiresAt">[] = [
-  { type: "weekly", title: "3 lecciones esta semana", description: "Completa 3 lecciones en 7 días", xpReward: 100, badgeReward: "reto-semanal" },
-  { type: "weekly", title: "Prueba 3 herramientas", description: "Usa el comparador 3 veces", xpReward: 80 },
-  { type: "weekly", title: "Racha de 3 días", description: "Mantén una racha de 3 días consecutivos", xpReward: 120, badgeReward: "racha-3" },
-];
-
-const DEFAULT_PROJECTS: Omit<Project, "completed" | "completedAt">[] = [
-  { id: "proyecto-1", title: "Chatbot simple con prompts", description: "Diseña un prompt de sistema para un asistente de atención al cliente", difficulty: "basico" },
-  { id: "proyecto-2", title: "Análisis de sentimientos", description: "Usa IA para analizar el sentimiento de 10 reseñas de productos", difficulty: "basico" },
-  { id: "proyecto-3", title: "Generador de imágenes", description: "Crea una serie de 5 imágenes con DALL-E o Midjourney para una campaña", difficulty: "intermedio" },
-  { id: "proyecto-4", title: "Flujo de automatización", description: "Diseña un flujo de trabajo con Make o Zapier que use IA", difficulty: "intermedio" },
-  { id: "proyecto-5", title: "Agente RAG básico", description: "Construye un agente con recuperación de información usando prompts", difficulty: "avanzado" },
-  { id: "proyecto-6", title: "Comparativa de modelos", description: "Compara GPT-4, Claude y Gemini en una tarea específica y documenta resultados", difficulty: "avanzado" },
-];
-
-const NAMES = ["Ana García", "Carlos López", "María Rodríguez", "David Martínez", "Laura Sánchez", "Jorge Fernández", "Sofía Díaz", "Miguel Ángel Ruiz", "Elena Torres", "Pablo Ramírez", "Isabel Castro", "Alejandro Vargas", "Valentina Ortiz", "Fernando Mendoza", "Camila Ríos", "Andrés Herrera", "Lucía Campos", "Santiago Vega", "Paula Navarro", "Diego Aguirre"];
-const AVATARS = ["🧑‍💻", "👩‍🔬", "👨‍🏫", "👩‍🎨", "👨‍🚀", "👩‍💼", "👨‍🔧", "👩‍🎓", "👨‍💻", "👩‍🏭"];
-
-function generateRankingData(currentXP: number, currentBadges: string[], currentStreak: number): RankingEntry[] {
-  const entries: RankingEntry[] = [
-    { name: "Tú", xp: currentXP, badges: currentBadges.length, streak: currentStreak, avatar: "⭐" },
-  ];
-
-  const shuffled = [...NAMES].sort(() => Math.random() - 0.5).slice(0, 15);
-  for (const name of shuffled) {
-    const xpBase = Math.floor(Math.random() * 3000) + 100;
-    const variation = Math.random() > 0.5 ? 1 : -1;
-    const xp = Math.max(50, xpBase + variation * Math.floor(Math.random() * 500));
-    entries.push({
-      name,
-      xp,
-      badges: Math.floor(Math.random() * 8) + 1,
-      streak: Math.floor(Math.random() * 30),
-      avatar: AVATARS[Math.floor(Math.random() * AVATARS.length)],
-    });
-  }
-
-  return entries.sort((a, b) => b.xp - a.xp);
 }
 
 export const useProgress = create<ProgressState>()(
@@ -591,210 +522,3 @@ export const useProgress = create<ProgressState>()(
   )
 );
 
-export const BADGES: Record<string, { nombre: string; descripcion: string; icono: string }> = {
-  "first-lesson": {
-    nombre: "Primer paso",
-    descripcion: "Completaste tu primera lección",
-    icono: "🎯",
-  },
-  "five-lessons": {
-    nombre: "Estudiante dedicado",
-    descripcion: "Completaste 5 lecciones",
-    icono: "📚",
-  },
-  "ten-lessons": {
-    nombre: "Explorador",
-    descripcion: "Completaste 10 lecciones",
-    icono: "🧭",
-  },
-  "twenty-five-lessons": {
-    nombre: "Maestro del conocimiento",
-    descripcion: "Completaste 25 lecciones",
-    icono: "🏆",
-  },
-  "fifty-lessons": {
-    nombre: "Erudito",
-    descripcion: "Completaste 50 lecciones",
-    icono: "📖",
-  },
-  "seventy-five-lessons": {
-    nombre: "Sabio de la IA",
-    descripcion: "Completaste 75 lecciones",
-    icono: "🏅",
-  },
-  "xp-100": {
-    nombre: "Centenario",
-    descripcion: "Acumulaste 100 XP",
-    icono: "⭐",
-  },
-  "xp-500": {
-    nombre: "Veterano",
-    descripcion: "Acumulaste 500 XP",
-    icono: "🌟",
-  },
-  "xp-1000": {
-    nombre: "Leyenda",
-    descripcion: "Acumulaste 1.000 XP",
-    icono: "👑",
-  },
-  "xp-2500": {
-    nombre: "Inmortal",
-    descripcion: "Acumulaste 2.500 XP",
-    icono: "💎",
-  },
-  "xp-5000": {
-    nombre: "Dios de la IA",
-    descripcion: "Acumulaste 5.000 XP",
-    icono: "⚡",
-  },
-  "streak-7": {
-    nombre: "Racha de fuego",
-    descripcion: "7 días consecutivos de aprendizaje",
-    icono: "🔥",
-  },
-  "streak-14": {
-    nombre: "Racha imparable",
-    descripcion: "14 días consecutivos de aprendizaje",
-    icono: "💪",
-  },
-  "streak-30": {
-    nombre: "Leyenda viviente",
-    descripcion: "30 días consecutivos de aprendizaje",
-    icono: "🌟",
-  },
-  "ecosistema-complete": {
-    nombre: "Explorador del ecosistema",
-    descripcion: "Completaste todas las lecciones del Bloque 2",
-    icono: "🌍",
-  },
-  "comparador-user": {
-    nombre: "Comparador experto",
-    descripcion: "Usaste el comparador interactivo de herramientas",
-    icono: "⚖️",
-  },
-  "arbol-decision": {
-    nombre: "Decisión inteligente",
-    descripcion: "Completaste el árbol de decisión de herramientas",
-    icono: "🌳",
-  },
-  "prompting-complete": {
-    nombre: "Maestro del prompt",
-    descripcion: "Completaste todas las lecciones del Bloque 3",
-    icono: "💬",
-  },
-  "calculadora-prompts": {
-    nombre: "Arquitecto de prompts",
-    descripcion: "Usaste la calculadora de prompts",
-    icono: "🔧",
-  },
-  "reto-diario": {
-    nombre: "Asiduo",
-    descripcion: "Completaste un reto diario",
-    icono: "📅",
-  },
-  "reto-semanal": {
-    nombre: "Campeón semanal",
-    descripcion: "Completaste un reto semanal",
-    icono: "📆",
-  },
-  "racha-3": {
-    nombre: "Constante",
-    descripcion: "Mantuviste una racha de 3 días",
-    icono: "📈",
-  },
-  "primer-proyecto": {
-    nombre: "Arquitecto en prácticas",
-    descripcion: "Completaste tu primer proyecto",
-    icono: "🛠️",
-  },
-  "tres-proyectos": {
-    nombre: "Constructor",
-    descripcion: "Completaste 3 proyectos",
-    icono: "🏗️",
-  },
-  "todos-proyectos": {
-    nombre: "Maestro constructor",
-    descripcion: "Completaste todos los proyectos",
-    icono: "🏰",
-  },
-  "chat-ia": {
-    nombre: "Explorador del laboratorio",
-    descripcion: "Usaste el chat de IA en el laboratorio",
-    icono: "🔬",
-  },
-  "agentes-complete": {
-    nombre: "Arquitecto de agentes",
-    descripcion: "Completaste todas las lecciones del Bloque 7",
-    icono: "🤖",
-  },
-  "ia-docencia-complete": {
-    nombre: "Educador IA",
-    descripcion: "Completaste todas las lecciones del Bloque 4",
-    icono: "🎓",
-  },
-  "ia-multimodal-complete": {
-    nombre: "Explorador multimodal",
-    descripcion: "Completaste todas las lecciones del Bloque 5",
-    icono: "🖼️",
-  },
-  "programacion-complete": {
-    nombre: "Arquitecto de software",
-    descripcion: "Completaste todas las lecciones del Bloque 6",
-    icono: "💻",
-  },
-  "etica-complete": {
-    nombre: "Guardián ético",
-    descripcion: "Completaste todas las lecciones del Bloque 8",
-    icono: "🛡️",
-  },
-  "laboratorio-complete": {
-    nombre: "Científico de IA",
-    descripcion: "Completaste todas las lecciones del Bloque 9",
-    icono: "🧪",
-  },
-  "novedades-complete": {
-    nombre: "Vanguardista",
-    descripcion: "Completaste todas las lecciones del Bloque 10",
-    icono: "✨",
-  },
-  "ingeniero-prompts": {
-    nombre: "Ingeniero de prompts",
-    descripcion: "Usaste el entorno de prompts interactivo",
-    icono: "💡",
-  },
-  "arquitecto-flujos": {
-    nombre: "Arquitecto de flujos",
-    descripcion: "Creaste un flujo de agentes en AgentFlow",
-    icono: "🔀",
-  },
-  "evaluador-modelos": {
-    nombre: "Evaluador de modelos",
-    descripcion: "Usaste el comparador de modelos",
-    icono: "📊",
-  },
-  "primer-quiz": {
-    nombre: "Primer cuestionario",
-    descripcion: "Completaste tu primer cuestionario",
-    icono: "📝",
-  },
-  "quiz-perfecto": {
-    nombre: "Puntuación perfecta",
-    descripcion: "Completaste un cuestionario con puntuación perfecta",
-    icono: "🎯",
-  },
-  "quiz-maestro": {
-    nombre: "Maestro del cuestionario",
-    descripcion: "Completaste 10 cuestionarios",
-    icono: "📜",
-  },
-  "colaborador": {
-    nombre: "Colaborador",
-    descripcion: "Enviaste tu primera propuesta de mejora",
-    icono: "💬",
-  },
-  "curso-completo": {
-    nombre: "Diploma",
-    descripcion: "Completaste el curso completo de Atlas IA",
-    icono: "🎓",
-  },
-};

@@ -521,7 +521,8 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 13. ~~**Onboarding / guía de primer acceso**~~ — modal de 4 pasos (`components/onboarding/OnboardingModal.tsx`) al primer acceso por navegador, montado en `Shell.tsx`; con mención explícita del periodo de pruebas (reportar en «Valoración»). Completado en la Fase 54.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–54 completadas.** Último commit: `e47a5ac` (docs). La **Fase 54 (onboarding al primer acceso)** está implementada pero **sin commitear** (working tree con cambios → `git status`). Pendiente además para el despliegue del periodo de pruebas: repo en GitHub + Vercel, migrar DATABASE_URL de SQLite a Postgres (registros/valoración/docencia no persisten en serverless de Vercel), `.env` de producción (NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS), Sentry con DSN real, y reset de la BD de pruebas.
+- **Fases 43–55 completadas.** La **Fase 55 (refactor de mantenimiento)** está implementada pero **sin commitear** (working tree con cambios → `git status`); últimos commits: `bea98e9` (Fase 54), `e47a5ac` (docs). Pendiente además para el despliegue del periodo de pruebas: repo en GitHub + Vercel, migrar DATABASE_URL de SQLite a Postgres (registros/valoración/docencia no persisten en serverless de Vercel), `.env` de producción (NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS), Sentry con DSN real, y reset de la BD de pruebas.
+- Verificación Fase 55: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos), `npm run build` OK (323 páginas). Refactor sin cambios de comportamiento: `lib/ai.ts` 734→374 líneas (datos en `lib/ai-knowledge.ts`) y `stores/progress.ts` 800→524 líneas (badges en `stores/badges.ts`, tipos+datos+ranking en `stores/progress-data.ts`); las 43 importaciones de `@/stores/progress` y las de `@/lib/ai` siguen igual (re-exports).
 - Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
 - Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 - Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
@@ -622,6 +623,19 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - **Tests**: `components/onboarding/OnboardingModal.test.tsx` (6): muestra primer paso sin flag, no se muestra con flag, avance/retroceso de pasos, fin de guía guarda flag y cierra, saltar guarda y cierra, cierre con X guarda y cierra.
 - Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos), `npm run build` OK (323 páginas).
 
+## Fase 55 ✅ (refactor de mantenimiento: conocimiento de IA y store de progreso)
+
+> El autor indicó que prefiere que los refactors los haga el asistente (no otro tool de IA). Cambios **sin comportamiento**: mismos datos, misma lógica, mismas rutas de import; refactorización de los dos archivos de mayor deuda técnica detectados (`lib/ai.ts` con la lógica mezclada con ~350 líneas de datos, y `stores/progress.ts` de 800 líneas con datos/insignias/ranking mezclados con el store). Los 43 consumidores de `@/stores/progress` (y los de `@/lib/ai`) no cambian: los módulos nuevos se re-exportan desde el mismo path.
+
+- **`lib/ai.ts` 734→374 líneas**: el conocimiento offline que mezclaba (614 líneas de datos) se extrae a **`lib/ai-knowledge.ts`** (375 líneas, exporta `FallbackEntry`, `FALLBACK_RESPONSES`, `GENERAL_KNOWLEDGE`, `TopicCategory`, `TOPIC_CATEGORIES`). `ai.ts` queda solo con la lógica (matcher, memoria, `streamChatResponse`, composición de prefijos). Extraído por cortes de línea exactos del archivo original (sin tocar ni un carácter del contenido revisado en la Fase 13). `subjectMatchesCategory` tipa ahora con `TopicCategory` en lugar de `(typeof TOPIC_CATEGORIES)[number]`.
+- **`stores/progress.ts` 800→524 líneas**: extraídos dos módulos nuevos dentro de `stores/`:
+  - **`stores/badges.ts`** (214 líneas): `BadgeInfo` + los 40 badges `BADGES` (antes 207 líneas dentro del store).
+  - **`stores/progress-data.ts`** (80 líneas): tipos `Challenge`, `Project`, `Notification`, `RankingEntry` + `DAILY_CHALLENGES`, `WEEKLY_CHALLENGES`, `DEFAULT_PROJECTS`, `NAMES`/`AVATARS` y `generateRankingData`.
+  - `progress.ts` conserva el store Zustand (`useProgress`, `TOTAL_LESSONS`, `ProgressState`, `generateId`) y re-exporta la API pública (`export { BADGES, type BadgeInfo }` y `export type { Challenge, Notification, Project, RankingEntry }`), con imports desde `./badges` y `./progress-data` (sin ciclos).
+- **Evaluado y descartado**: dividir `ValoracionContent.tsx` (446 líneas), `DocenciaDashboard.tsx` (370), `DocenciaFeedback.tsx` (325) y `SpeechReader.tsx` (347) en subcomponentes no aporta claridad (son componentes cohesivos; los formularios comparten ~12 estados elevados en el padre, extraerlos exigiría un prop-drill igual de largo). Tampoco se tocaron `lib/quiz-data.ts` (10.228 líneas) ni los diccionarios (~1.650 c/u): son datos puros legítimos, no deuda técnica.
+- Fijado mientras se refactorizaba un warning de lint nuevo: el import `type TopicCategory` que había quedado sin usar (resuelto usándolo).
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos, incluye `lib/ai.test.ts` 17/17, `stores/progress.test.ts` 18/18 y los 35 tests del online de gamificación/export), `npm run build` OK (323 páginas; SSG ● y rutas dinámicas ƒ sin cambios). Refactor sin commitear.
+
 ## Bloques de contenido (MDX)
 
 | Bloque | Slug | Lecciones | Estado |
@@ -699,6 +713,7 @@ lib/
   speech.ts           → Síntesis de voz (Web Speech API), extracción de texto legible
   progress-export.ts  → Snapshot de progreso (schema atlas-progress, validación + parseSnapshot)
   ai.ts               → Servicio de IA (OpenAI + fallback offline, locale-aware)
+  ai-knowledge.ts     → Conocimiento offline del asistente (FALLBACK_RESPONSES, GENERAL_KNOWLEDGE, TOPIC_CATEGORIES + tipos)
   auth.ts             → NextAuth config (Credentials)
   prisma.ts           → PrismaClient singleton
   getServerSession.ts → Helper servidor
@@ -711,7 +726,9 @@ lib/
     dictionaries/     → es.ts (fuente de verdad, exporta Dictionary), en.ts, val.ts, index.ts
 
 stores/
-  progress.ts         → Zustand + persist localStorage (XP, badges, retos, proyectos, notificaciones)
+  progress.ts         → Zustand + persist localStorage (XP, badges, retos, proyectos, notificaciones); re-exporta BADGES y los tipos de datos
+  badges.ts           → BadgeInfo + los 40 badges (BADGES)
+  progress-data.ts    → Retro/types + datos de retos, proyectos y ranking (generateRankingData)
 
 prisma/
   schema.prisma       → User, Account, Session, VerificationToken, UserFeedback, Suggestion
