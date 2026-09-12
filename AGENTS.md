@@ -520,7 +520,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 12. ~~**Import/export de progreso**~~ — snapshot portable `lib/progress-export.ts` (schema `atlas-progress` v1, validación estricta, rechazo de versiones futuras) + card `ProgressExport` en el perfil. Completado en la Fase 52.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–53 completadas.** Último commit: `d6ac1f8` (Fase 51 valoración). Las Fases 52 (import/export de progreso) y 53 (diploma de finalización) están implementadas pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`).
+- **Fases 43–53 completadas.** Último commit: `aa4265a` (Fase 53 diploma de finalización). Working tree limpio (todo commiteado: Fase 51 `d6ac1f8`, Fase 52 `92b9342`, Fase 53 `aa4265a`).
 - Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
 - Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 - Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
@@ -532,7 +532,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; implementar una funcionalidad nueva (diploma de finalización).
+- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; evaluar una funcionalidad nueva para la siguiente fase.
 
 ## Fase 51 ✅ (valoración de la app + propuestas de mejora)
 > Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
