@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { useProgress } from "./progress";
+import { useProgress, TOTAL_LESSONS } from "./progress";
 
 function resetState() {
   useProgress.setState({
@@ -18,6 +18,7 @@ function resetState() {
     quizBest: {},
     quizPerfect: [],
     colaboradorBadge: false,
+    cursoCompletadoAt: null,
   });
 }
 
@@ -184,5 +185,17 @@ describe("useProgress", () => {
       s.recordQuizResult(`bloque/leccion-${String(i).padStart(2, "0")}`, i % 4, 4);
     }
     expect(useProgress.getState().badges).toContain("quiz-maestro");
+  });
+
+  it("completar las 76 lecciones otorga insignia del diploma y fija cursoCompletadoAt", () => {
+    const s = useProgress.getState();
+    const lessons = Array.from({ length: TOTAL_LESSONS }, (_, i) => `b/l-${i}`);
+    lessons.slice(0, TOTAL_LESSONS - 1).forEach((l) => s.completeLesson(l));
+    expect(useProgress.getState().badges).toContain("seventy-five-lessons");
+    expect(useProgress.getState().cursoCompletadoAt).toBeNull();
+
+    s.completeLesson(lessons[TOTAL_LESSONS - 1]);
+    expect(useProgress.getState().badges).toContain("curso-completo");
+    expect(useProgress.getState().cursoCompletadoAt).toBeTruthy();
   });
 });

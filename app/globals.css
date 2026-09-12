@@ -248,3 +248,32 @@
     }
   }
 }
+
+@media print {
+  header,
+  aside,
+  footer,
+  nav,
+  .speech-reader-container,
+  [data-glossary-popover],
+  .install-pwa-container {
+    display: none !important;
+  }
+
+  main#contenido {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .diploma-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 1rem !important;
+    max-width: 100% !important;
+    break-inside: avoid;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}

@@ -29,6 +29,7 @@ function pickProgressData(): ProgressData {
     quizBest: s.quizBest,
     quizPerfect: s.quizPerfect,
     colaboradorBadge: s.colaboradorBadge,
+    cursoCompletadoAt: s.cursoCompletadoAt,
   };
 }
 

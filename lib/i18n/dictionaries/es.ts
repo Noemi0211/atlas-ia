@@ -37,6 +37,7 @@ export const esDict = {
     perfil: "Mi perfil",
     docencia: "Docencia",
     valoracion: "Valoración",
+    diploma: "Diploma",
   },
 
   header: {
@@ -75,6 +76,7 @@ export const esDict = {
     terminos: "Términos de uso",
     appsedu: "Appsedu",
     valoracion: "Valoración",
+    diploma: "Diploma",
     copyright: "por Noemí Celaya Mingot",
     licenciaAria: "Licencia Creative Commons CC BY-NC-SA 4.0",
     licencia: "Licencia Creative Commons CC BY-NC-SA 4.0",
@@ -88,6 +90,7 @@ export const esDict = {
     laboratorio: "Laboratorio",
     perfil: "Mi perfil",
     valoracion: "Valoración",
+    diploma: "Diploma",
   },
 
   search: {
@@ -301,6 +304,31 @@ Reglas de comportamiento:
       invalidData: "El archivo no tiene un formato de progreso válido.",
       futureVersion:
         "El archivo proviene de una versión más reciente de Atlas IA. Actualiza la aplicación e inténtalo de nuevo.",
+    },
+  },
+
+  diploma: {
+    title: "Diploma de finalización",
+    subtitle: "Certificado que acredita que has completado el curso completo de Atlas IA.",
+    notEarnedTitle: "Aún no has completado el curso",
+    notEarnedText:
+      "Completa las {total} lecciones del curso para desbloquear tu diploma de finalización.",
+    completedLessons: "Lecciones completadas",
+    of: "de",
+    keepLearning: "Seguir aprendiendo",
+    printButton: "Imprimir o guardar PDF",
+    printHint:
+      "En el diálogo de impresión puedes elegir «Guardar como PDF» para conservar tu diploma.",
+    certificate: {
+      award: "CERTIFICADO DE FINALIZACIÓN",
+      body: "este certificado acredita que",
+      name: "ha completado con éxito el curso completo de Inteligencia Artificial de Atlas IA, superando las {total} lecciones distribuidas en {bloques} bloques temáticos.",
+      date: "Fecha",
+      signature: "Noemí Celaya Mingot",
+      signatureRole: "Autora del curso",
+      courseName: "Curso completo de Inteligencia Artificial",
+      platform: "Plataforma educativa Atlas IA",
+      license: "Licencia CC BY-NC-SA 4.0",
     },
   },
 
@@ -1582,6 +1610,7 @@ Reglas de comportamiento:
       "quiz-perfecto": { nombre: "Puntuación perfecta", descripcion: "Completaste un cuestionario con puntuación perfecta" },
       "quiz-maestro": { nombre: "Maestro del cuestionario", descripcion: "Completaste 10 cuestionarios" },
       "colaborador": { nombre: "Colaborador", descripcion: "Enviaste tu primera propuesta de mejora" },
+      "curso-completo": { nombre: "Diploma", descripcion: "Completaste el curso completo de Atlas IA" },
     },
 
     retos: {

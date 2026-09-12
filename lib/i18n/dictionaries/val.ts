@@ -28,6 +28,7 @@ export const valDict = {
     perfil: "El meu perfil",
     docencia: "Docència",
     valoracion: "Valoració",
+    diploma: "Diploma",
   },
 
   header: {
@@ -66,6 +67,7 @@ export const valDict = {
     terminos: "Termes d'ús",
     appsedu: "Appsedu",
     valoracion: "Valoració",
+    diploma: "Diploma",
     copyright: "per Noemí Celaya Mingot",
     licenciaAria: "Llicència Creative Commons CC BY-NC-SA 4.0",
     licencia: "Llicència Creative Commons CC BY-NC-SA 4.0",
@@ -79,6 +81,7 @@ export const valDict = {
     laboratorio: "Laboratori",
     perfil: "El meu perfil",
     valoracion: "Valoració",
+    diploma: "Diploma",
   },
 
   search: {
@@ -292,6 +295,31 @@ Regles de comportament:
       invalidData: "El fitxer no té un format de progrés vàlid.",
       futureVersion:
         "El fitxer prové d'una versió més recent d'Atlas IA. Actualitza l'aplicació i torna-ho a provar.",
+    },
+  },
+
+  diploma: {
+    title: "Diploma de finalització",
+    subtitle: "Certificat que acredita que has completat el curs complet d'Atlas IA.",
+    notEarnedTitle: "Encara no has completat el curs",
+    notEarnedText:
+      "Completa les {total} lliçons del curs per a desbloquejar el teu diploma de finalització.",
+    completedLessons: "Lliçons completades",
+    of: "de",
+    keepLearning: "Seguir aprenent",
+    printButton: "Imprimir o desar PDF",
+    printHint:
+      "En el diàleg d'impressió pots triar «Desa com a PDF» per a conservar el teu diploma.",
+    certificate: {
+      award: "CERTIFICAT DE FINALITZACIÓ",
+      body: "aquest certificat acredita que",
+      name: "ha completat amb èxit el curs complet d'Intel·ligència Artificial d'Atlas IA, superant les {total} lliçons distribuïdes en {bloques} blocs temàtics.",
+      date: "Data",
+      signature: "Noemí Celaya Mingot",
+      signatureRole: "Autora del curs",
+      courseName: "Curs complet d'Intel·ligència Artificial",
+      platform: "Plataforma educativa Atlas IA",
+      license: "Llicència CC BY-NC-SA 4.0",
     },
   },
 
@@ -1573,6 +1601,7 @@ Regles de comportament:
       "quiz-perfecto": { nombre: "Puntuació perfecta", descripcion: "Has completat un qüestionari amb puntuació perfecta" },
       "quiz-maestro": { nombre: "Mestre del qüestionari", descripcion: "Has completat 10 qüestionaris" },
       "colaborador": { nombre: "Col·laborador", descripcion: "Has enviat la teua primera proposta de millora" },
+      "curso-completo": { nombre: "Diploma", descripcion: "Has completat el curs complet d'Atlas IA" },
     },
 
     retos: {

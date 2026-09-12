@@ -20,6 +20,7 @@ export interface ProgressData {
   quizBest: Record<string, number>;
   quizPerfect: string[];
   colaboradorBadge: boolean;
+  cursoCompletadoAt?: string | null;
 }
 
 export interface ProgressSnapshot {
@@ -134,6 +135,12 @@ export function isValidProgressData(value: unknown): value is ProgressData {
   if (!isNumberRecord(value.quizBest)) return false;
   if (!isStringArray(value.quizPerfect)) return false;
   if (typeof value.colaboradorBadge !== "boolean") return false;
+  if (
+    value.cursoCompletadoAt !== undefined &&
+    value.cursoCompletadoAt !== null &&
+    typeof value.cursoCompletadoAt !== "string"
+  )
+    return false;
   return true;
 }
 

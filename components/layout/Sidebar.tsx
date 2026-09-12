@@ -28,6 +28,7 @@ import {
   Sparkles,
   User,
   Star,
+  Award,
 } from "lucide-react";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 
@@ -49,6 +50,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   FlaskConical,
   Sparkles,
   Star,
+  Award,
 };
 
 interface SidebarProps {
@@ -73,6 +75,7 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
     { href: localize("/laboratorio"), label: t.nav.laboratorio, icon: "FlaskConical" },
     { href: localize("/perfil"), label: t.nav.perfil, icon: "User" },
     { href: localize("/valoracion"), label: t.nav.valoracion, icon: "Star" },
+    { href: localize("/diploma"), label: t.nav.diploma, icon: "Award" },
     ...(session?.user?.role === "teacher"
       ? [{ href: localize("/docencia"), label: t.nav.docencia, icon: "GraduationCap" }]
       : []),

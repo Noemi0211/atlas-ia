@@ -47,6 +47,11 @@ export function Footer() {
                   {t.footer.valoracion}
                 </Link>
               </li>
+              <li>
+                <Link href={localize("/diploma")} className="text-sm text-fg-secondary hover:text-fg transition-colors">
+                  {t.footer.diploma}
+                </Link>
+              </li>
             </ul>
           </div>
 

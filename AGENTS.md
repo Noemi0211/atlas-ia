@@ -520,7 +520,8 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 12. ~~**Import/export de progreso**~~ — snapshot portable `lib/progress-export.ts` (schema `atlas-progress` v1, validación estricta, rechazo de versiones futuras) + card `ProgressExport` en el perfil. Completado en la Fase 52.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–52 completadas.** Último commit: `d6ac1f8` (Fase 51 valoración). La Fase 52 (import/export de progreso) está implementada pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`).
+- **Fases 43–53 completadas.** Último commit: `d6ac1f8` (Fase 51 valoración). Las Fases 52 (import/export de progreso) y 53 (diploma de finalización) están implementadas pero **sin commitear**: working tree con modificaciones y archivos nuevos (ver `git status`).
+- Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
 - Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 - Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
 - Nota: para probar `/valoracion` y el panel docente hay que crear una cuenta y (para ver la gestión) una cuenta docente vía `TEACHER_EMAILS` en `.env`.
@@ -593,6 +594,20 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - **Tests**: `lib/progress-export.test.ts` (14: round-trip createSnapshot→JSON, validaciones de tipos, rechazo de JSON no válido, schema ajeno, versión futura, datos internos inválidos, campos opcionales `badgeReward`/`completedAt` ausentes) y `components/gamification/ProgressExport.test.tsx` (8: render, export con mock de `URL.createObjectURL` + `HTMLAnchorElement.prototype.click`, import válido reemplaza el estado, errores not-json/invalid-schema/invalid-data/future-version, estado intacto ante archivo inválido).
 - Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 
+## Fase 53 ✅ (diploma de finalización)
+- **Página `/diploma`** (`app/[lang]/diploma/page.tsx`): server component con `generateMetadata` (canonical `/diploma` + `buildLanguagesAlternates`), `Breadcrumbs`, `data-read-aloud`, renderiza `DiplomaContent`.
+- **`proxy.ts`**: `/diploma` añadido a `PROTECTED_PATHS`.
+- **`components/diploma/DiplomaContent.tsx`**: componente cliente — dos estados:
+  - **No completado**: Card con icono `Award`, `t.diploma.notEarnedTitle`, `t.diploma.notEarnedText`, barra de progreso (`completedLessons/TOTAL_LESSONS`), botón "Seguir aprendiendo" (`router.push(localize("/bloques"))`).
+  - **Completado**: botón "Imprimir" (`window.print()`), hoja de diploma (`diploma-sheet`) con: icono `Award`, `certificate.award`, `certificate.courseName`, `certificate.body`, nombre del estudiante (`session.user.name`), body interpolado (`{total}`=TOTAL_LESSONS=76, `{bloques}`=BLOQUES.length=11), `certificate.signature` ("Noemí Celaya Mingot"), `certificate.signatureRole`, `certificate.platform`, `certificate.license`, `certificate.date` (formateada con `formatDate`).
+- **`components/layout/Sidebar.tsx`**: icono `Award` añadido a lucide import + `iconMap`; item nav `{ href: localize("/diploma"), label: t.nav.diploma, icon: "Award" }` añadido tras valoracion.
+- **`components/layout/Footer.tsx`**: enlace `localize("/diploma")` en columna Plataforma (ya existía de fases anteriores).
+- **`app/globals.css`**: reglas `@media print` — ocultar `header`, `aside`, `footer`, `nav`, `.speech-reader-container`, `[data-glossary-popover]`, `.install-pwa-container`; `main#contenido` sin margen/padding; `.diploma-sheet` sin borde/sombra, padding mínimo, `break-inside: avoid`; `.print\:hidden` oculto.
+- **i18n**: secciones `diploma` (title, subtitle, notEarnedTitle, notEarnedText, completedLessons, of, keepLearning, printButton, printHint, certificate.{award, body, name, date, signature, signatureRole, courseName, platform, license}) + `nav.diploma` + `breadcrumbs.diploma` + `footer.plataforma.diploma` en es/en/val (paridad verificada).
+- **Badge `curso-completo`** (ya existía desde Fase 49): desbloqueado por `completeLesson` al alcanzar `TOTAL_LESSONS` (76), `cursoCompletadoAt` en store y export.
+- Nota técnica: `Button` del repo no soporta `asChild`; se usa `router.push()` (patrón de LoginForm/RegisterForm).
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas).
+
 ## Bloques de contenido (MDX)
 
 | Bloque | Slug | Lecciones | Estado |
@@ -626,6 +641,7 @@ app/                  → Páginas (App Router) bajo segmento dinámico de idiom
     laboratorio/      → Laboratorio interactivo (layout.tsx con canonical + fuerza static; página client)
     docencia/         → Panel docente (dinámica, rol teacher) + DocenciaDashboard + DocenciaFeedback
     valoracion/       → Valoración + propuestas de mejora (dinámica, sesión) + ValoracionContent
+    diploma/          → Diploma de finalización (dinámica, sesión) + DiplomaContent
     auth/             → login + register (noindex)
   manifest.ts         → Manifest localizado (start_url /es, shortcuts prefijados)
   robots.ts           → allow "/", disallow auth prefijado (3 idiomas), sitemap.xml
@@ -646,6 +662,7 @@ components/
   layout/             → Shell, Sidebar, Header, Footer, Breadcrumbs, LanguageSelector
   interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator, LessonQuiz
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats, ProgressExport (import/export)
+  diploma/            → DiplomaContent (diploma de finalización imprimible)
   content/            → MDXRenderer (usa next-mdx-remote/rsc), BlockCompleteCTA, LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)

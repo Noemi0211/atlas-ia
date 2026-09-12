@@ -11,7 +11,7 @@ import {
   type Locale,
 } from "@/lib/i18n/config";
 
-const PROTECTED_PATHS = ["/perfil", "/docencia", "/valoracion"];
+const PROTECTED_PATHS = ["/perfil", "/docencia", "/valoracion", "/diploma"];
 
 function negotiateLocale(req: NextRequest): Locale {
   const cookieLocale = req.cookies.get("atlas-locale")?.value;

@@ -2,6 +2,9 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { BLOQUES } from "@/lib/constants";
+
+export const TOTAL_LESSONS = BLOQUES.reduce((acc, b) => acc + b.lecciones, 0);
 
 export interface Challenge {
   id: string;
@@ -57,6 +60,7 @@ interface ProgressState {
   quizBest: Record<string, number>;
   quizPerfect: string[];
   colaboradorBadge: boolean;
+  cursoCompletadoAt: string | null;
 
   completeLesson: (lessonId: string) => void;
   addXP: (amount: number) => void;
@@ -154,6 +158,7 @@ export const useProgress = create<ProgressState>()(
       quizBest: {},
       quizPerfect: [],
       colaboradorBadge: false,
+      cursoCompletadoAt: null,
 
       completeLesson: (lessonId: string) => {
         const { completedLessons, xp, challenges } = get();
@@ -185,6 +190,13 @@ export const useProgress = create<ProgressState>()(
           if (total === 25) get().addBadge("twenty-five-lessons");
           if (total === 50) get().addBadge("fifty-lessons");
           if (total === 75) get().addBadge("seventy-five-lessons");
+
+          if (total >= TOTAL_LESSONS) {
+            get().addBadge("curso-completo");
+            if (!get().cursoCompletadoAt) {
+              set({ cursoCompletadoAt: new Date().toISOString() });
+            }
+          }
 
           if (lessonId.startsWith("ecosistema/")) {
             const ecosystemLessons = completedLessons.filter((id) =>
@@ -779,5 +791,10 @@ export const BADGES: Record<string, { nombre: string; descripcion: string; icono
     nombre: "Colaborador",
     descripcion: "Enviaste tu primera propuesta de mejora",
     icono: "💬",
+  },
+  "curso-completo": {
+    nombre: "Diploma",
+    descripcion: "Completaste el curso completo de Atlas IA",
+    icono: "🎓",
   },
 };

@@ -28,6 +28,7 @@ export const enDict = {
     perfil: "My profile",
     docencia: "Teaching",
     valoracion: "Rating",
+    diploma: "Diploma",
   },
 
   header: {
@@ -66,6 +67,7 @@ export const enDict = {
     terminos: "Terms of Use",
     appsedu: "Appsedu",
     valoracion: "Rating",
+    diploma: "Diploma",
     copyright: "by Noemí Celaya Mingot",
     licenciaAria: "Creative Commons license CC BY-NC-SA 4.0",
     licencia: "Creative Commons license CC BY-NC-SA 4.0",
@@ -79,6 +81,7 @@ export const enDict = {
     laboratorio: "Laboratory",
     perfil: "My profile",
     valoracion: "Rating",
+    diploma: "Diploma",
   },
 
   search: {
@@ -292,6 +295,31 @@ Behaviour rules:
       invalidData: "The file does not have a valid progress format.",
       futureVersion:
         "The file comes from a newer version of Atlas IA. Update the app and try again.",
+    },
+  },
+
+  diploma: {
+    title: "Completion diploma",
+    subtitle: "Certificate certifying that you have completed the full Atlas IA course.",
+    notEarnedTitle: "You have not completed the course yet",
+    notEarnedText:
+      "Complete all {total} lessons of the course to unlock your completion diploma.",
+    completedLessons: "Completed lessons",
+    of: "of",
+    keepLearning: "Keep learning",
+    printButton: "Print or save PDF",
+    printHint:
+      "In the print dialog you can choose «Save as PDF» to keep your diploma.",
+    certificate: {
+      award: "CERTIFICATE OF COMPLETION",
+      body: "this certificate certifies that",
+      name: "has successfully completed the full Artificial Intelligence course of Atlas IA, completing all {total} lessons distributed in {bloques} thematic blocks.",
+      date: "Date",
+      signature: "Noemí Celaya Mingot",
+      signatureRole: "Course author",
+      courseName: "Full Artificial Intelligence course",
+      platform: "Atlas IA educational platform",
+      license: "License CC BY-NC-SA 4.0",
     },
   },
 
@@ -1573,6 +1601,7 @@ Behaviour rules:
       "quiz-perfecto": { nombre: "Perfect score", descripcion: "You completed a quiz with a perfect score" },
       "quiz-maestro": { nombre: "Quiz master", descripcion: "You completed 10 quizzes" },
       "colaborador": { nombre: "Collaborator", descripcion: "You sent your first improvement suggestion" },
+      "curso-completo": { nombre: "Diploma", descripcion: "You completed the full Atlas IA course" },
     },
 
     retos: {
