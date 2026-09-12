@@ -298,6 +298,34 @@ Regles de comportament:
     },
   },
 
+  onboarding: {
+    skip: "Omet la introducció",
+    next: "Següent",
+    back: "Enrere",
+    finish: "Començar a aprendre",
+    stepOf: "Pas {actual} de {total}",
+    closeAria: "Tanca la introducció",
+    title: "Com s'usa Atlas IA",
+    items: [
+      {
+        title: "Et donem la benvinguda a Atlas IA",
+        text: "Aprén Intel·ligència Artificial des de zero: 11 blocs, 76 lliçons, qüestionaris i activitats pràctiques. No calen coneixements previs.",
+      },
+      {
+        title: "Explora des del menú",
+        text: "Fes servir el menú lateral per a moure't pels blocs, el glossari, la cronologia, el laboratori i les teues estadístiques. També pots usar la cerca amb Ctrl+K.",
+      },
+      {
+        title: "Completa lliçons i guanya XP",
+        text: "Marca cada lliçó com a completada i supera el seu qüestionari per a guanyar XP, insígnies i ratxes. El teu progrés es guarda automàticament al teu perfil.",
+      },
+      {
+        title: "La teua opinió millora Atlas IA",
+        text: "Estem en període de proves. Si alguna cosa falla o vols proposar una millora, fes servir l'apartat «Valoració»; la teua opinió és molt valuosa.",
+      },
+    ],
+  },
+
   diploma: {
     title: "Diploma de finalització",
     subtitle: "Certificat que acredita que has completat el curs complet d'Atlas IA.",

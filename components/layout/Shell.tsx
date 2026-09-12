@@ -10,6 +10,7 @@ import { GlossaryProvider } from "@/components/accessibility/GlossaryProvider";
 import { GlossaryTermLinks } from "@/components/accessibility/GlossaryTermLinks";
 import { ServiceWorkerRegistrar } from "@/components/pwa/ServiceWorkerRegistrar";
 import { PwaThemeColor } from "@/components/pwa/PwaThemeColor";
+import { OnboardingModal } from "@/components/onboarding/OnboardingModal";
 import { useI18n } from "@/lib/i18n/provider";
 
 interface ShellProps {
@@ -70,6 +71,7 @@ export function Shell({ children }: ShellProps) {
 
       <ServiceWorkerRegistrar />
       <PwaThemeColor />
+      <OnboardingModal />
     </>
   );
 }

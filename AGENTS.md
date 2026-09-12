@@ -518,9 +518,10 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 10. ~~**PDF por bloque**~~ — variante `--bloque` del generador (`scripts/generate-pdf.mjs`) para exportar un solo tema para el aula. Completado en la Fase 42 (portada/footer/chips/índice adaptados, sin glosario ni cronología, salida `Atlas-IA-bloque-<slug>.pdf`).
 11. ~~**Sentry / monitorización de errores**~~ — `@sentry/nextjs` v10.73.0 configurado (client/server/edge, `withSentryConfig`, `captureException` en 5 API routes, desactivado sin DSN). `.env.example` creado con todas las variables documentadas.
 12. ~~**Import/export de progreso**~~ — snapshot portable `lib/progress-export.ts` (schema `atlas-progress` v1, validación estricta, rechazo de versiones futuras) + card `ProgressExport` en el perfil. Completado en la Fase 52.
+13. ~~**Onboarding / guía de primer acceso**~~ — modal de 4 pasos (`components/onboarding/OnboardingModal.tsx`) al primer acceso por navegador, montado en `Shell.tsx`; con mención explícita del periodo de pruebas (reportar en «Valoración»). Completado en la Fase 54.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–53 completadas.** Último commit: `aa4265a` (Fase 53 diploma de finalización). Working tree limpio (todo commiteado: Fase 51 `d6ac1f8`, Fase 52 `92b9342`, Fase 53 `aa4265a`).
+- **Fases 43–54 completadas.** Último commit: `e47a5ac` (docs). La **Fase 54 (onboarding al primer acceso)** está implementada pero **sin commitear** (working tree con cambios → `git status`). Pendiente además para el despliegue del periodo de pruebas: repo en GitHub + Vercel, migrar DATABASE_URL de SQLite a Postgres (registros/valoración/docencia no persisten en serverless de Vercel), `.env` de producción (NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS), Sentry con DSN real, y reset de la BD de pruebas.
 - Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
 - Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
 - Verificación Fase 51: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 225/225 (35 archivos), `npm run build` OK (rutas `ƒ /[lang]/valoracion`, `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]` registradas; página de valoración dinámica por sesión, igual que `/perfil`).
@@ -532,7 +533,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos posibles: probar el panel docente y `/valoracion` con datos reales una vez haya alumnado registrado; evaluar una funcionalidad nueva para la siguiente fase.
+- Siguientes pasos (despliegue periodo de pruebas): subir repo a GitHub + desplegar en Vercel, migrar a Postgres (Neon/Supabase) ajustando `DATABASE_URL` + `prisma db push`, configurar `.env` de producción (NEXTAUTH_SECRET, NEXTAUTH_URL, TEACHER_EMAILS), activar Sentry con DSN real, y resetear la BD de pruebas; después probar con el alumnado real el flujo registro → lecciones → `/valoracion` → panel docente.
 
 ## Fase 51 ✅ (valoración de la app + propuestas de mejora)
 > Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
@@ -608,6 +609,19 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - Nota técnica: `Button` del repo no soporta `asChild`; se usa `router.push()` (patrón de LoginForm/RegisterForm).
 - Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas).
 
+## Fase 54 ✅ (guía de introducción al primer acceso / onboarding)
+
+> Preparación para el periodo de pruebas (despliegue previsto: repo en GitHub + Vercel). Decisión tomada 12/9/2026: opción 3 recomendada (modal multi-paso al primer acceso).
+
+- **`components/onboarding/OnboardingModal.tsx`**: modal de bienvenida de **4 pasos** que se muestra al primer acceso de cada navegador (flag `localStorage["atlas-onboarded"]`). Pasos localizados (es/en/val) vía `t.onboarding.items`: 1º bienvenida (11 bloques, 76 lecciones, cuestionarios y actividades), 2º navegación (menú lateral + búsqueda Ctrl+K), 3º mecánica (completar lecciones → XP, insignias, rachas; perfil), 4º **periodo de pruebas** (reportar fallos/propuestas en «Valoración»).
+- Componente accesible: `role="dialog"` + `aria-modal` + `aria-label`, Escape y clic en backdrop cierran, `aria-hidden` en la barra de pasos, `sr-only` con "Paso X de 4". Iconos lucide por paso (Sparkles → Compass → Trophy → Star, mapa `stepIcons`). Sin animación (la utility `animate-slide-up` usada por SearchModal no existe en el CSS).
+- Montaje: `components/layout/Shell.tsx`, junto a `ServiceWorkerRegistrar`/`PwaThemeColor`.
+- Patrón de carga: `useState(false)` + `useEffect` con `setTimeout(0)` (evita `react-hooks/set-state-in-effect` y hydration mismatch); `localStorage.getItem`/`setItem` envueltos en try/catch (modo privado o localStorage bloqueado → se muestra la guía igualmente).
+- Cierre (X, «Saltar introducción», «Empezar a aprender» o fin del último paso) siempre escribe `atlas-onboarded=1` para no molestar en visitas posteriores.
+- **i18n**: nueva sección `onboarding` en es/en/val (`skip`, `next`, `back`, `finish`, `stepOf`, `closeAria`, `title`, `items[]` con `{title, text}`). Paridad de claves verificada por el test de diccionarios.
+- **Tests**: `components/onboarding/OnboardingModal.test.tsx` (6): muestra primer paso sin flag, no se muestra con flag, avance/retroceso de pasos, fin de guía guarda flag y cierra, saltar guarda y cierra, cierre con X guarda y cierra.
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos), `npm run build` OK (323 páginas).
+
 ## Bloques de contenido (MDX)
 
 | Bloque | Slug | Lecciones | Estado |
@@ -663,6 +677,7 @@ components/
   interactive/        → SearchModal, Comparador, ÁrbolDecisión, CalcPrompts, CronologiaTimeline, AIChat, ChatMarkdown, PromptSandbox, AgentFlow, ModelComparator, TokenSimulator, LessonQuiz
   gamification/       → XPBar, RankingTable, RetosCard, ProjectCard, NotificationBell, ProfileStats, ProgressExport (import/export)
   diploma/            → DiplomaContent (diploma de finalización imprimible)
+  onboarding/         → OnboardingModal (guía de primer acceso, 4 pasos)
   content/            → MDXRenderer (usa next-mdx-remote/rsc), BlockCompleteCTA, LessonNav, LessonSidebar, TableOfContents
   auth/               → AuthProvider, LoginForm, RegisterForm, UserMenu
   accessibility/      → SpeechReader (lectura por voz), GlossaryProvider, GlossaryPopover, GlossaryTermLinks (términos interactivos)

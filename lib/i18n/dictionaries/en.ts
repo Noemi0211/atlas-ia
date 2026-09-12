@@ -298,6 +298,34 @@ Behaviour rules:
     },
   },
 
+  onboarding: {
+    skip: "Skip introduction",
+    next: "Next",
+    back: "Back",
+    finish: "Start learning",
+    stepOf: "Step {actual} of {total}",
+    closeAria: "Close introduction",
+    title: "How to use Atlas IA",
+    items: [
+      {
+        title: "Welcome to Atlas IA",
+        text: "Learn Artificial Intelligence from scratch: 11 blocks, 76 lessons, quizzes and hands-on activities. No previous knowledge required.",
+      },
+      {
+        title: "Explore from the menu",
+        text: "Use the side menu to move between blocks, the glossary, the timeline, the lab and your stats. You can also use the search with Ctrl+K.",
+      },
+      {
+        title: "Complete lessons and earn XP",
+        text: "Mark every lesson as complete and pass its quiz to earn XP, badges and streaks. Your progress is saved automatically in your profile.",
+      },
+      {
+        title: "Your feedback improves Atlas IA",
+        text: "We are in a testing period. If something breaks or you want to suggest an improvement, use the «Ratings» section; your opinion is very valuable.",
+      },
+    ],
+  },
+
   diploma: {
     title: "Completion diploma",
     subtitle: "Certificate certifying that you have completed the full Atlas IA course.",

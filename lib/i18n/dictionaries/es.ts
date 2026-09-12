@@ -307,6 +307,34 @@ Reglas de comportamiento:
     },
   },
 
+  onboarding: {
+    skip: "Saltar introducción",
+    next: "Siguiente",
+    back: "Atrás",
+    finish: "Empezar a aprender",
+    stepOf: "Paso {actual} de {total}",
+    closeAria: "Cerrar introducción",
+    title: "Cómo usar Atlas IA",
+    items: [
+      {
+        title: "Te damos la bienvenida a Atlas IA",
+        text: "Aprende Inteligencia Artificial desde cero: 11 bloques, 76 lecciones, cuestionarios y actividades prácticas. No necesitas conocimientos previos.",
+      },
+      {
+        title: "Explora desde el menú",
+        text: "Usa el menú lateral para moverte por los bloques, el glosario, la cronología, el laboratorio y tus estadísticas. También puedes usar la búsqueda con Ctrl+K.",
+      },
+      {
+        title: "Completa lecciones y gana XP",
+        text: "Marca cada lección como completada y supera su cuestionario para ganar XP, insignias y rachas. Tu progreso se guarda automáticamente en tu perfil.",
+      },
+      {
+        title: "Tu opinión mejora Atlas IA",
+        text: "Estamos en periodo de pruebas. Si algo falla o quieres proponer una mejora, usa el apartado «Valoración»; tu opinión es muy valiosa.",
+      },
+    ],
+  },
+
   diploma: {
     title: "Diploma de finalización",
     subtitle: "Certificado que acredita que has completado el curso completo de Atlas IA.",
