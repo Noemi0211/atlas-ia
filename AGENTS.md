@@ -521,7 +521,8 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 13. ~~**Onboarding / guía de primer acceso**~~ — modal de 4 pasos (`components/onboarding/OnboardingModal.tsx`) al primer acceso por navegador, montado en `Shell.tsx`; con mención explícita del periodo de pruebas (reportar en «Valoración»). Completado en la Fase 54.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–55 completadas y commiteadas.** Último commit: `08f93f2` (Fase 55, refactor); árbol de trabajo limpio (`git status`). Pendiente además para el despliegue del periodo de pruebas: repo en GitHub + Vercel, migrar DATABASE_URL de SQLite a Postgres (registros/valoración/docencia no persisten en serverless de Vercel), `.env` de producción (NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS), Sentry con DSN real, y reset de la BD de pruebas.
+- **Fases 43–55 completadas y commiteadas.** Último commit: `45c78ed` (docs AGENTS.md Fase 55). **Fase 56 (`/piloto`) implementada el 12/9/2026 pero SIN commitear** (archivos modificados: `lib/i18n/dictionaries/{es,en,val}.ts`, `lib/i18n/dictionaries.test.ts`; página nueva: `app/[lang]/piloto/`). Detalle en la sección "Fase 56" y plan de lanzamiento en "Plan de trabajo pendiente".
+- Verificación Fase 56: `validate:translations` 0 errores, `npx tsc --noEmit` 0, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas; `/piloto` SSG en es/en/val).
 - Verificación Fase 55: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos), `npm run build` OK (323 páginas). Refactor sin cambios de comportamiento: `lib/ai.ts` 734→374 líneas (datos en `lib/ai-knowledge.ts`) y `stores/progress.ts` 800→524 líneas (badges en `stores/badges.ts`, tipos+datos+ranking en `stores/progress-data.ts`); las 43 importaciones de `@/stores/progress` y las de `@/lib/ai` siguen igual (re-exports).
 - Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
 - Verificación Fase 52: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 247/247 (37 archivos), `npm run build` OK.
@@ -534,7 +535,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos (despliegue periodo de pruebas): subir repo a GitHub + desplegar en Vercel, migrar a Postgres (Neon/Supabase) ajustando `DATABASE_URL` + `prisma db push`, configurar `.env` de producción (NEXTAUTH_SECRET, NEXTAUTH_URL, TEACHER_EMAILS), activar Sentry con DSN real, y resetear la BD de pruebas; después probar con el alumnado real el flujo registro → lecciones → `/valoracion` → panel docente.
+- Siguientes pasos: ver **"Plan de trabajo pendiente"** (sección tras la Fase 56): despliegue de la prueba piloto (GitHub + Vercel, migración a Postgres, `.env` de producción con NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS, Sentry DSN, reset de la BD, cuenta docente de la autora, correo de invitación y hoja de seguimiento para 6 personas evaluadoras).
 
 ## Fase 51 ✅ (valoración de la app + propuestas de mejora)
 > Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
@@ -636,6 +637,48 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - Fijado mientras se refactorizaba un warning de lint nuevo: el import `type TopicCategory` que había quedado sin usar (resuelto usándolo).
 - Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos, incluye `lib/ai.test.ts` 17/17, `stores/progress.test.ts` 18/18 y los 35 tests del online de gamificación/export), `npm run build` OK (323 páginas; SSG ● y rutas dinámicas ƒ sin cambios).
 
+## Fase 56 ✅ (página de bienvenida de la prueba piloto /piloto)
+
+> Página transitoria de invitación a la prueba piloto, preparada para la 1ª tanda de 6 personas evaluadoras. Implementada el 12/9/2026 (cambios SIN commitear: `lib/i18n/dictionaries/{es,en,val}.ts`, `lib/i18n/dictionaries.test.ts` y `app/[lang]/piloto/`).
+
+- **`app/[lang]/piloto/page.tsx`**: server component SSG (`export const dynamic = "force-static"`, patrón de roadmap) con `generateMetadata` (canonical `/piloto` + `buildLanguagesAlternates`), `Breadcrumbs`, `data-read-aloud`, secciones con iconos lucide (HeartHandshake, ClipboardCheck, ShieldCheck, MessageSquare, Sparkles) y CTA `<Link>` a `prefixPath("/bloques", locale)` con estilos de botón primario (`Button` no soporta `href`/`asChild`). Generada en `/es/piloto`, `/en/piloto`, `/val/piloto`. NO está en sitemap/robots (transitoria, se enlaza desde el correo de invitación) y no requiere sesión (solo `/valoracion` está protegido).
+- **Sección `piloto` en es/en/val** (paridad de claves verificada por `dictionaries.test.ts`): `title`, `description`, `greeting`, `intro1`, `intro2`, `interestsTitle`+`interests[6]`, `asksTitle`+`asks[4]`, `infoTitle`+`info[6]`, `valueTitle`+`valueIntro`+`valueItems[5]`+`valueClosing`, `thanksTitle`+`thanks1`+`thanks2`, `signature` ("Noemí Celaya Mingot"), `cta` ("Comenzar la prueba"/"Start the pilot test"/"Comença la prova").
+- **CAMBIO 1 (12/9/2026)**: `valueIntro` fusionado con el mensaje anti-deseabilidad social («...no busco confirmación, sino aprender de tu experiencia como persona usuaria...») en es/en/val, en lugar de un bloque nuevo antes del CTA (evita redundancia con `valueClosing`). Es la principal palanca de calidad del feedback.
+- **CAMBIO 2 (12/9/2026)**: val `"Quins errors o fallades has trobat."` → `"Quins errors o errades has trobat."` ("fallades" es AVL válida pero poco habitual; el proyecto usa "errors"). Verificado: sin otras apariciones de "fallade" en la sección. "persona usuària" y "cercador" se mantienen (coherentes con el resto del valenciano del proyecto).
+- **CAMBIO 3 (12/9/2026)**: nuevo item en `info[6]` de los 3 idiomas sobre la cuenta gratuita para enviar valoración/propuestas en `/valoracion`: explica el motivo sin tono obligatorio, aclara que es "cuenta de prueba" y que sus datos podrán eliminarse al final de la fase.
+- **Normalización en es**: "usuario/a real" → "persona usuaria real" (normativa Fase 13: prohibido el desdoblamiento; verificado sin restos no inclusivos en diccionarios ni MDX).
+- Verificación: `npm run validate:translations` 0 errores, `npx tsc --noEmit` 0, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas).
+
+## Plan de trabajo pendiente (despliegue de la prueba piloto)
+
+> **Objetivo**: enviar `/piloto` a 6 personas (2 valenciano, 2 castellano, 2 inglés; en cada lengua 1 "sabe IA" y 1 "no sabe IA") y poder leer sus valoraciones y propuestas en `/docencia`. Decisión tomada 12/9/2026: página dedicada por idioma vía enlace directo (no detección de idioma), para cubrir la validación lingüística de las 3 variantes.
+
+### Restricciones técnicas verificadas el 12/9/2026
+- **SQLite → Postgres es bloqueante**: en Vercel (serverless) SQLite no persiste; sin migrar, `/api/register` y `/api/feedback` dan 500 y no llegarán valoraciones.
+- **`TEACHER_EMAILS` + cuenta docente es bloqueante para la autora**: `/api/feedback` y `/api/suggestions` solo devuelven ratings/propuestas de todas las personas si el rol es docente. La autora debe incluir su correo en `TEACHER_EMAILS` y crear su cuenta con él.
+- **`/api/sync-progress` está huérfano** (verificado con grep): existe el endpoint pero no se llama desde el cliente (sin `fetch`/acción en stores ni componentes). `/docencia` mostrará registros y valoraciones, pero no lecciones/XP de las cuentas. No bloquea el objetivo del piloto; conectar si se quiere seguir el recorrido.
+
+### Pasos (orden de ejecución en la próxima sesión)
+1. Subir el repo a GitHub y conectar a Vercel.
+2. Migrar a Postgres (Neon/Supabase): `DATABASE_URL` en `.env` de producción + `npx prisma db push` + `prisma generate`.
+3. `.env` de producción: `DATABASE_URL`, `NEXTAUTH_SECRET` real, `NEXTAUTH_URL`, `TEACHER_EMAILS` (correo de la autora), `SENTRY_DSN` real (recomendado).
+4. Resetear la BD de pruebas.
+5. Crear la cuenta docente de la autora (el registro promociona a `teacher` si el correo está en `TEACHER_EMAILS`) y verificar `/docencia`.
+6. Prueba end-to-end desde producción en las 3 lenguas: registro → completar una lección → `/valoracion` (valoración + propuesta) → `/docencia` (ver ratings/propuestas).
+7. Redactar y enviar el correo de invitación: enlace directo por lengua (`/es/piloto`, `/val/piloto`, `/en/piloto`), 3-4 micro-tareas concretas (imprescindible para los perfiles "no sabe IA"), recordatorio de que la valoración está en la sección "Valoración" y que requiere cuenta gratuita de prueba.
+8. Registrar a las 6 personas en la hoja de seguimiento (alias, idioma principal, variante probada, perfil, fecha de prueba, cuenta creada, formulario recibido, dispositivo/navegador, problemas, prioridad, observaciones) y hacer seguimiento.
+9. Tras la tanda: categorizar problemas/prioridades y decidir siguientes pasos (arreglos, conectar sync-progress, ampliar tandas).
+
+### Asignación sugerida (6 personas, cobertura del objetivo lingüístico)
+| # | Página | Perfil |
+|---|--------|--------|
+| 1 | `/val/piloto` | sabe IA |
+| 2 | `/val/piloto` | no sabe IA |
+| 3 | `/es/piloto` | sabe IA |
+| 4 | `/es/piloto` | no sabe IA |
+| 5 | `/en/piloto` | sabe IA |
+| 6 | `/en/piloto` | no sabe IA |
+
 ## Bloques de contenido (MDX)
 
 | Bloque | Slug | Lecciones | Estado |
@@ -665,6 +708,7 @@ app/                  → Páginas (App Router) bajo segmento dinámico de idiom
     roadmap/          → Roadmap del proyecto (canonical + data-read-aloud)
     terminos/         → Términos de uso (canonical + data-read-aloud)
     acerca-de/        → Página institucional (canonical + data-read-aloud)
+    piloto/           → Invitación a la prueba piloto (SSG es/en/val, no indexada; se enlaza desde el correo)
     perfil/           → Estadísticas, ranking, retos, proyectos, badges (dinámica, sesión)
     laboratorio/      → Laboratorio interactivo (layout.tsx con canonical + fuerza static; página client)
     docencia/         → Panel docente (dinámica, rol teacher) + DocenciaDashboard + DocenciaFeedback
@@ -679,7 +723,7 @@ app/api/              → API Routes
   auth/[...nextauth]  → NextAuth
   register/           → Crear usuario
   search/             → Búsqueda full-text
-  sync-progress/      → Sincronizar localStorage → DB
+  sync-progress/      → Sincronizar localStorage → DB (endpoint sin llamadas desde el cliente, 12/9/2026)
   chat/               → Chat IA streaming (SSE)
   feedback/           → GET/POST valoración (docente ve ratings[], 5/15 min)
   suggestions/        → GET/POST propuestas (docente ve todas, 5/15 min)
@@ -783,5 +827,6 @@ Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlac
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión
 2. Revisar la sección "Estado actual" (último commit, cambios pendientes)
-3. El asistente leerá este archivo y sabrá exactamente el estado y qué hacer
-4. `npm run dev` para desarrollo, `npx tsc --noEmit` y `npm run lint` para verificar
+3. Para el lanzamiento de la prueba piloto, seguir el **"Plan de trabajo pendiente"** (despliegue + correo de invitación + hoja de seguimiento)
+4. El asistente leerá este archivo y sabrá exactamente el estado y qué hacer
+5. `npm run dev` para desarrollo, `npx tsc --noEmit` y `npm run lint` para verificar
