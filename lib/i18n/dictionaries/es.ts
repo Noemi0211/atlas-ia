@@ -335,6 +335,59 @@ Reglas de comportamiento:
     ],
   },
 
+  piloto: {
+    title: "Invitación a participar en la prueba piloto de Atlas IA",
+    description:
+      "Una prueba piloto abierta a personas adultas para validar la experiencia, los contenidos y el funcionamiento de Atlas IA.",
+    greeting: "Hola:",
+    intro1:
+      "Estoy realizando una prueba piloto de Atlas IA, un recurso educativo interactivo sobre Inteligencia Artificial desarrollado dentro de un proyecto de innovación educativa.",
+    intro2:
+      "Tu participación consiste en probar la aplicación como persona usuaria real y compartir tu experiencia. No se trata de evaluar conocimientos ni de encontrar respuestas correctas, sino de ayudarme a descubrir qué funciona bien y qué puede mejorarse.",
+    interestsTitle: "¿Qué me interesa especialmente?",
+    interests: [
+      "Si la navegación es clara e intuitiva.",
+      "Si entiendes fácilmente los contenidos.",
+      "Si el buscador y el chat resultan útiles.",
+      "Si encuentras errores, incoherencias o aspectos confusos.",
+      "Si las versiones en español, inglés y valenciano resultan naturales.",
+      "Si la experiencia general te parece interesante y útil.",
+    ],
+    asksTitle: "¿Qué te pediré?",
+    asks: [
+      "Acceder a la aplicación.",
+      "Realizar algunas tareas sencillas que te indicaré.",
+      "Utilizarla con libertad durante unos minutos.",
+      "Completar un breve formulario de valoración.",
+    ],
+    infoTitle: "Información importante",
+    info: [
+      "La prueba está dirigida únicamente a personas adultas.",
+      "No se evalúan conocimientos ni habilidades tecnológicas.",
+      "No existen respuestas correctas o incorrectas.",
+      "Toda la información recogida se utilizará exclusivamente para mejorar la aplicación.",
+      "Para enviar la valoración y las propuestas de mejora necesitarás una cuenta gratuita, pero no hace falta nada más: es una cuenta de prueba y sus datos podrán eliminarse al finalizar esta fase.",
+      "Al finalizar la fase piloto, los datos de prueba podrán eliminarse.",
+    ],
+    valueTitle: "Lo más valioso para mí",
+    valueIntro:
+      "Tu opinión es valiosa precisamente porque no has participado en el desarrollo del proyecto: no busco confirmación, sino aprender de tu experiencia como persona usuaria. No necesito que me digas solo lo que te gusta; me ayuda mucho más que me indiques:",
+    valueItems: [
+      "Qué te ha confundido.",
+      "En qué momento te has perdido.",
+      "Qué mejorarías.",
+      "Qué te ha parecido poco claro.",
+      "Qué errores o fallos has encontrado.",
+    ],
+    valueClosing: "Un comentario sincero vale más que diez elogios.",
+    thanksTitle: "Gracias",
+    thanks1:
+      "Tu colaboración ayudará a mejorar un proyecto educativo que pretende acercar la Inteligencia Artificial de forma comprensible, crítica y práctica.",
+    thanks2: "Muchas gracias por dedicar parte de tu tiempo a esta prueba piloto.",
+    signature: "Noemí Celaya Mingot",
+    cta: "Comenzar la prueba",
+  },
+
   diploma: {
     title: "Diploma de finalización",
     subtitle: "Certificado que acredita que has completado el curso completo de Atlas IA.",

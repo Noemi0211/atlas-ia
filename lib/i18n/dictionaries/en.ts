@@ -326,6 +326,59 @@ Behaviour rules:
     ],
   },
 
+  piloto: {
+    title: "Invitation to take part in the Atlas IA pilot test",
+    description:
+      "A pilot test open to adults to validate the experience, content and operation of Atlas IA.",
+    greeting: "Hello,",
+    intro1:
+      "I am running a pilot test of Atlas IA, an interactive educational resource about Artificial Intelligence developed as part of an educational innovation project.",
+    intro2:
+      "Your participation consists of using the application as a real user and sharing your experience. This is not about testing your knowledge or finding right answers, but about helping me discover what works well and what could be improved.",
+    interestsTitle: "What I am especially interested in",
+    interests: [
+      "Whether the navigation is clear and intuitive.",
+      "Whether you understand the content easily.",
+      "Whether the search box and the chat are useful.",
+      "Whether you find errors, inconsistencies or confusing aspects.",
+      "Whether the Spanish, English and Valencian versions sound natural.",
+      "Whether the overall experience is interesting and useful.",
+    ],
+    asksTitle: "What I will ask you to do",
+    asks: [
+      "Access the application.",
+      "Carry out a few simple tasks that I will send you.",
+      "Use it freely for a few minutes.",
+      "Complete a short feedback form.",
+    ],
+    infoTitle: "Important information",
+    info: [
+      "This pilot test is aimed exclusively at adults.",
+      "No knowledge or technical skills are assessed.",
+      "There are no right or wrong answers.",
+      "All the information collected will be used exclusively to improve the application.",
+      "To send your rating and improvement suggestions you will need a free account, but nothing else is required: it is a test account and its data can be deleted when this phase ends.",
+      "Once the pilot phase is over, test data may be deleted.",
+    ],
+    valueTitle: "What is most valuable to me",
+    valueIntro:
+      "Your opinion is especially valuable because you have not been involved in developing the project: I am not looking for confirmation, but for insights from your experience as a user. I do not need you to tell me only what you like; it helps me much more if you point out:",
+    valueItems: [
+      "What confused you.",
+      "Where you got lost.",
+      "What you would improve.",
+      "What was not clear to you.",
+      "What errors or faults you found.",
+    ],
+    valueClosing: "One honest comment is worth more than ten compliments.",
+    thanksTitle: "Thank you",
+    thanks1:
+      "Your collaboration will help improve an educational project that aims to bring Artificial Intelligence closer in an understandable, critical and practical way.",
+    thanks2: "Thank you very much for dedicating part of your time to this pilot test.",
+    signature: "Noemí Celaya Mingot",
+    cta: "Start the pilot test",
+  },
+
   diploma: {
     title: "Completion diploma",
     subtitle: "Certificate certifying that you have completed the full Atlas IA course.",

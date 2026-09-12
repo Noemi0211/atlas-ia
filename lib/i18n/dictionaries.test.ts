@@ -43,6 +43,47 @@ describe("diccionarios", () => {
   });
 });
 
+describe("sección piloto", () => {
+  it("tiene los mismos campos y listas en los 3 idiomas", () => {
+    const textFields: (keyof typeof esDict.piloto)[] = [
+      "title",
+      "description",
+      "greeting",
+      "intro1",
+      "intro2",
+      "interestsTitle",
+      "asksTitle",
+      "infoTitle",
+      "valueTitle",
+      "valueIntro",
+      "valueClosing",
+      "thanksTitle",
+      "thanks1",
+      "thanks2",
+      "signature",
+      "cta",
+    ];
+    for (const field of textFields) {
+      expect(esDict.piloto[field]).toBeTruthy();
+      expect(enDict.piloto[field]).toBeTruthy();
+      expect(valDict.piloto[field]).toBeTruthy();
+    }
+
+    const listFields = ["interests", "asks", "info", "valueItems"] as const;
+    for (const field of listFields) {
+      const n = esDict.piloto[field].length;
+      expect(n).toBeGreaterThan(0);
+      expect(enDict.piloto[field]).toHaveLength(n);
+      expect(valDict.piloto[field]).toHaveLength(n);
+    }
+
+    expect(esDict.piloto.interests).toHaveLength(6);
+    expect(esDict.piloto.asks).toHaveLength(4);
+    expect(esDict.piloto.info).toHaveLength(6);
+    expect(esDict.piloto.valueItems).toHaveLength(5);
+  });
+});
+
 describe("builders i18n", () => {
   it("glosario tiene la misma longitud en los 3 idiomas", () => {
     const n = getGlosario(esDict).length;

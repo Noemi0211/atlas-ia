@@ -326,6 +326,59 @@ Regles de comportament:
     ],
   },
 
+  piloto: {
+    title: "Invitació a participar en la prova pilot d'Atlas IA",
+    description:
+      "Una prova pilot oberta a persones adultes per a validar l'experiència, els continguts i el funcionament d'Atlas IA.",
+    greeting: "Hola:",
+    intro1:
+      "Estic realitzant una prova pilot d'Atlas IA, un recurs educatiu interactiu sobre Intel·ligència Artificial desenvolupat dins d'un projecte d'innovació educativa.",
+    intro2:
+      "La teua participació consisteix a provar l'aplicació com a persona usuària real i compartir la teua experiència. No es tracta d'avaluar coneixements ni de trobar respostes correctes, sinó d'ajudar-me a descobrir què funciona bé i què es pot millorar.",
+    interestsTitle: "Què m'interessa especialment?",
+    interests: [
+      "Si la navegació és clara i intuïtiva.",
+      "Si entens fàcilment els continguts.",
+      "Si el cercador i el xat resulten útils.",
+      "Si trobes errors, incoherències o aspectes confusos.",
+      "Si les versions en espanyol, anglés i valencià resulten naturals.",
+      "Si l'experiència general et sembla interessant i útil.",
+    ],
+    asksTitle: "Què et demanaré?",
+    asks: [
+      "Accedir a l'aplicació.",
+      "Realitzar algunes tasques senzilles que t'indicaré.",
+      "Utilitzar-la amb llibertat durant uns minuts.",
+      "Completar un breu formulari de valoració.",
+    ],
+    infoTitle: "Informació important",
+    info: [
+      "La prova està dirigida únicament a persones adultes.",
+      "No s'avaluen coneixements ni habilitats tecnològiques.",
+      "No hi ha respostes correctes ni incorrectes.",
+      "Tota la informació recollida s'utilitzarà exclusivament per a millorar l'aplicació.",
+      "Per a enviar la valoració i les propostes de millora necessitaràs un compte gratuït, però no cal res més: és un compte de prova i les seues dades es podran eliminar en acabar aquesta fase.",
+      "En acabar la fase pilot, les dades de prova es podran eliminar.",
+    ],
+    valueTitle: "El més valuós per a mi",
+    valueIntro:
+      "La teua opinió és valuosa precisament perquè no has participat en el desenvolupament del projecte: no busque confirmació, sinó aprendre de la teua experiència com a persona usuària. No necessite que em digues només allò que t'agrada; m'ajuda molt més que m'indiques:",
+    valueItems: [
+      "Què t'ha confós.",
+      "En quin moment t'has perdut.",
+      "Què milloraries.",
+      "Què t'ha semblat poc clar.",
+      "Quins errors o errades has trobat.",
+    ],
+    valueClosing: "Un comentari sincer val més que deu elogis.",
+    thanksTitle: "Gràcies",
+    thanks1:
+      "La teua col·laboració ajudarà a millorar un projecte educatiu que pretén acostar la Intel·ligència Artificial d'una manera comprensible, crítica i pràctica.",
+    thanks2: "Moltes gràcies per dedicar part del teu temps a aquesta prova pilot.",
+    signature: "Noemí Celaya Mingot",
+    cta: "Comença la prova",
+  },
+
   diploma: {
     title: "Diploma de finalització",
     subtitle: "Certificat que acredita que has completat el curs complet d'Atlas IA.",
