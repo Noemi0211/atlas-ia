@@ -59,14 +59,15 @@ npm install
 
 # 2. Crear el archivo .env (ver el listado en "Variables de entorno")
 #    .env
-#    DATABASE_URL="file:./dev.db"
+#    DATABASE_URL="postgresql://USER:PASSWORD@HOST-pooler.production.neon.tech/DBNAME?sslmode=require&pgbouncer=true&connection_limit=1"
+#    DIRECT_URL="postgresql://USER:PASSWORD@HOST.production.neon.tech/DBNAME?sslmode=require"
 #    NEXTAUTH_SECRET="<genera una con: openssl rand -base64 32>"
 #    NEXTAUTH_URL="http://localhost:3000"
 #    TEACHER_EMAILS="profesor@correo.com"        # opcional, promueve cuentas docentes
 #    OPENAI_API_KEY="..."                        # opcional, habilita respuestas con IA real
 
 # 3. Preparar la base de datos
-npx prisma db push
+npx prisma migrate dev
 npx prisma generate
 
 # 4. Servidor de desarrollo
@@ -79,7 +80,8 @@ Abre [http://localhost:3000](http://localhost:3000).
 
 | Variable | Obligatoria | Descripción |
 |----------|-------------|-------------|
-| `DATABASE_URL` | Sí | URL de SQLite para Prisma (`file:./dev.db`) |
+| `DATABASE_URL` | Sí | URL de conexión en caliente (pooled) a PostgreSQL/Neon para la app (`?sslmode=require&pgbouncer=true&connection_limit=1`) |
+| `DIRECT_URL` | Sí | URL de conexión directa (sin pooler) a PostgreSQL/Neon para las migraciones de Prisma |
 | `NEXTAUTH_SECRET` | Sí | Secreto de NextAuth (genera uno con `openssl rand -base64 32`) |
 | `NEXTAUTH_URL` | Sí | URL pública de la app |
 | `TEACHER_EMAILS` | No | Lista separada por comas de correos que se registran con rol docente |

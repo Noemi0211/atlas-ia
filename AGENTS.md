@@ -13,6 +13,11 @@ npm run lint      # ESLint
 npm test          # Vitest (run)
 npm run test:watch # Vitest (watch)
 npm run validate:translations  # Validar sincronización es/en/val del contenido
+npm run db:generate # prisma generate
+npm run db:migrate  # prisma migrate deploy (aplica migraciones pendientes en producción)
+npm run db:dev      # prisma migrate dev (crea/aplica migraciones en desarrollo local)
+npm run db:push     # prisma db push (sincronización sin historial; evitar en producción)
+npm run db:studio   # prisma studio (inspector visual de la BD)
 ```
 
 ## Fases completadas
@@ -521,7 +526,8 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 13. ~~**Onboarding / guía de primer acceso**~~ — modal de 4 pasos (`components/onboarding/OnboardingModal.tsx`) al primer acceso por navegador, montado en `Shell.tsx`; con mención explícita del periodo de pruebas (reportar en «Valoración»). Completado en la Fase 54.
 
 ## Estado actual (para retomar la sesión)
-- **Fases 43–55 completadas y commiteadas.** Último commit: `45c78ed` (docs AGENTS.md Fase 55). **Fase 56 (`/piloto`) implementada el 12/9/2026 pero SIN commitear** (archivos modificados: `lib/i18n/dictionaries/{es,en,val}.ts`, `lib/i18n/dictionaries.test.ts`; página nueva: `app/[lang]/piloto/`). Detalle en la sección "Fase 56" y plan de lanzamiento en "Plan de trabajo pendiente".
+- **Fases 43–56 completadas y commiteadas.** Último commit: `e2e52f1` (docs AGENTS.md Fase 56 + plan de despliegue). **Fase 57 (migración SQLite → PostgreSQL/Neon) PREPARADA Y APLICADA el 13/9/2026, pero los cambios siguen SIN commitear** (modificados: `prisma/schema.prisma`, `.env.example`, `AGENTS.md`, `README.md`, `package.json`; nueva: `prisma/migrations/0_init_per_pg/`). La BD Neon YA existe (creada por la autora), `prisma migrate deploy` ejecutado, 6 tablas verificadas y prueba de escritura de los 4 flujos OK. `.env` real local configurado (gitignored; `DATABASE_URL` pooled con `pgbouncer=true&connection_limit=1`, `DIRECT_URL` directa, `NEXTAUTH_SECRET` de 64 hex, `TEACHER_EMAILS` con el correo de la autora). **NO se ha tocado GitHub/Vercel.** Detalle en la sección "Fase 57".
+- Verificación Fase 57 (preparación): `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas). Cliente Prisma regenerado con proveedor `postgresql`. Verificación de la aplicación en Neon detallada al final de la sección "Fase 57".
 - Verificación Fase 56: `validate:translations` 0 errores, `npx tsc --noEmit` 0, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas; `/piloto` SSG en es/en/val).
 - Verificación Fase 55: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 254/254 (38 archivos), `npm run build` OK (323 páginas). Refactor sin cambios de comportamiento: `lib/ai.ts` 734→374 líneas (datos en `lib/ai-knowledge.ts`) y `stores/progress.ts` 800→524 líneas (badges en `stores/badges.ts`, tipos+datos+ranking en `stores/progress-data.ts`); las 43 importaciones de `@/stores/progress` y las de `@/lib/ai` siguen igual (re-exports).
 - Verificación Fase 53: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 248/248 (37 archivos), `npm run build` OK (323 páginas). Ruta `ƒ /[lang]/diploma` registrada (dinámica por sesión, igual que `/perfil`).
@@ -535,7 +541,7 @@ npm run validate:translations  # Validar sincronización es/en/val del contenido
 - **[7/9/2026] Revisión del Bloque 10 Novedades completada**: las 6 lecciones están al día a septiembre 2026 (01/02/05 actualizadas en la Fase 45; 03/04/06 verificadas y vigentes). Sin cambios realizados.
 - **Nota de entorno (dev)**: al levantar `npm run dev`, Turbopack (Next 16.2.12) puede entrar en bucle de recompilación con un error `FATAL: Failed to write app endpoint /page` (`Cell ... no longer exists in task ... directory_tree_to_loader_tree`), que se ve como **parpadeo constante de la pantalla**. Solución: detener el servidor, borrar `.next` (`Remove-Item -Recurse -Force .next`) y relanzar `npm run dev`. No es un error del código de la app. Verificado: tras limpiar la caché la página responde 200 sin errores y el proyecto se visualiza estable.
 - El PDF generado está en `Atlas-IA-contenido-completo.pdf` (gitignored, 3.95 MB, actualizado con el bloque 10 de septiembre 2026); regenerar con `node scripts/generate-pdf.mjs`, y por bloque con `node scripts/generate-pdf.mjs --bloque <slug>`. La OG image se regenera con `node scripts/generate-og-image.mjs` (HTML del diseño dentro del propio script; el autor confirmó el resultado visual tras quitar la URL).
-- Siguientes pasos: ver **"Plan de trabajo pendiente"** (sección tras la Fase 56): despliegue de la prueba piloto (GitHub + Vercel, migración a Postgres, `.env` de producción con NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS, Sentry DSN, reset de la BD, cuenta docente de la autora, correo de invitación y hoja de seguimiento para 6 personas evaluadoras).
+- Siguientes pasos: ver **"Plan de trabajo pendiente"** (sección tras la Fase 57): despliegue de la prueba piloto (GitHub + Vercel, crear la BD en Neon y aplicar la migración ya preparada, `.env` de producción con URLs de Neon/NEXTAUTH_SECRET/NEXTAUTH_URL/TEACHER_EMAILS, Sentry DSN, reset de la BD, cuenta docente de la autora, correo de invitación y hoja de seguimiento para 6 personas evaluadoras).
 
 ## Fase 51 ✅ (valoración de la app + propuestas de mejora)
 > Implementado el 11/9/2026 según el plan aprobado el 10/9/2026 con 3 decisiones: (1) página nueva `/valoracion`, (2) requiere sesión, (3) el docente gestiona desde el panel de docencia.
@@ -649,25 +655,49 @@ Un apartado `/valoracion` (protegido por sesión) donde el alumnado puntúa la a
 - **Normalización en es**: "usuario/a real" → "persona usuaria real" (normativa Fase 13: prohibido el desdoblamiento; verificado sin restos no inclusivos en diccionarios ni MDX).
 - Verificación: `npm run validate:translations` 0 errores, `npx tsc --noEmit` 0, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas).
 
+## Fase 57 ✅ (preparación de la migración SQLite → PostgreSQL/Neon)
+
+> Preparada y APLICADA el 13/9/2026 como prerequisito del despliegue (en Vercel/serverless SQLite no persiste). Cambios **locales SIN commitear todavía**: la migración ya está ejecutada en Neon, pero NO se ha tocado GitHub/Vercel. Pendiente: commitear la Fase 57, e2e y despliegue (ver "Plan de trabajo pendiente").
+
+- **`prisma/schema.prisma`**: `provider = "sqlite"` → `"postgresql"` + `directUrl = env("DIRECT_URL")` (Prisma usa la URL directa para migraciones/studio y la URL pooled para el runtime). Sin cambios en los 6 modelos (User, Account, Session, VerificationToken, UserFeedback, Suggestion).
+- **Migración inicial `prisma/migrations/0_init_per_pg/migration.sql`** (118 líneas, 6 tablas + índices únicos + FKs `ON DELETE CASCADE`): generada OFFLINE con `prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output ...` (no requiere conexión a la BD). Se commitea.
+- **`npx prisma generate`** ejecutado: cliente regenerado para `postgresql` (los tests mockean Prisma, no requieren BD).
+- **`.env.example`**: `DATABASE_URL` (URL pooled de Neon con `?sslmode=require&pgbouncer=true&connection_limit=1`), nueva `DIRECT_URL` (URL directa sin pooler), `NEXTAUTH_URL` de ejemplo apuntando a producción.
+- **`.env`** (local, gitignored): al preparar la migración se dejó con placeholders (`USER/PASSWORD/HOST/DBNAME`) y se actualizó con las URLs **reales** de Neon durante la aplicación (ver "Aplicación en Neon"). ⚠️ El dev local necesita una URL de Postgres real (rama dev de Neon o Postgres local); el antiguo `file:./dev.db` ya no funciona.
+- **`package.json`**: scripts nuevos `db:generate`, `db:migrate` (`migrate deploy`), `db:dev` (`migrate dev`), `db:push`, `db:studio`.
+- **`README.md`**: tabla de variables de entorno y pasos de puesta en marcha actualizados a PostgreSQL/Neon (`migrate dev` en lugar de `db push`).
+- **Compatibilidad verificada**: el proyecto NO usa consultas raw (`grep` de `$queryRaw`/`$executeRaw` = 0); todas las consultas de `/api/register`, login (`lib/auth.ts`), `/api/feedback`, `/api/suggestions`, `/api/suggestions/[id]`, `/api/docencia/students` y `/api/sync-progress` son ORM portable → comportamiento idéntico, los endpoints no dependen del proveedor.
+- Verificación: `npx tsc --noEmit` 0 errores, lint 0/0, `npm test` 255/255 (38 archivos), `npm run build` OK (326 páginas; rutas dinámicas ƒ intactas).
+
+### Aplicación en Neon (13/9/2026) — migración EJECUTADA
+- Proyecto Neon creado por la autora: BD `neondb`, región `eu-central-1`, host `ep-rapid-paper-b1g0bbj9.c-5.eu-central-1.aws.neon.tech` (directo) y `-pooler.` (pooled).
+- **`.env` local REAL** (gitignored): `DATABASE_URL` = pooled con `?sslmode=require&channel_binding=require&pgbouncer=true&connection_limit=1`; `DIRECT_URL` = directo con `?sslmode=require&channel_binding=require`; `NEXTAUTH_SECRET` = 64 hex de `crypto.randomBytes(32)` (línea normalizada: tenía un carácter sobrante tras la comilla de cierre); `NEXTAUTH_URL` = `http://localhost:3000`; `TEACHER_EMAILS` = correo real de la autora.
+- `npx prisma migrate status` → conexión OK vía `DIRECT_URL`; `npx prisma migrate deploy` → aplicada `0_init_per_pg` (registrada en `_prisma_migrations`).
+- Tablas verificadas vía `information_schema` + `pg_indexes`: 6 tablas (User, Account, Session, VerificationToken, UserFeedback, Suggestion), índices únicos correctos, 0 filas.
+- **Prisma Studio** verificado (HTTP 200 en `localhost:5555`; puede arrancarse con `npm run db:studio`).
+- **Prueba de escritura reversible** contra los 4 flujos objetivo: INSERT User + UPSERT UserFeedback + INSERT Suggestion + SELECT por email (login) → todos OK y **borrado completo sin residuos**.
+- Ajuste aplicado: `&pgbouncer=true&connection_limit=1` en la `DATABASE_URL` real (recomendación Neon para Prisma/serverless; sin él, PgBouncer en modo transaccional puede dar `prepared statement does not exist` bajo carga). Conexión pooled re-verificada (`SELECT 1` → OK). `.env.example` ya documentaba esos parámetros (sin cambios).
+- Modelo de acceso correcto: `p.user` (no `p.users`), `p.userFeedback`, `p.suggestion` (caso singular minúscula de Prisma).
+- PENDIENTE: commitear la Fase 57 (`.env` queda fuera, gitignored), prueba e2e del flujo completo con el servidor dev, y despliegue (pasos 1-3 del "Plan de trabajo pendiente").
+
 ## Plan de trabajo pendiente (despliegue de la prueba piloto)
 
 > **Objetivo**: enviar `/piloto` a 6 personas (2 valenciano, 2 castellano, 2 inglés; en cada lengua 1 "sabe IA" y 1 "no sabe IA") y poder leer sus valoraciones y propuestas en `/docencia`. Decisión tomada 12/9/2026: página dedicada por idioma vía enlace directo (no detección de idioma), para cubrir la validación lingüística de las 3 variantes.
 
-### Restricciones técnicas verificadas el 12/9/2026
-- **SQLite → Postgres es bloqueante**: en Vercel (serverless) SQLite no persiste; sin migrar, `/api/register` y `/api/feedback` dan 500 y no llegarán valoraciones.
+### Restricciones técnicas verificadas el 12/9/2026 y el 13/9/2026
+- **SQLite → Postgres era bloqueante y YA ESTÁ RESUELTO (13/9/2026)**: en Vercel (serverless) SQLite no persiste. La migración Fase 57 está **aplicada en Neon** (proyecto creado, `prisma migrate deploy` ejecutado, 6 tablas verificadas y pruebas de escritura OK). Solo falta llevar `DATABASE_URL`/`DIRECT_URL` a Vercel en el despliegue.
 - **`TEACHER_EMAILS` + cuenta docente es bloqueante para la autora**: `/api/feedback` y `/api/suggestions` solo devuelven ratings/propuestas de todas las personas si el rol es docente. La autora debe incluir su correo en `TEACHER_EMAILS` y crear su cuenta con él.
 - **`/api/sync-progress` está huérfano** (verificado con grep): existe el endpoint pero no se llama desde el cliente (sin `fetch`/acción en stores ni componentes). `/docencia` mostrará registros y valoraciones, pero no lecciones/XP de las cuentas. No bloquea el objetivo del piloto; conectar si se quiere seguir el recorrido.
 
 ### Pasos (orden de ejecución en la próxima sesión)
-1. Subir el repo a GitHub y conectar a Vercel.
-2. Migrar a Postgres (Neon/Supabase): `DATABASE_URL` en `.env` de producción + `npx prisma db push` + `prisma generate`.
-3. `.env` de producción: `DATABASE_URL`, `NEXTAUTH_SECRET` real, `NEXTAUTH_URL`, `TEACHER_EMAILS` (correo de la autora), `SENTRY_DSN` real (recomendado).
-4. Resetear la BD de pruebas.
-5. Crear la cuenta docente de la autora (el registro promociona a `teacher` si el correo está en `TEACHER_EMAILS`) y verificar `/docencia`.
-6. Prueba end-to-end desde producción en las 3 lenguas: registro → completar una lección → `/valoracion` (valoración + propuesta) → `/docencia` (ver ratings/propuestas).
-7. Redactar y enviar el correo de invitación: enlace directo por lengua (`/es/piloto`, `/val/piloto`, `/en/piloto`), 3-4 micro-tareas concretas (imprescindible para los perfiles "no sabe IA"), recordatorio de que la valoración está en la sección "Valoración" y que requiere cuenta gratuita de prueba.
-8. Registrar a las 6 personas en la hoja de seguimiento (alias, idioma principal, variante probada, perfil, fecha de prueba, cuenta creada, formulario recibido, dispositivo/navegador, problemas, prioridad, observaciones) y hacer seguimiento.
-9. Tras la tanda: categorizar problemas/prioridades y decidir siguientes pasos (arreglos, conectar sync-progress, ampliar tandas).
+1. **Commitear la Fase 57** (no incluir `.env`, está gitignored) y **subir el repo a GitHub + conectar Vercel**. Las variables de entorno se ponen en Vercel en el paso 3 (no en el repo).
+2. **Migración a Postgres — YA APLICADA (13/9/2026)**: en el despliegue solo hay que poner `DATABASE_URL` (pooled) y `DIRECT_URL` (directa) en las variables de Vercel. La migración `0_init_per_pg` ya está registrada en la BD Neon (no hace falta `db push` ni volver a ejecutar `migrate deploy`). Opcional: crear una rama `dev` en Neon para desarrollo local.
+3. Variables de entorno en Vercel (production): `DATABASE_URL`/`DIRECT_URL` reales de Neon, `NEXTAUTH_SECRET` nuevo de 64 hex (generar con `openssl rand -base64 32`), `NEXTAUTH_URL` = URL de producción, `TEACHER_EMAILS` (correo de la autora), `SENTRY_DSN` real (recomendado).
+4. Crear la cuenta docente de la autora (el registro promociona a `teacher` si el correo está en `TEACHER_EMAILS`) y verificar `/docencia`.
+5. Prueba end-to-end desde producción en las 3 lenguas: registro → completar una lección → `/valoracion` (valoración + propuesta) → `/docencia` (ver ratings/propuestas).
+6. Redactar y enviar el correo de invitación: enlace directo por lengua (`/es/piloto`, `/val/piloto`, `/en/piloto`), 3-4 micro-tareas concretas (imprescindible para los perfiles "no sabe IA"), recordatorio de que la valoración está en la sección "Valoración" y que requiere cuenta gratuita de prueba.
+7. Registrar a las 6 personas en la hoja de seguimiento (alias, idioma principal, variante probada, perfil, fecha de prueba, cuenta creada, formulario recibido, dispositivo/navegador, problemas, prioridad, observaciones) y hacer seguimiento.
+8. Tras la tanda: categorizar problemas/prioridades y decidir siguientes pasos (arreglos, conectar sync-progress, ampliar tandas).
 
 ### Asignación sugerida (6 personas, cobertura del objetivo lingüístico)
 | # | Página | Perfil |
@@ -775,8 +805,9 @@ stores/
   progress-data.ts    → Retro/types + datos de retos, proyectos y ranking (generateRankingData)
 
 prisma/
-  schema.prisma       → User, Account, Session, VerificationToken, UserFeedback, Suggestion
-  dev.db              → SQLite (gitignored)
+  schema.prisma       → User, Account, Session, VerificationToken, UserFeedback, Suggestion (postgresql + directUrl)
+  migrations/         → 0_init_per_pg/migration.sql (migración inicial PostgreSQL, se commitea)
+  dev.db              → SQLite local residual (gitignored; ya NO se usa: proveedor PostgreSQL/Neon)
 ```
 
 ## Notas técnicas importantes
@@ -823,6 +854,12 @@ Creative Commons CC BY-NC-SA 4.0. Icono en `public/icons/cc_by_nc_sa.png`. Enlac
 - **Prefijado de rutas**: en páginas server usar `prefixPath(path, locale)` para URLs internas y `buildLanguagesAlternates(path)` para hreflang; en componentes client usar `localize(path)` de `useI18n()`. NO prefijar rutas `/api/*` (no tienen idioma). `searchContent(query, locale)` ya devuelve hrefs prefijados.
 - **SEO**: canonical y hreflang (es/en/val + x-default) con URLs absolutas vía `metadataBase`; `Content-Language` en todas las respuestas; `noindex` en auth; sitemap con 291 URLs prefijadas.
 - **SSG con Next 16 + Turbopack**: bajo `app/[lang]/`, `generateStaticParams` en el layout NO basta para generar estático; cada página server estática necesita `export const dynamic = "force-static"` (las páginas client bajo `[lang]` lo llevan en su `layout.tsx` server). Las únicas rutas dinámicas (`ƒ`) son las que usan sesión/cookies (perfil, docencia, auth) y las API.
+
+### Base de datos (PostgreSQL/Neon)
+- Proveedor Prisma actual: `postgresql` (Fase 57). `DATABASE_URL` = conexión pooled (host con `-pooler`) para el runtime (Vercel/serverless); `DIRECT_URL` = conexión directa sin pooler para Prisma CLI/migraciones. En Neon el host pooled termina en `-pooler.<región>.aws.neon.tech` (formato actual; `-pooler.production.neon.tech` también puede aparecer). La `DATABASE_URL` real lleva `?sslmode=require&channel_binding=require&pgbouncer=true&connection_limit=1` (los dos últimos parámetros son la recomendación para Prisma/serverless).
+- La migración inicial ya existe y se commitea (`prisma/migrations/0_init_per_pg`). En producción aplicar con `npm run db:migrate` (`prisma migrate deploy`); en local usar `npm run db:dev` (`prisma migrate dev`). Evitar `db push` en producción (no genera historial).
+- El proyecto NO usa SQL raw; todas las consultas pasan por el ORM Prisma, así que son portables entre proveedores.
+- El `.env` local ya usa las URLs reales de Neon (rama `main`, gitignored); si se quiere desarrollo local aislado, crear una rama `dev` de Neon y usar sus URLs en el `.env` local.
 
 ## Cómo continuar
 1. Abrir este archivo en la nueva sesión
