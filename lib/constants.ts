@@ -3,7 +3,7 @@ import { BloqueMeta } from "./types";
 export const SITE_CONFIG = {
   name: "Atlas IA",
   description: "La mejor plataforma en español para aprender Inteligencia Artificial",
-  url: "https://atlas-ia.dev",
+  url: "https://atlas-ia-psi.vercel.app",
   author: "Atlas IA",
   contactEmail: "privacidad@atlas-ia.dev",
   contactName: "Noemí Celaya Mingot",

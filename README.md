@@ -150,4 +150,4 @@ Este proyecto se distribuye bajo **Creative Commons CC BY-NC-SA 4.0** (Reconocim
 
 Más información: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-Autoría: Noemí Celaya Mingot · https://atlas-ia.dev
+Autoría: Noemí Celaya Mingot · https://atlas-ia-psi.vercel.app

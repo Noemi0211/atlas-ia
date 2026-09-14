@@ -310,7 +310,7 @@ export const GENERAL_KNOWLEDGE: FallbackEntry[] = [
   {
     keywords: [["url"], ["dominio"], ["direccion", "web"]],
     fn: () =>
-      "Una **URL** (o dirección web) es la dirección única de un recurso en Internet, por ejemplo `https://atlas-ia.dev/glosario`.\n\nSe compone de:\n- **Protocolo**: `https` (la comunicación cifrada)\n- **Dominio**: `atlas-ia.dev` (el nombre que identifica el sitio)\n- **Ruta**: `/glosario` (la página o sección concreta)\n\nEl **dominio** se registra en una empresa autorizada y apunta a los servidores donde está alojado el sitio.",
+      "Una **URL** (o dirección web) es la dirección única de un recurso en Internet, por ejemplo `https://atlas-ia-psi.vercel.app/glosario`.\n\nSe compone de:\n- **Protocolo**: `https` (la comunicación cifrada)\n- **Dominio**: `atlas-ia-psi.vercel.app` (el nombre que identifica el sitio)\n- **Ruta**: `/glosario` (la página o sección concreta)\n\nEl **dominio** se registra en una empresa autorizada y apunta a los servidores donde está alojado el sitio.",
   },
   {
     keywords: [["base", "de", "datos"], ["base", "datos"], ["sql"], ["bd"]],
