@@ -57,9 +57,10 @@ interface SidebarProps {
   isOpen?: boolean;
   collapsed?: boolean;
   onClose?: () => void;
+  className?: string;
 }
 
-export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarProps) {
+export function Sidebar({ isOpen = true, collapsed = false, onClose, className }: SidebarProps) {
   const pathname = usePathname();
   const [expandedBloque, setExpandedBloque] = useState<string | null>(null);
   const { getLessonProgress, completedLessons } = useProgress();
@@ -91,7 +92,8 @@ export function Sidebar({ isOpen = true, collapsed = false, onClose }: SidebarPr
         "flex flex-col transition-all duration-300 ease-in-out overflow-hidden",
         "lg:translate-x-0",
         collapsed ? "w-[60px]" : "w-[280px]",
-        isOpen ? "translate-x-0" : "-translate-x-full"
+        isOpen ? "translate-x-0" : "-translate-x-full",
+        className
       )}
     >
       <div className={cn(

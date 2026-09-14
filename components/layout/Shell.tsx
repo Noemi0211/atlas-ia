@@ -45,7 +45,7 @@ export function Shell({ children }: ShellProps) {
         <Sidebar isOpen={true} collapsed={false} onClose={() => setMobileMenuOpen(false)} />
       </MobileDrawer>
 
-      <Sidebar isOpen={true} collapsed={sidebarCollapsed} />
+      <Sidebar isOpen={true} collapsed={sidebarCollapsed} className="max-lg:hidden" />
 
       <main
         id="contenido"
